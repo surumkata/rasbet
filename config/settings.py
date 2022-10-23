@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#So sessions are not stored in db
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 # Application definition
 

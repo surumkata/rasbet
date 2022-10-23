@@ -11,7 +11,8 @@ def login(response):
         psw = response.POST['psw']
 
         if User.verify_login(email,psw):
-            u = User.objects.filter(email=email)
+            u = User.objects.get(email=email)
+            response.session['logged'] = u.userID
             return redirect('/')
         #else:
             #render error page or smth
@@ -19,7 +20,10 @@ def login(response):
 
     return render(response, 'login.html')
 
+def logout(response):
+    del response.session['logged']
 
+    return redirect('/')
 
 def signup(response):
     if response.method == 'POST':

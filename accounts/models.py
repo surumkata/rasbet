@@ -21,6 +21,7 @@ class User(models.Model):
     def verify_login(self,email,password):
         if User.objects.filter(email=email,password=password).exists():
             return True
+        else: return False
 
         ## returnar um booleanprin
 

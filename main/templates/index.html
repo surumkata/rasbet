@@ -1,9 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="{% static 'top-nav.css' %}"/>
+
 <title> Home Page </title>
 </head>
 <body>
@@ -11,8 +13,20 @@
     <a href="/accounts/login">Aceder</a>
     <a href="">Desporto</a>
     <a href="">Promoções</a>
+    {% if logged %}
+    <a href="">Balance: {{ balance }}</a>
+    {% endif %}
+  </div>
 
-</div>
-    Pagina incial
-</body>
+  {% if logged %}
+      <a> Logged in : bemvindo {{ fanme }} </a>
+  {% else %}
+      <a> Ainda não está logado click em aceder! </a>
+  {% endif %}
+
+  <br>
+  {% if logged %}
+  <a href="/accounts/logout">Logout</a>
+  <br>
+  {% endif %}
 </html>
