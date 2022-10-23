@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h2>SignIn</h2>
+
+  <form method="POST" required>
+    {% csrf_token %}
+    <label for="email">Email:</label><br>
+    <input type="text"  name="email" value="" required><br>
+    <label for="psw">Password:</label><br>
+    <input type="text"  name="psw" value="" required><br><br>
+
+    <input type="submit" value="LogIn">
+  </form>
+  <a > Ainda não tem conta? </a>
+  <a href="/accounts/signup"> Registe-se já! </a>
+</body>
+</html>

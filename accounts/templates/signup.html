@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h2>SignUp</h2>
+
+  <form method="POST" required>
+    {% csrf_token %}
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" value="" required><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="" required><br><br>
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email" value="" required><br><br>
+    <label for="birthday">Birthday:</label><br>
+    <input type="date" id="birthday" name="birthday" required><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z]).{8,}"
+    title="Must contain at least one number and at least 8 or more characters" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
