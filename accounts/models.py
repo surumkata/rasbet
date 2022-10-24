@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.utils.crypto import get_random_string
 
 # Default User model
 class User(models.Model):
@@ -25,6 +26,44 @@ class User(models.Model):
         if User.objects.filter(email=email,password=password).exists():
             return True
         else: return False
+
+class Session(models.Model):
+    user_in_session = models.ForeignKey(User, on_delete=models.CASCADE)
+    login_time = models.DateField(auto_now_add=True)
+    ip_adress = models.CharField(max_length=15,null=False)
+    session_id = models.CharField(max_length=32,null=False)
+
+    # Create a new session instance
+    @classmethod
+    def create(self,user,request):
+        session_key = get_random_string(32,allowed_chars="abcdefghijklmnopqrstuvwxyz0123456789")
+        # Just to make sure that the key generated is not already in session
+        while Session.objects.filter(session_id=session_key).exists():
+            session_key = get_random_string(32,allowed_chars="abcdefghijklmnopqrstuvwxyz0123456789")
+
+        user_ip = request.META.get('HTTP_X_FORWARDED_FOR')
+        if user_ip:
+            ip = user_ip.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+
+        Session.objects.create(user_in_session=user,ip_adress=ip,session_id=session_key)
+        return session_key
+
+
+    # Verify if user already has session
+    @classmethod
+    def exists(self,user):
+        if Session.objects.filter(user_in_session=user).exists():
+            return True
+        else:
+            return False
+
+    # Close session (delete it from db)
+    @classmethod
+    def close(self,session_id):
+        Session.objects.filter(session_id=session_id).delete()
+
 
 # Methods of payment available
 class Payment_method(models.Model):

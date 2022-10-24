@@ -6,6 +6,9 @@
 
   <form method="POST" required>
     {% csrf_token %}
+    {% if error %}
+    <a>Já se encontra logado </a><br>
+    {% endif %}
     <label for="email">Email:</label><br>
     <input type="text"  name="email" value="" required><br>
     <label for="psw">Password:</label><br>

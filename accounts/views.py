@@ -1,50 +1,66 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
-from .models import User
+from .models import User,Session
+from django.utils.decorators import method_decorator
 
 
-# Create your views here.
-def login(response):
-    if response.method == 'POST':
-        email = response.POST.get('email',False)
-        psw = response.POST['psw']
+#@method_decorator(ensure_csrf_cookie)
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email',False)
+        psw = request.POST['psw']
+        context = {"error" : False}
 
         if User.verify_login(email,psw):
             u = User.objects.get(email=email)
-            response.session['logged'] = u.userID
-            return redirect('/')
-        #else:
-            #render error page or smth
 
+            if  Session.exists(u):
+                context = {"error" : True,"msg" : "Já se encontra loggado"}
+                response = render(request,'login.html',context)
+            else:
+                session_id = Session.create(u,request)
+                if session_id!=-1:
+                    response = redirect("/")
+                    response.set_cookie('session',session_id)
+    else:
+        context = {"error" : False, "msg" : ""}
+        response = render(request,'login.html',context)
 
-    return render(response, 'login.html')
+    return response
 
-def logout(response):
-    del response.session['logged']
+def logout(request):
+    session_key = request.COOKIES.get("session")
+    response = redirect('/')
+    Session.close(session_key)
+    response.delete_cookie('session')
 
-    return redirect('/')
+    return response
 
-def signup(response):
+def signup(request):
     context = {"fail" : False}
-    if response.method == 'POST':
-        fname = response.POST['fname']
-        lname = response.POST['lname']
-        email = response.POST['email']
-        birthday = response.POST['birthday']
-        psw = response.POST['psw']
+    response = render(request, 'login.html',context)
+
+    if request.method == 'POST':
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        birthday = request.POST['birthday']
+        psw = request.POST['psw']
 
         if not User.insert(fname,lname,email,birthday,psw):
             context = {"fail" : True}
-
-    return render(response, 'signup.html',context)
-
+            response = render(request, 'signup.html',context)
 
 
-def deposit(response):
+    return response
+
+
+
+def deposit(request):
     return render(response, 'deposit.html')
 
 
 
-def withdraw(response):
+def withdraw(request):
     return render(response, 'withdraw.html')
