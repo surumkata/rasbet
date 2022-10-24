@@ -26,6 +26,7 @@ def logout(response):
     return redirect('/')
 
 def signup(response):
+    context = {"fail" : False}
     if response.method == 'POST':
         fname = response.POST['fname']
         lname = response.POST['lname']
@@ -33,8 +34,10 @@ def signup(response):
         birthday = response.POST['birthday']
         psw = response.POST['psw']
 
-        User.insert(fname,lname,email,birthday,psw)
-    return render(response, 'signup.html')
+        if not User.insert(fname,lname,email,birthday,psw):
+            context = {"fail" : True}
+
+    return render(response, 'signup.html',context)
 
 
 

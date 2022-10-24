@@ -35,6 +35,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 INSTALLED_APPS = [
     "main.apps.MainConfig",
     "accounts.apps.AccountsConfig",
+    "gamble.apps.GambleConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
