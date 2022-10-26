@@ -21,7 +21,7 @@ def login(request):
             else:
                 session_id = Session.create(u,request)
                 if session_id!=-1:
-                    response = redirect("/")
+                    response = render(request,"/")
                     response.set_cookie('session',session_id)
     else:
         context = {"error" : False, "msg" : ""}
@@ -30,9 +30,9 @@ def login(request):
     return response
 
 def logout(request):
-    session_key = request.COOKIES.get("session")
+    session_id = request.COOKIES.get("session")
     response = redirect('/')
-    Session.close(session_key)
+    Session.close(session_id)
     response.delete_cookie('session')
 
     return response
@@ -56,8 +56,21 @@ def signup(request):
     return response
 
 
+def balance(request):
+    session_id = request.COOKIES.get("session")
+    u = Session.objects.get(session_id)
+    context = {"balance" : u.balance}
+    response = render (request,'balance.html',context)
+
+    return response
 
 def deposit(request):
+
+    if request.method == 'POST':
+        amount = request.POST['amount']
+        session_id = request.COOKIES.get("session")
+
+
     return render(response, 'deposit.html')
 
 

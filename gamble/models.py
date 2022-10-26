@@ -1,5 +1,6 @@
 from django.db import models
-from accounts.models import User
+from game.models import Odd
+
 
 # Types of bets
 class Bet_type(models.Model):
@@ -10,8 +11,6 @@ class Bet(models.Model):
     betID = models.AutoField(primary_key=True)
     # Speficy type of bet
     type = models.ForeignKey(Bet_type, on_delete=models.CASCADE)
-    ###outcomes..
-
     # Amount of money
     amount = models.FloatField()
     # Total odd of the bet
@@ -20,8 +19,6 @@ class Bet(models.Model):
     datetime = models.DateField(auto_now_add=True)
 
 
-class History(models.Model):
-    # Compose key betID+userID, history mapss all bets from all users
-    betID  = models.ForeignKey(Bet,on_delete=models.CASCADE)
-    userID = models.ForeignKey(User,on_delete=models.CASCADE)
-    unique_together = ((betID,userID))
+class Bet_game(models.Model):
+    bet = models.ForeignKey(Bet, on_delete=models.CASCADE)
+    odd = models.ForeignKey(Odd, on_delete=models.CASCADE)

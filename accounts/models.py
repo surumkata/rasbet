@@ -1,6 +1,7 @@
 from django.db import models
 from django import forms
 from django.utils.crypto import get_random_string
+from gamble.models import Bet
 
 # Default User model
 class User(models.Model):
@@ -26,6 +27,16 @@ class User(models.Model):
         if User.objects.filter(email=email,password=password).exists():
             return True
         else: return False
+
+    @classmethod
+    def deposit(self,amount):
+        self.balance += amount
+
+    @classmethod
+    def withdraw(self,amount):
+        self.balance -= amount
+
+
 
 class Session(models.Model):
     user_in_session = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -69,9 +80,11 @@ class Session(models.Model):
 class Payment_method(models.Model):
         method = models.CharField(primary_key=True,max_length=50)
 
+# Transations (withdraw or deposit) from user
 class Transation(models.Model):
     transationID = models.AutoField(primary_key=True)
-    userID = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     # Deposit or withdraw
     type = models.CharField(max_length=50,null=False)
     # Method of payment
@@ -80,3 +93,27 @@ class Transation(models.Model):
     amount = models.FloatField()
     # Date and time of the operation
     datetime = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def regist(self,user,type,method,amount):
+        if Payment_method.objects.filter(method=method).exists():
+            # Regist of the transation
+            Session.objects.create(user,type,method,amount)
+            # Updates user balance
+            if type=="DEPOSIT":
+                u.deposit(amount)
+            elif type=="WITHDRAW":
+                u.withdrae(amount)
+            return True
+        return False
+
+
+        # fazer transaiton DEPOSIT
+        # transation withdraw
+
+# Users betting history
+class History(models.Model):
+    # Compose key betID+userID, history mapss all bets from all users
+    bet  = models.ForeignKey(Bet,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    unique_together = ((bet,user))
