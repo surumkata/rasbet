@@ -28,11 +28,10 @@ class User(models.Model):
             return True
         else: return False
 
-    @classmethod
     def deposit(self,amount):
         self.balance += amount
 
-    @classmethod
+
     def withdraw(self,amount):
         self.balance -= amount
 
@@ -97,14 +96,17 @@ class Transation(models.Model):
     @classmethod
     def regist(self,user,type,method,amount):
         if Payment_method.objects.filter(method=method).exists():
+            pm = Payment_method.objects.get(method=method)
             # Regist of the transation
-            Session.objects.create(user,type,method,amount)
+            Transation.objects.create(user=user,type=type,method=pm,amount=amount)
             # Updates user balance
-            if type=="DEPOSIT":
-                u.deposit(amount)
-            elif type=="WITHDRAW":
-                u.withdrae(amount)
+            if type=="deposit":
+                user.deposit(float(amount))
+            elif type=="withdraw":
+                user.withdraw(float(amount))
+            user.save()
             return True
+
         return False
 
 

@@ -7,13 +7,14 @@
   </head>
   <body>
 
-      <form id="myform" method="POST" >
+      <form method="POST" required>
         {% csrf_token %}
-        <h2>Insere o montante a levantar:</h2> <br>
-        <input type="number" name="amount" required><br><br>
+        <h2>Phone number:</h2> <br>
+        <input type="number"  name="phoneNumber"><br><br>
 
-        <input type="submit" name="withdraw" value="levantar">
-
+          <input type="submit"  name="" value="Pagar" >
       </form>
+
+
   </body>
 </html>

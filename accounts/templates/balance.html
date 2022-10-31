@@ -1,14 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title> Deposit </title>
-</head>
-<body>
-<div>
-<h1>BALANCE</h1>
-<h3> {{balance}}€</h3>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'top-nav.css' %}"/>
+    <title> Deposit </title>
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="/accounts/login">Aceder</a>
+      <a href="/">Desporto</a>
+      <a href="/">Promoções</a>
+    </div>
 
-</div>
-</body>
+      <div>
+        <h1>BALANCE</h1>
+        <h3>{{balance}}€</h3>
+        <a href="/accounts/deposit">Deposit</a> <br>
+        <a href="/accounts/withdraw">Withdraw</a>
+
+      </div>
+    </body>
 </html>

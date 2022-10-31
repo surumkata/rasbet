@@ -5,21 +5,29 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="{% static 'top-nav.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
 {% csrf_token %}
 <title> Home Page </title>
 </head>
+
 <body>
-  <div class="topnav">
-    <a href="/accounts/login">Aceder</a>
-    <a href="">Desporto</a>
-    <a href="">Promoções</a>
-    {% if logged %}
-    <a href="/accounts/balance">Balance: {{ balance }}€</a>
-    {% endif %}
+{% if logged %}
+    <div class="topnav">
+      <a href="/">{{ fname }}</a>
+      <a href="">Desporto</a>
+      <a href="">Promoções</a>
+      <a href="/accounts/balance">Balance: {{ balance }}€</a>
   </div>
+{% else %}
+    <div class="topnav">
+      <a href="/accounts/login">Aceder</a>
+      <a href="">Desporto</a>
+      <a href="">Promoções</a>
+    </div>
+{% endif %}
 
   {% if logged %}
-      <a> Logged in : bemvindo {{ fanme }} </a>
+      <a> Logged in : bemvindo {{ fname }} </a>
   {% else %}
       <a> Ainda não está logado click em aceder! </a>
   {% endif %}
@@ -29,5 +37,26 @@
   <a href="/accounts/logout">Logout</a>
   <br>
   {% endif %}
+  <br>  <br>
+  <div class="flex-container">
+  <div>
+  <table class="center">
+      {% for g in games%}
+        <tr>
+            <td>{{g.homeTeam}}</td>
+            <td>{{g.awayTeam}}</td>
+            <td>{{g.bookmakers.1.markets.0.outcomes.0.price}}</td>
+            <td>{{g.bookmakers.1.markets.0.outcomes.1.price}}</td>
+            <td>{{g.bookmakers.1.markets.0.outcomes.2.price}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+  <div>
+    <h3>BOLETIM<h3>
+
+  </div>
+</div>
+</body>
 
 </html>

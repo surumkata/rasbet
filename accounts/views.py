@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
-from django.urls import reverse
-from .models import User,Session
 from django.utils.decorators import method_decorator
+from django.urls import reverse
+from .models import *
 
 
-#@method_decorator(ensure_csrf_cookie)
+
+
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email',False)
@@ -20,9 +21,8 @@ def login(request):
                 response = render(request,'login.html',context)
             else:
                 session_id = Session.create(u,request)
-                if session_id!=-1:
-                    response = render(request,"/")
-                    response.set_cookie('session',session_id)
+                response = redirect("/")
+                response.set_cookie('session',session_id)
     else:
         context = {"error" : False, "msg" : ""}
         response = render(request,'login.html',context)
@@ -39,7 +39,7 @@ def logout(request):
 
 def signup(request):
     context = {"fail" : False}
-    response = render(request, 'login.html',context)
+    response = render(request, 'signup.html',context)
 
     if request.method == 'POST':
         fname = request.POST['fname']
@@ -58,22 +58,46 @@ def signup(request):
 
 def balance(request):
     session_id = request.COOKIES.get("session")
-    u = Session.objects.get(session_id)
-    context = {"balance" : u.balance}
-    response = render (request,'balance.html',context)
+    u = Session.objects.get(session_id=session_id)
+    context = {"balance" : u.user_in_session.balance}
+    response = render(request,'balance.html',context)
 
     return response
 
 def deposit(request):
-
+    response = render(request,'deposit.html')
     if request.method == 'POST':
-        amount = request.POST['amount']
+        amount = request.POST.get('amount',False)
         session_id = request.COOKIES.get("session")
 
+        request.session['amount'] = amount
 
-    return render(response, 'deposit.html')
+        if request.POST.get('mbway',False):
+            response = redirect('mbway/')
+        elif request.POST.get('card',False):
+            response = redirect('card/')
 
 
+    return response
+
+def mbway(request):
+    response = render(request,"mbway.html")
+    if request.method == 'POST':
+        amount = request.session.get('amount',False)
+        session_id = request.COOKIES.get("session")
+        u = Session.objects.get(session_id=session_id)
+        if Transation.regist(u.user_in_session,"deposit","mbway",amount):
+            response = redirect('/accounts/balance')
+
+    return response
 
 def withdraw(request):
-    return render(response, 'withdraw.html')
+    response = render(request,"withdraw.html")
+    if request.method == 'POST':
+        amount = request.POST.get('amount',False)
+        session_id = request.COOKIES.get("session")
+        u = Session.objects.get(session_id=session_id)
+        if Transation.regist(u.user_in_session,"withdraw","mbway",amount):
+            response = redirect('/accounts/balance')
+
+    return response

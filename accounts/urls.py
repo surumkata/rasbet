@@ -8,5 +8,6 @@ urlpatterns = [
     path('signup/',views.signup,{}),
     path('balance/',views.balance,{}),
     path('deposit/',views.deposit,{}),
+    path('deposit/mbway/',views.mbway,{}),
     path('withdraw/',views.withdraw,{})
 ]
