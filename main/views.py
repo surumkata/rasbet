@@ -7,7 +7,7 @@ def home(request):
     games =  requests.get('http://ucras.di.uminho.pt/v1/games/').json()
     print(games)
     cookie = request.COOKIES.get("session")
-
+    
     if cookie:
         session = Session.objects.get(session_id=cookie)
         context = {
