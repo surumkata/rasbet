@@ -11,29 +11,24 @@
 </head>
 
 <body>
-  {% if logged %}
-  <nav>
-    <div class="logo">
-      <a href="#"></a>
-      <img src="{% static 'logo.png' %}" alt="Rasbet">
+  <div class="topnav">
+    <img src="{% static 'logo.png' %}" alt="Rasbet Logo">
+    <a href="/game/sports_page">Desporto</a>
+    <a href="">Promoções</a>
+    {% if logged %}
+    <a href="/">{{ fname }}</a>
+    <a href="/accounts/balance">Balance: {{ balance }}€</a>
+    <div class="topnav-right">
+      <a href="/accounts/logout">Logout</a>
     </div>
-    <ul>
-      <li><a href="/">{{ fname }}</a></li>
-      <li><a href="/game/sports_page">Desporto</a></li>
-      <li><a href="">Promoções</a></li>
-      <li><a href="/accounts/balance">Balance: {{ balance }}€</a></li>
-      <li><a href="#">Logout</a></li>
-    </ul>
-  </nav>
-  {% else %}
-  <nav>
-    <ul>
-      <li><a href="/accounts/login">Aceder</a></li>
-      <li><a href="/game/sports_page">Desporto</a></li>
-      <li><a href="">Promoções</a></li>
-    </ul>
-  </nav>
-{% endif %}
+    {% else %}
+    <div class="topnav-right">
+      <a href="/accounts/login">Login</a>
+      <a href="/accounts/signup">Registar</a>
+    </div>
+    {% endif %}
+  </div>
+
 
 <div class="row">
   <div class="column left" style="background-color:#aaa;">
