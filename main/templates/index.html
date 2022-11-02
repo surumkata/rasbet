@@ -50,18 +50,18 @@
     <div class="matchlist"> </div>
     <div class="matchlist">
         <table>
-          {% for g in games%}
+          {% for g in games_info%}
             <tr>
               <th>info</th>
               <th class="font-10">{{g.datetime|date:'d/m/Y H:i'}}</th>
               <th class="font-10" >Resultado(Tempo Regulamentar)</th>
             </tr>
             <tr>
-              <td>{{g.home}} - {{g.away}}</td>
+              <td>{{g.game.home}} - {{g.game.away}}</td>
 
-              <td>{{g.bookmakers.1.markets.0.outcomes.0.price}}</td>
-              <td>{{g.bookmakers.1.markets.0.outcomes.1.price}}</td>
-              <td>{{g.bookmakers.1.markets.0.outcomes.2.price}}</td>
+              <td>{{g.home_odd}}</td>
+              <td>{{g.away_odd}}</td>
+              <td>{{g.draw_odd}}</td>
             </tr>
           {% endfor %}
         </table>

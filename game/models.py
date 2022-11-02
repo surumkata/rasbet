@@ -19,6 +19,9 @@ class State(models.Model):
 class Odd_type(models.Model):
     type = models.CharField(primary_key=True,max_length=50,null=False)
 
+    def str(self):
+        return self.type
+
 
 class Game(models.Model):
     game_id = models.CharField(max_length=50,primary_key=True)
