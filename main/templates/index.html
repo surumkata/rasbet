@@ -39,23 +39,29 @@
   {% endif %}
   <br>  <br>
   <div class="flex-container">
-  <div>
-  <table class="center">
-      {% for g in games%}
-        <tr>
-            <td>{{g.homeTeam}}</td>
-            <td>{{g.awayTeam}}</td>
-            <td>{{g.bookmakers.1.markets.0.outcomes.0.price}}</td>
-            <td>{{g.bookmakers.1.markets.0.outcomes.1.price}}</td>
-            <td>{{g.bookmakers.1.markets.0.outcomes.2.price}}</td>
-      </tr>
-    {% endfor %}
-  </table>
-</div>
-  <div>
-    <h3>BOLETIM<h3>
+    <div class="matchlist"> </div>
+    <div class="matchlist">
+        <table>
+          {% for g in games%}
+            <tr>
+              <th>info</th>
+              <th class="font-10">{{g.datetime|date:'d/m/Y H:i'}}</th>
+              <th class="font-10" >Resultado(Tempo Regulamentar)</th>
+            </tr>
+            <tr>
+              <td>{{g.home}} - {{g.away}}</td>
 
-  </div>
+              <td>{{g.bookmakers.1.markets.0.outcomes.0.price}}</td>
+              <td>{{g.bookmakers.1.markets.0.outcomes.1.price}}</td>
+              <td>{{g.bookmakers.1.markets.0.outcomes.2.price}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+    </div>
+    <div class="betslip">
+      <a>BOLETIM<a>
+
+    </div>
 </div>
 </body>
 
