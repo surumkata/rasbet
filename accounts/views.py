@@ -9,6 +9,7 @@ from .models import *
 
 def login(request):
     if request.method == 'POST':
+        Session.close_all()
         email = request.POST.get('email',False)
         psw = request.POST['psw']
         context = {"error" : False}
@@ -23,6 +24,9 @@ def login(request):
                 session_id = Session.create(u,request)
                 response = redirect("/")
                 response.set_cookie('session',session_id)
+        else:
+            context = {"error" : True,"msg" : "User não existe"}
+            response = render(request,'login.html',context)
     else:
         context = {"error" : False, "msg" : ""}
         response = render(request,'login.html',context)

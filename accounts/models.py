@@ -74,6 +74,12 @@ class Session(models.Model):
     def close(self,session_id):
         Session.objects.filter(session_id=session_id).delete()
 
+    # Close all sessions (delete it from db)
+    @classmethod
+    def close_all(self):
+        for o in Session.objects.all():
+            o.delete()
+
 
 # Methods of payment available
 class Payment_method(models.Model):
