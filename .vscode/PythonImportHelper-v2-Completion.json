@@ -297,6 +297,22 @@
         "documentation": {}
     },
     {
+        "label": "User",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
         "label": "AppConfig",
         "importPath": "django.apps",
         "description": "django.apps",
@@ -441,6 +457,22 @@
         "documentation": {}
     },
     {
+        "label": "reverse",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
@@ -473,6 +505,14 @@
         "documentation": {}
     },
     {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
@@ -494,6 +534,30 @@
         "description": "django.http",
         "isExtraImport": true,
         "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponseRedirect",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "method_decorator",
+        "importPath": "django.utils.decorators",
+        "description": "django.utils.decorators",
+        "isExtraImport": true,
+        "detail": "django.utils.decorators",
         "documentation": {}
     },
     {
@@ -535,6 +599,30 @@
         "description": "django.core.wsgi",
         "isExtraImport": true,
         "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "Odd",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "load_ucras",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Game",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
         "documentation": {}
     },
     {
@@ -968,7 +1056,7 @@
         "kind": 5,
         "importPath": "config.urls",
         "description": "config.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/',admin.site.urls),\n    path('',include('main.urls')),\n    path('accounts/', include('accounts.urls')),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/',admin.site.urls),\n    path('',include('main.urls')),\n    path('accounts/', include('accounts.urls')),\n    path('game/', include('game.urls')),\n]",
         "detail": "config.urls",
         "documentation": {}
     },
@@ -1139,8 +1227,26 @@
         "kind": 2,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "def load_ucras(url):\n    games = requests.get('http://ucras.di.uminho.pt/v1/games/').json()\n    for g in games:\n        # Only new games are added\n        if not Game.objects.filter(game_id=g['id']).exists():\n            now = datetime.now()\n            game_date_obj = datetime.strptime(g['commenceTime'][:-5],\"%Y-%m-%dT%H:%M:%S\")\n            # Only upcoming games are added\n            if game_date_obj<now:\n                Game.create(g['id'],\"football\",g['homeTeam'],g['awayTeam'],game_date_obj)",
+        "peekOfCode": "def load_ucras(url):\n    games = requests.get('http://ucras.di.uminho.pt/v1/games/').json()\n    for g in games:\n        # Only new games are added\n        if not Game.objects.filter(game_id=g['id']).exists():\n            now = datetime.now().replace(second= 0, microsecond= 0)\n            game_date_obj = datetime.strptime(g['commenceTime'][:-8],\"%Y-%m-%dT%H:%M\")\n            # Only upcoming games are added\n            if game_date_obj>now:\n                Game.create(g['id'],\"football\",g['homeTeam'],g['awayTeam'],game_date_obj)",
         "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "game.urls",
+        "description": "game.urls",
+        "peekOfCode": "urlpatterns = [\n    path('sports_page/',views.sports_page,{}),\n]",
+        "detail": "game.urls",
+        "documentation": {}
+    },
+    {
+        "label": "sports_page",
+        "kind": 2,
+        "importPath": "game.views",
+        "description": "game.views",
+        "peekOfCode": "def sports_page(request):\n    sports = Sport.objects.all().values()\n    sports_listing = []\n    i = 0\n    for sport in sports:\n      sports_listing.append(sport['sport'])\n    cookie = request.COOKIES.get(\"session\")\n    context = {\n                    \"logged\" : False,\n                    \"sports_info\" : sports_listing,",
+        "detail": "game.views",
         "documentation": {}
     },
     {
