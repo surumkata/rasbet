@@ -1,32 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="widht=device-width, initial-scale=1.0">
+  <title>Rasbet Log ing</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+</head>
 <body>
-
-  <h2>SignUp</h2>
-
-  <form method="POST" required>
-    {% csrf_token %}
-    <label for="fname">First name:</label><br>
-    <input type="text" id="fname" name="fname" value="" required><br>
-    <label for="lname">Last name:</label><br>
-    <input type="text" id="lname" name="lname" value="" required><br><br>
-
-    {%if not fail %}
-    <label for="email">Email:</label><br>
-    <input type="text" id="email" name="email" value="" required><br><br>
-    {% else %}
-    <label for="email">Email:</label><br>
-    <input type="text" id="email" name="email" value="" required><br>
-    <a>Email already in use</a> <br>
-    {% endif %}
-
-    <label for="birthday">Birthday:</label><br>
-    <input type="date" id="birthday" name="birthday" required><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z]).{8,}"
-    title="Must contain at least one number and at least 8 or more characters" required>
-    <br>
-    <input href="" type="submit" value="Submit">
-  </form>
+  <div class="box">
+    <div class="title-box">
+      <img src="{% static 'logo.png' %}" alt="Rasbet">
+      <p>Rasbet é buede fixe e tals depois o Cunha inventa uma frase buéde boa para aqui.</p>
+    </div>
+    <div class="form-box">
+      <form method="POST" required>
+        {% csrf_token %}
+        <input type="text" placeholder="First Name" id="fname" name="fname" value="" required>
+        <input type="text" placeholder="Last Name" id="lname" name="lname" value="" required>
+        {%if not fail %}
+        <input type="text" placeholder="Email" id="email" name="email" value="" required>
+        {% else %}
+        <span>Email already in use</span>
+        <input type="text" placeholder="Email" id="email" name="email" value="" required><br>
+        {% endif %}
+        <label for="birthday">Birthday: </label>
+        <input type="date" id="birthday" name="birthday" required>
+        <input type="password" placeholder="Password" name="psw" value="" pattern="(?=.*\d)(?=.*[a-z]).{8,}" title="Must contain at least one number and at least 8 or more characters" required>
+        <button type="submit">REGISTER</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

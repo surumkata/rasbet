@@ -8,14 +8,10 @@ def home(request):
     #load ucras api to database
     load_ucras('http://ucras.di.uminho.pt/v1/games/')
     cookie = request.COOKIES.get("session")
-<<<<<<< HEAD
     # get all games
     games = Game.objects.all().values()
     odds = Odd.objects.all().values()
     print(odds)
-=======
-    
->>>>>>> refs/remotes/origin/main
     if cookie:
         session = Session.objects.get(session_id=cookie)
         context = {

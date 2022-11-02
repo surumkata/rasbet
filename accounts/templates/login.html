@@ -1,22 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="widht=device-width, initial-scale=1.0">
+  <title>Rasbet Log ing</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+</head>
 <body>
-
-  <h2>SignIn</h2>
-
-  <form method="POST" required>
-    {% csrf_token %}
-    {% if error %}
-      <a>{{ msg }}<a><br>
-    {% endif %}
-    <label for="email">Email:</label><br>
-    <input type="text"  name="email" value="" required><br>
-    <label for="psw">Password:</label><br>
-    <input type="text"  name="psw" value="" required><br><br>
-
-    <input type="submit" value="LogIn">
-  </form>
-  <a > Ainda não tem conta? </a>
-  <a href="/accounts/signup"> Registe-se já! </a>
+    <div class="box">
+    <div class="title-box">
+      <img src="{% static 'logo.png' %}" alt="Rasbet">
+      <p>Rasbet é buede fixe e tals depois o Cunha inventa uma frase buéde boa para aqui.</p>
+    </div>
+    <div class="form-box">
+      <form method="POST" required>
+        <input type="text" placeholder="Email" name="email" value="" required>
+        <input type="password" placeholder="Password" name="psw" value="" required>
+        <button type="submit">LOGIN IN</button>
+        {% csrf_token %}
+        {% if error %}
+        <span>{{ msg }}<span>
+        {% endif %}
+        <a href="#">Forgotten Password</a>
+      </form>
+      <hr>
+      <div class="create-btn">
+        <a href="/accounts/signup">Create New Account</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,0 +1,1174 @@
+[
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "django.db.models.deletion",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.db.models.deletion",
+        "description": "django.db.models.deletion",
+        "detail": "django.db.models.deletion",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "forms",
+        "importPath": "django",
+        "description": "django",
+        "isExtraImport": true,
+        "detail": "django",
+        "documentation": {}
+    },
+    {
+        "label": "get_random_string",
+        "importPath": "django.utils.crypto",
+        "description": "django.utils.crypto",
+        "isExtraImport": true,
+        "detail": "django.utils.crypto",
+        "documentation": {}
+    },
+    {
+        "label": "Bet",
+        "importPath": "gamble.models",
+        "description": "gamble.models",
+        "isExtraImport": true,
+        "detail": "gamble.models",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "gamble.models",
+        "description": "gamble.models",
+        "isExtraImport": true,
+        "detail": "gamble.models",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "reverse",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponseRedirect",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "method_decorator",
+        "importPath": "django.utils.decorators",
+        "description": "django.utils.decorators",
+        "isExtraImport": true,
+        "detail": "django.utils.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "Odd",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "load_ucras",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Game",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Odd",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0001_initial",
+        "description": "accounts.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = []\n    operations = [\n        migrations.CreateModel(\n            name=\"User\",\n            fields=[\n                (\"userID\", models.AutoField(primary_key=True, serialize=False)),\n                (\"email\", models.EmailField(max_length=200)),\n                (\"password\", models.CharField(max_length=10)),",
+        "detail": "accounts.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0002_payment_methods_transation_delete_transations",
+        "description": "accounts.migrations.0002_payment_methods_transation_delete_transations",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"accounts\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Payment_methods\",\n            fields=[\n                (\n                    \"id\",",
+        "detail": "accounts.migrations.0002_payment_methods_transation_delete_transations",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0003_rename_payment_methods_payment_method",
+        "description": "accounts.migrations.0003_rename_payment_methods_payment_method",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"accounts\", \"0002_payment_methods_transation_delete_transations\"),\n    ]\n    operations = [\n        migrations.RenameModel(old_name=\"Payment_methods\", new_name=\"Payment_method\",),\n    ]",
+        "detail": "accounts.migrations.0003_rename_payment_methods_payment_method",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0004_remove_payment_method_id_alter_payment_method_method_and_more",
+        "description": "accounts.migrations.0004_remove_payment_method_id_alter_payment_method_method_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"accounts\", \"0003_rename_payment_methods_payment_method\"),\n    ]\n    operations = [\n        migrations.RemoveField(model_name=\"payment_method\", name=\"id\",),\n        migrations.AlterField(\n            model_name=\"payment_method\",\n            name=\"method\",\n            field=models.CharField(max_length=50, primary_key=True, serialize=False),",
+        "detail": "accounts.migrations.0004_remove_payment_method_id_alter_payment_method_method_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0005_session",
+        "description": "accounts.migrations.0005_session",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\n            \"accounts\",\n            \"0004_remove_payment_method_id_alter_payment_method_method_and_more\",\n        ),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Session\",",
+        "detail": "accounts.migrations.0005_session",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0006_rename_userid_session_user_in_session",
+        "description": "accounts.migrations.0006_rename_userid_session_user_in_session",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"accounts\", \"0005_session\"),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name=\"session\", old_name=\"userID\", new_name=\"user_in_session\",\n        ),\n    ]",
+        "detail": "accounts.migrations.0006_rename_userid_session_user_in_session",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0007_rename_userid_transation_user_history",
+        "description": "accounts.migrations.0007_rename_userid_transation_user_history",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"gamble\", \"0002_bet_game_delete_history\"),\n        (\"accounts\", \"0006_rename_userid_session_user_in_session\"),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name=\"transation\", old_name=\"userID\", new_name=\"user\",\n        ),\n        migrations.CreateModel(",
+        "detail": "accounts.migrations.0007_rename_userid_transation_user_history",
+        "documentation": {}
+    },
+    {
+        "label": "AccountsConfig",
+        "kind": 6,
+        "importPath": "accounts.apps",
+        "description": "accounts.apps",
+        "peekOfCode": "class AccountsConfig(AppConfig):\n    default_auto_field = \"django.db.models.BigAutoField\"\n    name = \"accounts\"",
+        "detail": "accounts.apps",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "peekOfCode": "class User(models.Model):\n    userID = models.AutoField(primary_key=True)\n    email = models.EmailField(max_length=200,null=False)\n    password = models.CharField(max_length=10,null=False)\n    birthday = models.DateField(null=False)\n    first_name = models.CharField(max_length=50,null=False)\n    last_name = models.CharField(max_length=50,null=False)\n    balance = models.FloatField(default=0)\n    @classmethod\n    def insert(self,first_name,last_name,email,birthday,password):",
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "kind": 6,
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "peekOfCode": "class Session(models.Model):\n    user_in_session = models.ForeignKey(User, on_delete=models.CASCADE)\n    login_time = models.DateField(auto_now_add=True)\n    ip_adress = models.CharField(max_length=15,null=False)\n    session_id = models.CharField(max_length=32,null=False)\n    # Create a new session instance\n    @classmethod\n    def create(self,user,request):\n        session_key = get_random_string(32,allowed_chars=\"abcdefghijklmnopqrstuvwxyz0123456789\")\n        # Just to make sure that the key generated is not already in session",
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "Payment_method",
+        "kind": 6,
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "peekOfCode": "class Payment_method(models.Model):\n        method = models.CharField(primary_key=True,max_length=50)\n# Transations (withdraw or deposit) from user\nclass Transation(models.Model):\n    transationID = models.AutoField(primary_key=True)\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\n    # Deposit or withdraw\n    type = models.CharField(max_length=50,null=False)\n    # Method of payment\n    method = models.ForeignKey(Payment_method,on_delete=models.CASCADE)",
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "Transation",
+        "kind": 6,
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "peekOfCode": "class Transation(models.Model):\n    transationID = models.AutoField(primary_key=True)\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\n    # Deposit or withdraw\n    type = models.CharField(max_length=50,null=False)\n    # Method of payment\n    method = models.ForeignKey(Payment_method,on_delete=models.CASCADE)\n    # Transation amount\n    amount = models.FloatField()\n    # Date and time of the operation",
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "History",
+        "kind": 6,
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "peekOfCode": "class History(models.Model):\n    # Compose key betID+userID, history mapss all bets from all users\n    bet  = models.ForeignKey(Bet,on_delete=models.CASCADE)\n    user = models.ForeignKey(User,on_delete=models.CASCADE)\n    unique_together = ((bet,user))",
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "accounts.urls",
+        "description": "accounts.urls",
+        "peekOfCode": "urlpatterns = [\n    path('login/',views.login,{}),\n    path('logout/',views.logout,{}),\n    path('signup/',views.signup,{}),\n    path('balance/',views.balance,{}),\n    path('deposit/',views.deposit,{}),\n    path('deposit/mbway/',views.mbway,{}),\n    path('withdraw/',views.withdraw,{})\n]",
+        "detail": "accounts.urls",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def login(request):\n    if request.method == 'POST':\n        Session.close_all()\n        email = request.POST.get('email',False)\n        psw = request.POST['psw']\n        context = {\"error\" : False}\n        if User.verify_login(email,psw):\n            u = User.objects.get(email=email)\n            if  Session.exists(u):\n                context = {\"error\" : True,\"msg\" : \"Já se encontra loggado\"}",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def logout(request):\n    session_id = request.COOKIES.get(\"session\")\n    response = redirect('/')\n    Session.close(session_id)\n    response.delete_cookie('session')\n    return response\ndef signup(request):\n    context = {\"fail\" : False}\n    response = render(request, 'signup.html',context)\n    if request.method == 'POST':",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "signup",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def signup(request):\n    context = {\"fail\" : False}\n    response = render(request, 'signup.html',context)\n    if request.method == 'POST':\n        fname = request.POST['fname']\n        lname = request.POST['lname']\n        email = request.POST['email']\n        birthday = request.POST['birthday']\n        psw = request.POST['psw']\n        if not User.insert(fname,lname,email,birthday,psw):",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "balance",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def balance(request):\n    session_id = request.COOKIES.get(\"session\")\n    u = Session.objects.get(session_id=session_id)\n    context = {\"balance\" : u.user_in_session.balance}\n    response = render(request,'balance.html',context)\n    return response\ndef deposit(request):\n    response = render(request,'deposit.html')\n    if request.method == 'POST':\n        amount = request.POST.get('amount',False)",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "deposit",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def deposit(request):\n    response = render(request,'deposit.html')\n    if request.method == 'POST':\n        amount = request.POST.get('amount',False)\n        session_id = request.COOKIES.get(\"session\")\n        request.session['amount'] = amount\n        if request.POST.get('mbway',False):\n            response = redirect('mbway/')\n        elif request.POST.get('card',False):\n            response = redirect('card/')",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "mbway",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def mbway(request):\n    response = render(request,\"mbway.html\")\n    if request.method == 'POST':\n        amount = request.session.get('amount',False)\n        session_id = request.COOKIES.get(\"session\")\n        u = Session.objects.get(session_id=session_id)\n        if Transation.regist(u.user_in_session,\"deposit\",\"mbway\",amount):\n            response = redirect('/accounts/balance')\n    return response\ndef withdraw(request):",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "withdraw",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def withdraw(request):\n    response = render(request,\"withdraw.html\")\n    if request.method == 'POST':\n        amount = request.POST.get('amount',False)\n        session_id = request.COOKIES.get(\"session\")\n        u = Session.objects.get(session_id=session_id)\n        if Transation.regist(u.user_in_session,\"withdraw\",\"mbway\",amount):\n            response = redirect('/accounts/balance')\n    return response",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "config.asgi",
+        "description": "config.asgi",
+        "peekOfCode": "application = get_asgi_application()",
+        "detail": "config.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = \"django-insecure-!rr^gw-i_m@18nqm54sxz$ho0$!uwwyh!zfrd=@(j)n(uitvq-\"\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n#So sessions are not stored in db\nSESSION_ENGINE = 'django.contrib.sessions.backends.cache'",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "SECRET_KEY = \"django-insecure-!rr^gw-i_m@18nqm54sxz$ho0$!uwwyh!zfrd=@(j)n(uitvq-\"\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n#So sessions are not stored in db\nSESSION_ENGINE = 'django.contrib.sessions.backends.cache'\n# Application definition\nINSTALLED_APPS = [\n    \"main.apps.MainConfig\",\n    \"accounts.apps.AccountsConfig\",",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = []\n#So sessions are not stored in db\nSESSION_ENGINE = 'django.contrib.sessions.backends.cache'\n# Application definition\nINSTALLED_APPS = [\n    \"main.apps.MainConfig\",\n    \"accounts.apps.AccountsConfig\",\n    \"gamble.apps.GambleConfig\",\n    \"game.apps.GameConfig\",",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "ALLOWED_HOSTS = []\n#So sessions are not stored in db\nSESSION_ENGINE = 'django.contrib.sessions.backends.cache'\n# Application definition\nINSTALLED_APPS = [\n    \"main.apps.MainConfig\",\n    \"accounts.apps.AccountsConfig\",\n    \"gamble.apps.GambleConfig\",\n    \"game.apps.GameConfig\",\n    \"django.contrib.admin\",",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_ENGINE",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "SESSION_ENGINE = 'django.contrib.sessions.backends.cache'\n# Application definition\nINSTALLED_APPS = [\n    \"main.apps.MainConfig\",\n    \"accounts.apps.AccountsConfig\",\n    \"gamble.apps.GambleConfig\",\n    \"game.apps.GameConfig\",\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "INSTALLED_APPS = [\n    \"main.apps.MainConfig\",\n    \"accounts.apps.AccountsConfig\",\n    \"gamble.apps.GambleConfig\",\n    \"game.apps.GameConfig\",\n    \"django.contrib.admin\",\n    \"django.contrib.auth\",\n    \"django.contrib.contenttypes\",\n    \"django.contrib.sessions\",\n    \"django.contrib.messages\",",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "MIDDLEWARE = [\n    \"django.middleware.security.SecurityMiddleware\",\n    \"django.contrib.sessions.middleware.SessionMiddleware\",\n    \"django.middleware.common.CommonMiddleware\",\n    \"django.middleware.csrf.CsrfViewMiddleware\",\n    \"django.contrib.auth.middleware.AuthenticationMiddleware\",\n    \"django.contrib.messages.middleware.MessageMiddleware\",\n    \"django.middleware.clickjacking.XFrameOptionsMiddleware\",\n]\nROOT_URLCONF = \"config.urls\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "ROOT_URLCONF = \"config.urls\"\nTEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [os.path.join(BASE_DIR, \"templates\"),os.path.join(BASE_DIR, \"static\")],\n        \"APP_DIRS\": True,\n        \"OPTIONS\": {\n            \"context_processors\": [\n                \"django.template.context_processors.debug\",\n                \"django.template.context_processors.request\",",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "TEMPLATES = [\n    {\n        \"BACKEND\": \"django.template.backends.django.DjangoTemplates\",\n        \"DIRS\": [os.path.join(BASE_DIR, \"templates\"),os.path.join(BASE_DIR, \"static\")],\n        \"APP_DIRS\": True,\n        \"OPTIONS\": {\n            \"context_processors\": [\n                \"django.template.context_processors.debug\",\n                \"django.template.context_processors.request\",\n                \"django.contrib.auth.context_processors.auth\",",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "WSGI_APPLICATION = \"config.wsgi.application\"\n# Database\n# https://docs.djangoproject.com/en/4.1/ref/settings/#databases\nDATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "DATABASES = {\n    \"default\": {\n        \"ENGINE\": \"django.db.backends.sqlite3\",\n        \"NAME\": BASE_DIR / \"db.sqlite3\",\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        \"NAME\": \"django.contrib.auth.password_validation.UserAttributeSimilarityValidator\",\n    },\n    {\"NAME\": \"django.contrib.auth.password_validation.MinimumLengthValidator\",},\n    {\"NAME\": \"django.contrib.auth.password_validation.CommonPasswordValidator\",},\n    {\"NAME\": \"django.contrib.auth.password_validation.NumericPasswordValidator\",},\n]\n# Internationalization\n# https://docs.djangoproject.com/en/4.1/topics/i18n/",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "LANGUAGE_CODE = \"en-us\"\nTIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "TIME_ZONE = \"UTC\"\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.1/howto/static-files/\nSTATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "STATIC_URL = \"static/\"\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "config.settings",
+        "description": "config.settings",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = \"django.db.models.BigAutoField\"",
+        "detail": "config.settings",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "config.urls",
+        "description": "config.urls",
+        "peekOfCode": "urlpatterns = [\n    path('admin/',admin.site.urls),\n    path('',include('main.urls')),\n    path('accounts/', include('accounts.urls')),\n]",
+        "detail": "config.urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "config.wsgi",
+        "description": "config.wsgi",
+        "peekOfCode": "application = get_wsgi_application()",
+        "detail": "config.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "gamble.migrations.0001_initial",
+        "description": "gamble.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        (\n            \"accounts\",\n            \"0004_remove_payment_method_id_alter_payment_method_method_and_more\",\n        ),\n    ]\n    operations = [\n        migrations.CreateModel(",
+        "detail": "gamble.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "gamble.migrations.0002_bet_game_delete_history",
+        "description": "gamble.migrations.0002_bet_game_delete_history",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0001_initial\"),\n        (\"gamble\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Bet_game\",\n            fields=[\n                (",
+        "detail": "gamble.migrations.0002_bet_game_delete_history",
+        "documentation": {}
+    },
+    {
+        "label": "GambleConfig",
+        "kind": 6,
+        "importPath": "gamble.apps",
+        "description": "gamble.apps",
+        "peekOfCode": "class GambleConfig(AppConfig):\n    default_auto_field = \"django.db.models.BigAutoField\"\n    name = \"gamble\"",
+        "detail": "gamble.apps",
+        "documentation": {}
+    },
+    {
+        "label": "Bet_type",
+        "kind": 6,
+        "importPath": "gamble.models",
+        "description": "gamble.models",
+        "peekOfCode": "class Bet_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50)\nclass Bet(models.Model):\n    betID = models.AutoField(primary_key=True)\n    # Speficy type of bet\n    type = models.ForeignKey(Bet_type, on_delete=models.CASCADE)\n    # Amount of money\n    amount = models.FloatField()\n    # Total odd of the bet\n    total_odd = models.FloatField()",
+        "detail": "gamble.models",
+        "documentation": {}
+    },
+    {
+        "label": "Bet",
+        "kind": 6,
+        "importPath": "gamble.models",
+        "description": "gamble.models",
+        "peekOfCode": "class Bet(models.Model):\n    betID = models.AutoField(primary_key=True)\n    # Speficy type of bet\n    type = models.ForeignKey(Bet_type, on_delete=models.CASCADE)\n    # Amount of money\n    amount = models.FloatField()\n    # Total odd of the bet\n    total_odd = models.FloatField()\n    # Datetime of the bet\n    datetime = models.DateField(auto_now_add=True)",
+        "detail": "gamble.models",
+        "documentation": {}
+    },
+    {
+        "label": "Bet_game",
+        "kind": 6,
+        "importPath": "gamble.models",
+        "description": "gamble.models",
+        "peekOfCode": "class Bet_game(models.Model):\n    bet = models.ForeignKey(Bet, on_delete=models.CASCADE)\n    odd = models.ForeignKey(Odd, on_delete=models.CASCADE)",
+        "detail": "gamble.models",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "gamble.urls",
+        "description": "gamble.urls",
+        "peekOfCode": "urlpatterns = [\n    path('login/',views.,{}),\n]",
+        "detail": "gamble.urls",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "game.migrations.0001_initial",
+        "description": "game.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = []\n    operations = [\n        migrations.CreateModel(\n            name=\"Game\",\n            fields=[\n                (\"game_id\", models.AutoField(primary_key=True, serialize=False)),\n                (\"home\", models.CharField(max_length=50)),\n                (\"away\", models.CharField(max_length=50)),",
+        "detail": "game.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "game.migrations.0002_rename_sports_sport_alter_game_away_score_and_more",
+        "description": "game.migrations.0002_rename_sports_sport_alter_game_away_score_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.RenameModel(old_name=\"Sports\", new_name=\"Sport\",),\n        migrations.AlterField(\n            model_name=\"game\", name=\"away_score\", field=models.IntegerField(default=0),\n        ),\n        migrations.AlterField(",
+        "detail": "game.migrations.0002_rename_sports_sport_alter_game_away_score_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "game.migrations.0003_alter_game_datetime_alter_odd_happened",
+        "description": "game.migrations.0003_alter_game_datetime_alter_odd_happened",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0002_rename_sports_sport_alter_game_away_score_and_more\"),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name=\"game\",\n            name=\"datetime\",\n            field=models.DateTimeField(auto_now_add=True),\n        ),",
+        "detail": "game.migrations.0003_alter_game_datetime_alter_odd_happened",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "game.migrations.0004_alter_game_datetime_alter_game_game_id",
+        "description": "game.migrations.0004_alter_game_datetime_alter_game_game_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0003_alter_game_datetime_alter_odd_happened\"),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name=\"game\", name=\"datetime\", field=models.DateTimeField(),\n        ),\n        migrations.AlterField(\n            model_name=\"game\",",
+        "detail": "game.migrations.0004_alter_game_datetime_alter_game_game_id",
+        "documentation": {}
+    },
+    {
+        "label": "GameConfig",
+        "kind": 6,
+        "importPath": "game.apps",
+        "description": "game.apps",
+        "peekOfCode": "class GameConfig(AppConfig):\n    default_auto_field = \"django.db.models.BigAutoField\"\n    name = \"game\"",
+        "detail": "game.apps",
+        "documentation": {}
+    },
+    {
+        "label": "Sport",
+        "kind": 6,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "class Sport(models.Model):\n    sport = models.CharField(primary_key=True,max_length=50,null=False)\n    has_draw = models.BooleanField()\n    is_team_sport = models.BooleanField()\n    def str(self):\n        return self.sport\n# open | suspended | closed\nclass State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n# home | away | draw ...",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "State",
+        "kind": 6,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "class State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n# home | away | draw ...\nclass Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Odd_type",
+        "kind": 6,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "class Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)\n    away = models.CharField(max_length=50,null=False)\n    home_score = models.IntegerField(default=0)",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Game",
+        "kind": 6,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "class Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)\n    away = models.CharField(max_length=50,null=False)\n    home_score = models.IntegerField(default=0)\n    away_score = models.IntegerField(default=0)\n    datetime = models.DateTimeField()",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Odd",
+        "kind": 6,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "class Odd(models.Model):\n    game = models.ForeignKey(Game, on_delete=models.CASCADE)\n    odd_type = models.ForeignKey(Odd_type, on_delete=models.CASCADE)\n    odd = models.FloatField()\n    happened = models.BooleanField(default=False)\n    @classmethod\n    # Create odd to the outcome home team wins\n    def home(self,game,odd):\n        type = Odd_type.objects.get(type=\"home\")\n        Odd.objects.create(game=game,odd_type=type,odd=odd)",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "load_ucras",
+        "kind": 2,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "def load_ucras(url):\n    games = requests.get('http://ucras.di.uminho.pt/v1/games/').json()\n    for g in games:\n        # Only new games are added\n        if not Game.objects.filter(game_id=g['id']).exists():\n            now = datetime.now()\n            game_date_obj = datetime.strptime(g['commenceTime'][:-5],\"%Y-%m-%dT%H:%M:%S\")\n            # Only upcoming games are added\n            if game_date_obj<now:\n                Game.create(g['id'],\"football\",g['homeTeam'],g['awayTeam'],game_date_obj)",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "MainConfig",
+        "kind": 6,
+        "importPath": "main.apps",
+        "description": "main.apps",
+        "peekOfCode": "class MainConfig(AppConfig):\n    default_auto_field = \"django.db.models.BigAutoField\"\n    name = \"main\"",
+        "detail": "main.apps",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "main.urls",
+        "description": "main.urls",
+        "peekOfCode": "urlpatterns = [\n    path('',views.home,{}),\n]",
+        "detail": "main.urls",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "main.views",
+        "description": "main.views",
+        "peekOfCode": "def home(request):\n    #load ucras api to database\n    load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    odds = Odd.objects.all().values()\n    print(odds)\n    if cookie:\n        session = Session.objects.get(session_id=cookie)",
+        "detail": "main.views",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault(\"DJANGO_SETTINGS_MODULE\", \"config.settings\")\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
+        "detail": "manage",
+        "documentation": {}
+    }
+]

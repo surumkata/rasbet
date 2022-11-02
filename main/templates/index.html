@@ -11,19 +11,27 @@
 </head>
 
 <body>
-{% if logged %}
-    <div class="topnav">
-      <a href="/">{{ fname }}</a>
-      <a href="">Desporto</a>
-      <a href="">Promoções</a>
-      <a href="/accounts/balance">Balance: {{ balance }}€</a>
+  <div class="logo">
+    <a href="#"></a>
+    <img src="{% static 'logo.png' %}" alt="Rasbet">
   </div>
-{% else %}
-    <div class="topnav">
-      <a href="/accounts/login">Aceder</a>
-      <a href="">Desporto</a>
-      <a href="">Promoções</a>
-    </div>
+  {% if logged %}
+  <nav>
+    <ul>
+      <li><a href="/">{{ fname }}</a></li>
+      <li><a href="">Desporto</a></li>
+      <li><a href="">Promoções</a></li>
+      <li><a href="/accounts/balance">Balance: {{ balance }}€</a></li>
+    </ul>
+  </nav>
+  {% else %}
+  <nav>
+    <ul>
+      <li><a href="/accounts/login">Aceder</a></li>
+      <li><a href="">Desporto</a></li>
+      <li><a href="">Promoções</a></li>
+    </ul>
+  </nav>
 {% endif %}
 
   {% if logged %}
