@@ -14,7 +14,7 @@
 {% if logged %}
     <div class="topnav">
       <a href="/accounts/logout">Logout</a>
-      <a href="">{{ fname }}</a>
+      <a href="/">{{ fname }}</a>
       <a href="">Desporto</a>
       <a href="">Promoções</a>
       <a href="/accounts/balance">Balance: {{ balance }}€</a>
@@ -33,13 +33,20 @@
       <a> Ainda não está logado click em aceder! </a>
   {% endif %}
 
-  <br>
-  
-  <br>
-  {% endif %}
   <br>  <br>
   <div class="flex-container">
     
+</div>
+<div class="flex-container">
+  <div class="matchlist">
+    <table>
+      {% for s in sports_info %}
+      <tr>
+        <td>{{s}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>  
 </div>
 </body>
 
