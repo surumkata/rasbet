@@ -726,7 +726,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def login(request):\n    if request.method == 'POST':\n        Session.close_all()\n        email = request.POST.get('email',False)\n        psw = request.POST['psw']\n        context = {\"error\" : False}\n        if User.verify_login(email,psw):\n            u = User.objects.get(email=email)\n            if  Session.exists(u):\n                context = {\"error\" : True,\"msg\" : \"Já se encontra loggado\"}",
+        "peekOfCode": "def login(request):\n    if request.method == 'POST':\n        email = request.POST.get('email',False)\n        psw = request.POST['psw']\n        context = {\"error\" : False}\n        if User.verify_login(email,psw):\n            u = User.objects.get(email=email)\n            #se ja existe reutiliza a sessao\n            #(talvez o melhor a fazer seja apagar a antiga e criar uma nova,\n            # para n permitir dois dispositivos na mesma conta)",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -753,7 +753,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def balance(request):\n    session_id = request.COOKIES.get(\"session\")\n    u = Session.objects.get(session_id=session_id)\n    context = {\"balance\" : u.user_in_session.balance}\n    response = render(request,'balance.html',context)\n    return response\ndef deposit(request):\n    response = render(request,'deposit.html')\n    if request.method == 'POST':\n        amount = request.POST.get('amount',False)",
+        "peekOfCode": "def balance(request):\n    session_id = request.COOKIES.get(\"session\")\n    u = Session.objects.get(session_id=session_id)\n    context = {\n        \"balance\" : u.user_in_session.balance,\n        \"logged\" : True,\n        \"id\" : u.user_in_session.userID,\n        \"fname\" : u.user_in_session.first_name,\n    }\n    response = render(request,'balance.html',context)",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1158,7 +1158,7 @@
         "kind": 2,
         "importPath": "main.views",
         "description": "main.views",
-        "peekOfCode": "def home(request):\n    #load ucras api to database\n    load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    odds = Odd.objects.all().values()\n    print(odds)\n    if cookie:\n        session = Session.objects.get(session_id=cookie)",
+        "peekOfCode": "def home(request):\n    #load ucras api to database\n    load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    odds = Odd.objects.all().values()\n    print(odds)\n    context = {\n                    \"logged\" : False,",
         "detail": "main.views",
         "documentation": {}
     },
