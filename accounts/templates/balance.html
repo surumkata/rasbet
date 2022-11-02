@@ -1,4 +1,5 @@
 {% load static %}
+{% csrf_token %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,15 +8,24 @@
     <title> Deposit </title>
   </head>
   <body>
+    {% if logged %}
+    <div class="topnav">
+      <a href="/accounts/logout">Logout</a>
+      <a href="/">{{ fname }}</a>
+      <a href="">Desporto</a>
+      <a href="">Promoções</a>
+    </div>
+    {% else %}
     <div class="topnav">
       <a href="/accounts/login">Aceder</a>
       <a href="/">Desporto</a>
       <a href="/">Promoções</a>
     </div>
+    {% endif %}
 
       <div>
         <h1>BALANCE</h1>
-        <h3>{{balance}}€</h3>
+        <h3>{{balance}} €</h3>
         <a href="/accounts/deposit">Deposit</a> <br>
         <a href="/accounts/withdraw">Withdraw</a>
 

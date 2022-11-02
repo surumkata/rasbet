@@ -69,6 +69,14 @@ class Session(models.Model):
         else:
             return False
 
+
+    @classmethod
+    def get(self,user):
+        if Session.exists(user):
+            return Session.objects.get(user_in_session=user).session_id
+        else:
+            return None
+
     # Close session (delete it from db)
     @classmethod
     def close(self,session_id):
