@@ -570,6 +570,14 @@
         "documentation": {}
     },
     {
+        "label": "Odd_type",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -1095,7 +1103,7 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n# home | away | draw ...\nclass Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)",
+        "peekOfCode": "class State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n# home | away | draw ...\nclass Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):\n        return self.type\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1104,7 +1112,7 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)\n    away = models.CharField(max_length=50,null=False)\n    home_score = models.IntegerField(default=0)",
+        "peekOfCode": "class Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):\n        return self.type\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1158,7 +1166,7 @@
         "kind": 2,
         "importPath": "main.views",
         "description": "main.views",
-        "peekOfCode": "def home(request):\n    #load ucras api to database\n    load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    odds = Odd.objects.all().values()\n    print(odds)\n    context = {\n                    \"logged\" : False,",
+        "peekOfCode": "def home(request):\n    #load ucras api to database\n    load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    print(games)\n    main_listing = []\n    # Group each game with the odds in a dictionary\n    for g in games:",
         "detail": "main.views",
         "documentation": {}
     },

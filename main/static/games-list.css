@@ -1,27 +1,73 @@
-.center{
-  margin-left: auto;
-  margin-right: auto;
+.card-event{
+  background-color: #fff;
+  border-radius: 20px;
+  margin-left: 15px;
+  width: 863px;
+  height: 110px;
+  content: "";
+  display: table;
+  clear: both;
+  margin-top:25px;
+  
 }
 
-.flex-container {
-  display: flex;
-  background-color: DodgerBlue;
+.event{
+  width: 431.5px;
+  padding:0;
 }
 
-.matchlist{
-  background-color: #f1f1f1;
-  margin: 10px;
-  padding: 20px;
-  font-size: 15px;
+.event p{
+  color: #3d3c42;
 }
 
-.betslip{
-  background-color: #f1f1f1;
-  margin: 10px;
-  padding: 20px;
-  font-size: 30px;
-
+.event p hour{
+  font-family: MarlinGeoLight;
+  padding-left: 16px;
+  font-size: 12px;
 }
-.font-10{
+
+.event p span{
+  padding-left: 20px;
+  font-family: MarlinGeoMedium;
+  font-size: 13px;
+}
+
+.event p b{
+  font-family: MarlinGeoBold;
+  padding-left: 20px;
+  font-size: 17px;
+}
+
+.odds{
+  width: 431.5px;
+  padding:0;
+}
+
+.odd{
+  width: 30%;
+  padding:0;
+}
+
+.odd button{
+  color: #af7537;
+  background-color: #ffdf7b;
+  border: none;
+  border-radius: 5px;
+  width: 120px;
+  height: 50px;
+  margin-top: 28px;
+  font-family: MarlinGeoMedium;
   font-size: 10px;
 }
+.odd button:hover{
+  color: #ffdf7b;
+  background-color: #af7537;
+}
+
+.odd button span{
+  font-family: MarlinGeoBold;
+  font-size: 18px;
+}
+
+
+

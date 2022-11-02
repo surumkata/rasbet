@@ -11,17 +11,18 @@
 </head>
 
 <body>
-  <div class="logo">
-    <a href="#"></a>
-    <img src="{% static 'logo.png' %}" alt="Rasbet">
-  </div>
   {% if logged %}
   <nav>
+    <div class="logo">
+      <a href="#"></a>
+      <img src="{% static 'logo.png' %}" alt="Rasbet">
+    </div>
     <ul>
       <li><a href="/">{{ fname }}</a></li>
       <li><a href="">Desporto</a></li>
       <li><a href="">Promoções</a></li>
       <li><a href="/accounts/balance">Balance: {{ balance }}€</a></li>
+      <li><a href="#">Logout</a></li>
     </ul>
   </nav>
   {% else %}
@@ -34,43 +35,36 @@
   </nav>
 {% endif %}
 
-  {% if logged %}
-      <a> Logged in : bemvindo {{ fname }} </a>
-  {% else %}
-      <a> Ainda não está logado click em aceder! </a>
-  {% endif %}
-
-  <br>
-  {% if logged %}
-  <a href="/accounts/logout">Logout</a>
-  <br>
-  {% endif %}
-  <br>  <br>
-  <div class="flex-container">
-    <div class="matchlist"> </div>
-    <div class="matchlist">
-        <table>
-          {% for g in games_info%}
-            <tr>
-              <th>info</th>
-              <th class="font-10">{{g.datetime|date:'d/m/Y H:i'}}</th>
-              <th class="font-10" >Resultado(Tempo Regulamentar)</th>
-            </tr>
-            <tr>
-              <td>{{g.game.home}} - {{g.game.away}}</td>
-
-              <td>{{g.home_odd}}</td>
-              <td>{{g.away_odd}}</td>
-              <td>{{g.draw_odd}}</td>
-            </tr>
-          {% endfor %}
-        </table>
+<div class="row">
+  <div class="column left" style="background-color:#aaa;">
+    <h2>Competiçoes</h2>
+    <p>Some text..</p>
+  </div>
+  <div class="column middle">
+    {% for g in games_info%}
+    <div class="card-event">
+      <div class="column event">
+        <p><span>Futebol - Portugal - Liga Portuguesa<span></p>
+        <p><b>{{g.game.home}}</b> <hour>19.15</hour> <b>{{g.game.away}}</b></p>
+      </div>
+      <div class="column odds">
+        <div class="column odd">
+          <button>{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
+        </div>
+        <div class="column odd">
+          <button>Draw<br><span>{{g.draw_odd}}</span></button>
+        </div>
+        <div class="column odd">
+          <button>{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
+        </div>
+      </div>
     </div>
-    <div class="betslip">
-      <a>BOLETIM<a>
-
-    </div>
+    {% endfor %}
+  </div>
+  <div class="column right" style="background-color:#ccc;">
+    <h2>Boletim</h2>
+    <p>Some text..</p>
+  </div>
 </div>
-</body>
 
 </html>
