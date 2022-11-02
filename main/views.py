@@ -8,10 +8,18 @@ def home(request):
     #load ucras api to database
     load_ucras('http://ucras.di.uminho.pt/v1/games/')
     cookie = request.COOKIES.get("session")
+
     # get all games
     games = Game.objects.all().values()
     odds = Odd.objects.all().values()
     print(odds)
+    
+    context = {
+                    "logged" : False,
+                    "games" : games,
+                    "odds" : odds
+                }
+   # try:
     if cookie:
         session = Session.objects.get(session_id=cookie)
         context = {
@@ -23,11 +31,11 @@ def home(request):
                 "games" : games,
                 "odds" : odds
         }
-    else:
-        context = {
-                "logged" : False,
-                "games" : games,
-                "odds" : odds
-            }
-
-    return render(request, 'index.html',context)
+    response = render(request, 'index.html',context)
+    ''' #tratar de quando cookie existe, mas a sessao nao
+    except Exception:
+        response = render(request, 'index.html',context)
+        if cookie:   
+            response.delete_cookie('session') 
+'''
+    return response
