@@ -30,20 +30,28 @@ def home(request):
 
 
     print(main_listing)
-    if cookie:
-        session = Session.objects.get(session_id=cookie)
-        context = {
 
-                "logged" : True,
-                "id" : session.user_in_session.userID,
-                "fname" : session.user_in_session.first_name,
-                "balance" : session.user_in_session.balance,
-                "games_info" : main_listing,
-        }
-    else:
-        context = {
-                "logged" : False,
-                "games_info" : main_listing
+
+    context = {
+                    "logged" : False,
+                    "games_info" : main_listing
+                }
+    try:
+        if cookie:
+            session = Session.objects.get(session_id=cookie)
+            context = {
+
+                    "logged" : True,
+                    "id" : session.user_in_session.userID,
+                    "fname" : session.user_in_session.first_name,
+                    "balance" : session.user_in_session.balance,
+                    "games_info" : main_listing,
             }
+        response = render(request, 'index.html',context)
+        
+    except Exception:
+        if cookie:
+            response = render(request, 'index.html',context)
+            response.delete_cookie('session')
 
-    return render(request, 'index.html',context)
+    return response

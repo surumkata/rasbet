@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'top-nav.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
+{% csrf_token %}
+<title> Home Page </title>
+</head>
+
+<body>
+{% if logged %}
+    <div class="topnav">
+      <a href="/accounts/logout">Logout</a>
+      <a href="/">{{ fname }}</a>
+      <a href="">Desporto</a>
+      <a href="">Promoções</a>
+      <a href="/accounts/balance">Balance: {{ balance }}€</a>
+  </div>
+{% else %}
+    <div class="topnav">
+      <a href="/accounts/login">Aceder</a>
+      <a href="">Desporto</a>
+      <a href="">Promoções</a>
+    </div>
+{% endif %}
+
+  {% if logged %}
+      <a> Logged in : bemvindo {{ fname }} </a>
+  {% else %}
+      <a> Ainda não está logado click em aceder! </a>
+  {% endif %}
+
+  <br>  <br>
+  <div class="flex-container">
+    
+</div>
+<div class="flex-container">
+  <div class="matchlist">
+    <table>
+      {% for s in sports_info %}
+      <tr>
+        <td>{{s}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>  
+</div>
+</body>
+
+</html>
