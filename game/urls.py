@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('sports_page/',views.sports_page,{}),
+    path('sport/',views.sport,{}),
 ]

@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'top-nav.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
+{% csrf_token %}
+<title> Home Page </title>
+</head>
+
+<body>
+  <div class="topnav" >
+    <a href="/">
+      <img src="{% static 'logo.png' %}"  >
+    </a>
+    <a href="/game/sports_page">Desporto</a>
+    <a href="">Promoções</a>
+    {% if logged %}
+    <a href="/">{{ fname }}</a>
+    <a href="/accounts/balance">Balance: {{ balance }}€</a>
+    <div class="topnav-right">
+      <a href="/accounts/logout">Logout</a>
+    </div>
+    {% else %}
+    <div class="topnav-right">
+      <a href="/accounts/login">Login</a>
+      <a href="/accounts/signup">Registar</a>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="row">
+    <div class="column middle">
+      {% for g in games_info%}
+      <div class="card-event">
+        <div class="column event">
+          <p><span>Futebol - Portugal - Liga Portuguesa<span> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp{{g.game.datetime|date:"d/m/Y"}}</p>
+          <p><b>{{g.game.home}}</b> <hour>{{g.game.datetime|date:"H:I"}}</hour> <b>{{g.game.away}}</b></p>
+        </div>
+        <div class="column odds">
+          <div class="column odd">
+            <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" onclick="button_handler(this);slip_handler(this);" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
+          </div>
+          <div class="column odd">
+            <button   name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" onclick="button_handler(this);slip_handler(this);" >Draw<br><span>{{g.draw_odd}}</span></button>
+          </div>
+          <div class="column odd">
+            <button  name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" onclick="button_handler(this);slip_handler(this);">{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+    
+</div>
+</body>
+
+</html>

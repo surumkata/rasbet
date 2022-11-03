@@ -41,3 +41,43 @@ def sports_page(request):
             response.delete_cookie('session') 
 
     return response
+
+
+#page to list all bets of a sport
+def sport(request):
+    if request.method == 'GET':
+        sport = request.GET.get('sport')
+        if sport:
+            games = Game.objects.filter(sport_id=sport).values()
+            games_listing = []
+            i = 0
+            for game in games:
+                games_listing.append(game_odds(game))
+
+            cookie = request.COOKIES.get("session")
+            
+            context = {
+                            "logged" : False,
+                            "games_info" : games_listing,
+                        }
+            try:
+                if cookie:
+                    session = Session.objects.get(session_id=cookie)
+                    context = {
+
+                            "logged" : True,
+                            "id" : session.user_in_session.userID,
+                            "fname" : session.user_in_session.first_name,
+                            "balance" : session.user_in_session.balance,
+                            "games_info" : games_listing,
+                    }
+                response = render(request, 'sport.html',context)
+            #tratar de quando cookie existe, mas a sessao nao
+            except Exception:
+                response = render(request, 'sport.html',context)
+                if cookie:   
+                    response.delete_cookie('session') 
+        else:
+            print('erro')
+            response = render(request, 'index.html',)
+    return response
