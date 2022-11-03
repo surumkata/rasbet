@@ -44,13 +44,13 @@
       </div>
       <div class="column odds">
         <div class="column odd">
-          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" onchange="slip(this)" onclick="uncheck(this)">{{g.game.home}}<br><span>{{g.home_odd}}</span></input>
+          <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" onclick="button_handler(this);slip_handler(this);" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
         </div>
         <div class="column odd">
-          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" onchange="slip(this)" onclick="uncheck(this)">Draw<br><span>{{g.draw_odd}}</span></input>
+          <button   name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" onclick="button_handler(this);slip_handler(this);" >Draw<br><span>{{g.draw_odd}}</span></button>
         </div>
         <div class="column odd">
-          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" onchange="slip(this)" onclick="uncheck(this)">{{g.game.away}}<br><span>{{g.away_odd}}</span></input>
+          <button  name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" onclick="button_handler(this);slip_handler(this);">{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
         </div>
       </div>
     </div>
@@ -58,10 +58,15 @@
   </div>
   <div class="column right" style="background-color:#ccc;">
     <h2>Boletim</h2>
-    <p class="slip" id="boletim">Some text..</p>
+    <form id="slipform" data-counter="0" data-sameGcounter="0">
+      <button id="simplebtt" style="background-color:#ffaa80">Simples</button>
+      <button id="multibtt">Multipla</button>
+      <br><br>
+      <p class="slip" id="boletim">Some text..</p>
 
-    <input type="number" placeholder="Montante"> </input>
-    <input type="submit" value="Apostar"> </input>
+      <input type="number" placeholder="Montante"> </input>
+      <input type="submit" value="Apostar"> </input>
+    </form>
   </div>
 </div>
 <script src="{% static 'bettingslip.js' %}"></script>
