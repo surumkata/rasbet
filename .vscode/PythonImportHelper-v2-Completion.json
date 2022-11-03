@@ -1081,7 +1081,7 @@
         "kind": 5,
         "importPath": "config.urls",
         "description": "config.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/',admin.site.urls),\n    path('',include('main.urls')),\n    path('accounts/', include('accounts.urls')),\n    path('game/', include('game.urls')),\n    path('favicon.ico', RedirectView.as_view(url=static('favicon.ico'))),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/',admin.site.urls),\n    path('',include('main.urls')),\n    path('accounts/', include('accounts.urls')),\n    path('game/', include('game.urls')),\n    path('gamble/', include('gamble.urls')),\n    path('favicon.ico', RedirectView.as_view(url=static('favicon.ico'))),\n]",
         "detail": "config.urls",
         "documentation": {}
     },
@@ -1153,8 +1153,17 @@
         "kind": 5,
         "importPath": "gamble.urls",
         "description": "gamble.urls",
-        "peekOfCode": "urlpatterns = [\n    path('login/',views.,{}),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('bet/',views.bet,{}),\n]",
         "detail": "gamble.urls",
+        "documentation": {}
+    },
+    {
+        "label": "bet",
+        "kind": 2,
+        "importPath": "gamble.views",
+        "description": "gamble.views",
+        "peekOfCode": "def bet(request):\n    response = redirect(\"/\")\n    return response",
+        "detail": "gamble.views",
         "documentation": {}
     },
     {

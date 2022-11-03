@@ -44,13 +44,13 @@
       </div>
       <div class="column odds">
         <div class="column odd">
-          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" onchange="slip(this)" onclick="cleanSlip(this)">{{g.game.home}}<br><span>{{g.home_odd}}</span></input>
+          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" onchange="slip(this)" onclick="uncheck(this)">{{g.game.home}}<br><span>{{g.home_odd}}</span></input>
         </div>
         <div class="column odd">
-          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" onchange="slip(this)">Draw<br><span>{{g.draw_odd}}</span></input>
+          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" onchange="slip(this)" onclick="uncheck(this)">Draw<br><span>{{g.draw_odd}}</span></input>
         </div>
         <div class="column odd">
-          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" onchange="slip(this)">{{g.game.away}}<br><span>{{g.away_odd}}</span></input>
+          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" onchange="slip(this)" onclick="uncheck(this)">{{g.game.away}}<br><span>{{g.away_odd}}</span></input>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
   </div>
   <div class="column right" style="background-color:#ccc;">
     <h2>Boletim</h2>
-    <p class="slip">Some text..</p>
+    <p class="slip" id="boletim">Some text..</p>
 
     <input type="number" placeholder="Montante"> </input>
     <input type="submit" value="Apostar"> </input>
