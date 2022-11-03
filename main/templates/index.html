@@ -39,18 +39,18 @@
     {% for g in games_info%}
     <div class="card-event">
       <div class="column event">
-        <p><span>Futebol - Portugal - Liga Portuguesa<span></p>
-        <p><b>{{g.game.home}}</b> <hour>19.15</hour> <b>{{g.game.away}}</b></p>
+        <p><span>Futebol - Portugal - Liga Portuguesa<span> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp{{g.game.datetime|date:"d/m/Y"}}</p>
+        <p><b>{{g.game.home}}</b> <hour>{{g.game.datetime|date:"H:I"}}</hour> <b>{{g.game.away}}</b></p>
       </div>
       <div class="column odds">
         <div class="column odd">
-          <button>{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
+          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" onchange="slip(this)" onclick="cleanSlip(this)">{{g.game.home}}<br><span>{{g.home_odd}}</span></input>
         </div>
         <div class="column odd">
-          <button>Draw<br><span>{{g.draw_odd}}</span></button>
+          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" onchange="slip(this)">Draw<br><span>{{g.draw_odd}}</span></input>
         </div>
         <div class="column odd">
-          <button>{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
+          <input type="radio" name="{{g.game.game_id}}" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" onchange="slip(this)">{{g.game.away}}<br><span>{{g.away_odd}}</span></input>
         </div>
       </div>
     </div>
@@ -58,8 +58,12 @@
   </div>
   <div class="column right" style="background-color:#ccc;">
     <h2>Boletim</h2>
-    <p>Some text..</p>
+    <p class="slip">Some text..</p>
+
+    <input type="number" placeholder="Montante"> </input>
+    <input type="submit" value="Apostar"> </input>
   </div>
 </div>
-
+<script src="{% static 'bettingslip.js' %}"></script>
+</body>
 </html>

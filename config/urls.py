@@ -23,6 +23,6 @@ urlpatterns = [
     path('',include('main.urls')),
     path('accounts/', include('accounts.urls')),
     path('game/', include('game.urls')),
+    path('gamble/', include('gamble.urls')),
     path('favicon.ico', RedirectView.as_view(url=static('favicon.ico'))),
 ]
-
