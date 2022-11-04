@@ -3,11 +3,13 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from .models import *
+from game.models import load_ucras,Game
 
 
 
 
 def login(request):
+    load_ucras('http://ucras.di.uminho.pt/v1/games/')
     if request.method == 'POST':
         email = request.POST.get('email',False)
         psw = request.POST['psw']

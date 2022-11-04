@@ -1,23 +1,22 @@
 from django.shortcuts import render
 from accounts.models import User,Session
-from game.models import load_ucras,Game,Odd,Odd_type,game_odds,sports_list
+from game.models import load_ucras,Game,Odd,Odd_type,sports_list,game_details
 import requests
 
 # Create your views here.
 def home(request):
     #load ucras api to database
-    #load_ucras('http://ucras.di.uminho.pt/v1/games/')
+    load_ucras('http://ucras.di.uminho.pt/v1/games/')
     cookie = request.COOKIES.get("session")
     # get all games
     games = Game.objects.all().values()
-    print(games)
     main_listing = []
     # Group each game with the odds in a dictionary
     for g in games:
-        main_listing.append(game_odds(g))
+        # Add game odds,sport,country,competition
+        main_listing.append(game_details(g))
 
     sports_listing = sports_list()
-    print(main_listing)
 
 
     context = {
@@ -25,6 +24,7 @@ def home(request):
                     "games_info" : main_listing,
                     "sports_info" : sports_listing,
                 }
+    response = render(request, 'index.html',context)
     try:
         if cookie:
             session = Session.objects.get(session_id=cookie)
@@ -38,7 +38,7 @@ def home(request):
                     "sports_info" : sports_listing,
             }
         response = render(request, 'index.html',context)
-        
+
     except Exception:
         if cookie:
             response = render(request, 'index.html',context)

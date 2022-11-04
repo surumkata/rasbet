@@ -121,7 +121,6 @@ function slip_handler(elem){
       var betboxs = document.getElementsByClassName('betbox');
       // Iterate throw all betbox
       for(var i=0;i<betboxs.length;i++){
-        if(i==counter){
           // Get children elements in betbox
           var children = betboxs[i].children;
           // Iterate throw children elements
@@ -129,16 +128,16 @@ function slip_handler(elem){
               // Only add after
               if(j==1){
                   var child = children[j];
-                  child.outerHTML += '<br><input type="number" placeholder="Montante"> </input>'
+                  child.outerHTML = '<input type="number" placeholder="Montante" class="simpleAmount "> </input>'
               }
 
           }
 
-        }
+
 
       }
       var slipfooter = document.getElementById('slipfooter')
-      slipfooter.innerHTML = '</label><br> <input type="submit" value="Apostar"> </input>'
+      slipfooter.innerHTML = '<label>Montante total </label><br><label>Ganhos possíveis</label> <br> <input type="submit" value="Apostar"> </input>'
 
   }else if(counter>1){
       change_to_multi()

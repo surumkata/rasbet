@@ -22,11 +22,28 @@ class Odd_type(models.Model):
     def str(self):
         return self.type
 
+class Country(models.Model):
+    country = models.CharField(primary_key=True,max_length=50,null=False)
+
+    def str(self):
+        return self.country
+
+
+class Competition(models.Model):
+    competition = models.CharField(primary_key=True,max_length=50,null=False)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
+
+    def str(self):
+        return self.competition
+
 
 class Game(models.Model):
     game_id = models.CharField(max_length=50,primary_key=True)
     # Specify what kind of sport
     sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
     sate = models.ForeignKey(State, on_delete=models.CASCADE)
     home = models.CharField(max_length=50,null=False)
     away = models.CharField(max_length=50,null=False)
@@ -60,17 +77,19 @@ class Game(models.Model):
         state = State.objects.get(sate="finish")
         self.state = state
 
-        
+
 
     @classmethod
     # Create a game in the database
-    def create(self,id,sport,home,away,datetime):
+    def create(self,id,sport,country,competition,home,away,datetime):
         # The sport MUST exist in the db
         if Sport.objects.filter(sport=sport).exists():
             sport = Sport.objects.get(sport=sport)
+            country = Country.objects.get(country=country)
+            competition = Competition.objects.get(competition=competition)
             # By default the game state is closed
             state = State.objects.get(state="closed")
-            Game.objects.create(game_id=id,sport=sport,sate=state,home=home,away=away,datetime=datetime)
+            Game.objects.create(game_id=id,sport=sport,country=country,competition=competition,sate=state,home=home,away=away,datetime=datetime)
 
 
 
@@ -112,15 +131,19 @@ def load_ucras(url):
 
             # Only upcoming games are added
             if game_date_obj>now:
-                Game.create(g['id'],"football",g['homeTeam'],g['awayTeam'],game_date_obj)
+                Game.create(g['id'],"football","Portugal","Primeira Liga",g['homeTeam'],g['awayTeam'],game_date_obj)
                 game = Game.objects.get(game_id=g['id'])
                 Odd.home(game,g['bookmakers'][1]['markets'][0]['outcomes'][0]['price'])
                 Odd.away(game,g['bookmakers'][1]['markets'][0]['outcomes'][1]['price'])
                 Odd.draw(game,g['bookmakers'][1]['markets'][0]['outcomes'][2]['price'])
 
 
-def game_odds(game:dict):
+def game_details(game:dict):
     odds = Odd.objects.filter(game_id=game['game_id'])
+    game = Game.objects.get(game_id=game['game_id'])
+    sport = game.sport.str()
+    country = game.country.str()
+    competition = game.competition.str()
     game_dict = {}
     game_dict["game"] = game
     for odd_obj in odds:
@@ -132,7 +155,13 @@ def game_odds(game:dict):
             game_dict["away_odd"] = odd
         elif type.str() == "draw":
             game_dict["draw_odd"] = odd
+    game_dict["sport"] = sport
+    game_dict["country"] = country
+    game_dict["competition"] = competition
     return game_dict
+
+
+
 
 def sports_list():
     sports = Sport.objects.all().values()

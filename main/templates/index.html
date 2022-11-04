@@ -45,7 +45,7 @@
       <h2>Desportos</h2>
       <form method='get' action="/game/sport">
         {% for s in sports_info %}
-        
+
 
           <div class="column odds">
             <div class="column odd">
@@ -61,7 +61,7 @@
       <div class="card-event">
         <div class="event">
           <div class="event_path">
-            <p><span>Futebol - Portugal - Liga Portuguesa<span></p>
+            <p><span>{{g.sport}} - {{g.country}} - {{g.competition}}<span></p>
           </div>
           <div class="event_info">
             <div class="home">
