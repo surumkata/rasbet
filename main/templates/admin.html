@@ -95,12 +95,12 @@
             </div>
           </div>
           <div>
-            <select class="change_state" game-id="{{g.game.game_id}}" value="{{g.state}}">
+            <select class="change_state" original-value="{{g.state}}" game-id="{{g.game.game_id}}" value="{{g.state}}">
               <optgroup>
                 <option selected disabled hidden  value="{{g.state}}">{{g.state}}</option>
-                <option value="Open">Open</option>
-                <option value="Hold">Hold</option>
-                <option value="Close">Close</option>
+                <option value="Open">open</option>
+                <option value="Suspended">suspended</option>
+                <option value="Closed">closed</option>
               </optgroup>
             </select>
           </div>
@@ -118,5 +118,6 @@
     </div>
   </div>
   <script src="{% static 'bettingslip.js' %}"></script>
+  <script src="{% static 'admin.js' %}"></script>
  </body>
  </html>

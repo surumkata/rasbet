@@ -3,7 +3,7 @@ from .models import *
 
 
 class gameAdmin(admin.ModelAdmin):
-  list_display = ['sport','home','away','sate']
+  list_display = ['sport','home','away','state']
 
 admin.site.register(Sport)
 admin.site.register(State)

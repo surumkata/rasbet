@@ -2,6 +2,8 @@ from django.db import models
 import requests
 from datetime import datetime
 
+
+
 class Sport(models.Model):
     sport = models.CharField(primary_key=True,max_length=50,null=False)
     has_draw = models.BooleanField()
@@ -47,7 +49,7 @@ class Game(models.Model):
     sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
-    sate = models.ForeignKey(State, on_delete=models.CASCADE)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
     home = models.CharField(max_length=50,null=False)
     away = models.CharField(max_length=50,null=False)
     home_score = models.IntegerField(default=0)
@@ -61,24 +63,32 @@ class Game(models.Model):
         self.away_score += points
 
     # Bets are possible
+    @classmethod
     def open(self):
-        state = State.objects.get(sate="open")
+        state = State.objects.get(state="open")
         self.state = state
 
-    # Games has not staarted yet,bets not possible
+    # Games has not started yet,bets not possible
+    @classmethod
     def close(self):
-        state = State.objects.get(sate="closed")
+        state = State.objects.get(state="closed")
         self.state = state
 
     # Games is suspended, bets not possible
+    @classmethod
     def suspend(self):
-        state = State.objects.get(sate="suspended")
+        state = State.objects.get(state="suspended")
         self.state = state
 
     # Game finished , bets not possible
     def finish(self):
-        state = State.objects.get(sate="finish")
+        state = State.objects.get(state="finish")
         self.state = state
+
+    @classmethod
+    def exists(self,id):
+        return Game.objects.filter(game_id=id).exists()
+
 
 
 
@@ -92,7 +102,7 @@ class Game(models.Model):
             competition = Competition.objects.get(competition=competition)
             # By default the game state is closed
             state = State.objects.get(state="closed")
-            Game.objects.create(game_id=id,sport=sport,country=country,competition=competition,sate=state,home=home,away=away,datetime=datetime)
+            Game.objects.create(game_id=id,sport=sport,country=country,competition=competition,state=state,home=home,away=away,datetime=datetime)
 
 
 
@@ -147,7 +157,7 @@ def game_details(game:dict):
     sport = str(game.sport)
     country = str(game.country)
     competition = str(game.competition)
-    state = str(game.sate)
+    state = str(game.state)
     game_dict = {}
     game_dict["game"] = game
     for odd_obj in odds:
@@ -174,3 +184,22 @@ def sports_list():
     for sport in sports:
       sports_listing.append(sport['sport'])
     return sports_listing
+
+
+
+def db_change_games_state(games_to_change):
+    print(games_to_change)
+    for game in games_to_change:
+        if Game.exists(game[0]):
+            g = Game.objects.get(game_id=game[0])
+            print(g)
+            if game[1] == 'Closed':
+                g.state = State.objects.get(state="closed")
+                g.save()
+            elif game[1] == 'Open':
+                g.state = State.objects.get(state="open")
+                g.save()
+            elif game[1] == 'Suspended':
+                g.state = State.objects.get(state="suspended")
+                g.save()
+
