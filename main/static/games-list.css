@@ -18,6 +18,7 @@
 .event_path{
   padding: 5px 15px;
   height: 5%;
+  text-transform: uppercase;
 }
 
 .event_info{
@@ -123,6 +124,7 @@
   height: 40px;
   width: 100px;
   padding: 2px 0px;
+  cursor: pointer;
 }
 .odd button:hover{
   color: #ffdf7b;

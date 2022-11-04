@@ -3,21 +3,39 @@ function change_to_multi(){
   //Multiple bet check
   multibtt = document.getElementById("multibtt")
   multibtt.setAttribute("data-checked","true")
-  multibtt.style.background = "#ffaa80"
+  multibtt.style.color = "#000"
+  multibtt.style.fontFamily = "MarlinGeoBold"
 
   //Simple bet uncheck
   simplebtt = document.getElementById("simplebtt")
   simplebtt.setAttribute("data-checked","false")
-  simplebtt.style.background = "white"
+  simplebtt.style.color = "#9aa1af"
+  simplebtt.style.fontFamily = "MarlinGeoMedium"
 }
+
+// Change to simple bet
+function change_to_simple(){
+  //Simple bet checked
+  simplebtt = document.getElementById("simplebtt")
+  simplebtt.setAttribute("data-checked","true")
+  simplebtt.style.color = "#000"
+  simplebtt.style.fontFamily = "MarlinGeoBold"
+
+  //Multiple bet uncheck
+  multibtt = document.getElementById("multibtt")
+  multibtt.setAttribute("data-checked","false")
+  multibtt.style.color = "#9aa1af"
+  multibtt.style.fontFamily = "MarlinGeoMedium"
+}
+
 function update_gains(elem,odd){
-  gainslb = document.getElementById("gains")
+  gainslb = document.getElementById("valorGanhos")
   if(elem.value!=""){
     amount = parseFloat(elem.value)
     gains = amount*odd
-    gainslb.innerHTML = 'Ganhos possíveis: ' + String(gains.toFixed(2))
+    gainslb.innerHTML = String(gains.toFixed(2)) + "€"
   }else{
-    gainslb.innerHTML = 'Ganhos possíveis: 0.00'
+    gainslb.innerHTML = '0.00€'
   }
 }
 
@@ -73,8 +91,13 @@ function slip_handler(elem,isremove){
               }
           }
         }
-        var slipfooter = document.getElementById('slipfooter')
-        slipfooter.innerHTML = '<label>Montante total </label><br><label>Ganhos possíveis</label> <br> <input type="submit" value="Apostar"> </input>'
+            
+        var rowCimaNome = document.getElementById('rowCimaNome')
+        rowCimaNome.innerHTML = "Montante Total"
+
+        var rowCimaValor = document.getElementById('rowCimaValor')
+        rowCimaValor.innerHTML = "0.0€"
+
       }else{
         // If its a remove operation and prev state is multiple => change footer and ad simple input
           if(prev_bettype=="multiple"){
@@ -91,8 +114,11 @@ function slip_handler(elem,isremove){
                 }
             }
 
-            var slipfooter = document.getElementById('slipfooter')
-            slipfooter.innerHTML = '<label>Montante total </label><br><label>Ganhos possíveis</label> <br> <input type="submit" value="Apostar"> </input>'
+            var rowCimaNome = document.getElementById('rowCimaNome')
+            rowCimaNome.innerHTML = "Montante Total"
+            
+            var rowCimaValor = document.getElementById('rowCimaValor')
+            rowCimaValor.innerHTML = "0.0€"
 
           }
       }
@@ -152,8 +178,11 @@ function slip_handler(elem,isremove){
 
         }
       }
-      var slipfooter = document.getElementById('slipfooter')
-      slipfooter.innerHTML = '<br><label>Cota:' + String(total_odd.toFixed(2)) + '</label><input type="number" placeholder="Montante" oninput="update_gains(this,'+total_odd.toFixed(2)+')"><br><label id="gains">Ganhos possíveis:  </label> <br></input> <input type="submit" value="Apostar"> </input>'
+      var rowCimaNome = document.getElementById('rowCimaNome')
+      rowCimaNome.innerHTML = "Cota " + total_odd.toFixed(2)
+      
+      var rowCimaValor = document.getElementById('rowCimaValor')
+      rowCimaValor.innerHTML = '<input class="montanteInput" type="number" placeholder="Montante" oninput="update_gains(this,'+total_odd.toFixed(2)+')">'
   }
 }
 
@@ -223,18 +252,6 @@ function button_handler(elem){
   }
 }
 
-// Change to simple bet
-function change_to_simple(){
-  //Simple bet checked
-  simplebtt = document.getElementById("simplebtt")
-  simplebtt.setAttribute("data-checked","true")
-  simplebtt.style.background = "#ffaa80"
-
-  //Multiple bet uncheck
-  multibtt = document.getElementById("multibtt")
-  multibtt.setAttribute("data-checked","false")
-  multibtt.style.background = "white"
-}
 
 
 

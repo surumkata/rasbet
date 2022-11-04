@@ -47,7 +47,7 @@ def sport(request):
             games_listing = []
             i = 0
             for game in games:
-                games_listing.append(game_odds(game))
+                games_listing.append(game_details(game))
             sports_listing = sports_list()
             cookie = request.COOKIES.get("session")
             

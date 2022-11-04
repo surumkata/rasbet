@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
 {% csrf_token %}
 <title> Home Page </title>
 </head>
@@ -85,30 +87,56 @@
         <div class="market_odds">
           <div class="odds">
             <div class="odd">
-              <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" onclick="button_handler(this)" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
+              <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" onclick="button_handler(this);" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
             </div>
             <div class="odd">
-              <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" onclick="button_handler(this)" >Draw<br><span>{{g.draw_odd}}</span></button>
+              <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" onclick="button_handler(this);" >Draw<br><span>{{g.draw_odd}}</span></button>
             </div>
             <div class="odd">
-              <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" onclick="button_handler(this)">{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
+              <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" onclick="button_handler(this);">{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
             </div>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-    <div class="display-right" style="background-color:#ccc;">
-      <h2>Boletim</h2>
-      <form id="slipform" data-counter="0" data-sameGcounter="0" data-bettype="simple">
-      <button id="simplebtt" style="background-color:#ffaa80">Simples</button>
-      <button id="multibtt">Multipla</button>
-      <br><br>
-      <div class="slip" id="slipbody"> </div>
-      <div id="slipfooter">
-        <input type="submit" value="Apostar"> </input>
-      </div>
-      </form>
+    <div class="display-right">
+      <div class="boletimWrapper">
+        <form id="slipform" data-counter="0" data-sameGcounter="0" data-bettype="simple"></form>
+          <div class="boletim">
+            <div class="boletimHeader">
+              <div class="title">
+                <p>A minha aposta</p>
+              </div>
+              <div class="tabs">
+                <div class="tab">
+                  <button id="simplebtt" class="checked">Simples</button>
+                </div>
+                <div class="tab">
+                  <button id="multibtt" class="unchecked">Multipla</button>
+                </div>
+              </div>              
+            </div>
+            <div id="slipbody" class="boletimContent slip">  
+            </div>
+            <div class="boletimFooter">
+              <div class="boletimRow">
+                <div id="rowCimaNome" class="boletimRowItem start">Montante Total</div>
+                <div id="rowCimaValor" class="boletimRowItem end">0,00€</div>
+              </div>
+              <div class="boletimRow">
+                <div class="boletimRowItem start">Ganhos Possíveis</div>
+                <div id="valorGanhos" class="boletimRowItem end">0,00€</div>
+              </div>
+              <div class="boletimRow" class="boletimRowItem">
+                <div id="slipfooter">
+                  <input type="submit" value="Apostar"> </input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>  
     </div>
   </div>
   <script src="{% static 'bettingslip.js' %}"></script>

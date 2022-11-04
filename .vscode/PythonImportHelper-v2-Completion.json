@@ -208,6 +208,38 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -569,52 +601,19 @@
         "documentation": {}
     },
     {
-        "label": "os",
-        "kind": 6,
+        "label": "load_ucras",
+        "importPath": "game.models",
+        "description": "game.models",
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
+        "detail": "game.models",
         "documentation": {}
     },
     {
-        "label": "get_asgi_application",
-        "importPath": "django.core.asgi",
-        "description": "django.core.asgi",
+        "label": "Game",
+        "importPath": "game.models",
+        "description": "game.models",
         "isExtraImport": true,
-        "detail": "django.core.asgi",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "static",
-        "importPath": "django.templatetags.static",
-        "description": "django.templatetags.static",
-        "isExtraImport": true,
-        "detail": "django.templatetags.static",
-        "documentation": {}
-    },
-    {
-        "label": "RedirectView",
-        "importPath": "django.views.generic.base",
-        "description": "django.views.generic.base",
-        "isExtraImport": true,
-        "detail": "django.views.generic.base",
-        "documentation": {}
-    },
-    {
-        "label": "get_wsgi_application",
-        "importPath": "django.core.wsgi",
-        "description": "django.core.wsgi",
-        "isExtraImport": true,
-        "detail": "django.core.wsgi",
+        "detail": "game.models",
         "documentation": {}
     },
     {
@@ -682,11 +681,68 @@
         "documentation": {}
     },
     {
-        "label": "game_odds",
+        "label": "sports_list",
         "importPath": "game.models",
         "description": "game.models",
         "isExtraImport": true,
         "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "game_details",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "static",
+        "importPath": "django.templatetags.static",
+        "description": "django.templatetags.static",
+        "isExtraImport": true,
+        "detail": "django.templatetags.static",
+        "documentation": {}
+    },
+    {
+        "label": "RedirectView",
+        "importPath": "django.views.generic.base",
+        "description": "django.views.generic.base",
+        "isExtraImport": true,
+        "detail": "django.views.generic.base",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
         "documentation": {}
     },
     {
@@ -1211,6 +1267,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "game.migrations.0005_country_competition",
+        "description": "game.migrations.0005_country_competition",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0004_alter_game_datetime_alter_game_game_id\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Country\",\n            fields=[\n                (\n                    \"country\",",
+        "detail": "game.migrations.0005_country_competition",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "game.migrations.0006_game_competition_game_country",
+        "description": "game.migrations.0006_game_competition_game_country",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0005_country_competition\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"game\",\n            name=\"competition\",\n            field=models.ForeignKey(\n                default=0,",
+        "detail": "game.migrations.0006_game_competition_game_country",
+        "documentation": {}
+    },
+    {
         "label": "GameConfig",
         "kind": 6,
         "importPath": "game.apps",
@@ -1233,7 +1307,7 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n# home | away | draw ...\nclass Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):\n        return self.type\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport",
+        "peekOfCode": "class State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n# home | away | draw ...\nclass Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):\n        return self.type\nclass Country(models.Model):\n    country = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1242,7 +1316,25 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):\n        return self.type\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)",
+        "peekOfCode": "class Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):\n        return self.type\nclass Country(models.Model):\n    country = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):\n        return self.country\nclass Competition(models.Model):\n    competition = models.CharField(primary_key=True,max_length=50,null=False)",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Country",
+        "kind": 6,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "class Country(models.Model):\n    country = models.CharField(primary_key=True,max_length=50,null=False)\n    def str(self):\n        return self.country\nclass Competition(models.Model):\n    competition = models.CharField(primary_key=True,max_length=50,null=False)\n    country = models.ForeignKey(Country, on_delete=models.CASCADE)\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    def str(self):\n        return self.competition",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Competition",
+        "kind": 6,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "class Competition(models.Model):\n    competition = models.CharField(primary_key=True,max_length=50,null=False)\n    country = models.ForeignKey(Country, on_delete=models.CASCADE)\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    def str(self):\n        return self.competition\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1251,7 +1343,7 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)\n    away = models.CharField(max_length=50,null=False)\n    home_score = models.IntegerField(default=0)\n    away_score = models.IntegerField(default=0)\n    datetime = models.DateTimeField()",
+        "peekOfCode": "class Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    country = models.ForeignKey(Country, on_delete=models.CASCADE)\n    competition = models.ForeignKey(Competition, on_delete=models.CASCADE)\n    sate = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)\n    away = models.CharField(max_length=50,null=False)\n    home_score = models.IntegerField(default=0)",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1269,16 +1361,25 @@
         "kind": 2,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "def load_ucras(url):\n    games = requests.get('http://ucras.di.uminho.pt/v1/games/').json()\n    for g in games:\n        # Only new games are added\n        if not Game.objects.filter(game_id=g['id']).exists():\n            now = datetime.now().replace(second= 0, microsecond= 0)\n            game_date_obj = datetime.strptime(g['commenceTime'][:-8],\"%Y-%m-%dT%H:%M\")\n            # Only upcoming games are added\n            if game_date_obj>now:\n                Game.create(g['id'],\"football\",g['homeTeam'],g['awayTeam'],game_date_obj)",
+        "peekOfCode": "def load_ucras(url):\n    games = requests.get('http://ucras.di.uminho.pt/v1/games/').json()\n    for g in games:\n        # Only new games are added\n        if not Game.objects.filter(game_id=g['id']).exists():\n            now = datetime.now().replace(second= 0, microsecond= 0)\n            game_date_obj = datetime.strptime(g['commenceTime'][:-8],\"%Y-%m-%dT%H:%M\")\n            # Only upcoming games are added\n            if game_date_obj>now:\n                Game.create(g['id'],\"football\",\"Portugal\",\"Primeira Liga\",g['homeTeam'],g['awayTeam'],game_date_obj)",
         "detail": "game.models",
         "documentation": {}
     },
     {
-        "label": "game_odds",
+        "label": "game_details",
         "kind": 2,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "def game_odds(game:dict):\n    odds = Odd.objects.filter(game_id=game['game_id'])\n    game_dict = {}\n    game_dict[\"game\"] = game\n    for odd_obj in odds:\n        type =  getattr(odd_obj, \"odd_type\")\n        odd = getattr(odd_obj, \"odd\")\n        if type.str() == \"home\":\n            game_dict[\"home_odd\"] = odd\n        elif type.str() == \"away\":",
+        "peekOfCode": "def game_details(game:dict):\n    odds = Odd.objects.filter(game_id=game['game_id'])\n    game = Game.objects.get(game_id=game['game_id'])\n    sport = game.sport.str()\n    country = game.country.str()\n    competition = game.competition.str()\n    game_dict = {}\n    game_dict[\"game\"] = game\n    for odd_obj in odds:\n        type =  getattr(odd_obj, \"odd_type\")",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "sports_list",
+        "kind": 2,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "def sports_list():\n    sports = Sport.objects.all().values()\n    sports_listing = []\n    for sport in sports:\n      sports_listing.append(sport['sport'])\n    return sports_listing",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1296,7 +1397,7 @@
         "kind": 2,
         "importPath": "game.views",
         "description": "game.views",
-        "peekOfCode": "def sports_page(request):\n    sports = Sport.objects.all().values()\n    sports_listing = []\n    i = 0\n    for sport in sports:\n      sports_listing.append(sport['sport'])\n    cookie = request.COOKIES.get(\"session\")\n    context = {\n                    \"logged\" : False,\n                    \"sports_info\" : sports_listing,",
+        "peekOfCode": "def sports_page(request):\n    sports_listing = sports_list()\n    cookie = request.COOKIES.get(\"session\")\n    context = {\n                    \"logged\" : False,\n                    \"sports_info\" : sports_listing,\n                }\n    try:\n        if cookie:\n            session = Session.objects.get(session_id=cookie)",
         "detail": "game.views",
         "documentation": {}
     },
@@ -1305,7 +1406,7 @@
         "kind": 2,
         "importPath": "game.views",
         "description": "game.views",
-        "peekOfCode": "def sport(request):\n    if request.method == 'GET':\n        sport = request.GET.get('sport')\n        if sport:\n            games = Game.objects.filter(sport_id=sport).values()\n            games_listing = []\n            i = 0\n            for game in games:\n                games_listing.append(game_odds(game))\n            cookie = request.COOKIES.get(\"session\")",
+        "peekOfCode": "def sport(request):\n    if request.method == 'GET':\n        sport = request.GET.get('sport')\n        if sport:\n            games = Game.objects.filter(sport_id=sport).values()\n            games_listing = []\n            i = 0\n            for game in games:\n                games_listing.append(game_details(game))\n            sports_listing = sports_list()",
         "detail": "game.views",
         "documentation": {}
     },
@@ -1332,7 +1433,7 @@
         "kind": 2,
         "importPath": "main.views",
         "description": "main.views",
-        "peekOfCode": "def home(request):\n    #load ucras api to database\n    #load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    print(games)\n    main_listing = []\n    # Group each game with the odds in a dictionary\n    for g in games:",
+        "peekOfCode": "def home(request):\n    #load ucras api to database\n    #load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    main_listing = []\n    # Group each game with the odds in a dictionary\n    for g in games:\n        # Add game odds,sport,country,competition",
         "detail": "main.views",
         "documentation": {}
     },
