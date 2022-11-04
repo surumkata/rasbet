@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from accounts.models import User,Session
-from game.models import load_ucras,Game,Odd,Odd_type
+from game.models import load_ucras,Game,Odd,Odd_type,game_odds
 import requests
 
 # Create your views here.
 def home(request):
     #load ucras api to database
-    load_ucras('http://ucras.di.uminho.pt/v1/games/')
+    #load_ucras('http://ucras.di.uminho.pt/v1/games/')
     cookie = request.COOKIES.get("session")
     # get all games
     games = Game.objects.all().values()
@@ -14,19 +14,7 @@ def home(request):
     main_listing = []
     # Group each game with the odds in a dictionary
     for g in games:
-        odds = Odd.objects.filter(game_id=g['game_id'])
-        game_dict = {}
-        game_dict["game"] = g
-        for odd_obj in odds:
-            type =  getattr(odd_obj, "odd_type")
-            odd = getattr(odd_obj, "odd")
-            if type.str() == "home":
-                game_dict["home_odd"] = odd
-            elif type.str() == "away":
-                game_dict["away_odd"] = odd
-            elif type.str() == "draw":
-                game_dict["draw_odd"] = odd
-        main_listing.append(game_dict)
+        main_listing.append(game_odds(g))
 
 
     print(main_listing)

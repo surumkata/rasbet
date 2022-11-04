@@ -8,20 +8,23 @@
     <title> Deposit </title>
   </head>
   <body>
-    {% if logged %}
     <div class="topnav">
-      <a href="/accounts/logout">Logout</a>
-      <a href="/">{{ fname }}</a>
-      <a href="">Desporto</a>
+      <img src="{% static 'logo.png' %}" alt="Rasbet Logo">
+      <a href="/game/sports_page">Desporto</a>
       <a href="">Promoções</a>
+      {% if logged %}
+      <a href="/">{{ fname }}</a>
+      <a href="/accounts/balance">Balance: {{ balance }}€</a>
+      <div class="topnav-right">
+        <a href="/accounts/logout">Logout</a>
+      </div>
+      {% else %}
+      <div class="topnav-right">
+        <a href="/accounts/login">Login</a>
+        <a href="/accounts/signup">Registar</a>
+      </div>
+      {% endif %}
     </div>
-    {% else %}
-    <div class="topnav">
-      <a href="/accounts/login">Aceder</a>
-      <a href="/">Desporto</a>
-      <a href="/">Promoções</a>
-    </div>
-    {% endif %}
 
       <div>
         <h1>BALANCE</h1>

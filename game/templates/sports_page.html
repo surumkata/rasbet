@@ -11,43 +11,39 @@
 </head>
 
 <body>
-{% if logged %}
-    <div class="topnav">
+  <div class="topnav">
+    <img src="{% static 'logo.png' %}" alt="Rasbet Logo">
+    <a href="/game/sports_page">Desporto</a>
+    <a href="">Promoções</a>
+    {% if logged %}
+    <a href="/">{{ fname }}</a>
+    <a href="/accounts/balance">Balance: {{ balance }}€</a>
+    <div class="topnav-right">
       <a href="/accounts/logout">Logout</a>
-      <a href="/">{{ fname }}</a>
-      <a href="">Desporto</a>
-      <a href="">Promoções</a>
-      <a href="/accounts/balance">Balance: {{ balance }}€</a>
-  </div>
-{% else %}
-    <div class="topnav">
-      <a href="/accounts/login">Aceder</a>
-      <a href="">Desporto</a>
-      <a href="">Promoções</a>
     </div>
-{% endif %}
+    {% else %}
+    <div class="topnav-right">
+      <a href="/accounts/login">Login</a>
+      <a href="/accounts/signup">Registar</a>
+    </div>
+    {% endif %}
+  </div>
+  <div class="row">
+    <div class="column middle">
+      <form method='get' action="/game/sport">
+        {% for s in sports_info %}
+        
 
-  {% if logged %}
-      <a> Logged in : bemvindo {{ fname }} </a>
-  {% else %}
-      <a> Ainda não está logado click em aceder! </a>
-  {% endif %}
+          <div class="column odds">
+            <div class="column odd">
+                <button name="sport" type="submit" value="{{s}}" data-checked="false" >{{s}}</button>
+            </div>
+          </div>
 
-  <br>  <br>
-  <div class="flex-container">
-    
-</div>
-<div class="flex-container">
-  <div class="matchlist">
-    <table>
-      {% for s in sports_info %}
-      <tr>
-        <td>{{s}}</td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>  
-</div>
+        {% endfor %}
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>

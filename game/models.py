@@ -60,6 +60,8 @@ class Game(models.Model):
         state = State.objects.get(sate="finish")
         self.state = state
 
+        
+
     @classmethod
     # Create a game in the database
     def create(self,id,sport,home,away,datetime):
@@ -115,3 +117,19 @@ def load_ucras(url):
                 Odd.home(game,g['bookmakers'][1]['markets'][0]['outcomes'][0]['price'])
                 Odd.away(game,g['bookmakers'][1]['markets'][0]['outcomes'][1]['price'])
                 Odd.draw(game,g['bookmakers'][1]['markets'][0]['outcomes'][2]['price'])
+
+
+def game_odds(game:dict):
+    odds = Odd.objects.filter(game_id=game['game_id'])
+    game_dict = {}
+    game_dict["game"] = game
+    for odd_obj in odds:
+        type =  getattr(odd_obj, "odd_type")
+        odd = getattr(odd_obj, "odd")
+        if type.str() == "home":
+            game_dict["home_odd"] = odd
+        elif type.str() == "away":
+            game_dict["away_odd"] = odd
+        elif type.str() == "draw":
+            game_dict["draw_odd"] = odd
+    return game_dict
