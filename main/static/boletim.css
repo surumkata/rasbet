@@ -99,3 +99,22 @@
     align-items: center;
 }
 
+.buttonApostar{
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #3d3c42;
+    color: #e8e9eb;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: MarlinGeoBold;
+    
+}
+.buttonApostar:hover{
+    background-color: #444349;
+}
+
