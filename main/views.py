@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from accounts.models import User,Session,Admin,Transation
+from accounts.models import User,Session,Admin,Specialist,Transation
 from game.models import load_ucras,Game,Odd,Odd_type,game_details,sports_list
 import requests
 
@@ -46,8 +46,17 @@ def home(request):
                     "sports_info" : sports_listing,
                 }
                 response = render(request, 'admin.html',context)
-            else:
-                print('Not admin')
+            elif Specialist.is_specialist(session.user_in_session.userID):
+                context = {
+                    "logged" : True,
+                    "specialist" : True,
+                    "id" : session.user_in_session.userID,
+                    "fname" : session.user_in_session.first_name,
+                    "games_info" : main_listing,
+                    "sports_info" : sports_listing,
+                }
+                response = render(request, 'specialist.html',context)
+
     except Exception as e:
         print(e)
         if cookie:
