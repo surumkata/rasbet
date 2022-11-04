@@ -1,3 +1,7 @@
+// Global scope
+  window.totalAmount = 0
+
+
 // Change to multi bet
 function change_to_multi(){
   //Multiple bet check
@@ -39,6 +43,34 @@ function update_gains(elem,odd){
   }
 }
 
+function simpleAmount_handler(elem){
+    var rowCimaValor = document.getElementById('rowCimaValor')
+
+    if(elem.value!=""){
+      value = parseInt(elem.value)
+
+      if(elem.oldvalue==""){
+        window.totalAmount += value
+      }else{
+        oldvalue = parseInt(elem.oldvalue)
+
+        window.totalAmount -= oldvalue
+        window.totalAmount += value
+      }
+    }else{
+      oldvalue = parseInt(elem.oldvalue)
+      if(elem.oldvalue!=""){
+        window.totalAmount -= oldvalue
+      }
+    }
+
+    if (window.totalAmount==0){
+        rowCimaValor.innerHTML = '0,00€'
+    }else{
+        rowCimaValor.innerHTML = String(window.totalAmount) + "€"
+    }
+}
+
 function slip_handler(elem,isremove){
   slipform = document.getElementById("slipform")
   counter = parseInt(slipform.getAttribute("data-counter"))
@@ -72,7 +104,7 @@ function slip_handler(elem,isremove){
                 // Only add after
                 if(j==1){
                     var child = children[j];
-                    child.outerHTML += '<input type="number" placeholder="Montante" class="simpleAmount "> </input>'
+                    child.outerHTML += '<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="montanteEuro">€</span></div>'
                 }
             }
           }
@@ -86,17 +118,16 @@ function slip_handler(elem,isremove){
                   // Only add after
                   if(j==1){
                       var child = children[j];
-                      child.outerHTML += '<input type="number" placeholder="Montante" class="simpleAmount "> </input>'
+                      child.outerHTML += '<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="montanteEuro">€</span></div>'
                   }
               }
           }
         }
-            
         var rowCimaNome = document.getElementById('rowCimaNome')
         rowCimaNome.innerHTML = "Montante Total"
 
         var rowCimaValor = document.getElementById('rowCimaValor')
-        rowCimaValor.innerHTML = "0.0€"
+        rowCimaValor.innerHTML = '0,00€'
 
       }else{
         // If its a remove operation and prev state is multiple => change footer and ad simple input
@@ -109,16 +140,16 @@ function slip_handler(elem,isremove){
                     // Only add after
                     if(j==1){
                         var child = children[j];
-                        child.outerHTML += '<input type="number" placeholder="Montante" class="simpleAmount "> </input>'
+                        child.outerHTML += '<input type="number" placeholder="Montante" class="simpleAmount" oninput="simpleAmount_handler(this)"> </input>'
                     }
                 }
             }
 
             var rowCimaNome = document.getElementById('rowCimaNome')
             rowCimaNome.innerHTML = "Montante Total"
-            
+
             var rowCimaValor = document.getElementById('rowCimaValor')
-            rowCimaValor.innerHTML = "0.0€"
+            rowCimaValor.innerHTML = '0,00€'
 
           }
       }
@@ -172,7 +203,7 @@ function slip_handler(elem,isremove){
           }
         }else{
             for(var i=0;i<betboxs.length;i++){
-              total_odd = total_odd * parseFloat(betboxs[i].getAttribute("data-odd"))  
+              total_odd = total_odd * parseFloat(betboxs[i].getAttribute("data-odd"))
             }
 
 
@@ -180,9 +211,9 @@ function slip_handler(elem,isremove){
       }
       var rowCimaNome = document.getElementById('rowCimaNome')
       rowCimaNome.innerHTML = "Cota " + total_odd.toFixed(2)
-      
+
       var rowCimaValor = document.getElementById('rowCimaValor')
-      rowCimaValor.innerHTML = '<input class="montanteInput" type="number" placeholder="Montante" oninput="update_gains(this,'+total_odd.toFixed(2)+')">'
+      rowCimaValor.innerHTML = '<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" oninput="update_gains(this,'+total_odd.toFixed(2)+')"><span class="montanteEuro">€</span></div>'
   }
 }
 
