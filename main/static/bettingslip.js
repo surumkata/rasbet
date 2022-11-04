@@ -67,6 +67,7 @@ function simpleAmount_handler(elem){
     if (window.totalAmount==0){
         rowCimaValor.innerHTML = '0,00€'
     }else{
+        sessionStorage.setItem("amount",String(window.totalAmount))
         rowCimaValor.innerHTML = String(window.totalAmount) + "€"
     }
 }
@@ -85,8 +86,10 @@ function slip_handler(elem,isremove){
   var odd = elem.getAttribute("data-odd")
 
   if(sameGcounter>=1 || counter<=1){
+
       change_to_simple()
       slipform.setAttribute("data-bettype","simple")
+      sessionStorage.setItem("betType","simple")
       // Get all elements with id = betbox
       var betboxs = document.getElementsByClassName('betbox');
 
@@ -158,6 +161,8 @@ function slip_handler(elem,isremove){
       total_odd = 1
       change_to_multi()
       slipform.setAttribute("data-bettype","multiple")
+      sessionStorage.setItem("betType","multiple")
+
       var betboxs = document.getElementsByClassName('betbox');
       if(!isremove){
         if(prev_bettype=="multiple"){ // If last state is multiple just add to the end
@@ -245,6 +250,10 @@ function button_handler(elem){
     var bet = elem.getAttribute("data-bet")
     var odd = elem.getAttribute("data-odd")
 
+
+
+
+
     //Add game to slip in the html
     slip.innerHTML += '<div class="betbox" id='+elem.name+' data-odd='+odd+'><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>'+ odd +'</label><input type="hidden" name='+ elem.name + '> </input></div>';
 
@@ -252,6 +261,15 @@ function button_handler(elem){
     slipform = document.getElementById("slipform")
     counter = parseInt(slipform.getAttribute("data-counter"))
     counter++
+
+    if(bet==home){
+      sessionStorage.setItem(elem.name,"home");
+    }else if(bet==away){
+      sessionStorage.setItem(elem.name,"away");
+    }else{
+      sessionStorage.setItem(elem.name,"draw");
+    }
+
 
     slipform.setAttribute("data-counter",String(counter))
     slip_handler(elem,false)
@@ -271,6 +289,8 @@ function button_handler(elem){
       counter = parseInt(slipform.getAttribute("data-counter"))
       counter--;
       slipform.setAttribute("data-counter",String(counter))
+
+      sessionStorage.removeItem(elem.name);
 
       // Decrease same game counter
       game_on_slip = document.getElementById(elem.name)

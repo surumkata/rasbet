@@ -16,10 +16,10 @@
     </div>
     <div class="form-box">
       <form method="POST" required>
+        {% csrf_token %}
         <input type="text" placeholder="Email" name="email" value="" required>
         <input type="password" placeholder="Password" name="psw" value="" required>
         <button type="submit">LOGIN IN</button>
-        {% csrf_token %}
         {% if error %}
         <span>{{ msg }}<span>
         {% endif %}
