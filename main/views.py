@@ -6,7 +6,7 @@ import requests
 # Create your views here.
 def home(request):
     #load ucras api to database
-    load_ucras('http://ucras.di.uminho.pt/v1/games/')
+    #load_ucras('http://ucras.di.uminho.pt/v1/games/')
     cookie = request.COOKIES.get("session")
     # get all games
     games = Game.objects.all().values()
