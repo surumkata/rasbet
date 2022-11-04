@@ -7,7 +7,7 @@ class Sport(models.Model):
     has_draw = models.BooleanField()
     is_team_sport = models.BooleanField()
 
-    def str(self):
+    def __str__(self):
         return self.sport
 
 
@@ -15,17 +15,20 @@ class Sport(models.Model):
 class State(models.Model):
     state = models.CharField(primary_key=True,max_length=50,null=False)
 
+    def __str__(self):
+        return self.state
+
 # home | away | draw ...
 class Odd_type(models.Model):
     type = models.CharField(primary_key=True,max_length=50,null=False)
 
-    def str(self):
+    def __str__(self):
         return self.type
 
 class Country(models.Model):
     country = models.CharField(primary_key=True,max_length=50,null=False)
 
-    def str(self):
+    def __str__(self):
         return self.country
 
 
@@ -34,7 +37,7 @@ class Competition(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
 
-    def str(self):
+    def __str__(self):
         return self.competition
 
 
@@ -141,23 +144,25 @@ def load_ucras(url):
 def game_details(game:dict):
     odds = Odd.objects.filter(game_id=game['game_id'])
     game = Game.objects.get(game_id=game['game_id'])
-    sport = game.sport.str()
-    country = game.country.str()
-    competition = game.competition.str()
+    sport = str(game.sport)
+    country = str(game.country)
+    competition = str(game.competition)
+    state = str(game.sate)
     game_dict = {}
     game_dict["game"] = game
     for odd_obj in odds:
         type =  getattr(odd_obj, "odd_type")
         odd = getattr(odd_obj, "odd")
-        if type.str() == "home":
+        if str(type) == "home":
             game_dict["home_odd"] = odd
-        elif type.str() == "away":
+        elif str(type) == "away":
             game_dict["away_odd"] = odd
-        elif type.str() == "draw":
+        elif str(type) == "draw":
             game_dict["draw_odd"] = odd
     game_dict["sport"] = sport
     game_dict["country"] = country
     game_dict["competition"] = competition
+    game_dict["state"] = state
     return game_dict
 
 

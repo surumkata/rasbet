@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from accounts.models import User,Session
+from accounts.models import User,Session,Admin
 from game.models import load_ucras,Game,Odd
 from django.urls import reverse
 import requests
@@ -47,7 +47,7 @@ def sport(request):
             games_listing = []
             i = 0
             for game in games:
-                games_listing.append(game_odds(game))
+                games_listing.append(game_details(game))
             sports_listing = sports_list()
             cookie = request.COOKIES.get("session")
             
@@ -57,6 +57,7 @@ def sport(request):
                             "sports_info" : sports_listing,
                         }
             try:
+                response = render(request, 'sport.html',context)
                 if cookie:
                     session = Session.objects.get(session_id=cookie)
                     context = {
@@ -69,7 +70,16 @@ def sport(request):
                             "sports_info" : sports_listing,
                             "sport" : sport,
                     }
-                response = render(request, 'sport.html',context)
+                    if Admin.is_admin(session.user_in_session.userID):
+                        context = {
+                            "logged" : True,
+                            "admin" : True,
+                            "id" : session.user_in_session.userID,
+                            "fname" : session.user_in_session.first_name,
+                            "games_info" : games_listing,
+                            "sports_info" : sports_listing,
+                        }
+                        response = render(request, 'sport_admin.html',context)
             #tratar de quando cookie existe, mas a sessao nao
             except Exception:
                 response = render(request, 'sport.html',context)

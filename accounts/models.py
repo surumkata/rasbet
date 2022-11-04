@@ -35,6 +35,21 @@ class User(models.Model):
     def withdraw(self,amount):
         self.balance -= amount
 
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
+
+
+
+#Admin module
+class Admin(models.Model):
+    adminID = models.AutoField(primary_key=True)
+    userID = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    @classmethod
+    def is_admin(self,id:str):
+        return Admin.objects.filter(userID=id).exists()
+    
+
 
 
 class Session(models.Model):
@@ -133,3 +148,6 @@ class History(models.Model):
     bet  = models.ForeignKey(Bet,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     unique_together = ((bet,user))
+
+
+
