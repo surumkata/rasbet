@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+{% csrf_token %}
+<title> Home Page </title>
+</head>
+
+<body>
+  
+  {% if logged %}
+    {% if admin %}
+    <div class="header">
+      <div class="header-left">
+        <div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div>
+        <div class="tab"><a class="active" href="/game/sports_page">Desporto</a></div>
+        <div class="tab"><a href="">Promoções</a></div>
+        <div class="tab"><a href="">{{ fname }}</a></div>
+        <div class="tab"><a>ADMIN</a></div>
+      </div>
+      <div class="header-right">
+        <div class="tab"><a href="/accounts/logout">Logout</a></div>
+      </div>
+    </div>
+    {% elif specialist %}
+    <div class="header">
+      <div class="header-left">
+        <div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div>
+        <div class="tab"><a class="active" href="/game/sports_page">Desporto</a></div>
+        <div class="tab"><a href="">Promoções</a></div>
+        <div class="tab"><a href="">{{ fname }}</a></div>
+        <div class="tab"><a>SPECIALIST</a></div>
+      </div>
+      <div class="header-right">
+        <div class="tab"><a href="/accounts/logout">Logout</a></div>
+      </div>
+    </div>
+    {%else%}
+    <div class="header">
+      <div class="header-left">
+        <div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div>
+        <div class="tab"><a class="active" href="/game/sports_page">Desporto</a></div>
+        <div class="tab"><a href="">Promoções</a></div>
+        <div class="tab"><a href="">{{ fname }}</a></div>
+        <a href="/accounts/balance">Balance: {{ balance }}€</a>
+      </div>
+      <div class="header-right">
+        <div class="tab"><a href="/accounts/logout">Logout</a></div>
+      </div>
+    </div>
+    {% endif %}
+  {% else %}
+  <div class="header">
+    <div class="header-left">
+      <div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div>
+      <div class="tab"><a class="active" href="/game/sports_page">Desporto</a></div>
+      <div class="tab"><a href="">Promoções</a></div>
+    </div>
+    <div class="header-right">
+      <div class="tab"><a href="/accounts/login">Login</a></div>
+      <div class="tab"><a href="/accounts/signup">Registar</a></div>
+    </div>
+  </div>
+  {% endif %}
+    <div class="display-center">
+      {%for h in history%}
+      <div class="row">
+        <div class="column">
+          {{h.bet_id}}
+        </div>
+        <div class="column">
+          {{h.type}}
+        </div>
+        <div class="column">
+          {{h.amount}}
+        </div>
+        <div class="column">
+          {{h.total_odd}}
+        </div>
+        <div class="column">
+          {{h.datetime}}
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+    
+
+  <script src="{% static 'bettingslip.js' %}"></script>
+ </body>
+ </html>

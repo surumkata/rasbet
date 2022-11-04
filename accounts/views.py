@@ -119,3 +119,63 @@ def withdraw(request):
             response = redirect('/accounts/balance')
 
     return response
+
+
+def profile(request):
+    cookie = request.COOKIES.get("session")
+    context = {
+                    "logged" : False,
+                }
+    try:
+        response = render(request, 'index.html',context)
+        if cookie:
+            session = Session.objects.get(session_id=cookie)
+            user_id = session.user_in_session.userID
+            if Admin.is_admin(user_id):
+                context = {
+                    "logged" : True,
+                    "admin" : True,
+                    "id" : user_id,
+                    "fname" : session.user_in_session.first_name,
+                }
+            elif Specialist.is_specialist(user_id):
+                context = {
+                    "logged" : True,
+                    "specialist" : True,
+                    "id" : user_id,
+                    "fname" : session.user_in_session.first_name,
+                }
+            else:
+                histories = []
+                if History.objects.filter(user=user_id).exists():
+                    histories = History.objects.get(user=user_id)
+                print(histories)
+                history = {}
+                for h in histories:
+                    dic = {}
+                    bet_id = h.bet
+                    if Bet.objects.filter(betID=bet_id).exists():
+                        bet = Bet.objects.filter(betID=bet_id).get()
+                        dic['bet_id'] = bet.betID
+                        dic['type'] = bet.type
+                        dic['amount'] = bet.amount
+                        dic['total_odd'] = bet.total_odd
+                        dic['datetime'] = str(bet.datetime)
+                context = {
+                    "logged" : True,
+                    "id" : user_id,
+                    "fname" : session.user_in_session.first_name,
+                    "balance" : session.user_in_session.balance,
+                    "history" : history,
+                }
+            response = render(request, 'profile.html',context)
+
+    except Exception as e:
+        print('error: '+ str(e))
+        if cookie:
+            context = {
+                    "logged" : False,
+                }
+            response = render(request, 'index.html',context)
+            response.delete_cookie('session')
+    return response

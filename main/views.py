@@ -24,8 +24,8 @@ def home(request):
                     "games_info" : main_listing,
                     "sports_info" : sports_listing,
                 }
+    response = render(request, 'index.html',context)
     try:
-        response = render(request, 'index.html',context)
         if cookie:
             session = Session.objects.get(session_id=cookie)
             context = {
@@ -36,6 +36,7 @@ def home(request):
                     "games_info" : main_listing,
                     "sports_info" : sports_listing,
             }
+            response = render(request, 'index.html',context)
             if Admin.is_admin(session.user_in_session.userID):
                 context = {
                     "logged" : True,
@@ -67,7 +68,6 @@ def home(request):
                 }
             response = render(request, 'index.html',context)
             response.delete_cookie('session')
-
     return response
 
 
