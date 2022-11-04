@@ -22,6 +22,11 @@ function button_handler(elem){
     var bet = elem.getAttribute("data-bet")
     var odd = elem.getAttribute("data-odd")
 
+    console.log(home)
+    console.log(away)
+    console.log(bet)
+    console.log(odd)
+
     //Add game to slip in the html
     slip.innerHTML += '<div class="betbox" id='+elem.name+' data-odd='+odd+'><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>'+ odd +'</label><input type="hidden" name='+ elem.name + '> </input></div>';
 

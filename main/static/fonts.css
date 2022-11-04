@@ -1,0 +1,20 @@
+@font-face {
+    font-family: MarlinGeoBold;
+    src: url("MarlinGeo\ Bold.ttf");
+  }
+  @font-face {
+    font-family: MarlinGeoLight;
+    src: url("MarlinGeoSlantLight.ttf");
+  }
+  @font-face {
+    font-family: MarlinGeoThin;
+    src: url("MarlinGeo\ Thin.ttf");
+  }
+  @font-face {
+    font-family: MarlinGeoMedium;
+    src: url("MarlinGeo\ Medium.ttf");
+  }
+
+body{
+    font-family: MarlinGeoMedium;
+}

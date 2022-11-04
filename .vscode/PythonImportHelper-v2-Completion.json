@@ -682,6 +682,14 @@
         "documentation": {}
     },
     {
+        "label": "game_odds",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -1266,11 +1274,20 @@
         "documentation": {}
     },
     {
+        "label": "game_odds",
+        "kind": 2,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "def game_odds(game:dict):\n    odds = Odd.objects.filter(game_id=game['game_id'])\n    game_dict = {}\n    game_dict[\"game\"] = game\n    for odd_obj in odds:\n        type =  getattr(odd_obj, \"odd_type\")\n        odd = getattr(odd_obj, \"odd\")\n        if type.str() == \"home\":\n            game_dict[\"home_odd\"] = odd\n        elif type.str() == \"away\":",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
         "label": "urlpatterns",
         "kind": 5,
         "importPath": "game.urls",
         "description": "game.urls",
-        "peekOfCode": "urlpatterns = [\n    path('sports_page/',views.sports_page,{}),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('sports_page/',views.sports_page,{}),\n    path('sport/',views.sport,{}),\n]",
         "detail": "game.urls",
         "documentation": {}
     },
@@ -1280,6 +1297,15 @@
         "importPath": "game.views",
         "description": "game.views",
         "peekOfCode": "def sports_page(request):\n    sports = Sport.objects.all().values()\n    sports_listing = []\n    i = 0\n    for sport in sports:\n      sports_listing.append(sport['sport'])\n    cookie = request.COOKIES.get(\"session\")\n    context = {\n                    \"logged\" : False,\n                    \"sports_info\" : sports_listing,",
+        "detail": "game.views",
+        "documentation": {}
+    },
+    {
+        "label": "sport",
+        "kind": 2,
+        "importPath": "game.views",
+        "description": "game.views",
+        "peekOfCode": "def sport(request):\n    if request.method == 'GET':\n        sport = request.GET.get('sport')\n        if sport:\n            games = Game.objects.filter(sport_id=sport).values()\n            games_listing = []\n            i = 0\n            for game in games:\n                games_listing.append(game_odds(game))\n            cookie = request.COOKIES.get(\"session\")",
         "detail": "game.views",
         "documentation": {}
     },
@@ -1306,7 +1332,7 @@
         "kind": 2,
         "importPath": "main.views",
         "description": "main.views",
-        "peekOfCode": "def home(request):\n    #load ucras api to database\n    load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    print(games)\n    main_listing = []\n    # Group each game with the odds in a dictionary\n    for g in games:",
+        "peekOfCode": "def home(request):\n    #load ucras api to database\n    #load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    print(games)\n    main_listing = []\n    # Group each game with the odds in a dictionary\n    for g in games:",
         "detail": "main.views",
         "documentation": {}
     },

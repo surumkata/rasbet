@@ -1,0 +1,34 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #e8e9eb;
+}
+
+.display{
+    margin-top: 50px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin: 0 auto;
+}
+
+.display-left{
+    width: 25%;
+    height: 100%;
+    position: sticky;
+    top: 50px;
+}
+
+.display-right{
+    width: 25%;
+    height: 100%;
+    position: sticky;
+    top: 50px;
+}
+
+.display-center{
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    padding: 30px 12px;
+}
