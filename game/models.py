@@ -63,19 +63,16 @@ class Game(models.Model):
         self.away_score += points
 
     # Bets are possible
-    @classmethod
     def open(self):
         state = State.objects.get(state="open")
         self.state = state
 
     # Games has not started yet,bets not possible
-    @classmethod
     def close(self):
         state = State.objects.get(state="closed")
         self.state = state
 
     # Games is suspended, bets not possible
-    @classmethod
     def suspend(self):
         state = State.objects.get(state="suspended")
         self.state = state
@@ -88,6 +85,9 @@ class Game(models.Model):
     @classmethod
     def exists(self,id):
         return Game.objects.filter(game_id=id).exists()
+
+    def __str__(self):
+        return self.home + " vs " + self.away
 
 
 
@@ -130,6 +130,13 @@ class Odd(models.Model):
     def draw(self,game,odd):
         type = Odd_type.objects.get(type="draw")
         Odd.objects.create(game=game,odd_type=type,odd=odd)
+
+   
+    #change odd value
+    def change_odd(self,value:float):
+        self.odd = value
+
+   
 
 
 # Load ucras api data to databse
@@ -188,18 +195,41 @@ def sports_list():
 
 
 def db_change_games_state(games_to_change):
-    print(games_to_change)
     for game in games_to_change:
         if Game.exists(game[0]):
             g = Game.objects.get(game_id=game[0])
             print(g)
             if game[1] == 'Closed':
-                g.state = State.objects.get(state="closed")
+                g.close()
                 g.save()
             elif game[1] == 'Open':
-                g.state = State.objects.get(state="open")
+                g.open()
                 g.save()
             elif game[1] == 'Suspended':
-                g.state = State.objects.get(state="suspended")
+                g.suspend()
                 g.save()
+
+
+
+def db_change_games_odds(games_to_change):
+    try:
+        for bet in games_to_change:
+            odd_type = Odd_type.objects.get(type=bet[1])
+            print(bet[0])
+            if Odd.objects.filter(game=bet[0],odd_type=odd_type).exists():
+                b = Odd.objects.get(game=bet[0],odd_type=odd_type)
+                try:
+                    value = float(bet[2])
+                    #print(b.odd)
+                    b.change_odd(value)
+                    #print(b.odd)
+                    b.save()
+                except Exception as e:
+                    print(e)
+
+    except Exception as e:
+        print(e)
+
+
+
 

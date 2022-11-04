@@ -48,9 +48,18 @@ class Admin(models.Model):
     @classmethod
     def is_admin(self,id:str):
         return Admin.objects.filter(userID=id).exists()
+<<<<<<< HEAD
 
+=======
+    
+class Specialist(models.Model):
+    specID = models.AutoField(primary_key=True)
+    userID = models.ForeignKey(User, on_delete=models.CASCADE)
+>>>>>>> 7c76931e5795a83e19948332dd6e4085ff67fd2f
 
-
+    @classmethod
+    def is_specialist(self,id:str):
+        return Specialist.objects.filter(userID=id).exists()
 
 class Session(models.Model):
     user_in_session = models.ForeignKey(User, on_delete=models.CASCADE)
