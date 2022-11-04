@@ -1,0 +1,101 @@
+.boletimWrapper {
+    padding: 20px 16px 20px 4px;
+}
+
+.boletim {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    height: 100%;
+    border-radius: 1.6rem;
+    overflow: hidden;
+}
+
+.boletimHeader{
+    border-bottom: 0.1rem solid #eef0f3;
+}
+
+.boletimHeader .title{
+    font-size: 17px;
+    padding: 0px 15px;
+    font-family: 'MarlinGeoBold';
+}
+
+.boletimHeader .tabs{
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin: 0 auto;
+}
+
+.boletimHeader .tab{
+    width: 50%;
+    height: auto;
+}
+
+.tab button{
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #fff;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.tab .checked{
+    color: #000;
+    font-family: "MarlinGeoBold";
+}
+
+.tab .unchecked{
+    color: #9aa1af;
+    font-family: "MarlinGeoMedium";
+}
+
+.boletimContent{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.1rem solid #eef0f3;
+    overflow-y: auto;
+    height: 380px;
+}
+
+
+.boletimFooter{
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 0;
+    background-color: #fff;
+    align-items: inherit;
+    padding: 15px;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.boletimFooter .boletimRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+    width: 100%;
+    color: #000;
+    font-size: 17px;
+    line-height: 2rem;
+    font-weight: 500;
+}
+
+.boletimFooter .boletimRowItem .start {
+    margin-right: 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.boletimFooter .boletimRowItem .end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
