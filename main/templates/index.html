@@ -44,13 +44,13 @@
       </div>
       <div class="column odds">
         <div class="column odd">
-          <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" onclick="button_handler(this);slip_handler(this);" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
+          <button name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" onclick="button_handler(this);slip_handler(this);" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
         </div>
         <div class="column odd">
-          <button   name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" onclick="button_handler(this);slip_handler(this);" >Draw<br><span>{{g.draw_odd}}</span></button>
+          <button   name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" onclick="button_handler(this);slip_handler(this);" >Draw<br><span>{{g.draw_odd}}</span></button>
         </div>
         <div class="column odd">
-          <button  name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" onclick="button_handler(this);slip_handler(this);">{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
+          <button  name="{{g.game.game_id}}" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" onclick="button_handler(this);slip_handler(this);">{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
         </div>
       </div>
     </div>
@@ -58,14 +58,17 @@
   </div>
   <div class="column right" style="background-color:#ccc;">
     <h2>Boletim</h2>
-    <form id="slipform" data-counter="0" data-sameGcounter="0">
+    <form id="slipform" data-counter="0" data-sameGcounter="0" data-bettype="simple">
       <button id="simplebtt" style="background-color:#ffaa80">Simples</button>
       <button id="multibtt">Multipla</button>
       <br><br>
-      <p class="slip" id="boletim">Some text..</p>
+      <div class="slip" id="slipbody">
 
-      <input type="number" placeholder="Montante"> </input>
-      <input type="submit" value="Apostar"> </input>
+
+      </div>
+      <div id="slipfooter">
+        <input type="submit" value="Apostar"> </input>
+      </div>
     </form>
   </div>
 </div>
