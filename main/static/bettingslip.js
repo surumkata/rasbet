@@ -132,6 +132,7 @@ function slip_handler(elem,isremove){
       }else{
         // If its a remove operation and prev state is multiple => change footer and ad simple input
           if(prev_bettype=="multiple"){
+            console.log("ola runlo")
             for(var i=0;i<betboxs.length;i++){
                 // Get children elements in betbox
                 var children = betboxs[i].children;
@@ -140,7 +141,7 @@ function slip_handler(elem,isremove){
                     // Only add after
                     if(j==1){
                         var child = children[j];
-                        child.outerHTML += '<input type="number" placeholder="Montante" class="simpleAmount" oninput="simpleAmount_handler(this)"> </input>'
+                        child.outerHTML += '<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="montanteEuro">€</span></div>'
                     }
                 }
             }
