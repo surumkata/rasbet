@@ -99,3 +99,53 @@
     align-items: center;
 }
 
+.buttonApostar{
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #3d3c42;
+    color: #e8e9eb;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: MarlinGeoBold;
+    
+}
+.buttonApostar:hover{
+    background-color: #444349;
+}
+
+.montante{
+    margin: 0;
+    width: 200px;
+    height: 50px;
+    background-color: #eef0f3;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.montanteInput{
+    line-height: 2rem;
+    border-color: transparent;
+    border-radius: 0.8rem;
+    background-color: transparent;
+    font-size: 14px;
+    font-family: MarlinGeoBold;
+}
+.montanteInput:focus, .montanteInput:active {
+    outline: none;
+}
+
+.montanteEuro{
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+
+
+
