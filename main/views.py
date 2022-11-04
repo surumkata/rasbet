@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from accounts.models import User,Session
-from game.models import load_ucras,Game,Odd,Odd_type,sports_list,game_details
+from django.shortcuts import render,redirect
+from accounts.models import User,Session,Admin,Transation
+from game.models import load_ucras,Game,Odd,Odd_type,game_details,sports_list
 import requests
 
 # Create your views here.
@@ -10,26 +10,25 @@ def home(request):
     cookie = request.COOKIES.get("session")
     # get all games
     games = Game.objects.all().values()
+
     main_listing = []
     # Group each game with the odds in a dictionary
     for g in games:
-        # Add game odds,sport,country,competition
         main_listing.append(game_details(g))
 
     sports_listing = sports_list()
-
+    print(main_listing)
 
     context = {
                     "logged" : False,
                     "games_info" : main_listing,
                     "sports_info" : sports_listing,
                 }
-    response = render(request, 'index.html',context)
     try:
+        response = render(request, 'index.html',context)
         if cookie:
             session = Session.objects.get(session_id=cookie)
             context = {
-
                     "logged" : True,
                     "id" : session.user_in_session.userID,
                     "fname" : session.user_in_session.first_name,
@@ -37,11 +36,28 @@ def home(request):
                     "games_info" : main_listing,
                     "sports_info" : sports_listing,
             }
-        response = render(request, 'index.html',context)
-
-    except Exception:
+            if Admin.is_admin(session.user_in_session.userID):
+                context = {
+                    "logged" : True,
+                    "admin" : True,
+                    "id" : session.user_in_session.userID,
+                    "fname" : session.user_in_session.first_name,
+                    "games_info" : main_listing,
+                    "sports_info" : sports_listing,
+                }
+                response = render(request, 'admin.html',context)
+            else:
+                print('Not admin')
+    except Exception as e:
+        print(e)
         if cookie:
+            context = {
+                    "logged" : False,
+                    "games_info" : main_listing,
+                    "sports_info" : sports_listing,
+                }
             response = render(request, 'index.html',context)
             response.delete_cookie('session')
 
     return response
+
