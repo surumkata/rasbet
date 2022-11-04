@@ -42,8 +42,19 @@
 
   <div class="display">
     <div class="display-left" style="background-color:#aaa;">
-      <h2>Competiçoes</h2>
-      <p>Some text..</p>
+      <h2>Desportos</h2>
+      <form method='get' action="/game/sport">
+        {% for s in sports_info %}
+        
+
+          <div class="column odds">
+            <div class="column odd">
+                <button name="sport" type="submit" value="{{s}}" data-checked="false" >{{s}}</button>
+            </div>
+          </div>
+
+        {% endfor %}
+      </form>
     </div>
     <div class="display-center">
       {% for g in games_info%}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from accounts.models import User,Session
-from game.models import load_ucras,Game,Odd,Odd_type,game_odds
+from game.models import load_ucras,Game,Odd,Odd_type,game_odds,sports_list
 import requests
 
 # Create your views here.
@@ -16,13 +16,14 @@ def home(request):
     for g in games:
         main_listing.append(game_odds(g))
 
-
+    sports_listing = sports_list()
     print(main_listing)
 
 
     context = {
                     "logged" : False,
-                    "games_info" : main_listing
+                    "games_info" : main_listing,
+                    "sports_info" : sports_listing,
                 }
     try:
         if cookie:
@@ -34,6 +35,7 @@ def home(request):
                     "fname" : session.user_in_session.first_name,
                     "balance" : session.user_in_session.balance,
                     "games_info" : main_listing,
+                    "sports_info" : sports_listing,
             }
         response = render(request, 'index.html',context)
         

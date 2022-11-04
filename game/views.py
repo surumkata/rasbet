@@ -9,12 +9,7 @@ from .models import *
 
 #pagina dos desportos
 def sports_page(request):
-    sports = Sport.objects.all().values()
-    sports_listing = []
-    i = 0
-    for sport in sports:
-      sports_listing.append(sport['sport'])
-
+    sports_listing = sports_list()
 
     cookie = request.COOKIES.get("session")
     
@@ -53,12 +48,13 @@ def sport(request):
             i = 0
             for game in games:
                 games_listing.append(game_odds(game))
-
+            sports_listing = sports_list()
             cookie = request.COOKIES.get("session")
             
             context = {
                             "logged" : False,
                             "games_info" : games_listing,
+                            "sports_info" : sports_listing,
                         }
             try:
                 if cookie:
@@ -70,6 +66,8 @@ def sport(request):
                             "fname" : session.user_in_session.first_name,
                             "balance" : session.user_in_session.balance,
                             "games_info" : games_listing,
+                            "sports_info" : sports_listing,
+                            "sport" : sport,
                     }
                 response = render(request, 'sport.html',context)
             #tratar de quando cookie existe, mas a sessao nao

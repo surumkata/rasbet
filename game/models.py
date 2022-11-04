@@ -133,3 +133,10 @@ def game_odds(game:dict):
         elif type.str() == "draw":
             game_dict["draw_odd"] = odd
     return game_dict
+
+def sports_list():
+    sports = Sport.objects.all().values()
+    sports_listing = []
+    for sport in sports:
+      sports_listing.append(sport['sport'])
+    return sports_listing
