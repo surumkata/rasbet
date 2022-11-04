@@ -17,7 +17,6 @@ def home(request):
         main_listing.append(game_details(g))
 
     sports_listing = sports_list()
-    print(main_listing)
 
     context = {
                     "logged" : False,
@@ -60,6 +59,3 @@ def home(request):
             response.delete_cookie('session')
 
     return response
-
-
-

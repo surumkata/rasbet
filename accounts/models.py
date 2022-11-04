@@ -44,11 +44,11 @@ class User(models.Model):
 class Admin(models.Model):
     adminID = models.AutoField(primary_key=True)
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+
     @classmethod
     def is_admin(self,id:str):
         return Admin.objects.filter(userID=id).exists()
-    
+
 
 
 
@@ -149,5 +149,6 @@ class History(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     unique_together = ((bet,user))
 
-
-
+    @classmethod
+    def create(self,bet,user):
+        History.objects.create(bet=bet,user=user)

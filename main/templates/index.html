@@ -115,7 +115,7 @@
                 <div class="tab">
                   <button id="multibtt" class="unchecked">Multipla</button>
                 </div>
-              </div>              
+              </div>
             </div>
             <div id="slipbody" class="boletimContent slip"></div>
             <div class="boletimFooter">
@@ -129,15 +129,16 @@
               </div>
               <div class="boletimRowItem">
                 <div>
-                  <input class="buttonApostar" type="submit" value="Apostar"> </input>
+                  <input class="buttonApostar" type="submit" value="Apostar" onclick="sendToCookie()" > </input>
                 </div>
               </div>
             </div>
           </div>
         </form>
-      </div>  
+      </div>
     </div>
   </div>
   <script src="{% static 'bettingslip.js' %}"></script>
+  <script src="{% static 'cookies.js' %}"></script>
  </body>
  </html>
