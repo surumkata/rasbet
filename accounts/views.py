@@ -161,6 +161,7 @@ def profile(request):
                         dic['amount'] = bet.amount
                         dic['total_odd'] = bet.total_odd
                         dic['datetime'] = str(bet.datetime)
+                        history.append(dic)
                 context = {
                     "logged" : True,
                     "id" : user_id,

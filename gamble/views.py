@@ -18,9 +18,9 @@ def bet(request):
     slip = request.COOKIES.get("slip")
 
     slip_fields = slip.split("|")
-
+    print(slip_fields[1])
     session.user_in_session.withdraw(float(slip_fields[1]))
-
+    session.user_in_session.save()
     bet_obj = Bet.create(slip_fields[0],slip_fields[1])
 
     game_outcome = slip_fields[2].split("/")

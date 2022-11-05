@@ -34,6 +34,7 @@ class User(models.Model):
 
     def withdraw(self,amount):
         self.balance -= amount
+        
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -48,14 +49,10 @@ class Admin(models.Model):
     @classmethod
     def is_admin(self,id:str):
         return Admin.objects.filter(userID=id).exists()
-<<<<<<< HEAD
-
-=======
     
 class Specialist(models.Model):
     specID = models.AutoField(primary_key=True)
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
->>>>>>> 7c76931e5795a83e19948332dd6e4085ff67fd2f
 
     @classmethod
     def is_specialist(self,id:str):
