@@ -1,36 +1,54 @@
 //Specialist button to save games odds
-function button_change_odd(elem){
+function save(elem){
   //quando carregou no botao cancelar retorna a pagina aos valores originais (reload)
   if (elem.value.localeCompare('Cancelar') == 0){
     window.location.replace('/')
   }else if (elem.value.localeCompare('Gravar') == 0){
-    console.log('Guardando')
-    var odds = document.getElementsByClassName('odd_input')
+    var games = document.getElementsByClassName('odds')
+    gamesDict = {}
+    
 
-    //buscar valor da query do url
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-      get: (searchParams, prop) => searchParams.get(prop),
-    })
-    var sport = params.sport
-    var url = '/game/change_games_odds'
-    url = url + '?sport=' + sport
-
-    for(var i=0; i<odds.length; i++){
-      let odd_input = odds[i]
-      try {
-        if(odd_input.getAttribute('original-value').localeCompare(odd_input.value)){
-          let odd_query = odd_input.getAttribute('game_id')+';'+odd_input.getAttribute('data-type')
-          let value = odd_input.value
-          if(!value){
-            value = '0'
+    for(var i=0; i<games.length; i++){
+      let game = games[i]
+      let game_id = game.getAttribute("id")
+      gameDict = {}
+      try{
+        if(game.getAttribute('original-value').localeCompare(game.getAttribute('value')) != 0){
+          gameDict['state'] = game.getAttribute('value')
+        }
+        for(var j = 0; j < game.children.length -1; j++){
+          odd_input = game.children[j].children[0]
+          if(odd_input.getAttribute('original-value').localeCompare(odd_input.value) != 0){
+            gameDict[odd_input.getAttribute('data-type')] = odd_input.value
           }
-          url = url + "&"+odd_query+"="+value
+        }
+        if(Object.keys(gameDict).length > 0){
+          gamesDict[game_id] = gameDict
         }
       }
-      catch{
-
-      }
+      catch{}
     }
-    window.location.href = url
+
+    $.ajax({
+      type: 'POST',
+      url: '/game/specialist_update_games/',
+      dataType: "json",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+      },
+      data: JSON.stringify({games : gamesDict})
+    })
+    
+    $(document).ajaxStop(function(){
+      window.location.reload();
+    });
+    
   }
+}
+
+function change_state_to_open(elem){
+  game_id = elem.getAttribute("game_id")
+  game = document.getElementById(game_id)
+  game.setAttribute("value","open")
 }

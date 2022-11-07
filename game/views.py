@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from accounts.models import User, Session, Admin,Specialist
-from game.models import load_ucras, Game, Odd,db_change_games_state
+from game.models import db_change_gameodd, db_change_games_state, Game, load_ucras, Odd
 from django.urls import reverse
 import requests
 from .models import *
+import json
 
 # pagina dos desportos
 
@@ -157,7 +158,59 @@ def change_games_state(request):
     return response
 
 
-def change_games_odds(request):
+def specialist_update_games(request):
+    response = redirect("/")
+    cookie = request.COOKIES.get("session")
+    if cookie:
+        session = Session.objects.get(session_id=cookie)
+        if request.method == "POST":
+            is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+            if is_ajax:
+                request_data = json.load(request)
+
+                games = request_data.get('games')
+
+                for game in games:
+                    g = games[game]
+                    if 'state' in g.keys():
+                        db_change_gamestate(game,g['state'])
+                    if 'home' in g.keys():
+                        db_change_gameodd(game,g['home'],'home')
+                    if 'away' in g.keys():
+                        db_change_gameodd(game,g['away'],'away')
+                    if 'draw' in g.keys():
+                        db_change_gameodd(game,g['draw'],'draw')
+                
+                onhold = State.objects.get(state="on_hold")
+                open = State.objects.get(state="open")
+                sport = None
+                sports_listing = sports_list()
+                if sport is None or sport=='null':
+                    games_onhold = Game.objects.filter(state=onhold).values()
+                    games_open = Game.objects.filter(state=open).values()
+                else:
+                    games_onhold = Game.objects.filter(sport_id=sport,state=onhold).values()
+                    games_open = Game.objects.filter(sport_id=sport,state=open).values()
+                onhold_listening = []
+                open_listening = []
+                for game in games_onhold:
+                    onhold_listening.append(game_details(game))
+                for game in games_open:
+                    open_listening.append(game_details(game))
+                context = {
+                    "logged": True,
+                    "specialist": True,
+                    "id": session.user_in_session.userID,
+                    "fname": session.user_in_session.first_name,
+                    "games_onhold": onhold_listening,
+                    "games_open": open_listening,
+                    "sports_info": sports_listing,
+                }
+                response = render(request, 'specialist.html', context)
+                return response
+    return response
+"""
     if request.method == 'GET':
         sport = request.GET.get('sport')
         cookie = request.COOKIES.get("session")
@@ -187,20 +240,12 @@ def change_games_odds(request):
                         "id": session.user_in_session.userID,
                         "fname": session.user_in_session.first_name,
                         "balance": session.user_in_session.balance,
-                        "games_info": games_listing,
+                        "games_onhold": games_listing,
                         "sports_info": sports_listing,
                         "sport": sport,
                 }
                 if Specialist.is_specialist(session.user_in_session.userID):
-                    context = {
-                        "logged": True,
-                        "specialist": True,
-                        "id": session.user_in_session.userID,
-                        "fname": session.user_in_session.first_name,
-                        "games_info": games_listing,
-                        "sports_info": sports_listing,
-                    }
-                    response = render(request, 'specialist.html', context)
+                    
                     games_to_change = []
                     iterate = list(request.GET)
                     iterate.pop(0)
@@ -209,6 +254,30 @@ def change_games_odds(request):
                         data = query.split(';')
                         games_to_change.append((data[0],data[1],request.GET.get(query)))
                     db_change_games_odds(games_to_change)
+                    onhold = State.objects.get(state="on_hold")
+                    open = State.objects.get(state="open")
+                    if sport is None or sport=='null':
+                        games_onhold = Game.objects.filter(state=onhold).values()
+                        games_open = Game.objects.filter(state=open).values()
+                    else:
+                        games_onhold = Game.objects.filter(sport_id=sport,state=onhold).values()
+                        games_open = Game.objects.filter(sport_id=sport,state=open).values()
+                    onhold_listening = []
+                    open_listening = []
+                    for game in games_onhold:
+                        onhold_listening.append(game_details(game))
+                    for game in games_open:
+                        open_listening.append(game_details(game))
+                    context = {
+                        "logged": True,
+                        "specialist": True,
+                        "id": session.user_in_session.userID,
+                        "fname": session.user_in_session.first_name,
+                        "games_onhold": onhold_listening,
+                        "games_open": open_listening,
+                        "sports_info": sports_listing,
+                    }
+                    response = render(request, 'specialist.html', context)
                     
         # tratar de quando cookie existe, mas a sessao nao
         except Exception as e:
@@ -218,4 +287,5 @@ def change_games_odds(request):
                 response.delete_cookie('session') 
     else:
         response = redirect('/')
-    return response
+    return response´
+    """

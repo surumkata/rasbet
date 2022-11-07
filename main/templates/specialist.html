@@ -48,8 +48,8 @@
         {% for s in sports_info %}
 
 
-          <div class="column odds">
-            <div class="column odd">
+          <div class="column">
+            <div class="column">
                 <button name="sport" type="submit" value="{{s}}" data-checked="false" >{{s}}</button>
             </div>
           </div>
@@ -58,7 +58,7 @@
       </form>
     </div>
     <div class="display-center">
-      {% for g in games_info%}
+      {% for g in games_onhold%}
       <div class="card-event">
         <div class="event">
           <div class="event_path">
@@ -84,7 +84,7 @@
           </div>
         </div>
         <div class="market_odds">
-          <div class="odds">
+          <div id="{{g.game.game_id}}" class="odds" original-value="{{g.state}}" value="{{g.state}}">
             <div class="odd">
               <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="home" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" original-value="{{g.home_odd}}" value="{{g.home_odd}}" min="0" required>{{g.game.home}}</input>
             </div>
@@ -92,8 +92,50 @@
               <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="draw" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" original-value="{{g.draw_odd}}" value="{{g.draw_odd}}" min="0" required>Draw</input>
             </div>
             <div class="odd">
-              <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="away" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" original-value="{{g.away_odd}}" value="{{g.away_odd}}" min="0" required>{{g.game.away}}</input>
+              <input class="odd_input" type="number"  game_id="{{g.game.game_id}}" data-checked="false" data-type="away" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" original-value="{{g.away_odd}}" value="{{g.away_odd}}" min="0" required>{{g.game.away}}</input>
             </div>
+            <input game_id="{{g.game.game_id}}" type="submit" value="Aprovar" onclick="change_state_to_open(this)"> </input>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% for g in games_open%}
+      <div class="card-event" style="background-color: green">
+        <div class="event">
+          <div class="event_path">
+            <p><span>{{g.sport}} - {{g.country}} - {{g.competition}}<span></p>
+          </div>
+          <div class="event_info">
+            <div class="home">
+              <p><b>{{g.game.home}}</b></p>
+            </div>
+            <div class="event_date">
+              <div class="datetime">
+                <div class="date">
+                  {{g.game.datetime|date:"d/m/Y"}}
+                </div>
+                <div class="hour">
+                  {{g.game.datetime|date:"H:i"}}
+                </div>
+              </div>
+            </div>
+            <div class="away">
+              <p><b>{{g.game.away}}</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="market_odds">
+          <div id="{{g.game.game_id}}" class="odds" original-value="{{g.state}}" value="{{g.state}}">
+            <div class="odd">
+              <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="home" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" original-value="{{g.home_odd}}" value="{{g.home_odd}}" min="0" required>{{g.game.home}}</input>
+            </div>
+            <div class="odd">
+              <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="draw" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" original-value="{{g.draw_odd}}" value="{{g.draw_odd}}" min="0" required>Draw</input>
+            </div>
+            <div class="odd">
+              <input class="odd_input" type="number"  game_id="{{g.game.game_id}}" data-checked="false" data-type="away" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" original-value="{{g.away_odd}}" value="{{g.away_odd}}" min="0" required>{{g.game.away}}</input>
+            </div>
+            <input game_id="{{g.game.game_id}}" type="submit" value="Aprovar" onclick="change_state_to_open(this)"> </input>
           </div>
         </div>
       </div>
@@ -102,14 +144,15 @@
     <div class="display-right" style="background-color:#ccc;">
       <h2>Confirmar Operação</h2>
       <div id="confirm_state">
-        <input type="submit" value="Cancelar" onclick="button_change_odd(this);"> </input>
-        <input type="submit" value="Gravar" onclick="button_change_odd(this);"> </input>
+        <input type="submit" value="Cancelar" onclick="save(this);"> </input>
+        <input type="submit" value="Gravar" onclick="save(this);"> </input>
       </div>
       </form>
     </div>
   </div>
-  <script src="{% static 'bettingslip.js' %}"></script>
   <script src="{% static 'specialist.js' %}"></script>
+  <script src="{% static 'cookies.js' %}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  </body>
  </html>
 {% endif %}

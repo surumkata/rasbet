@@ -67,7 +67,7 @@ class Game(models.Model):
         state = State.objects.get(state="open")
         self.state = state
 
-    # Games has not started yet,bets not possible
+    # Games finished by admin
     def close(self):
         state = State.objects.get(state="closed")
         self.state = state
@@ -77,9 +77,9 @@ class Game(models.Model):
         state = State.objects.get(state="suspended")
         self.state = state
 
-    # Game finished , bets not possible
-    def finish(self):
-        state = State.objects.get(state="finish")
+    # Games unnaproved (specialist needs to aprove the game)
+    def on_hold(self):
+        state = State.objects.get(state="on_hold")
         self.state = state
 
     @classmethod
@@ -101,7 +101,7 @@ class Game(models.Model):
             country = Country.objects.get(country=country)
             competition = Competition.objects.get(competition=competition)
             # By default the game state is closed
-            state = State.objects.get(state="closed")
+            state = State.objects.get(state="on_hold")
             Game.objects.create(game_id=id,sport=sport,country=country,competition=competition,state=state,home=home,away=away,datetime=datetime)
 
 
@@ -130,6 +130,10 @@ class Odd(models.Model):
     def draw(self,game,odd):
         type = Odd_type.objects.get(type="draw")
         Odd.objects.create(game=game,odd_type=type,odd=odd)
+    
+    def create(self,game_id,odd_type,odd):
+        game = Game.objects.get(id=game_id)
+        Odd.objects.create(game=game,odd_type=odd_type,odd=odd)
 
    
     #change odd value
@@ -211,21 +215,36 @@ def db_change_games_state(games_to_change):
 
 
 
-def db_change_games_odds(games_to_change):
+
+def db_change_gamestate(game_id,state):
     try:
-        for bet in games_to_change:
-            odd_type = Odd_type.objects.get(type=bet[1])
-            print(bet[0])
-            if Odd.objects.filter(game=bet[0],odd_type=odd_type).exists():
-                b = Odd.objects.get(game=bet[0],odd_type=odd_type)
-                try:
-                    value = float(bet[2])
-                    #print(b.odd)
-                    b.change_odd(value)
-                    #print(b.odd)
-                    b.save()
-                except Exception as e:
-                    print(e)
+        if(Game.exists(game_id)):
+            g = Game.objects.get(game_id=game_id)
+            if(state == 'open'):
+                g.open()
+                g.save()
+            elif(state == 'closed'):
+                g.close()
+                g.save()
+            elif(state == 'suspended'):
+                g.suspend()
+                g.save()
+            elif(state == 'on_hold'):
+                g.on_hold()
+                g.save()
+    except Exception as e:
+        print(e)
+
+def db_change_gameodd(game_id,value,odd_type):
+    try:
+        odd_type = Odd_type.objects.get(type=odd_type)
+        if Odd.objects.filter(game=game_id,odd_type=odd_type).exists():
+            odd = Odd.objects.get(game=game_id,odd_type=odd_type)
+            odd.change_odd(float(value))
+            odd.save()
+        else:
+            Odd.create(game_id,odd_type,float(value))
+            
 
     except Exception as e:
         print(e)

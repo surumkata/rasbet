@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from accounts.models import User,Session,Admin,Specialist,Transation
-from game.models import load_ucras,Game,Odd,Odd_type,game_details,sports_list
+from game.models import Game, game_details, load_ucras, Odd, Odd_type, sports_list, State
 import requests
 
 # Create your views here.
@@ -47,12 +47,25 @@ def home(request):
                 }
                 response = render(request, 'admin.html',context)
             elif Specialist.is_specialist(session.user_in_session.userID):
+                on_hold = State.objects.get(state="on_hold")
+                open = State.objects.get(state="open")
+                games_onhold = Game.objects.filter(state=on_hold).values()
+                games_open = Game.objects.filter(state=open).values()
+                open_listing = []
+                onhold_listing = []
+                # Group each game with the odds in a dictionary
+                for g in games_open:
+                    open_listing.append(game_details(g))
+                for g in games_onhold:
+                    onhold_listing.append(game_details(g))
+
                 context = {
                     "logged" : True,
                     "specialist" : True,
                     "id" : session.user_in_session.userID,
                     "fname" : session.user_in_session.first_name,
-                    "games_info" : main_listing,
+                    "games_open" : open_listing,
+                    "games_onhold" : onhold_listing,
                     "sports_info" : sports_listing,
                 }
                 response = render(request, 'specialist.html',context)
