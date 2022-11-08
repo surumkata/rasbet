@@ -37,11 +37,12 @@ function update_gains(elem,odd){
   gainslb = document.getElementById("valorGanhos")
   if(elem.value!=""){
     amount = parseFloat(elem.value)
-    //sessionStorage.setItem("amount",String(amount))
+    sessionStorage.setItem("amount",String(amount))
     gains = amount*odd
     gainslb.innerHTML = String(gains.toFixed(2)) + "€"
   }else{
     gainslb.innerHTML = '0.00€'
+    sessionStorage.setItem("amount","0")
 
   }
 }

@@ -23,26 +23,24 @@ return "";
 
 function post_slip(){
   type = sessionStorage.getItem("betType")
+  sessionStorage.removeItem("betType");
   slip_data = {}
 
   if(type=="simple"){
-    sessionStorage.removeItem("betType");
     slip_data['bet_type'] = type
     slip_data['games'] = []
+    keys = Object.keys(sessionStorage)
     for(var i=0;i<keys.length;i++){
       game_data_obj = JSON.parse(sessionStorage.getItem(keys[i]))
-      same_game_simples = []
-      for(var j=0;j<game_data_obj.lenght;j++){
-          game_bet = {"bet_outcome" : game_data_obj[j].outcome,"amount" :game_data_obj[j].amount }
-          same_game_simples.push(game_bet)
+      for(var j=0;j<game_data_obj.length;j++){
+          game_bet = {"game_id" : keys[i],"bet_outcome" : game_data_obj[j].bet_outcome,"amount" : game_data_obj[j].amount }
+          slip_data['games'].push(game_bet)
       }
-      slip_data['games'].push({"game_id" : keys[i],"bet_outcomes" : same_game_simples})
       sessionStorage.removeItem(keys[i]);
-
     }
+    console.log(slip_data['games'])
   }else if(type=="multiple"){
     amount = sessionStorage.getItem("amount")
-    sessionStorage.removeItem("betType");
     sessionStorage.removeItem("amount");
     slip_data['bet_type'] = type
     slip_data['amount'] = amount
@@ -50,7 +48,7 @@ function post_slip(){
     keys = Object.keys(sessionStorage)
     for(var i=0;i<keys.length;i++){
       game_data_obj = JSON.parse(sessionStorage.getItem(keys[i]))
-      game_bet = {"game_id" : keys[i],"bet_outcome" : game_data_obj[0].outcome}
+      game_bet = {"game_id" : keys[i],"bet_outcome" : game_data_obj[0].bet_outcome}
       sessionStorage.removeItem(keys[i]);
       slip_data['games'].push(game_bet)
     }
@@ -65,5 +63,9 @@ function post_slip(){
   },
   data: JSON.stringify({slip : slip_data})
 })
+
+$(document).ajaxStop(function(){
+  window.location.reload();
+});
 
 }

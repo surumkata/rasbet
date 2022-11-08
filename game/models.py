@@ -130,17 +130,18 @@ class Odd(models.Model):
     def draw(self,game,odd):
         type = Odd_type.objects.get(type="draw")
         Odd.objects.create(game=game,odd_type=type,odd=odd)
-    
+
     def create(self,game_id,odd_type,odd):
         game = Game.objects.get(id=game_id)
         Odd.objects.create(game=game,odd_type=odd_type,odd=odd)
 
-   
+
     #change odd value
     def change_odd(self,value:float):
         self.odd = value
+        
 
-   
+
 
 
 # Load ucras api data to databse
@@ -244,11 +245,7 @@ def db_change_gameodd(game_id,value,odd_type):
             odd.save()
         else:
             Odd.create(game_id,odd_type,float(value))
-            
+
 
     except Exception as e:
         print(e)
-
-
-
-
