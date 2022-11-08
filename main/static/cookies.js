@@ -21,64 +21,49 @@ for(let i = 0; i <ca.length; i++) {
 return "";
 }
 
-
-function sendData(data) {
-  console.log('Sending data');
-
-  const XHR = new XMLHttpRequest();
-
-  const urlEncodedDataPairs = [];
-
-  // Turn the data object into an array of URL-encoded key/value pairs.
-  for (const [name, value] of Object.entries(data)) {
-    urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(value)}`);
-  }
-
-  // Combine the pairs into a single string and replace all %-encoded spaces to
-  // the '+' character; matches the behavior of browser form submissions.
-  const urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
-
-  // Define what happens on successful data submission
-  XHR.addEventListener('load', (event) => {
-    alert('Yeah! Data sent and response loaded.');
-  });
-
-  // Define what happens in case of error
-  XHR.addEventListener('error', (event) => {
-    alert('Oops! Something went wrong.');
-  });
-
-  // Set up our request
-  XHR.open('POST', 'http://127.0.0.1:8000/gamble/bet');
-
-  // Add the required HTTP header for form data POST requests
-  XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-  // Finally, send our data.
-  XHR.send(urlEncodedData);
-}
-
-
-
-function sendToCookie(){
-  sendData({ test: 'ok' });
+function post_slip(){
   type = sessionStorage.getItem("betType")
-  amount = sessionStorage.getItem("amount")
-  sessionStorage.removeItem("betType");
-  sessionStorage.removeItem("amount");
-  keys = Object.keys(sessionStorage)
+  slip_data = {}
 
-  var cookieValue = "" +type+"|"+amount+"|"
-  for(var i=0;i<keys.length;i++){
-    if(i==keys.length-1){
-      cookieValue += "" + keys[i]+"/"+sessionStorage.getItem(keys[i])
-    }else{
-      cookieValue +=  "" + keys[i]+"/"+sessionStorage.getItem(keys[i])+"|"
+  if(type=="simple"){
+    sessionStorage.removeItem("betType");
+    slip_data['bet_type'] = type
+    slip_data['games'] = []
+    for(var i=0;i<keys.length;i++){
+      game_data_obj = JSON.parse(sessionStorage.getItem(keys[i]))
+      same_game_simples = []
+      for(var j=0;j<game_data_obj.lenght;j++){
+          game_bet = {"bet_outcome" : game_data_obj[j].outcome,"amount" :game_data_obj[j].amount }
+          same_game_simples.push(game_bet)
+      }
+      slip_data['games'].push({"game_id" : keys[i],"bet_outcomes" : same_game_simples})
+      sessionStorage.removeItem(keys[i]);
+
     }
-
+  }else if(type=="multiple"){
+    amount = sessionStorage.getItem("amount")
+    sessionStorage.removeItem("betType");
+    sessionStorage.removeItem("amount");
+    slip_data['bet_type'] = type
+    slip_data['amount'] = amount
+    slip_data['games'] = []
+    keys = Object.keys(sessionStorage)
+    for(var i=0;i<keys.length;i++){
+      game_data_obj = JSON.parse(sessionStorage.getItem(keys[i]))
+      game_bet = {"game_id" : keys[i],"bet_outcome" : game_data_obj[0].outcome}
+      sessionStorage.removeItem(keys[i]);
+      slip_data['games'].push(game_bet)
+    }
   }
-  console.log(cookieValue)
-  setCookie("slip",cookieValue,365)
+  $.ajax({
+  type: 'POST',
+  url: '/gamble/bet/',
+  dataType: "json",
+  headers: {
+    "X-Requested-With": "XMLHttpRequest",
+    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+  },
+  data: JSON.stringify({slip : slip_data})
+})
 
-  window.location.href = "/gamble/bet"
 }
