@@ -33,7 +33,20 @@ class User(models.Model):
 
 
     def withdraw(self,amount):
-        self.balance -= amount
+        if(amount > 5 and self.has_sufficient_balance(amount)): 
+            self.balance -= amount
+            return True
+        else: return False
+
+    def withdraw_bet(self,amount):
+        if(self.has_sufficient_balance(amount)): 
+            self.balance -= amount
+            return True
+        else: return False
+
+    def has_sufficient_balance(self,amount):
+        if(self.balance >= amount): return True
+        else: return False
         
 
     def __str__(self):

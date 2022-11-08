@@ -181,7 +181,7 @@ def specialist_update_games(request):
                         db_change_gameodd(game,g['away'],'away')
                     if 'draw' in g.keys():
                         db_change_gameodd(game,g['draw'],'draw')
-                
+                """
                 onhold = State.objects.get(state="on_hold")
                 open = State.objects.get(state="open")
                 sport = None
@@ -207,85 +207,7 @@ def specialist_update_games(request):
                     "games_open": open_listening,
                     "sports_info": sports_listing,
                 }
-                response = render(request, 'specialist.html', context)
+                response = render(request, 'index.html', context)
                 return response
+                """
     return response
-"""
-    if request.method == 'GET':
-        sport = request.GET.get('sport')
-        cookie = request.COOKIES.get("session")
-        print(sport)
-
-        if sport is None or sport=='null':
-            games = Game.objects.all().values()
-        else:
-            games = Game.objects.filter(sport_id=sport).values()
-        games_listing = []
-        for game in games:
-            games_listing.append(game_details(game))
-        sports_listing = sports_list()
-        context = {
-                    "logged": False,
-                    "games_info": games_listing,
-                    "sports_info": sports_listing,
-                }
-
-        try:
-            response = render(request, 'index.html', context)
-            if cookie:
-                session = Session.objects.get(session_id=cookie)
-                context = {
-
-                        "logged": True,
-                        "id": session.user_in_session.userID,
-                        "fname": session.user_in_session.first_name,
-                        "balance": session.user_in_session.balance,
-                        "games_onhold": games_listing,
-                        "sports_info": sports_listing,
-                        "sport": sport,
-                }
-                if Specialist.is_specialist(session.user_in_session.userID):
-                    
-                    games_to_change = []
-                    iterate = list(request.GET)
-                    iterate.pop(0)
-                    #guarda tuplo de jogo e estado para mudar
-                    for query in iterate:
-                        data = query.split(';')
-                        games_to_change.append((data[0],data[1],request.GET.get(query)))
-                    db_change_games_odds(games_to_change)
-                    onhold = State.objects.get(state="on_hold")
-                    open = State.objects.get(state="open")
-                    if sport is None or sport=='null':
-                        games_onhold = Game.objects.filter(state=onhold).values()
-                        games_open = Game.objects.filter(state=open).values()
-                    else:
-                        games_onhold = Game.objects.filter(sport_id=sport,state=onhold).values()
-                        games_open = Game.objects.filter(sport_id=sport,state=open).values()
-                    onhold_listening = []
-                    open_listening = []
-                    for game in games_onhold:
-                        onhold_listening.append(game_details(game))
-                    for game in games_open:
-                        open_listening.append(game_details(game))
-                    context = {
-                        "logged": True,
-                        "specialist": True,
-                        "id": session.user_in_session.userID,
-                        "fname": session.user_in_session.first_name,
-                        "games_onhold": onhold_listening,
-                        "games_open": open_listening,
-                        "sports_info": sports_listing,
-                    }
-                    response = render(request, 'specialist.html', context)
-                    
-        # tratar de quando cookie existe, mas a sessao nao
-        except Exception as e:
-            print(e)
-            response = render(request, 'index.html',context)
-            if cookie:   
-                response.delete_cookie('session') 
-    else:
-        response = redirect('/')
-    return response´
-    """
