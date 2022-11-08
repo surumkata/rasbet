@@ -33,13 +33,13 @@ class User(models.Model):
 
 
     def withdraw(self,amount):
-        if(amount > 5 and self.has_sufficient_balance(amount)): 
+        if(amount > 5 and self.has_sufficient_balance(amount)):
             self.balance -= amount
             return True
         else: return False
 
     def withdraw_bet(self,amount):
-        if(self.has_sufficient_balance(amount)): 
+        if(self.has_sufficient_balance(amount)):
             self.balance -= amount
             return True
         else: return False
@@ -47,7 +47,7 @@ class User(models.Model):
     def has_sufficient_balance(self,amount):
         if(self.balance >= amount): return True
         else: return False
-        
+
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -62,7 +62,7 @@ class Admin(models.Model):
     @classmethod
     def is_admin(self,id:str):
         return Admin.objects.filter(userID=id).exists()
-    
+
 class Specialist(models.Model):
     specID = models.AutoField(primary_key=True)
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
