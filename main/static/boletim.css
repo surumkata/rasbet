@@ -146,6 +146,57 @@
     margin-right: 20px;
 }
 
+.betbox{
+    margin-top: 1.2rem;
+    margin-bottom: 0;
+    margin-left: 1.2rem;
+    margin-right:1.2rem;
+    border: 0.1rem solid #eef0f3;
+    border-radius: 1.6rem;
+}
 
+.betboxHeader{
+    display: flex;
+    padding: 1.2rem 0.8rem 1.2rem 0.8rem;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+    font-size: 13px;
+}
 
+.betboxFooter{
+    border-top: 0.1rem solid #eef0f3;
+    padding: 1.2rem 0.8rem 1.2rem 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.betboxMontante{
+    margin: 0 10px 0 10px;
+    height: 50px;
+    background-color: #eef0f3;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    width: 100%;
+}
+
+.betboxMontanteInput{
+    line-height: 2rem;
+    border-color: transparent;
+    border-radius: 0.8rem;
+    background-color: transparent;
+    font-size: 14px;
+    font-family: MarlinGeoBold;
+    width: 100%
+}
+.betboxMontanteInput:focus, .betboxMontanteInput:active {
+    outline: none;
+}
+
+.betboxMontanteEuro{
+    font-size: 20px;
+    margin-right: 10px;
+}

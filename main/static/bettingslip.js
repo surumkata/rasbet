@@ -244,7 +244,7 @@ function slip_handler(elem,isremove){
                 // Only add after
                 if(j==1){
                     var child = children[j];
-                    child.outerHTML += '<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="montanteEuro">€</span></div>'
+                    child.outerHTML += '<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>'
                 }
             }
           }
@@ -259,7 +259,7 @@ function slip_handler(elem,isremove){
                   // Only add after
                   if(j==1){
                       var child = children[j];
-                      child.outerHTML += '<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="montanteEuro">€</span></div>'
+                      child.outerHTML += '<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>'
                   }
               }
           }
@@ -283,7 +283,7 @@ function slip_handler(elem,isremove){
                     // Only add after
                     if(j==1){
                         var child = children[j];
-                        child.outerHTML += '<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="montanteEuro">€</span></div>'
+                        child.outerHTML += '<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>'
                     }
                 }
             }
@@ -412,7 +412,7 @@ function button_handler(elem){
 
 
     //Add game to slip in the html
-    slip.innerHTML += '<div class="betbox" id='+elem.name+' data-odd='+odd+' data-oddType='+odd_type+'><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>'+ odd +'</label><input type="hidden" name='+ elem.name + '> </input></div>';
+    slip.innerHTML += '<div class="betbox" id='+elem.name+' data-odd='+odd+' data-oddType='+odd_type+'><div class="betboxHeader"><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>Cota '+odd+' </div></label><input type="hidden" name='+ elem.name + '> </input></div>';
 
     // Increase total games counter in the form
     slipform = document.getElementById("slipform")
