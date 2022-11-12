@@ -199,7 +199,7 @@ function slip_handler(bttChange){
     $(".betboxFooter").remove()
 
     $("#rowCimaNome span").text('Cota '+total_odd.toFixed(2))
-    $("#rowCimaValor span").html('<input class="montanteInput" type="number" placeholder="Montante"  oninput="update_gains(this,'+total_odd+')"><span class="betboxMontanteEuro">€</span></div>')
+    $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Montante"  oninput="update_gains(this,'+total_odd+')"><span class="betboxMontanteEuro">€</span></div></div>')
 
     $("#rowBaixoNome span").text('Ganhos Possíveis')
     $("#valorGanhos span").text('0,00€')
