@@ -33,24 +33,42 @@ function change_to_simple(){
   multibtt.style.fontFamily = "MarlinGeoMedium"
 }
 
+// Update multiple possible gains
 function update_gains(elem,odd){
-  gainslb = document.getElementById("valorGanhos")
   if(elem.value!=""){
     amount = parseFloat(elem.value)
     sessionStorage.setItem("amount",String(amount))
     gains = amount*odd
-    gainslb.innerHTML = String(gains.toFixed(2)) + "€"
+    $("#valorGanhos span").text(String(gains.toFixed(2)) + "€")
   }else{
-    gainslb.innerHTML = '0.00€'
+    $("#valorGanhos span").text('0.00€')
     sessionStorage.setItem("amount","0")
 
   }
 }
 
+function update_simple_gains(){
+
+      betboxesInputs = document.getElementsByClassName("betboxMontanteInput");
+      gains = 0
+      for(var i=0;i<betboxesInputs.length;i++){
+        value = betboxesInputs[i].value
+        betbox = betboxesInputs[i].parentNode.parentNode.parentNode
+        if(value!=null){
+          gains += value * parseFloat(betbox.getAttribute("data-odd"))
+        }
+
+      if(gains==0){
+        $("#valorGanhos span").text("0,00€")
+      }else{
+        $("#valorGanhos span").text(String(gains.toFixed(2)) + "€")
+      }
+    }
+}
 
 function update_simple_amount(elem,amount){
   // get the div with the game id
-  game_div = $(elem).parent().parent()
+  game_div = $(elem).parent().parent().parent()
   game_id = game_div.attr("id")
   odd_type = game_div.attr("data-oddType")
 
@@ -81,299 +99,115 @@ function simpleAmount_handler(elem){
         window.totalAmount += value
       }
       update_simple_amount(elem,value)
+      console.log(window.totalAmount)
+      $("#rowCimaValor span").text(String(window.totalAmount.toFixed(2)))
     }else{
       oldvalue = parseInt(elem.oldvalue)
       if(elem.oldvalue!=""){
         window.totalAmount -= oldvalue
       }
       update_simple_amount(elem,"0")
+      $("#rowCimaValor span").text(String(window.totalAmount.toFixed(2)))
     }
+}
 
-    if (window.totalAmount==0){
-        rowCimaValor.innerHTML = '0,00€'
+// Change every game in storage has simple (prev betType was multiple)
+function storage_change_simple(){
+  sessionStorage.clear();
+  // Set bet type
+  sessionStorage.setItem("betType","simple")
+
+  betboxes = document.getElementsByClassName("betbox");
+
+  for(var i=0;i<betboxes.length;i++){
+    game_id = betboxes[i].getAttribute("id")
+    odd_type = betboxes[i].getAttribute("data-oddtype")
+    stored_value = sessionStorage.getItem(game_id)
+    if(stored_value!=null){
+      data_obj = JSON.parse(stored_value)
+      new_store_value = {"bet_outcome" : odd_type, "amount" : 0}
+      data_obj.push(new_store_value)
+      sessionStorage.setItem(game_id,JSON.stringify(data_obj))
     }else{
-        rowCimaValor.innerHTML = String(window.totalAmount) + "€"
+      data_obj = [{"bet_outcome" : odd_type, "amount" : 0}]
+      sessionStorage.setItem(game_id,JSON.stringify(data_obj));
 
     }
-}
-
-// Session store simple bet
-function store_simple(game_id,odd_type){
-  stored_value = sessionStorage.getItem(game_id)
-  if(stored_value!=null){
-    data_obj = JSON.parse(stored_value)
-    new_store_value = {"bet_outcome" : odd_type, "amount" : 0}
-    data_obj.push(new_store_value)
-    sessionStorage.setItem(game_id,JSON.stringify(data_obj))
-  }else{
-    data_obj = [{"bet_outcome" : odd_type, "amount" : 0}]
-    sessionStorage.setItem(game_id,JSON.stringify(data_obj));
-
   }
 }
 
-// Session store simple bet when prev betType is multi. Convert multi fields to simple fields
-function store_multiTosimple(game_id,odd_type){
-  sessionStorage.removeItem("amount");
+// Change every game in storage has multiple
+function storage_change_multiple(){
+  sessionStorage.clear();
+  // Set bet type
+  sessionStorage.setItem("betType","multiple")
 
-  keys = Object.keys(sessionStorage)
-  for(var i=0;i<keys.length;i++){
-      if(keys[i]=="betType"){
-          //pass
-      }else{
-        game_data = sessionStorage.getItem(keys[i])
-        game_data_obj = JSON.parse(game_data)
-        new_store_value = [{"bet_outcome" : game_data_obj[0].bet_outcome, "amount" : 0}]
-        sessionStorage.setItem(keys[i],JSON.stringify(new_store_value))
-      }
+  betboxes = document.getElementsByClassName("betbox");
+
+  for(var i=0;i<betboxes.length;i++){
+    game_id = betboxes[i].getAttribute("id")
+    odd_type = betboxes[i].getAttribute("data-oddtype")
+    new_store_value = [{"bet_outcome" : odd_type}]
+    sessionStorage.setItem(game_id,JSON.stringify(new_store_value))
   }
 
-  store_simple(game_id,odd_type)
-}
-
-// Session store multi bet
-function store_multi(game_id,odd_type){
-  new_store_value = [{"bet_outcome" : odd_type}]
-  sessionStorage.setItem(game_id,JSON.stringify(new_store_value))
-}
-
-// Session store multi bet. Convert simple fields to multi fields
-function store_simpleTomulti(game_id,odd_type){
-  keys = Object.keys(sessionStorage)
-  for(var i=0;i<keys.length;i++){
-      if(keys[i]=="betType"){
-          //pass
-      }else{
-        game_data = sessionStorage.getItem(keys[i])
-        game_data_obj = JSON.parse(game_data)
-        store_multi(keys[i],game_data_obj[0].bet_outcome)
-      }
-  }
-  store_multi(game_id,odd_type)
-  sessionStorage.setItem("amount","0")
-}
-
-// store_onDelete_simple
-function store_onDeleteTo_simple(game_id){
-  sessionStorage.removeItem("amount");
-  sessionStorage.removeItem(game_id);
-
-  keys = Object.keys(sessionStorage)
-  for(var i=0;i<keys.length;i++){
-      if(keys[i]=="betType"){
-          //pass
-      }else{
-        game_data= sessionStorage.getItem(keys[i])
-        game_data_obj = JSON.parse(game_data)
-        new_store_value = [{"bet_outcome" : game_data_obj[0].bet_outcome, "amount" : 0}]
-        sessionStorage.setItem(keys[i],JSON.stringify(new_store_value))
-
-      }
-  }
-}
-
-// store_onDelete_multi
-function store_onDeleteTo_multi(game_id,odd_type){
-  same_game_data = sessionStorage.getItem(keys[i])
-  same_game_data_obj = JSON.parse(game_data)
-  for(var i=0;i<same_game_data_obj.lenght;i++){
-        if(same_game_data_obj[i]==odd_type){
-          //remove from array
-          same_game_data_obj.splice(index, i)
-        }
-  }
-
-  keys = Object.keys(sessionStorage)
-  for(var i=0;i<keys.length;i++){
-      if(keys[i]=="betType"){
-          //pass
-      }else{
-        game_data = sessionStorage.getItem(keys[i])
-        game_data_obj = JSON.parse(game_data)
-        store_multi(keys[i],game_data_obj[0].bet_outcome)
-
-      }
-  }
   sessionStorage.setItem("amount","0")
 
+
 }
 
-function slip_handler(elem,isremove){
+function slip_handler(bttChange){
+
   slipform = document.getElementById("slipform")
   counter = parseInt(slipform.getAttribute("data-counter"))
   sameGcounter = parseInt(slipform.getAttribute("data-sameGcounter"))
   prev_bettype = slipform.getAttribute("data-bettype")
 
-  // Get data atributes from tag
-  let slip = document.querySelector('.slip');
-  var home = elem.getAttribute("data-home")
-  var away = elem.getAttribute("data-away")
-  var bet = elem.getAttribute("data-bet")
-  var odd = elem.getAttribute("data-odd")
-
-
-  if(bet==home){
-    odd_type = "home"
-  }else if(bet==away){
-    odd_type = "away"
-  }else{
-    odd_type = "draw"
-
+  var betboxs = document.getElementsByClassName('betbox');
+  total_odd = 1
+  for(var i=0;i<betboxs.length;i++){
+    total_odd *= parseFloat(betboxs[i].getAttribute("data-odd"))
   }
 
-  if(sameGcounter>=1 || counter<=1){
+  // Simple
+  if(sameGcounter>=1 || counter<=1 || bttChange=="simple"){
 
-      change_to_simple()
-      slipform.setAttribute("data-bettype","simple")
-      sessionStorage.setItem("betType","simple")
-      // Get all elements with id = betbox
-      var betboxs = document.getElementsByClassName('betbox');
+    change_to_simple()
+    slipform.setAttribute("data-bettype","simple")
+    sessionStorage.setItem("betType","simple")
 
-      if(!isremove){
-      // If last state is simple just add at the end
-      if(prev_bettype=="simple"){
-        store_simple(elem.name,odd_type)
-        // Iterate throw all betbox
-        for(var i=0;i<betboxs.length;i++){
-            // Get children elements in betbox
-            var children = betboxs[i].children;
+    $(".betboxFooter").remove()
+    $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);update_simple_gains();this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>')
 
-            if(i==counter-1){ // Only add to the end
-            // Iterate throw children elements
-            for(var j=0; j<children.length; j++){
-                // Only add after
-                if(j==1){
-                    var child = children[j];
-                    child.outerHTML += '<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>'
-                }
-            }
-          }
-        }
-      }else{ // if last state is multi add to all bet boxes
-          store_multiTosimple(elem.name,odd_type)
-          for(var i=0;i<betboxs.length;i++){
-              // Get children elements in betbox
-              var children = betboxs[i].children;
-              // Iterate throw children elements
-              for(var j=0; j<children.length; j++){
-                  // Only add after
-                  if(j==1){
-                      var child = children[j];
-                      child.outerHTML += '<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>'
-                  }
-              }
-          }
-        }
-        var rowCimaNome = document.getElementById('rowCimaNome')
-        rowCimaNome.innerHTML = "Montante Total"
+    $("#rowCimaNome span").text('Montante Total')
+    $("#rowCimaValor span").text('0,00€')
 
-        var rowCimaValor = document.getElementById('rowCimaValor')
-        rowCimaValor.innerHTML = '0,00€'
+    $("#rowBaixoNome span").text('Ganhos Possíveis')
+    $("#valorGanhos span").text('0,00€')
 
-      }else{
-        // If its a remove operation and prev state is multiple => change footer and ad simple input
-          if(prev_bettype=="multiple"){
-            store_onDeleteTo_simple(elem.name)
+    storage_change_simple()
 
-            for(var i=0;i<betboxs.length;i++){
-                // Get children elements in betbox
-                var children = betboxs[i].children;
-                // Iterate throw children elements
-                for(var j=0; j<children.length; j++){
-                    // Only add after
-                    if(j==1){
-                        var child = children[j];
-                        child.outerHTML += '<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>'
-                    }
-                }
-            }
+  // Multiple
+  }else if(counter>1 || bttChange=="multiple"){
 
-            var rowCimaNome = document.getElementById('rowCimaNome')
-            rowCimaNome.innerHTML = "Montante Total"
-
-            var rowCimaValor = document.getElementById('rowCimaValor')
-            rowCimaValor.innerHTML = '0,00€'
-
-          }else{
-              sessionStorage.removeItem(elem.name);
-          }
-      }
-}else if(counter>1){
-      total_odd = 1
-      change_to_multi()
-      slipform.setAttribute("data-bettype","multiple")
-      sessionStorage.setItem("betType","multiple")
-      window.totalAmount = 0
-
-      var betboxs = document.getElementsByClassName('betbox');
-      if(!isremove){
-        if(prev_bettype=="multiple"){ // If last state is multiple just add to the end
-          store_multi(elem.name,odd_type)
-
-          for(var i=0;i<betboxs.length;i++){
-            total_odd = total_odd * parseFloat(betboxs[i].getAttribute("data-odd"))
-            var children = betboxs[i].children;
-            if(i==counter){
-              for(var j=0; j<children.length; j++){
-                  var child = children[j];
-                  if(j==1){
-                      child.outerHTML = '<label>'+odd+'</label>'
-                  }
-                }
-              }
-            }
-        }else{ // If last state is simple clear all input
-          store_simpleTomulti(elem.name,odd_type)
-          for(var i=0;i<betboxs.length;i++){
-            total_odd = total_odd * parseFloat(betboxs[i].getAttribute("data-odd"))
-            var children = betboxs[i].children;
-            if(i==0){
-              var child = children[2]
-              child.outerHTML=""
-            }else if(i==counter){
-              for(var j=0; j<children.length; j++){
-                  var child = children[j];
-                  if(j==1){
-                    child.outerHTML = '<label>'+odd+'</label>'
-                  }
-                }
-              }
-            }
-          }
-    }else{
-
-        if(prev_bettype=="simple"){// If its a remove operation and prev state is simple => change footer and remove simple input
-          store_onDeleteTo_multi(elem.name)
-          for(var i=0;i<betboxs.length;i++){
-            total_odd = total_odd * parseFloat(betboxs[i].getAttribute("data-odd"))
-            var children = betboxs[i].children;
-            for(var j=0; j<children.length; j++){
-                  var child = children[j];
-                  if(j==2){
-                      child.outerHTML = ""
-                  }
-              }
-          }
-        }else{
-            sessionStorage.removeItem(elem.name,odd_type);
-
-            for(var i=0;i<betboxs.length;i++){
-              total_odd = total_odd * parseFloat(betboxs[i].getAttribute("data-odd"))
-            }
+    change_to_multi()
+    slipform.setAttribute("data-bettype","multiple")
+    sessionStorage.setItem("betType","multiple")
+    window.totalAmount = 0
 
 
-        }
-      }
-      var rowCimaNome = document.getElementById('rowCimaNome')
-      rowCimaNome.innerHTML = "Cota " + total_odd.toFixed(2)
+    $(".betboxFooter").remove()
 
-      var rowCimaValor = document.getElementById('rowCimaValor')
-      rowCimaValor.innerHTML = '<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" oninput="update_gains(this,'+total_odd.toFixed(2)+')"><span class="montanteEuro">€</span></div>'
-  }
+    $("#rowCimaNome span").text('Cota '+total_odd.toFixed(2))
+    $("#rowCimaValor span").html('<input class="montanteInput" type="number" placeholder="Montante"  oninput="update_gains(this,'+total_odd+')"><span class="betboxMontanteEuro">€</span></div>')
+
+    $("#rowBaixoNome span").text('Ganhos Possíveis')
+    $("#valorGanhos span").text('0,00€')
+
+    storage_change_multiple()
+
+    }
 }
-
-
-
 
 // Handles button check/uncheck logic, add game to slip and update counter in the form
 function button_handler(elem){
@@ -408,11 +242,8 @@ function button_handler(elem){
       odd_type = "draw"
 
     }
-
-
-
     //Add game to slip in the html
-    slip.innerHTML += '<div class="betbox" id='+elem.name+' data-odd='+odd+' data-oddType='+odd_type+'><div class="betboxHeader"><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>Cota '+odd+' </div></label><input type="hidden" name='+ elem.name + '> </input></div>';
+    slip.innerHTML += '<div class="betbox" id='+elem.name+' data-odd='+odd+' data-oddType='+odd_type+'><div class="betboxHeader"><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>Cota '+odd+' </div></label></div>';
 
     // Increase total games counter in the form
     slipform = document.getElementById("slipform")
@@ -420,7 +251,7 @@ function button_handler(elem){
     counter++
 
     slipform.setAttribute("data-counter",String(counter))
-    slip_handler(elem,false)
+    slip_handler("nobtt")
   }else{
     // Button uncheck
     elem.setAttribute("data-checked","false")
@@ -446,7 +277,7 @@ function button_handler(elem){
           sameGcounter--;
           slipform.setAttribute("data-sameGcounter",String(sameGcounter))
       }
-      slip_handler(elem,true)
+      slip_handler("nobtt")
     }
   }
 }

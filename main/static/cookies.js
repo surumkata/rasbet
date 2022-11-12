@@ -61,7 +61,6 @@ function post_slip(){
     "X-Requested-With": "XMLHttpRequest",
     "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
   },
-  data: JSON.stringify({slip : slip_data})
 })
 
 $(document).ajaxStop(function(){

@@ -110,22 +110,22 @@
               </div>
               <div class="tabs">
                 <div class="tab">
-                  <button id="simplebtt" class="checked">Simples</button>
+                  <button id="simplebtt" class="checked" onclick="slip_handler('simple')">Simples</button>
                 </div>
                 <div class="tab">
-                  <button id="multibtt" class="unchecked">Multipla</button>
+                  <button id="multibtt" class="unchecked" onclick="slip_handler('multiple')">Multipla</button>
                 </div>
               </div>
             </div>
             <div id="slipbody" class="boletimContent slip"></div>
             <div class="boletimFooter">
               <div class="boletimRow">
-                <div id="rowCimaNome" class="boletimRowItem start">Montante Total</div>
-                <div id="rowCimaValor" class="boletimRowItem end">0,00€</div>
+                <div id="rowCimaNome" class="boletimRowItem start"><span>Montante Total</span></div>
+                <div id="rowCimaValor" class="boletimRowItem end"><span>0,00€</span></div>
               </div>
               <div class="boletimRow">
-                <div class="boletimRowItem start">Ganhos Possíveis</div>
-                <div id="valorGanhos" class="boletimRowItem end">0,00€</div>
+                <div id="rowBaixoNome" class="boletimRowItem start"><span>Ganhos Possíveis</span></div>
+                <div id="valorGanhos" class="boletimRowItem end"><span>0,00€<span></div>
               </div>
               <div class="boletimRowItem">
                 <div>
