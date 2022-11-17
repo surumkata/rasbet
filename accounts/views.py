@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse
 from .models import *
 from game.models import load_ucras,Game
+from gamble.models import Bet_game,Odd
 
 
 
@@ -119,6 +120,44 @@ def withdraw(request):
             response = redirect('/accounts/balance')
 
     return response
+
+def history(request):
+    session_id = request.COOKIES.get("session")
+    u = Session.objects.get(session_id=session_id)
+
+    user_bet_history = History.objects.filter(user=u.user_in_session)
+
+    openBets = []
+    for entry in user_bet_history:
+        if entry.bet.type == "simple":
+            bet_game = Bet_game.objects.get(bet=entry.bet)
+
+            openBets.append({"type" : entry.bet.type ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type})
+        else:
+
+            bet_games = Bet_game.objects.filter(bet=entry.bet)
+
+            gamesList = []
+            for bet_game in bet_games:
+
+                gamesList.append({"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type})
+
+
+            openBets.append({"type" : entry.bet.type ,"amount" : entry.bet.amount,"games":gamesList})
+#Openbets é uma lista de dicionários
+# aposta simples -> type,amount,odd home,away,bet
+# aposta multipla -> type,amount, game->odd,home,away,bet
+    context = {
+        "logged" : True,
+        "id" : u.user_in_session.userID,
+        "fname" : u.user_in_session.first_name,
+        "openBets" : openBets
+    }
+
+    response = render(request,"history.html")
+
+    return response
+
 
 
 def profile(request):

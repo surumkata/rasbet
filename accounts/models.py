@@ -1,7 +1,6 @@
 from django.db import models
 from django import forms
 from django.utils.crypto import get_random_string
-from gamble.models import Bet
 
 # Default User model
 class User(models.Model):
@@ -164,7 +163,7 @@ class Transation(models.Model):
 # Users betting history
 class History(models.Model):
     # Compose key betID+userID, history mapss all bets from all users
-    bet  = models.ForeignKey(Bet,on_delete=models.CASCADE)
+    bet  = models.ForeignKey("gamble.Bet",on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     unique_together = ((bet,user))
 

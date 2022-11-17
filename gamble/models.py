@@ -1,12 +1,13 @@
 from django.db import models
 from game.models import *
-#from accounts.models import History
-
-
+from accounts.models import History
 
 # Types of bets
 class Bet_type(models.Model):
     type = models.CharField(primary_key=True,max_length=50)
+
+    def __str__(self):
+        return self.type
 
 
 class Bet(models.Model):
@@ -35,7 +36,7 @@ class Bet(models.Model):
             odd_obj = Odd.objects.get(game=game_obj,odd_type=odd_type_obj)
             Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_obj.odd)
             # Add to user History
-            #History.create(bet=bet_obj,user=user_obj)
+            History.create(bet=bet_obj,user=user_obj)
 
 
     # Arguments : Total amount of the bet , Array od dictionaries {game_id,odd_type}
@@ -43,7 +44,7 @@ class Bet(models.Model):
         bet_type = Bet_type.objects.get(type="multiple")
         bet_obj = Bet.objects.create(type=bet_type,amount=total_amount)
         # Add to user History
-        #History.create(bet=bet_obj,user=user_obj)
+        History.create(bet=bet_obj,user=user_obj)
         # Os jogos do dicionário juntos constituem uma múltipla
         for dict in gamesBet:
             game_obj = Game.objects.get(game_id=dict['game_id'])
