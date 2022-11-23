@@ -9,6 +9,9 @@ class Bet_type(models.Model):
     def __str__(self):
         return self.type
 
+    def str(self):
+        return  self.type
+
 
 class Bet(models.Model):
     betID = models.AutoField(primary_key=True)

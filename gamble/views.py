@@ -31,7 +31,7 @@ def bet(request):
                 if session.user_in_session.withdraw_bet(total_amount):
                     session.user_in_session.save()
                     Bet.place_simple(session.user_in_session,slip['games'])
-                    #History.create(session.user_in_session,)
+
             else:
                 if session.user_in_session.withdraw_bet(float(slip['amount'])):
                     session.user_in_session.save()
