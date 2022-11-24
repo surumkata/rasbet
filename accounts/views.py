@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse
 from .models import *
 from game.models import load_ucras,Game
-from gamble.models import Bet_game,Odd
+from gamble.models import Bet_game,Odd,Bet
 
 
 
@@ -136,7 +136,7 @@ def history(request):
             bet_game = Bet_game.objects.get(bet=entry.bet)
 
             # Verify if is open or closed bet
-            if bet_game.odd_id.game.state.str()=="open":
+            if bet_game.odd_id.game.state.__str__()=="open":
                 openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type})
             else:
                 closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
@@ -150,7 +150,8 @@ def history(request):
 
             # Verify if is open or closed bet, in multi bet one open game is enougth to be a open bet
             for bet_game in bet_games:
-                if bet_game.odd_id.game.state.str()=="open":
+                if bet_game.odd_id.game.state.__str__()=="open":
+                    print("open")
                     is_open = True
 
                 if not bet_game.odd_id.happened:
@@ -158,10 +159,10 @@ def history(request):
 
                 gamesList.append({"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
 
-            if is_open:
-                openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"games":gamesList})
-            else:
-                closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"happened": happened,"games":gamesList})
+                if is_open:
+                    openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"games":gamesList})
+                else:
+                    closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"happened": happened,"games":gamesList})
 
 #FALTA DATAS
 
@@ -181,6 +182,10 @@ def history(request):
         "closedBets" : closedBets
     }
 
+    print("openBets: ")
+    print(openBets)
+    print("closedBets: ")
+    print(closedBets)
     response = render(request,"history.html",context)
 
     return response
@@ -212,28 +217,36 @@ def profile(request):
                     "fname" : session.user_in_session.first_name,
                 }
             else:
-                histories = []
+                """
+                history_set = []
                 if History.objects.filter(user=user_id).exists():
-                    histories = History.objects.get(user=user_id)
-                print(histories)
-                history = {}
-                for h in histories:
+                    user = User.objects.get(userID=user_id)
+                    history_set = user.history.all()
+                print(history_set)
+                
+                history = []
+                for h in history_set:
                     dic = {}
-                    bet_id = h.bet
-                    if Bet.objects.filter(betID=bet_id).exists():
-                        bet = Bet.objects.filter(betID=bet_id).get()
-                        dic['bet_id'] = bet.betID
-                        dic['type'] = bet.type
-                        dic['amount'] = bet.amount
-                        dic['total_odd'] = bet.total_odd
-                        dic['datetime'] = str(bet.datetime)
-                        history.append(dic)
+                    bet = h.bet
+                    dic['bet_id'] = bet.betID
+                    dic['type'] = bet.type
+                    dic['amount'] = bet.amount
+                    dic['datetime'] = str(bet.datetime)
+                    history.append(dic)
+                """
+                user = {
+                    "email" : session.user_in_session.email,
+                    "birthday" : session.user_in_session.birthday,
+                    "first_name" : session.user_in_session.first_name,
+                    "last_name" : session.user_in_session.last_name,
+                }
+
                 context = {
                     "logged" : True,
                     "id" : user_id,
                     "fname" : session.user_in_session.first_name,
                     "balance" : session.user_in_session.balance,
-                    "history" : history,
+                    "user" : user
                 }
             response = render(request, 'profile.html',context)
 

@@ -13,7 +13,7 @@ class Sport(models.Model):
         return self.sport
 
 
-# open | suspended | closed
+# on_hold | open | suspended | closed
 class State(models.Model):
     state = models.CharField(primary_key=True,max_length=50,null=False)
 

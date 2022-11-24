@@ -56,15 +56,48 @@
         <div class="tab"><a href="/accounts/logout">Logout</a></div>
       </div>
     </div>
-    <div>
-      <div>First Name: {{user.first_name}}</div>
-      <div>Last Name: {{user.last_name}}</div>
-      <div>Email: {{user.email}}</div>
-      <div>Birthday: {{user.birthday}}</div>
-    </div>
-    <div>
-      <a href="/accounts/history">Historico</a>
-    </div>
+    <div><p>OPEN BETS</p></div>
+    <table>
+      {%for b in openBets%}
+      <tr>
+        {% if b.type == "simple" %}
+        <td>{{b.type}}</td>
+        <td>{{b.amount}}</td>
+        <td>[{{b.odd}}|{{b.home}}-{{b.away}}|{{b.bet}}]</td>
+        {% else %}
+        <td>{{b.type}}</td>
+        <td>{{b.amount}}</td>
+        <td>
+          {% for g in b.games %}
+          [{{g.odd}}|{{g.home}}-{{g.away}}|{{g.bet}}] 
+          {%endfor%}
+        </td>
+        {% endif %}
+      </tr>
+      {%endfor%}
+    </table>
+    <div><p>CLOSED BETS</p></div>
+    <table>
+      {%for b in closedBets%}
+      <tr>
+        {% if b.type == "simple" %}
+        <td>{{b.type}}</td>
+        <td>{{b.amount}}</td>
+        <td>[{{b.odd}}|{{b.home}}-{{b.away}}|{{b.bet}}]</td>
+        <td>{{b.happened}}</td>
+        {% else %}
+        <td>{{b.type}}</td>
+        <td>{{b.amount}}</td>
+        <td>
+          {% for g in b.games %}
+          [{{g.odd}}|{{g.home}}-{{g.away}}|{{g.bet}}|{{g.happened}}] 
+          {%endfor%}
+        </td>
+        <td>{{b.happened}}</td>
+        {% endif %}
+      </tr>
+      {%endfor%}
+    </table>
 
 
     {% endif %}

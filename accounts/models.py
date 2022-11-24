@@ -164,7 +164,7 @@ class Transation(models.Model):
 class History(models.Model):
     # Compose key betID+userID, history mapss all bets from all users
     bet  = models.ForeignKey("gamble.Bet",on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE, related_name = "history")
     unique_together = ((bet,user))
 
     @classmethod
