@@ -128,33 +128,60 @@ def history(request):
     user_bet_history = History.objects.filter(user=u.user_in_session)
 
     openBets = []
+    closedBets = []
     for entry in user_bet_history:
-        if entry.bet.type == "simple":
+
+        if entry.bet.type.str() == "simple":
+
             bet_game = Bet_game.objects.get(bet=entry.bet)
 
-            openBets.append({"type" : entry.bet.type ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type})
+            # Verify if is open or closed bet
+            if bet_game.odd_id.game.state.str()=="open":
+                openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type})
+            else:
+                closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
         else:
 
             bet_games = Bet_game.objects.filter(bet=entry.bet)
 
             gamesList = []
+            is_open = False
+            happened = True
+
+            # Verify if is open or closed bet, in multi bet one open game is enougth to be a open bet
             for bet_game in bet_games:
+                if bet_game.odd_id.game.state.str()=="open":
+                    is_open = True
 
-                gamesList.append({"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type})
+                if not bet_game.odd_id.happened:
+                    happened = False
 
+                gamesList.append({"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
 
-            openBets.append({"type" : entry.bet.type ,"amount" : entry.bet.amount,"games":gamesList})
+            if is_open:
+                openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"games":gamesList})
+            else:
+                closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"happened": happened,"games":gamesList})
+
+#FALTA DATAS
+
 #Openbets é uma lista de dicionários
-# aposta simples -> type,amount,odd home,away,bet
+# aposta simples -> type,amount,odd,home,away,bet
 # aposta multipla -> type,amount, game->odd,home,away,bet
+
+#Closedbets é uma lista de dicionários
+# aposta simples -> type,amount,odd,home,away,bet,happened
+# aposta multipla -> type,amount,happened, game->odd,home,away,bet,happened
+
     context = {
         "logged" : True,
         "id" : u.user_in_session.userID,
         "fname" : u.user_in_session.first_name,
-        "openBets" : openBets
+        "openBets" : openBets,
+        "closedBets" : closedBets
     }
 
-    response = render(request,"history.html")
+    response = render(request,"history.html",context)
 
     return response
 
