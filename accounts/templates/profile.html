@@ -57,6 +57,13 @@
       </div>
     </div>
     <div>
+      {%if msg == 0 %}
+      <p>Gravações bem sucedidas!</p>
+      {% elif msg == 1 %}
+      <p>Email já está registado</p>
+      {% elif msg == 2 %}
+      <p>Password incorreta</p>
+      {%endif%}
       <form method="POST" required>
         {% csrf_token %}
         <input type="text" placeholder="First Name" id="fname" name="fname" value={{user.first_name}} required>
@@ -66,7 +73,7 @@
         <input type="date" id="birthday" name="birthday" value={{user.birthday}} required>
         <div id="confirm_state">
           <button type="submit">GRAVAR ALTERAÇÕES</button>
-        </div>
+          <input type="password" placeholder="Password" name="psw" value="" required>
       </form>
     </div>
     

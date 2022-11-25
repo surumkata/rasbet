@@ -51,17 +51,25 @@ class User(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
-    def update(self,fname,lname,email,birthday):
-        if(self.email != email and User.objects.exists(email=email)):
-            return 1
-        else:
-            self.email = email
-            self.first_name = fname
-            self.last_name = lname
-            self.birthday = birthday
-            #self.password = password
-            self.save()
+    def update(self,password,fname,lname,email,birthday):
+        if(self.password == password):
+            if(self.email != email and User.objects.filter(email=email).exists()):
+                return 1
+            else:
+                self.email = email
+                self.first_name = fname
+                self.last_name = lname
+                self.birthday = birthday
+                #self.password = password
+                self.save()
+                return 0
+        else: return 2
+    
+    def change_password(self,password,new_password):
+        if(self.password == password):
+            self.password = new_password
             return 0
+        else: return 1
             
 
 

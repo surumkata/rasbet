@@ -200,6 +200,7 @@ def profile(request):
                 "logged" : False,
                     }
     response = render(request, 'profile.html',context)
+    msg = -1
     if request.method == 'POST':
         session = Session.objects.get(session_id=cookie)
         user_id = session.user_in_session.userID
@@ -209,12 +210,13 @@ def profile(request):
         lname = request.POST['lname']
         email = request.POST['email']
         birthday = request.POST['birthday']
+        password = request.POST['psw']
         print(fname)
         print(lname)
         #psw = request.POST['psw']
         print("OLA")
 
-        user.update(fname,lname,email,birthday)
+        msg = user.update(password,fname,lname,email,birthday)
     
     try:
         response = render(request, 'index.html',context)
@@ -227,6 +229,7 @@ def profile(request):
                     "admin" : True,
                     "id" : user_id,
                     "fname" : session.user_in_session.first_name,
+                    "msg" : msg
                 }
             elif Specialist.is_specialist(user_id):
                 context = {
@@ -234,6 +237,7 @@ def profile(request):
                     "specialist" : True,
                     "id" : user_id,
                     "fname" : session.user_in_session.first_name,
+                    "msg" : msg
                 }
             else:
                 user = {
@@ -247,7 +251,8 @@ def profile(request):
                     "id" : user_id,
                     "fname" : session.user_in_session.first_name,
                     "balance" : session.user_in_session.balance,
-                    "user" : user
+                    "user" : user,
+                    "msg" : msg
                 }
             response = render(request, 'profile.html',context)
     except Exception as e:
