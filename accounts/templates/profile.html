@@ -57,11 +57,19 @@
       </div>
     </div>
     <div>
-      <div>First Name: {{user.first_name}}</div>
-      <div>Last Name: {{user.last_name}}</div>
-      <div>Email: {{user.email}}</div>
-      <div>Birthday: {{user.birthday}}</div>
+      <form method="POST" required>
+        {% csrf_token %}
+        <input type="text" placeholder="First Name" id="fname" name="fname" value={{user.first_name}} required>
+        <input type="text" placeholder="Last Name" id="lname" name="lname" value={{user.last_name}} required>
+        <input type="text" placeholder="Email" id="email" name="email" value={{user.email}} required>
+        <label for="birthday">Birthday: {{user.birthday}}</label>
+        <input type="date" id="birthday" name="birthday" value={{user.birthday}} required>
+        <div id="confirm_state">
+          <button type="submit">GRAVAR ALTERAÇÕES</button>
+        </div>
+      </form>
     </div>
+    
     <div>
       <a href="/accounts/history">Historico</a>
     </div>

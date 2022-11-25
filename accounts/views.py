@@ -9,6 +9,7 @@ from gamble.models import Bet_game,Odd,Bet
 
 
 
+
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email',False)
@@ -193,10 +194,28 @@ def history(request):
 
 
 def profile(request):
+    print("OLA")
     cookie = request.COOKIES.get("session")
     context = {
-                    "logged" : False,
-                }
+                "logged" : False,
+                    }
+    response = render(request, 'profile.html',context)
+    if request.method == 'POST':
+        session = Session.objects.get(session_id=cookie)
+        user_id = session.user_in_session.userID
+        user = User.objects.get(userID=user_id)
+        
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        birthday = request.POST['birthday']
+        print(fname)
+        print(lname)
+        #psw = request.POST['psw']
+        print("OLA")
+
+        user.update(fname,lname,email,birthday)
+    
     try:
         response = render(request, 'index.html',context)
         if cookie:
@@ -217,30 +236,12 @@ def profile(request):
                     "fname" : session.user_in_session.first_name,
                 }
             else:
-                """
-                history_set = []
-                if History.objects.filter(user=user_id).exists():
-                    user = User.objects.get(userID=user_id)
-                    history_set = user.history.all()
-                print(history_set)
-                
-                history = []
-                for h in history_set:
-                    dic = {}
-                    bet = h.bet
-                    dic['bet_id'] = bet.betID
-                    dic['type'] = bet.type
-                    dic['amount'] = bet.amount
-                    dic['datetime'] = str(bet.datetime)
-                    history.append(dic)
-                """
                 user = {
                     "email" : session.user_in_session.email,
-                    "birthday" : session.user_in_session.birthday,
+                    "birthday" : str(session.user_in_session.birthday),
                     "first_name" : session.user_in_session.first_name,
                     "last_name" : session.user_in_session.last_name,
                 }
-
                 context = {
                     "logged" : True,
                     "id" : user_id,
@@ -249,7 +250,6 @@ def profile(request):
                     "user" : user
                 }
             response = render(request, 'profile.html',context)
-
     except Exception as e:
         print('error: '+ str(e))
         if cookie:
