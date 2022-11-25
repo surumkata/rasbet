@@ -122,7 +122,11 @@ def withdraw(request):
 
     return response
 
-def history(request):
+def history_transactions(request):
+    response = render(request,"index.html")
+    return response
+
+def history_bets(request):
     session_id = request.COOKIES.get("session")
     u = Session.objects.get(session_id=session_id)
 
@@ -187,7 +191,7 @@ def history(request):
     print(openBets)
     print("closedBets: ")
     print(closedBets)
-    response = render(request,"history.html",context)
+    response = render(request,"history_bets.html",context)
 
     return response
 

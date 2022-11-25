@@ -70,7 +70,7 @@
         <input type="text" placeholder="Last Name" id="lname" name="lname" value={{user.last_name}} required>
         <input type="text" placeholder="Email" id="email" name="email" value={{user.email}} required>
         <label for="birthday">Birthday: {{user.birthday}}</label>
-        <input type="date" id="birthday" name="birthday" value={{user.birthday}} required>
+        <input type="date" id="birthday" name="birthday" value={{user.birthday}} required/>
         <div id="confirm_state">
           <button type="submit">GRAVAR ALTERAÇÕES</button>
           <input type="password" placeholder="Password" name="psw" value="" required>
@@ -78,7 +78,8 @@
     </div>
     
     <div>
-      <a href="/accounts/history">Historico</a>
+      <a href="/accounts/history_bets">Historico de apostas</a>
+      <a href="/accounts/history_transactions">Historico de transações</a>
     </div>
 
 
@@ -96,5 +97,6 @@
     </div>
   </div>
   {% endif %}
+  <script src="{% static 'birthday.js' %}"></script>
  </body>
  </html>

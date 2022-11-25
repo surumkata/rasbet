@@ -10,6 +10,7 @@ urlpatterns = [
     path('deposit/',views.deposit,{}),
     path('deposit/mbway/',views.mbway,{}),
     path('withdraw/',views.withdraw,{}),
-    path('history/',views.history,{}),
+    path('history_bets/',views.history_bets,{}),
+    path('history_transactions/',views.history_transactions,{}),
     path('profile/',views.profile,{}),
 ]

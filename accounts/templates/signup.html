@@ -26,11 +26,12 @@
         <input type="text" placeholder="Email" id="email" name="email" value="" required><br>
         {% endif %}
         <label for="birthday">Birthday: </label>
-        <input type="date" id="birthday" name="birthday" required>
+        <input type="date" id="birthday" name="birthday" required/>
         <input type="password" placeholder="Password" name="psw" value="" pattern="(?=.*\d)(?=.*[a-z]).{8,}" title="Must contain at least one number and at least 8 or more characters" required>
         <button type="submit">REGISTER</button>
       </form>
     </div>
   </div>
+<script src="{% static 'birthday.js' %}"></script>
 </body>
 </html>
