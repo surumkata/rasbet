@@ -60,15 +60,17 @@ class User(models.Model):
                 self.first_name = fname
                 self.last_name = lname
                 self.birthday = birthday
-                #self.password = password
                 self.save()
                 return 0
         else: return 2
     
-    def change_password(self,password,new_password):
+    def change_password(self,password,new_password,new_password2):
         if(self.password == password):
-            self.password = new_password
-            return 0
+            if(new_password == new_password2):
+                self.password = new_password
+                self.save()
+                return 0
+            else: return 2
         else: return 1
             
 

@@ -195,10 +195,64 @@ def history_bets(request):
 
     return response
 
+def change_password(request):
+    cookie = request.COOKIES.get("session")
+    context = {
+                "logged" : True,
+                    }
+    msg = -1
+    if request.method == 'POST':
+        session = Session.objects.get(session_id=cookie)
+        user_id = session.user_in_session.userID
+        user = User.objects.get(userID=user_id)
+        
+        password = request.POST['psw']
+        new_password = request.POST['newpsw']
+        confirm_password = request.POST['newpsw2']
+        result = user.change_password(password,new_password,confirm_password)
+        msg = result
+        print("OLA")
+    try:
+        response = redirect('/accounts/profile')
+        if cookie and msg != 0:
+            session = Session.objects.get(session_id=cookie)
+            user_id = session.user_in_session.userID
+            if Admin.is_admin(user_id):
+                context = {
+                    "logged" : True,
+                    "admin" : True,
+                    "id" : user_id,
+                    "fname" : session.user_in_session.first_name,
+                    "msg" : msg
+                }
+            elif Specialist.is_specialist(user_id):
+                context = {
+                    "logged" : True,
+                    "specialist" : True,
+                    "id" : user_id,
+                    "msg" : msg
+                }
+            else:
+                context = {
+                    "logged" : True,
+                    "id" : user_id,
+                    "msg" : msg
+                }
+            print("OLA")
+            response = render(request, 'change_password.html',context)
+
+    except Exception as e:
+        print('error: '+ str(e))
+        if cookie:
+            context = {
+                    "logged" : False,
+                }
+            response = render(request, 'index.html',context)
+            response.delete_cookie('session')
+    return response
 
 
 def profile(request):
-    print("OLA")
     cookie = request.COOKIES.get("session")
     context = {
                 "logged" : False,
