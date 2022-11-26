@@ -66,7 +66,7 @@ body {
     outline: none;
 }
 .form-box input:focus{
-    box-shadow: 0px 0px 1px 1px rgb(255,223,123);   
+    box-shadow: 0px 0px 1px 1px rgb(255,223,123);
 }
 .form-box button{
     width: 100%;
@@ -116,4 +116,24 @@ body {
 .form-box span{
     color:red;
     font-family: MarlinGeoBold;
+}
+
+.center-box{
+  width: 350px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 15px;
+  background: #fff;
+  margin-left: 60px;
+}
+
+
+.method-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.method{
+  margin: 0px 10px;
 }

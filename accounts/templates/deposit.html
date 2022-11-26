@@ -1,12 +1,24 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
     <title> Deposit </title>
-  </head>
-  <body>
+    </head>
 
+    <body>
+      <div class="header">
+        <div class="header-left">
+          <a href="/" ><div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div></a>
+        </div>
+        <div class="header-right">
+          <div class="tab"><a href="/accounts/logout">Logout</a></div>
+        </div>
+      </div>
       <form id="myform" method="POST" >
         {% csrf_token %}
         <div>

@@ -1,37 +1,46 @@
 {% load static %}
 {% csrf_token %}
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{% static 'top-nav.css' %}"/>
-    <title> Deposit </title>
-  </head>
-  <body>
-    <div class="topnav">
-      <img src="{% static 'logo.png' %}" alt="Rasbet Logo">
-      <a href="/game/sports_page">Desporto</a>
-      <a href="">Promoções</a>
-      {% if logged %}
-      <a href="/">{{ fname }}</a>
-      <a href="/accounts/balance">Balance: {{ balance }}€</a>
-      <div class="topnav-right">
-        <a href="/accounts/logout">Logout</a>
-      </div>
-      {% else %}
-      <div class="topnav-right">
-        <a href="/accounts/login">Login</a>
-        <a href="/accounts/signup">Registar</a>
-      </div>
-      {% endif %}
-    </div>
 
-      <div>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+
+{% csrf_token %}
+<title>Balance</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-left">
+      <a href="/" ><div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div></a>
+      <div class="tab"><a href="/accounts/profile">{{ fname }}</a></div>
+      <a href="/accounts/history_bets">Apostas</a>
+    </div>
+    <div class="header-right">
+      <div class="tab"><a href="/accounts/logout">Logout</a></div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="center-box">
+      <div class="balance-box">
         <h1>BALANCE</h1>
         <h3>{{balance}} €</h3>
-        <a href="/accounts/deposit">Deposit</a> <br>
-        <a href="/accounts/withdraw">Withdraw</a>
-
       </div>
+      <div class="method-box">
+        <div class="method">
+        <a href="/accounts/deposit">Deposit</a> <br>
+       </div>
+       <div class="method">
+        <a href="/accounts/withdraw">Withdraw</a>
+       </div>
+      </div>
+    </div>
+
+  </div>
     </body>
 </html>
