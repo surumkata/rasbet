@@ -18,10 +18,10 @@
   {% if logged %}
   <div class="header">
     <div class="header-left">
-      <div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div>
+      <a href="/" ><div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div></a>
       <div class="tab"><a href="/accounts/profile">{{ fname }}</a></div>
       <a href="/accounts/balance">Balance: {{ balance }}€</a>
-      <a href="/accounts/my-bets">Apostas</a>
+      <a href="/accounts/history_bets">Apostas</a>
     </div>
     <div class="header-right">
       <div class="tab"><a href="/accounts/logout">Logout</a></div>
@@ -116,7 +116,7 @@
                 </div>
               </div>
             </div>
-            <div id="slipbody" class="boletimContent slip"></div>
+            <div id="slipbody" class="boletimContent slip"><div id="slipbodyMsg">Adiciona a tua primeira aposta!</div></div>
             <div class="boletimFooter">
               <div class="boletimRow">
                 <div id="rowCimaNome" class="boletimRowItem start"><span>Montante Total</span></div>
@@ -128,7 +128,7 @@
               </div>
               <div class="boletimRowItem">
                 <div>
-                  <input class="buttonApostar" type="submit" value="Apostar" onclick="post_slip()" > </input>
+                  <input class="buttonApostar" type="submit" value="Apostar" onclick="post_slip()" disabled> </input>
                 </div>
               </div>
             </div>

@@ -53,19 +53,24 @@ function post_slip(){
       slip_data['games'].push(game_bet)
     }
   }
+
   $.ajax({
-  type: 'POST',
-  url: '/gamble/bet/',
-  dataType: "json",
-  headers: {
-    "X-Requested-With": "XMLHttpRequest",
-    "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
-  },
-  data: JSON.stringify({slip : slip_data})
+      type: 'POST',
+      url: '/gamble/bet/',
+      dataType: "json",
+      headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRFToken": getCookie("csrftoken"),
+     },
+     data: JSON.stringify({slip : slip_data}),
+     success: function( data, status, xhttp) {
+              if(data.status==0){
+                  window.location.reload();
+             }else{
+                  window.location.assign('/accounts/login/')
+            }
+    },
 })
 
-$(document).ajaxStop(function(){
-  window.location.reload();
-});
 
 }

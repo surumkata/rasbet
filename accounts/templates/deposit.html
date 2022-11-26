@@ -9,14 +9,22 @@
 
       <form id="myform" method="POST" >
         {% csrf_token %}
-        <h2>Insere montante a depositar:</h2> <br>
-        <input type="number" name="amount" required><br><br>
-
-        <input type="submit" name="mbway" value="mbway">
-        <input type="submit" name="card" value="card">
+        <div>
+          <div>
+            <h2>Insere montante a depositar:</h2> <br>
+            <input type="number" name="amount" oninput="check_deposit_value(this)" required>
+            <div class="minAmount"></div>
+          </div>
+          <div>
+            <input class="depositBtt" type="submit" name="mbway" value="mbway" disabled>
+            <input class="depositBtt" type="submit" name="card" value="card" disabled>
+          </div>
+      </div>
 
 
 
       </form>
+      <script src="{% static 'transations.js' %}"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </body>
 </html>

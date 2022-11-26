@@ -40,7 +40,9 @@ function update_gains(elem,odd){
     sessionStorage.setItem("amount",String(amount))
     gains = amount*odd
     $("#valorGanhos span").text(String(gains.toFixed(2)) + "€")
+    $('.buttonApostar').prop('disabled', false);
   }else{
+    $('.buttonApostar').prop('disabled', true);
     $("#valorGanhos span").text('0.00€')
     sessionStorage.setItem("amount","0")
 
@@ -88,6 +90,8 @@ function update_simple_amount(elem,amount){
 function simpleAmount_handler(elem){
     var rowCimaValor = document.getElementById('rowCimaValor')
 
+    slip_counter = $("#slipform").attr("data-counter")
+
     if(elem.value!=""){
       value = parseInt(elem.value)
       if(elem.oldvalue==""){
@@ -99,7 +103,6 @@ function simpleAmount_handler(elem){
         window.totalAmount += value
       }
       update_simple_amount(elem,value)
-      console.log(window.totalAmount)
       $("#rowCimaValor span").text(String(window.totalAmount.toFixed(2)))
     }else{
       oldvalue = parseInt(elem.oldvalue)
@@ -176,8 +179,21 @@ function slip_handler(bttChange){
     slipform.setAttribute("data-bettype","simple")
     sessionStorage.setItem("betType","simple")
 
+    // disable bet button
+    $('.buttonApostar').prop('disabled', true);
+
     $(".betboxFooter").remove()
     $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);update_simple_gains();this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>')
+
+    // Simple bets needs to have a odds less then 1.20
+    var betboxs = document.getElementsByClassName('betbox');
+    for(var i=0;i<betboxs.length;i++){
+        odd = parseFloat(betboxs[i].getAttribute("data-odd"))
+        if(odd < 1.20){
+          betboxs[i].children[1].innerHTML = "<p style='color:red'> Cota"+odd+"</p><p>A cota para esta selecção simples deve ser igual, ou superior, a 1,20</p>"
+        }
+
+    }
 
     $("#rowCimaNome span").text('Montante Total')
     $("#rowCimaValor span").text('0,00€')
@@ -190,21 +206,44 @@ function slip_handler(bttChange){
   // Multiple
   }else if(counter>1 || bttChange=="multiple"){
 
-    change_to_multi()
-    slipform.setAttribute("data-bettype","multiple")
-    sessionStorage.setItem("betType","multiple")
-    window.totalAmount = 0
+    // Multiple bets max 10 slections
+    if(counter<=10){
+      change_to_multi()
+      slipform.setAttribute("data-bettype","multiple")
+      sessionStorage.setItem("betType","multiple")
+      window.totalAmount = 0
+
+      // enable bet button
+      $('.buttonApostar').prop('disabled', true);
+
+      $(".betboxFooter").remove()
 
 
-    $(".betboxFooter").remove()
+      $("#rowCimaNome span").text('Cota '+total_odd.toFixed(2))
+      $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Montante"  oninput="update_gains(this,'+total_odd+')"><span class="betboxMontanteEuro">€</span></div></div>')
 
-    $("#rowCimaNome span").text('Cota '+total_odd.toFixed(2))
-    $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Montante"  oninput="update_gains(this,'+total_odd+')"><span class="betboxMontanteEuro">€</span></div></div>')
+      var betboxs = document.getElementsByClassName('betbox');
+      for(var i=0;i<betboxs.length;i++){
+          odd = parseFloat(betboxs[i].getAttribute("data-odd"))
+          if(odd < 1.10){
+            $("#rowCimaNome span").text("Esta aposta múltipla não é permitida, as cotas dos jogos tem de ser, pelo menos, 1,10")
+            $("#rowCimaValor span").html('')
+            // disable bet button
+            $('.buttonApostar').prop('disabled', true);
+          }
 
-    $("#rowBaixoNome span").text('Ganhos Possíveis')
-    $("#valorGanhos span").text('0,00€')
+      }
 
-    storage_change_multiple()
+      $("#rowBaixoNome span").text('Ganhos Possíveis')
+      $("#valorGanhos span").text('0,00€')
+
+      storage_change_multiple()
+    }else{
+      alert("Só podem ser feitas 10 seleções na modalidade múltipla");
+      // disable bet button
+      $('.buttonApostar').prop('disabled', true);
+    }
+
 
     }
 }
@@ -242,6 +281,7 @@ function button_handler(elem){
       odd_type = "draw"
 
     }
+    $('#slipbodyMsg').remove()
     //Add game to slip in the html
     slip.innerHTML += '<div class="betbox" id='+elem.name+' data-odd='+odd+' data-oddType='+odd_type+'><div class="betboxHeader"><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>Cota '+odd+' </div></label></div>';
 
@@ -269,6 +309,10 @@ function button_handler(elem){
       counter--;
       slipform.setAttribute("data-counter",String(counter))
 
+      if(counter==0){
+        let slip = document.querySelector('.slip');
+        slip.innerHTML += "<div id='slipbodyMsg'>Adiciona a tua primeira aposta!</div>"
+      }
 
       // Decrease same game counter
       game_on_slip = document.getElementById(elem.name)
@@ -276,6 +320,7 @@ function button_handler(elem){
           sameGcounter = parseInt(slipform.getAttribute("data-sameGcounter"))
           sameGcounter--;
           slipform.setAttribute("data-sameGcounter",String(sameGcounter))
+
       }
       slip_handler("nobtt")
     }
