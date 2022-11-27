@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect
-from accounts.models import User,Session,Admin,Specialist,Transation
-from game.models import Game, game_details, load_ucras, Odd, Odd_type, sports_list, State
+from accounts.models import *
+from game.models import *
 import requests
 
-# Create your views here.
+
+# Create your views here
 def home(request):
-    #load ucras api to database
-    #load_ucras('http://ucras.di.uminho.pt/v1/games/')
+
     cookie = request.COOKIES.get("session")
     # get all games
     games = Game.objects.all().values()

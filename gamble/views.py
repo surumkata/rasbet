@@ -19,7 +19,6 @@ def bet(request):
         cookie = request.COOKIES.get("session")
 
         if cookie:
-            print("tem cookie")
             session = Session.objects.get(session_id=cookie)
 
             if session:
@@ -35,10 +34,10 @@ def bet(request):
                             session.user_in_session.save()
                             Bet.place_simple(session.user_in_session,slip['games'])
 
-                        else:
-                            if session.user_in_session.withdraw_bet(float(slip['amount'])):
-                                session.user_in_session.save()
-                                Bet.place_multiple(session.user_in_session,float(slip['amount']),slip['games'])
+                else:
+                        if session.user_in_session.withdraw_bet(float(slip['amount'])):
+                            session.user_in_session.save()
+                            Bet.place_multiple(session.user_in_session,float(slip['amount']),slip['games'])
 
                 response = {'status': 0, 'message': "bet placed"}
             else:

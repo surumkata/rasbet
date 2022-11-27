@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from accounts.models import User, Session, Admin,Specialist
-from game.models import db_change_gameodd, db_change_games_state, Game, load_ucras, Odd
+from game.models import db_change_gameodd, db_change_games_state, Game,Odd
 from django.urls import reverse
 import requests
 from .models import *
@@ -146,13 +146,13 @@ def change_games_state(request):
                     for query in iterate:
                         games_to_change.append((query,request.GET.get(query)))
                     db_change_games_state(games_to_change)
-                    
+
         # tratar de quando cookie existe, mas a sessao nao
         except Exception as e:
             print(e)
             response = render(request, 'index.html',context)
-            if cookie:   
-                response.delete_cookie('session') 
+            if cookie:
+                response.delete_cookie('session')
     else:
         response = redirect('/')
     return response

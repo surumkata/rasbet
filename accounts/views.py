@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from .models import *
-from game.models import load_ucras,Game
+from game.models import Game
 from gamble.models import Bet_game,Odd,Bet
 
 
@@ -205,7 +205,7 @@ def change_password(request):
         session = Session.objects.get(session_id=cookie)
         user_id = session.user_in_session.userID
         user = User.objects.get(userID=user_id)
-        
+
         password = request.POST['psw']
         new_password = request.POST['newpsw']
         confirm_password = request.POST['newpsw2']
@@ -263,7 +263,7 @@ def profile(request):
         session = Session.objects.get(session_id=cookie)
         user_id = session.user_in_session.userID
         user = User.objects.get(userID=user_id)
-        
+
         fname = request.POST['fname']
         lname = request.POST['lname']
         email = request.POST['email']
@@ -275,7 +275,7 @@ def profile(request):
         print("OLA")
 
         msg = user.update(password,fname,lname,email,birthday)
-    
+
     try:
         response = render(request, 'index.html',context)
         if cookie:

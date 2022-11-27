@@ -180,7 +180,7 @@ function slip_handler(bttChange){
     sessionStorage.setItem("betType","simple")
 
     // disable bet button
-    $('.buttonApostar').prop('disabled', true);
+    //$('.buttonApostar').prop('disabled', true);
 
     $(".betboxFooter").remove()
     $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);update_simple_gains();this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>')
@@ -214,7 +214,7 @@ function slip_handler(bttChange){
       window.totalAmount = 0
 
       // enable bet button
-      $('.buttonApostar').prop('disabled', true);
+      //$('.buttonApostar').prop('disabled', true);
 
       $(".betboxFooter").remove()
 
