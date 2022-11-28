@@ -33,9 +33,25 @@ function change_to_simple(){
   multibtt.style.fontFamily = "MarlinGeoMedium"
 }
 
+function check_amount(elem){
+  if(elem.value<0.10 && elem.value!="" && elem.value>0){
+      elem.parentElement.outerHTML += "<div>A aposta mínima é 0.10€</div>"
+  }else if(elem.value>500){
+      elem.parentElement.outerHTML += "<div>A aposta máxima é 500€</div>"
+  }
+}
+
+function remove_amount_warning(elem){
+
+  if(elem.parentElement.nextSibling){
+    elem.parentElement.nextSibling.remove()
+  }
+
+}
+
 // Update multiple possible gains
 function update_gains(elem,odd){
-  if(elem.value!=""){
+  if(elem.value!="" && elem.value>=0.10 && elem.value<=500){
     amount = parseFloat(elem.value)
     sessionStorage.setItem("amount",String(amount))
     gains = amount*odd
@@ -71,6 +87,7 @@ function update_simple_gains(){
 function update_simple_amount(elem,amount){
   // get the div with the game id
   game_div = $(elem).parent().parent().parent()
+  console.log(game_div)
   game_id = game_div.attr("id")
   odd_type = game_div.attr("data-oddType")
 
@@ -88,16 +105,17 @@ function update_simple_amount(elem,amount){
 
 
 function simpleAmount_handler(elem){
+
     var rowCimaValor = document.getElementById('rowCimaValor')
 
     slip_counter = $("#slipform").attr("data-counter")
 
-    if(elem.value!=""){
-      value = parseInt(elem.value)
+    if(elem.value!="" && elem.value>=0.10 && elem.value<=500){
+      value = parseFloat(elem.value)
       if(elem.oldvalue==""){
         window.totalAmount += value
       }else{
-        oldvalue = parseInt(elem.oldvalue)
+        oldvalue = parseFloat(elem.oldvalue)
 
         window.totalAmount -= oldvalue
         window.totalAmount += value
@@ -105,13 +123,20 @@ function simpleAmount_handler(elem){
       update_simple_amount(elem,value)
       $("#rowCimaValor span").text(String(window.totalAmount.toFixed(2)))
     }else{
-      oldvalue = parseInt(elem.oldvalue)
+      oldvalue = parseFloat(elem.oldvalue)
       if(elem.oldvalue!=""){
         window.totalAmount -= oldvalue
       }
       update_simple_amount(elem,"0")
-      $("#rowCimaValor span").text(String(window.totalAmount.toFixed(2)))
-    }
+
+      if(elem.value<0.10 || elem.value >500){
+        $("#rowCimaValor span").text("0,00€")
+        $("#valorGanhos span").text("0,00€")
+      }else{
+          $("#rowCimaValor span").text(String(window.totalAmount.toFixed(2)))
+      }
+
+  }
 }
 
 // Change every game in storage has simple (prev betType was multiple)
@@ -162,8 +187,8 @@ function storage_change_multiple(){
 function slip_handler(bttChange){
 
   slipform = document.getElementById("slipform")
-  counter = parseInt(slipform.getAttribute("data-counter"))
-  sameGcounter = parseInt(slipform.getAttribute("data-sameGcounter"))
+  counter = parseFloat(slipform.getAttribute("data-counter"))
+  sameGcounter = parseFloat(slipform.getAttribute("data-sameGcounter"))
   prev_bettype = slipform.getAttribute("data-bettype")
 
   var betboxs = document.getElementsByClassName('betbox');
@@ -183,7 +208,7 @@ function slip_handler(bttChange){
     //$('.buttonApostar').prop('disabled', true);
 
     $(".betboxFooter").remove()
-    $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" onfocus="this.oldvalue = this.value;" oninput="simpleAmount_handler(this);update_simple_gains();this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>')
+    $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
 
     // Simple bets needs to have a odds less then 1.20
     var betboxs = document.getElementsByClassName('betbox');
@@ -220,7 +245,7 @@ function slip_handler(bttChange){
 
 
       $("#rowCimaNome span").text('Cota '+total_odd.toFixed(2))
-      $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Montante"  oninput="update_gains(this,'+total_odd+')"><span class="betboxMontanteEuro">€</span></div></div>')
+      $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="update_gains(this,'+total_odd+');check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
 
       var betboxs = document.getElementsByClassName('betbox');
       for(var i=0;i<betboxs.length;i++){
@@ -260,7 +285,7 @@ function button_handler(elem){
     // Increase same game counter in the form
     game_on_slip = document.getElementById(elem.name)
     if(game_on_slip != null && typeof(game_on_slip) != 'undefined'){
-        sameGcounter = parseInt(slipform.getAttribute("data-sameGcounter"))
+        sameGcounter = parseFloat(slipform.getAttribute("data-sameGcounter"))
         sameGcounter++;
         slipform.setAttribute("data-sameGcounter",String(sameGcounter))
     }
@@ -287,7 +312,7 @@ function button_handler(elem){
 
     // Increase total games counter in the form
     slipform = document.getElementById("slipform")
-    counter = parseInt(slipform.getAttribute("data-counter"))
+    counter = parseFloat(slipform.getAttribute("data-counter"))
     counter++
 
     slipform.setAttribute("data-counter",String(counter))
@@ -305,7 +330,7 @@ function button_handler(elem){
 
       //Decrase counter in the form
       slipform = document.getElementById("slipform")
-      counter = parseInt(slipform.getAttribute("data-counter"))
+      counter = parseFloat(slipform.getAttribute("data-counter"))
       counter--;
       slipform.setAttribute("data-counter",String(counter))
 
@@ -317,7 +342,7 @@ function button_handler(elem){
       // Decrease same game counter
       game_on_slip = document.getElementById(elem.name)
       if(game_on_slip != null && typeof(game_on_slip) != 'undefined'){
-          sameGcounter = parseInt(slipform.getAttribute("data-sameGcounter"))
+          sameGcounter = parseFloat(slipform.getAttribute("data-sameGcounter"))
           sameGcounter--;
           slipform.setAttribute("data-sameGcounter",String(sameGcounter))
 
