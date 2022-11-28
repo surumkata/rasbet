@@ -14,7 +14,9 @@ def home(request):
     main_listing = []
     # Group each game with the odds in a dictionary
     for g in games:
-        main_listing.append(game_details(g))
+        details = open_game_details(g)
+        if details!={}:
+            main_listing.append(details)
 
     sports_listing = sports_list()
 
