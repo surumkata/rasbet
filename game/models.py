@@ -84,12 +84,21 @@ class Game(models.Model):
         state = State.objects.get(state="on_hold")
         self.state = state
 
+    # Calculates the winner of the match at the moment
+    def tabulate_winner(self):
+        if self.home_score == self.away_score:
+            return 'draw'
+        elif self.home_score > self.away_score:
+            return 'home'
+        else:
+            return 'away'
+
     @classmethod
     def exists(self,id):
         return Game.objects.filter(game_id=id).exists()
 
     def __str__(self):
-        return self.home + " vs " + self.away
+        return self.game_id + ' :' + self.home + " vs " + self.away
 
 
 
@@ -141,6 +150,13 @@ class Odd(models.Model):
     #change odd value
     def change_odd(self,value:float):
         self.odd = value
+
+    #change odd to happened
+    def turn_happened(self):
+        self.happened = True
+
+    def __str__(self):
+        return str(self.game) + '    '+ str(self.odd_type)
 
 
 

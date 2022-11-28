@@ -24,7 +24,6 @@ def bet(request):
             if session:
 
                 slip = request_data.get('slip')
-
                 if slip['bet_type']=="simple":
                     total_amount = 0
                     for games in slip['games']:

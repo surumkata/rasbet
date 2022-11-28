@@ -22,3 +22,5 @@ def load_ucras():
                 Odd.home(game,g['bookmakers'][1]['markets'][0]['outcomes'][0]['price'])
                 Odd.away(game,g['bookmakers'][1]['markets'][0]['outcomes'][1]['price'])
                 Odd.draw(game,g['bookmakers'][1]['markets'][0]['outcomes'][2]['price'])
+
+

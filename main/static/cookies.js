@@ -25,7 +25,6 @@ function post_slip(){
   type = sessionStorage.getItem("betType")
   sessionStorage.removeItem("betType");
   slip_data = {}
-
   if(type=="simple"){
     slip_data['bet_type'] = type
     slip_data['games'] = []
@@ -53,7 +52,6 @@ function post_slip(){
       slip_data['games'].push(game_bet)
     }
   }
-
   $.ajax({
       type: 'POST',
       url: '/gamble/bet/',
