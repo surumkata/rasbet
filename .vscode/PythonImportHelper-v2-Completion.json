@@ -1279,7 +1279,7 @@
         "kind": 6,
         "importPath": "game.admin",
         "description": "game.admin",
-        "peekOfCode": "class gameAdmin(admin.ModelAdmin):\n  list_display = ['sport','home','away','state']\n  actions = ['turn_close']\n  @admin.action(description='Mark selected games as closed')\n  def turn_close(self,request, queryset):\n    games_id = [game.game_id for game in queryset]\n    close = State.objects.get(state='closed')\n    #update games to closed\n    queryset.update(state=close)\n    games_result = [] ",
+        "peekOfCode": "class gameAdmin(admin.ModelAdmin):\n  list_display = ['sport','home','away','state']\n  actions = ['turn_close','create_odds']\n  def save_model(self,request,obj,form,change):\n    super().save_model(request,obj,form,change)\n    Odd.home(obj,0.0)\n    Odd.away(obj,0.0)\n    Odd.draw(obj,0.0) \n  @admin.action(description='Mark selected games as closed')\n  def turn_close(self,request, queryset):",
         "detail": "game.admin",
         "documentation": {}
     },

@@ -6,7 +6,14 @@ from .models import *
 
 class gameAdmin(admin.ModelAdmin):
   list_display = ['sport','home','away','state']
-  actions = ['turn_close']
+  actions = ['turn_close','create_odds']
+
+  def save_model(self,request,obj,form,change):
+    super().save_model(request,obj,form,change)
+    Odd.home(obj,0.0)
+    Odd.away(obj,0.0)
+    Odd.draw(obj,0.0) 
+
 
   @admin.action(description='Mark selected games as closed')
   def turn_close(self,request, queryset):
@@ -14,7 +21,6 @@ class gameAdmin(admin.ModelAdmin):
     close = State.objects.get(state='closed')
     #update games to closed
     queryset.update(state=close)
-    games_result = [] 
     main_bets_list = set()
 
     #updating odds that happened
@@ -58,22 +64,7 @@ class gameAdmin(admin.ModelAdmin):
       for main_bet in main_bets_list:
         bet = Bet.objects.get(betID=main_bet)
         bet.check_status()
-        bet.save()
-
-
-      
-
-      
-
-      
-
-
-    
-    #closing bets
-
-
-
-    
+        bet.save() 
   
     
 
