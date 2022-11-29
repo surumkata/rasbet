@@ -24,19 +24,20 @@ def bet(request):
             if session:
 
                 slip = request_data.get('slip')
+                print(slip['games'])
                 if slip['bet_type']=="simple":
                     total_amount = 0
                     for games in slip['games']:
                         total_amount += float(games['amount'])
 
-                        if session.user_in_session.withdraw_bet(total_amount):
-                            session.user_in_session.save()
-                            Bet.place_simple(session.user_in_session,slip['games'])
+                    if session.user_in_session.withdraw_bet(total_amount):
+                        session.user_in_session.save()
+                        Bet.place_simple(session.user_in_session,slip['games'])
 
                 else:
-                        if session.user_in_session.withdraw_bet(float(slip['amount'])):
-                            session.user_in_session.save()
-                            Bet.place_multiple(session.user_in_session,float(slip['amount']),slip['games'])
+                    if session.user_in_session.withdraw_bet(float(slip['amount'])):
+                        session.user_in_session.save()
+                        Bet.place_multiple(session.user_in_session,float(slip['amount']),slip['games'])
 
                 response = {'status': 0, 'message': "bet placed"}
             else:

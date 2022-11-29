@@ -183,7 +183,7 @@ function storage_change_multiple(){
 
 }
 
-function slip_handler(){
+function slip_handler(bttchange){
 
   slipform = document.getElementById("slipform")
   counter = parseFloat(slipform.getAttribute("data-counter"))
@@ -197,7 +197,7 @@ function slip_handler(){
   }
 
   // Simple
-  if(sameGcounter>=1 || counter<=1){
+  if(sameGcounter>=1 || counter<=1 || bttchange=="simple"){
 
     change_to_simple()
     slipform.setAttribute("data-bettype","simple")
@@ -228,7 +228,7 @@ function slip_handler(){
     storage_change_simple()
 
   // Multiple
-  }else if(counter>1){
+}else if(counter>1 || bttchange=="multiple" ){
 
     // Multiple bets max 10 slections
     if(counter<=10){
@@ -319,7 +319,7 @@ function button_handler(elem){
     counter++
 
     slipform.setAttribute("data-counter",String(counter))
-    slip_handler()
+    slip_handler("nobtt")
   }else{
     // Button uncheck
     elem.setAttribute("data-checked","false")
@@ -350,7 +350,7 @@ function button_handler(elem){
           slipform.setAttribute("data-sameGcounter",String(sameGcounter))
 
       }
-      slip_handler()
+      slip_handler("nobtt")
     }
   }
 }

@@ -47,6 +47,7 @@ class Bet(models.Model):
     def place_simple(user_obj,gamesBet):
         # Cada jogo do dicionário é uma simples
         for dict in gamesBet:
+            print(dict)
             bet_obj = Bet.create(type='simple',amount=float(dict['amount']))
             game_obj = Game.objects.get(game_id=dict['game_id'])
             odd_type_obj = Odd_type.objects.get(type=dict['bet_outcome'])
@@ -89,17 +90,17 @@ class Bet(models.Model):
 
         for bet in bet_games:
             if bet.get_status() == 'lost':
-                lost = True 
+                lost = True
                 break
             elif bet.get_status() == 'open':
                 open = True
 
         if lost:
-            self.turn_lost() 
+            self.turn_lost()
         elif not open:
             self.turn_won()
-        
-            
+
+
 
 
     #returns the total amount that can be gained (single or multiple bet)

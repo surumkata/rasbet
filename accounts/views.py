@@ -164,10 +164,11 @@ def history_bets(request):
 
                 gamesList.append({"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
 
-                if is_open:
-                    openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"games":gamesList})
-                else:
-                    closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"happened": happened,"games":gamesList})
+
+            if is_open:
+                openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"games":gamesList})
+            else:
+                closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"happened": happened,"games":gamesList})
 
 #FALTA DATAS
 
