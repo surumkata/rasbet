@@ -16,7 +16,9 @@ def sport(request):
             games = Game.objects.filter(sport_id=sport).values()
             games_listing = []
             for game in games:
-                games_listing.append(game_details(game))
+                details = open_game_details(game)
+                if details!={}:
+                    games_listing.append(game_details(game))
             sports_listing = sports_list()
 
             cookie = request.COOKIES.get("session")
@@ -29,31 +31,23 @@ def sport(request):
             try:
 
                 response = render(request, 'sport.html', context)
-
                 if cookie:
+                    html = 'sport.html'
                     session = Session.objects.get(session_id=cookie)
-                    context = {
-
-                            "logged": True,
-                            "id": session.user_in_session.userID,
-                            "fname": session.user_in_session.first_name,
-                            "balance": session.user_in_session.balance,
-                            "games_info": games_listing,
-                            "sports_info": sports_listing,
-                            "sport": sport,
-                    }
+                    context['logged'] = True
+                    context['id'] =  session.user_in_session.userID
+                    context['fname'] = session.user_in_session.first_name
+                    context['balance'] = session.user_in_session.balance
+                    context['sport'] = sport
+                    
                     if Admin.is_admin(session.user_in_session.userID):
-                        context = {
-                            "logged": True,
-                            "admin": True,
-                            "id": session.user_in_session.userID,
-                            "fname": session.user_in_session.first_name,
-                            "games_info": games_listing,
-                            "sports_info": sports_listing,
-                        }
-                        response = render(request, 'sport_admin.html', context)
+                        context['admin'] = True
+                        html = 'sport_admin.html'
+
+                    response = render(request, html, context)
             # tratar de quando cookie existe, mas a sessao nao
-            except Exception:
+            except Exception as e:
+                print(e)
                 response = render(request, 'sport.html', context)
                 if cookie:
                     response.delete_cookie('session')
