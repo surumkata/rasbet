@@ -16,111 +16,7 @@
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
         "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -177,126 +73,6 @@
     },
     {
         "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -377,6 +153,22 @@
         "documentation": {}
     },
     {
+        "label": "*",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "Session",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
         "label": "History",
         "importPath": "accounts.models",
         "description": "accounts.models",
@@ -385,14 +177,6 @@
         "documentation": {}
     },
     {
-        "label": "Session",
-        "importPath": "accounts.models",
-        "description": "accounts.models",
-        "isExtraImport": true,
-        "detail": "accounts.models",
-        "documentation": {}
-    },
-    {
         "label": "User",
         "importPath": "accounts.models",
         "description": "accounts.models",
@@ -425,39 +209,7 @@
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "accounts.models",
-        "description": "accounts.models",
-        "isExtraImport": true,
-        "detail": "accounts.models",
-        "documentation": {}
-    },
-    {
-        "label": "Session",
-        "importPath": "accounts.models",
-        "description": "accounts.models",
-        "isExtraImport": true,
-        "detail": "accounts.models",
-        "documentation": {}
-    },
-    {
-        "label": "Admin",
-        "importPath": "accounts.models",
-        "description": "accounts.models",
-        "isExtraImport": true,
-        "detail": "accounts.models",
-        "documentation": {}
-    },
-    {
-        "label": "Specialist",
-        "importPath": "accounts.models",
-        "description": "accounts.models",
-        "isExtraImport": true,
-        "detail": "accounts.models",
-        "documentation": {}
-    },
-    {
-        "label": "Transation",
+        "label": "*",
         "importPath": "accounts.models",
         "description": "accounts.models",
         "isExtraImport": true,
@@ -510,22 +262,6 @@
         "description": "django.utils.crypto",
         "isExtraImport": true,
         "detail": "django.utils.crypto",
-        "documentation": {}
-    },
-    {
-        "label": "Bet",
-        "importPath": "gamble.models",
-        "description": "gamble.models",
-        "isExtraImport": true,
-        "detail": "gamble.models",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "gamble.models",
-        "description": "gamble.models",
-        "isExtraImport": true,
-        "detail": "gamble.models",
         "documentation": {}
     },
     {
@@ -713,6 +449,14 @@
         "documentation": {}
     },
     {
+        "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
         "label": "HttpResponseRedirect",
         "importPath": "django.http",
         "description": "django.http",
@@ -737,14 +481,6 @@
         "documentation": {}
     },
     {
-        "label": "load_ucras",
-        "importPath": "game.models",
-        "description": "game.models",
-        "isExtraImport": true,
-        "detail": "game.models",
-        "documentation": {}
-    },
-    {
         "label": "Game",
         "importPath": "game.models",
         "description": "game.models",
@@ -753,7 +489,7 @@
         "documentation": {}
     },
     {
-        "label": "Odd",
+        "label": "*",
         "importPath": "game.models",
         "description": "game.models",
         "isExtraImport": true,
@@ -793,14 +529,6 @@
         "documentation": {}
     },
     {
-        "label": "load_ucras",
-        "importPath": "game.models",
-        "description": "game.models",
-        "isExtraImport": true,
-        "detail": "game.models",
-        "documentation": {}
-    },
-    {
         "label": "Odd",
         "importPath": "game.models",
         "description": "game.models",
@@ -809,7 +537,7 @@
         "documentation": {}
     },
     {
-        "label": "Game",
+        "label": "*",
         "importPath": "game.models",
         "description": "game.models",
         "isExtraImport": true,
@@ -817,7 +545,7 @@
         "documentation": {}
     },
     {
-        "label": "game_details",
+        "label": "*",
         "importPath": "game.models",
         "description": "game.models",
         "isExtraImport": true,
@@ -825,43 +553,43 @@
         "documentation": {}
     },
     {
-        "label": "load_ucras",
-        "importPath": "game.models",
-        "description": "game.models",
+        "label": "Bet_game",
+        "importPath": "gamble.models",
+        "description": "gamble.models",
         "isExtraImport": true,
-        "detail": "game.models",
+        "detail": "gamble.models",
         "documentation": {}
     },
     {
         "label": "Odd",
-        "importPath": "game.models",
-        "description": "game.models",
+        "importPath": "gamble.models",
+        "description": "gamble.models",
         "isExtraImport": true,
-        "detail": "game.models",
+        "detail": "gamble.models",
         "documentation": {}
     },
     {
-        "label": "Odd_type",
-        "importPath": "game.models",
-        "description": "game.models",
+        "label": "Bet",
+        "importPath": "gamble.models",
+        "description": "gamble.models",
         "isExtraImport": true,
-        "detail": "game.models",
+        "detail": "gamble.models",
         "documentation": {}
     },
     {
-        "label": "sports_list",
-        "importPath": "game.models",
-        "description": "game.models",
+        "label": "*",
+        "importPath": "gamble.models",
+        "description": "gamble.models",
         "isExtraImport": true,
-        "detail": "game.models",
+        "detail": "gamble.models",
         "documentation": {}
     },
     {
-        "label": "State",
-        "importPath": "game.models",
-        "description": "game.models",
+        "label": "*",
+        "importPath": "gamble.models",
+        "description": "gamble.models",
         "isExtraImport": true,
-        "detail": "game.models",
+        "detail": "gamble.models",
         "documentation": {}
     },
     {
@@ -914,6 +642,23 @@
         "documentation": {}
     },
     {
+        "label": "scheduler",
+        "importPath": "jobs",
+        "description": "jobs",
+        "isExtraImport": true,
+        "detail": "jobs",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -931,12 +676,53 @@
         "documentation": {}
     },
     {
-        "label": "json",
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "sync_to_async",
+        "importPath": "asgiref.sync",
+        "description": "asgiref.sync",
+        "isExtraImport": true,
+        "detail": "asgiref.sync",
+        "documentation": {}
+    },
+    {
+        "label": "requests,json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests.json",
+        "description": "requests.json",
+        "detail": "requests.json",
+        "documentation": {}
+    },
+    {
+        "label": "BackgroundScheduler",
+        "importPath": "apscheduler.schedulers.background",
+        "description": "apscheduler.schedulers.background",
+        "isExtraImport": true,
+        "detail": "apscheduler.schedulers.background",
+        "documentation": {}
+    },
+    {
+        "label": "IntervalTrigger",
+        "importPath": "apscheduler.triggers.interval",
+        "description": "apscheduler.triggers.interval",
+        "isExtraImport": true,
+        "detail": "apscheduler.triggers.interval",
         "documentation": {}
     },
     {
@@ -953,98 +739,8 @@
         "kind": 6,
         "importPath": "accounts.migrations.0001_initial",
         "description": "accounts.migrations.0001_initial",
-        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = []\n    operations = [\n        migrations.CreateModel(\n            name=\"User\",\n            fields=[\n                (\"userID\", models.AutoField(primary_key=True, serialize=False)),\n                (\"email\", models.EmailField(max_length=200)),\n                (\"password\", models.CharField(max_length=10)),",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        ('gamble', '0001_initial'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Payment_method',\n            fields=[\n                ('method', models.CharField(max_length=50, primary_key=True, serialize=False)),",
         "detail": "accounts.migrations.0001_initial",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0002_payment_methods_transation_delete_transations",
-        "description": "accounts.migrations.0002_payment_methods_transation_delete_transations",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"accounts\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Payment_methods\",\n            fields=[\n                (\n                    \"id\",",
-        "detail": "accounts.migrations.0002_payment_methods_transation_delete_transations",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0003_rename_payment_methods_payment_method",
-        "description": "accounts.migrations.0003_rename_payment_methods_payment_method",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"accounts\", \"0002_payment_methods_transation_delete_transations\"),\n    ]\n    operations = [\n        migrations.RenameModel(old_name=\"Payment_methods\", new_name=\"Payment_method\",),\n    ]",
-        "detail": "accounts.migrations.0003_rename_payment_methods_payment_method",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0004_remove_payment_method_id_alter_payment_method_method_and_more",
-        "description": "accounts.migrations.0004_remove_payment_method_id_alter_payment_method_method_and_more",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"accounts\", \"0003_rename_payment_methods_payment_method\"),\n    ]\n    operations = [\n        migrations.RemoveField(model_name=\"payment_method\", name=\"id\",),\n        migrations.AlterField(\n            model_name=\"payment_method\",\n            name=\"method\",\n            field=models.CharField(max_length=50, primary_key=True, serialize=False),",
-        "detail": "accounts.migrations.0004_remove_payment_method_id_alter_payment_method_method_and_more",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0005_session",
-        "description": "accounts.migrations.0005_session",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\n            \"accounts\",\n            \"0004_remove_payment_method_id_alter_payment_method_method_and_more\",\n        ),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Session\",",
-        "detail": "accounts.migrations.0005_session",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0006_rename_userid_session_user_in_session",
-        "description": "accounts.migrations.0006_rename_userid_session_user_in_session",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"accounts\", \"0005_session\"),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name=\"session\", old_name=\"userID\", new_name=\"user_in_session\",\n        ),\n    ]",
-        "detail": "accounts.migrations.0006_rename_userid_session_user_in_session",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0007_rename_userid_transation_user_history",
-        "description": "accounts.migrations.0007_rename_userid_transation_user_history",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"gamble\", \"0002_bet_game_delete_history\"),\n        (\"accounts\", \"0006_rename_userid_session_user_in_session\"),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name=\"transation\", old_name=\"userID\", new_name=\"user\",\n        ),\n        migrations.CreateModel(",
-        "detail": "accounts.migrations.0007_rename_userid_transation_user_history",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0008_admin",
-        "description": "accounts.migrations.0008_admin",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('accounts', '0007_rename_userid_transation_user_history'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Admin',\n            fields=[\n                ('adminID', models.AutoField(primary_key=True, serialize=False)),\n                ('userID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accounts.user')),",
-        "detail": "accounts.migrations.0008_admin",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0009_rename_admin_ad",
-        "description": "accounts.migrations.0009_rename_admin_ad",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('accounts', '0008_admin'),\n    ]\n    operations = [\n        migrations.RenameModel(\n            old_name='Admin',\n            new_name='Ad',\n        ),\n    ]",
-        "detail": "accounts.migrations.0009_rename_admin_ad",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0010_rename_ad_admin",
-        "description": "accounts.migrations.0010_rename_ad_admin",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('accounts', '0009_rename_admin_ad'),\n    ]\n    operations = [\n        migrations.RenameModel(\n            old_name='Ad',\n            new_name='Admin',\n        ),\n    ]",
-        "detail": "accounts.migrations.0010_rename_ad_admin",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "accounts.migrations.0011_specialist",
-        "description": "accounts.migrations.0011_specialist",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('accounts', '0010_rename_ad_admin'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Specialist',\n            fields=[\n                ('specID', models.AutoField(primary_key=True, serialize=False)),\n                ('userID', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accounts.user')),",
-        "detail": "accounts.migrations.0011_specialist",
         "documentation": {}
     },
     {
@@ -1052,7 +748,16 @@
         "kind": 6,
         "importPath": "accounts.admin",
         "description": "accounts.admin",
-        "peekOfCode": "class TransationAdmin(admin.ModelAdmin):\n  list_display = ['user','type']\nclass AdminAdmin(admin.ModelAdmin):\n  list_display = ['adminID','userID']\nclass SpecAdmin(admin.ModelAdmin):\n  list_display = ['specID','userID']\n# Register your models here.\nadmin.site.register(User)\nadmin.site.register(Admin,AdminAdmin)\nadmin.site.register(Specialist,SpecAdmin)",
+        "peekOfCode": "class TransationAdmin(admin.ModelAdmin):\n  list_display = ['user','type']\nclass UserAdmin(admin.ModelAdmin):\n  list_display = ['first_name','last_name','email','birthday','balance']\nclass AdminAdmin(admin.ModelAdmin):\n  list_display = ['adminID','userID']\nclass SpecAdmin(admin.ModelAdmin):\n  list_display = ['specID','userID']\nclass HistoryAdmin(admin.ModelAdmin):\n  list_display = ['bet','user']",
+        "detail": "accounts.admin",
+        "documentation": {}
+    },
+    {
+        "label": "UserAdmin",
+        "kind": 6,
+        "importPath": "accounts.admin",
+        "description": "accounts.admin",
+        "peekOfCode": "class UserAdmin(admin.ModelAdmin):\n  list_display = ['first_name','last_name','email','birthday','balance']\nclass AdminAdmin(admin.ModelAdmin):\n  list_display = ['adminID','userID']\nclass SpecAdmin(admin.ModelAdmin):\n  list_display = ['specID','userID']\nclass HistoryAdmin(admin.ModelAdmin):\n  list_display = ['bet','user']\n# Register your models here.\nadmin.site.register(User,UserAdmin)",
         "detail": "accounts.admin",
         "documentation": {}
     },
@@ -1061,7 +766,7 @@
         "kind": 6,
         "importPath": "accounts.admin",
         "description": "accounts.admin",
-        "peekOfCode": "class AdminAdmin(admin.ModelAdmin):\n  list_display = ['adminID','userID']\nclass SpecAdmin(admin.ModelAdmin):\n  list_display = ['specID','userID']\n# Register your models here.\nadmin.site.register(User)\nadmin.site.register(Admin,AdminAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)\nadmin.site.register(Payment_method)",
+        "peekOfCode": "class AdminAdmin(admin.ModelAdmin):\n  list_display = ['adminID','userID']\nclass SpecAdmin(admin.ModelAdmin):\n  list_display = ['specID','userID']\nclass HistoryAdmin(admin.ModelAdmin):\n  list_display = ['bet','user']\n# Register your models here.\nadmin.site.register(User,UserAdmin)\nadmin.site.register(Admin,AdminAdmin)\nadmin.site.register(Specialist,SpecAdmin)",
         "detail": "accounts.admin",
         "documentation": {}
     },
@@ -1070,7 +775,16 @@
         "kind": 6,
         "importPath": "accounts.admin",
         "description": "accounts.admin",
-        "peekOfCode": "class SpecAdmin(admin.ModelAdmin):\n  list_display = ['specID','userID']\n# Register your models here.\nadmin.site.register(User)\nadmin.site.register(Admin,AdminAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)\nadmin.site.register(Payment_method)\nadmin.site.register(Transation,TransationAdmin)\nadmin.site.register(History)",
+        "peekOfCode": "class SpecAdmin(admin.ModelAdmin):\n  list_display = ['specID','userID']\nclass HistoryAdmin(admin.ModelAdmin):\n  list_display = ['bet','user']\n# Register your models here.\nadmin.site.register(User,UserAdmin)\nadmin.site.register(Admin,AdminAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)\nadmin.site.register(Payment_method)",
+        "detail": "accounts.admin",
+        "documentation": {}
+    },
+    {
+        "label": "HistoryAdmin",
+        "kind": 6,
+        "importPath": "accounts.admin",
+        "description": "accounts.admin",
+        "peekOfCode": "class HistoryAdmin(admin.ModelAdmin):\n  list_display = ['bet','user']\n# Register your models here.\nadmin.site.register(User,UserAdmin)\nadmin.site.register(Admin,AdminAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)\nadmin.site.register(Payment_method)\nadmin.site.register(Transation,TransationAdmin)\nadmin.site.register(History,HistoryAdmin)",
         "detail": "accounts.admin",
         "documentation": {}
     },
@@ -1142,7 +856,7 @@
         "kind": 6,
         "importPath": "accounts.models",
         "description": "accounts.models",
-        "peekOfCode": "class History(models.Model):\n    # Compose key betID+userID, history mapss all bets from all users\n    bet  = models.ForeignKey(Bet,on_delete=models.CASCADE)\n    user = models.ForeignKey(User,on_delete=models.CASCADE)\n    unique_together = ((bet,user))\n    @classmethod\n    def create(self,bet,user):\n        History.objects.create(bet=bet,user=user)",
+        "peekOfCode": "class History(models.Model):\n    # Compose key betID+userID, history mapss all bets from all users\n    bet  = models.ForeignKey(\"gamble.Bet\",on_delete=models.CASCADE)\n    user = models.ForeignKey(User,on_delete=models.CASCADE, related_name = \"history\")\n    unique_together = ((bet,user))\n    @classmethod\n    def create(self,bet,user):\n        History.objects.create(bet=bet,user=user)",
         "detail": "accounts.models",
         "documentation": {}
     },
@@ -1151,7 +865,7 @@
         "kind": 5,
         "importPath": "accounts.urls",
         "description": "accounts.urls",
-        "peekOfCode": "urlpatterns = [\n    path('login/',views.login,{}),\n    path('logout/',views.logout,{}),\n    path('signup/',views.signup,{}),\n    path('balance/',views.balance,{}),\n    path('deposit/',views.deposit,{}),\n    path('deposit/mbway/',views.mbway,{}),\n    path('withdraw/',views.withdraw,{}),\n    path('profile/',views.profile,{}),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('login/',views.login,{}),\n    path('logout/',views.logout,{}),\n    path('signup/',views.signup,{}),\n    path('balance/',views.balance,{}),\n    path('deposit/',views.deposit,{}),\n    path('deposit/mbway/',views.mbway,{}),\n    path('withdraw/',views.withdraw,{}),\n    path('history_bets/',views.history_bets,{}),\n    path('history_transactions/',views.history_transactions,{}),",
         "detail": "accounts.urls",
         "documentation": {}
     },
@@ -1214,7 +928,34 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def withdraw(request):\n    response = render(request,\"withdraw.html\")\n    if request.method == 'POST':\n        amount = request.POST.get('amount',False)\n        session_id = request.COOKIES.get(\"session\")\n        u = Session.objects.get(session_id=session_id)\n        if Transation.regist(u.user_in_session,\"withdraw\",\"mbway\",amount):\n            response = redirect('/accounts/balance')\n    return response\ndef profile(request):",
+        "peekOfCode": "def withdraw(request):\n    response = render(request,\"withdraw.html\")\n    if request.method == 'POST':\n        amount = request.POST.get('amount',False)\n        session_id = request.COOKIES.get(\"session\")\n        u = Session.objects.get(session_id=session_id)\n        if Transation.regist(u.user_in_session,\"withdraw\",\"mbway\",amount):\n            response = redirect('/accounts/balance')\n    return response\ndef history_transactions(request):",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "history_transactions",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def history_transactions(request):\n    response = render(request,\"index.html\")\n    return response\ndef history_bets(request):\n    session_id = request.COOKIES.get(\"session\")\n    u = Session.objects.get(session_id=session_id)\n    user_bet_history = History.objects.filter(user=u.user_in_session)\n    openBets = []\n    closedBets = []\n    for entry in user_bet_history:",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "history_bets",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def history_bets(request):\n    session_id = request.COOKIES.get(\"session\")\n    u = Session.objects.get(session_id=session_id)\n    user_bet_history = History.objects.filter(user=u.user_in_session)\n    openBets = []\n    closedBets = []\n    for entry in user_bet_history:\n        if entry.bet.type.str() == \"simple\":\n            bet_game = Bet_game.objects.get(bet=entry.bet)\n            # Verify if is open or closed bet",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "change_password",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def change_password(request):\n    cookie = request.COOKIES.get(\"session\")\n    context = {\n                \"logged\" : True,\n                    }\n    msg = -1\n    if request.method == 'POST':\n        session = Session.objects.get(session_id=cookie)\n        user_id = session.user_in_session.userID\n        user = User.objects.get(userID=user_id)",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1223,7 +964,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def profile(request):\n    cookie = request.COOKIES.get(\"session\")\n    context = {\n                    \"logged\" : False,\n                }\n    try:\n        response = render(request, 'index.html',context)\n        if cookie:\n            session = Session.objects.get(session_id=cookie)\n            user_id = session.user_in_session.userID",
+        "peekOfCode": "def profile(request):\n    cookie = request.COOKIES.get(\"session\")\n    context = {\n                \"logged\" : False,\n                    }\n    response = render(request, 'profile.html',context)\n    msg = -1\n    if request.method == 'POST':\n        session = Session.objects.get(session_id=cookie)\n        user_id = session.user_in_session.userID",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1421,7 +1162,7 @@
         "kind": 5,
         "importPath": "config.wsgi",
         "description": "config.wsgi",
-        "peekOfCode": "application = get_wsgi_application()",
+        "peekOfCode": "application = get_wsgi_application()\nfrom jobs import scheduler\nscheduler.start()",
         "detail": "config.wsgi",
         "documentation": {}
     },
@@ -1430,26 +1171,26 @@
         "kind": 6,
         "importPath": "gamble.migrations.0001_initial",
         "description": "gamble.migrations.0001_initial",
-        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        (\n            \"accounts\",\n            \"0004_remove_payment_method_id_alter_payment_method_method_and_more\",\n        ),\n    ]\n    operations = [\n        migrations.CreateModel(",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        ('game', '0001_initial'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Bet',\n            fields=[\n                ('betID', models.AutoField(primary_key=True, serialize=False)),",
         "detail": "gamble.migrations.0001_initial",
         "documentation": {}
     },
     {
-        "label": "Migration",
+        "label": "betAdmin",
         "kind": 6,
-        "importPath": "gamble.migrations.0002_bet_game_delete_history",
-        "description": "gamble.migrations.0002_bet_game_delete_history",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0001_initial\"),\n        (\"gamble\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Bet_game\",\n            fields=[\n                (",
-        "detail": "gamble.migrations.0002_bet_game_delete_history",
+        "importPath": "gamble.admin",
+        "description": "gamble.admin",
+        "peekOfCode": "class betAdmin(admin.ModelAdmin):\n  list_display = ['betID','type','amount','datetime']\nclass bet_gameAdmin(admin.ModelAdmin):\n  list_display = ['bet','odd_id','odd','status']\nadmin.site.register(Bet,betAdmin)\nadmin.site.register(Bet_type)\nadmin.site.register(Bet_game,bet_gameAdmin)\nadmin.site.register(Bet_status)",
+        "detail": "gamble.admin",
         "documentation": {}
     },
     {
-        "label": "Migration",
+        "label": "bet_gameAdmin",
         "kind": 6,
-        "importPath": "gamble.migrations.0003_remove_bet_total_odd",
-        "description": "gamble.migrations.0003_remove_bet_total_odd",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"gamble\", \"0002_bet_game_delete_history\"),\n    ]\n    operations = [\n        migrations.RemoveField(model_name=\"bet\", name=\"total_odd\",),\n    ]",
-        "detail": "gamble.migrations.0003_remove_bet_total_odd",
+        "importPath": "gamble.admin",
+        "description": "gamble.admin",
+        "peekOfCode": "class bet_gameAdmin(admin.ModelAdmin):\n  list_display = ['bet','odd_id','odd','status']\nadmin.site.register(Bet,betAdmin)\nadmin.site.register(Bet_type)\nadmin.site.register(Bet_game,bet_gameAdmin)\nadmin.site.register(Bet_status)",
+        "detail": "gamble.admin",
         "documentation": {}
     },
     {
@@ -1466,7 +1207,16 @@
         "kind": 6,
         "importPath": "gamble.models",
         "description": "gamble.models",
-        "peekOfCode": "class Bet_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50)\nclass Bet(models.Model):\n    betID = models.AutoField(primary_key=True)\n    # Speficy type of bet\n    type = models.ForeignKey(Bet_type, on_delete=models.CASCADE)\n    # Amount of money\n    amount = models.FloatField()\n    # Datetime of the bet\n    datetime = models.DateField(auto_now_add=True)",
+        "peekOfCode": "class Bet_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50)\n    def __str__(self):\n        return self.type\n    def str(self):\n        return  self.type\nclass Bet_status(models.Model):\n    status = models.CharField(primary_key=True,max_length=10)\n    def __str__(self):\n        return self.status",
+        "detail": "gamble.models",
+        "documentation": {}
+    },
+    {
+        "label": "Bet_status",
+        "kind": 6,
+        "importPath": "gamble.models",
+        "description": "gamble.models",
+        "peekOfCode": "class Bet_status(models.Model):\n    status = models.CharField(primary_key=True,max_length=10)\n    def __str__(self):\n        return self.status\n    def str(self):\n        return  self.status\n    class Meta:\n        verbose_name_plural = 'Bet_status'\nclass Bet(models.Model):\n    betID = models.AutoField(primary_key=True)",
         "detail": "gamble.models",
         "documentation": {}
     },
@@ -1475,7 +1225,7 @@
         "kind": 6,
         "importPath": "gamble.models",
         "description": "gamble.models",
-        "peekOfCode": "class Bet(models.Model):\n    betID = models.AutoField(primary_key=True)\n    # Speficy type of bet\n    type = models.ForeignKey(Bet_type, on_delete=models.CASCADE)\n    # Amount of money\n    amount = models.FloatField()\n    # Datetime of the bet\n    datetime = models.DateField(auto_now_add=True)\n    @classmethod\n    def create(self,type,amount):",
+        "peekOfCode": "class Bet(models.Model):\n    betID = models.AutoField(primary_key=True)\n    # Speficy type of bet\n    type = models.ForeignKey(Bet_type, on_delete=models.CASCADE)\n    # Amount of money\n    amount = models.FloatField()\n    # Datetime of the bet\n    datetime = models.DateField(auto_now_add=True)\n    # Status of the bet, open, won or lost\n    status = models.ForeignKey(Bet_status, on_delete=models.CASCADE)",
         "detail": "gamble.models",
         "documentation": {}
     },
@@ -1484,7 +1234,7 @@
         "kind": 6,
         "importPath": "gamble.models",
         "description": "gamble.models",
-        "peekOfCode": "class Bet_game(models.Model):\n    bet = models.ForeignKey(Bet, on_delete=models.CASCADE)\n    odd = models.ForeignKey(Odd, on_delete=models.CASCADE)\n    @classmethod\n    def create(self,bet,odd):\n        Bet_game.objects.create(bet=bet,odd=odd)",
+        "peekOfCode": "class Bet_game(models.Model):\n    bet = models.ForeignKey(Bet, on_delete=models.CASCADE)\n    odd_id = models.ForeignKey(Odd, on_delete=models.CASCADE,default=\"\")\n    status = models.ForeignKey(Bet_status, on_delete=models.CASCADE)\n    odd = models.FloatField()\n    @classmethod\n    def create(self,bet,odd_id,odd):\n        status = Bet_status.objects.get(status='open')\n        Bet_game.objects.create(bet=bet,odd_id=odd_id,odd=odd,status=status)\n    def turn_won(self):",
         "detail": "gamble.models",
         "documentation": {}
     },
@@ -1502,7 +1252,7 @@
         "kind": 2,
         "importPath": "gamble.views",
         "description": "gamble.views",
-        "peekOfCode": "def bet(request):\n    #simple|10|538136a794711c8c9bc24b48353c396c/home\n    # if request.method == 'POST':\n    #     print(\"dentro\")\n    #     print(request.POST['test'])\n    cookie = request.COOKIES.get(\"session\")\n    session = Session.objects.get(session_id=cookie)\n    slip = request.COOKIES.get(\"slip\")\n    slip_fields = slip.split(\"|\")\n    print(slip_fields[1])",
+        "peekOfCode": "def bet(request):\n    if request.method == \"POST\":\n         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'\n    if is_ajax:\n        request_data = json.load(request)\n        cookie = request.COOKIES.get(\"session\")\n        if cookie:\n            session = Session.objects.get(session_id=cookie)\n            if session:\n                slip = request_data.get('slip')",
         "detail": "gamble.views",
         "documentation": {}
     },
@@ -1511,62 +1261,17 @@
         "kind": 6,
         "importPath": "game.migrations.0001_initial",
         "description": "game.migrations.0001_initial",
-        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = []\n    operations = [\n        migrations.CreateModel(\n            name=\"Game\",\n            fields=[\n                (\"game_id\", models.AutoField(primary_key=True, serialize=False)),\n                (\"home\", models.CharField(max_length=50)),\n                (\"away\", models.CharField(max_length=50)),",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Competition',\n            fields=[\n                ('competition', models.CharField(max_length=50, primary_key=True, serialize=False)),\n            ],",
         "detail": "game.migrations.0001_initial",
         "documentation": {}
     },
     {
         "label": "Migration",
         "kind": 6,
-        "importPath": "game.migrations.0002_rename_sports_sport_alter_game_away_score_and_more",
-        "description": "game.migrations.0002_rename_sports_sport_alter_game_away_score_and_more",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0001_initial\"),\n    ]\n    operations = [\n        migrations.RenameModel(old_name=\"Sports\", new_name=\"Sport\",),\n        migrations.AlterField(\n            model_name=\"game\", name=\"away_score\", field=models.IntegerField(default=0),\n        ),\n        migrations.AlterField(",
-        "detail": "game.migrations.0002_rename_sports_sport_alter_game_away_score_and_more",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "game.migrations.0003_alter_game_datetime_alter_odd_happened",
-        "description": "game.migrations.0003_alter_game_datetime_alter_odd_happened",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0002_rename_sports_sport_alter_game_away_score_and_more\"),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name=\"game\",\n            name=\"datetime\",\n            field=models.DateTimeField(auto_now_add=True),\n        ),",
-        "detail": "game.migrations.0003_alter_game_datetime_alter_odd_happened",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "game.migrations.0004_alter_game_datetime_alter_game_game_id",
-        "description": "game.migrations.0004_alter_game_datetime_alter_game_game_id",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0003_alter_game_datetime_alter_odd_happened\"),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name=\"game\", name=\"datetime\", field=models.DateTimeField(),\n        ),\n        migrations.AlterField(\n            model_name=\"game\",",
-        "detail": "game.migrations.0004_alter_game_datetime_alter_game_game_id",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "game.migrations.0005_country_competition",
-        "description": "game.migrations.0005_country_competition",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0004_alter_game_datetime_alter_game_game_id\"),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name=\"Country\",\n            fields=[\n                (\n                    \"country\",",
-        "detail": "game.migrations.0005_country_competition",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "game.migrations.0006_game_competition_game_country",
-        "description": "game.migrations.0006_game_competition_game_country",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        (\"game\", \"0005_country_competition\"),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name=\"game\",\n            name=\"competition\",\n            field=models.ForeignKey(\n                default=0,",
-        "detail": "game.migrations.0006_game_competition_game_country",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "game.migrations.0007_rename_sate_game_state",
-        "description": "game.migrations.0007_rename_sate_game_state",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('game', '0006_game_competition_game_country'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='game',\n            old_name='sate',\n            new_name='state',\n        ),",
-        "detail": "game.migrations.0007_rename_sate_game_state",
+        "importPath": "game.migrations.0002_alter_game_game_id",
+        "description": "game.migrations.0002_alter_game_game_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('game', '0001_initial'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='game',\n            name='game_id',\n            field=models.AutoField(primary_key=True, serialize=False),\n        ),",
+        "detail": "game.migrations.0002_alter_game_game_id",
         "documentation": {}
     },
     {
@@ -1574,7 +1279,7 @@
         "kind": 6,
         "importPath": "game.admin",
         "description": "game.admin",
-        "peekOfCode": "class gameAdmin(admin.ModelAdmin):\n  list_display = ['sport','home','away','state']\nclass oddAdmin(admin.ModelAdmin):\n  list_display = ['game','odd_type','odd','happened']\nadmin.site.register(Sport)\nadmin.site.register(State)\nadmin.site.register(Odd_type)\nadmin.site.register(Game,gameAdmin)\nadmin.site.register(Odd,oddAdmin)\nadmin.site.register(Country)",
+        "peekOfCode": "class gameAdmin(admin.ModelAdmin):\n  list_display = ['sport','home','away','state']\n  actions = ['turn_close']\n  @admin.action(description='Mark selected games as closed')\n  def turn_close(self,request, queryset):\n    games_id = [game.game_id for game in queryset]\n    close = State.objects.get(state='closed')\n    #update games to closed\n    queryset.update(state=close)\n    games_result = [] ",
         "detail": "game.admin",
         "documentation": {}
     },
@@ -1583,7 +1288,7 @@
         "kind": 6,
         "importPath": "game.admin",
         "description": "game.admin",
-        "peekOfCode": "class oddAdmin(admin.ModelAdmin):\n  list_display = ['game','odd_type','odd','happened']\nadmin.site.register(Sport)\nadmin.site.register(State)\nadmin.site.register(Odd_type)\nadmin.site.register(Game,gameAdmin)\nadmin.site.register(Odd,oddAdmin)\nadmin.site.register(Country)\nadmin.site.register(Competition)",
+        "peekOfCode": "class oddAdmin(admin.ModelAdmin):\n  list_display = ['game','odd_type','odd','happened']\nadmin.site.register(Sport)\nadmin.site.register(State)\nadmin.site.register(Odd_type)\nadmin.site.register(Game,gameAdmin)\nadmin.site.register(Odd,oddAdmin)\nadmin.site.register(Country)\nadmin.site.register(Competition)\n# @admin.action(description='Mark selected stories as published')",
         "detail": "game.admin",
         "documentation": {}
     },
@@ -1601,7 +1306,7 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class Sport(models.Model):\n    sport = models.CharField(primary_key=True,max_length=50,null=False)\n    has_draw = models.BooleanField()\n    is_team_sport = models.BooleanField()\n    def __str__(self):\n        return self.sport\n# open | suspended | closed\nclass State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n    def __str__(self):",
+        "peekOfCode": "class Sport(models.Model):\n    sport = models.CharField(primary_key=True,max_length=50,null=False)\n    has_draw = models.BooleanField()\n    is_team_sport = models.BooleanField()\n    def __str__(self):\n        return self.sport\n# on_hold | open | suspended | closed\nclass State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n    def __str__(self):",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1610,7 +1315,7 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n    def __str__(self):\n        return self.state\n# home | away | draw ...\nclass Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\n    def __str__(self):\n        return self.type\nclass Country(models.Model):",
+        "peekOfCode": "class State(models.Model):\n    state = models.CharField(primary_key=True,max_length=50,null=False)\n    def __str__(self):\n        return self.state\n    def str(self):\n        return self.state\n# home | away | draw ...\nclass Odd_type(models.Model):\n    type = models.CharField(primary_key=True,max_length=50,null=False)\n    def __str__(self):",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1637,7 +1342,7 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class Competition(models.Model):\n    competition = models.CharField(primary_key=True,max_length=50,null=False)\n    country = models.ForeignKey(Country, on_delete=models.CASCADE)\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    def __str__(self):\n        return self.competition\nclass Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)",
+        "peekOfCode": "class Competition(models.Model):\n    competition = models.CharField(primary_key=True,max_length=50,null=False)\n    country = models.ForeignKey(Country, on_delete=models.CASCADE)\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    def __str__(self):\n        return self.competition\nclass Game(models.Model):\n    game_id = models.AutoField(primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1646,7 +1351,7 @@
         "kind": 6,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "class Game(models.Model):\n    game_id = models.CharField(max_length=50,primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    country = models.ForeignKey(Country, on_delete=models.CASCADE)\n    competition = models.ForeignKey(Competition, on_delete=models.CASCADE)\n    state = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)\n    away = models.CharField(max_length=50,null=False)\n    home_score = models.IntegerField(default=0)",
+        "peekOfCode": "class Game(models.Model):\n    game_id = models.AutoField(primary_key=True)\n    # Specify what kind of sport\n    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)\n    country = models.ForeignKey(Country, on_delete=models.CASCADE)\n    competition = models.ForeignKey(Competition, on_delete=models.CASCADE)\n    state = models.ForeignKey(State, on_delete=models.CASCADE)\n    home = models.CharField(max_length=50,null=False)\n    away = models.CharField(max_length=50,null=False)\n    home_score = models.IntegerField(default=0)",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1660,20 +1365,20 @@
         "documentation": {}
     },
     {
-        "label": "load_ucras",
-        "kind": 2,
-        "importPath": "game.models",
-        "description": "game.models",
-        "peekOfCode": "def load_ucras(url):\n    games = requests.get('http://ucras.di.uminho.pt/v1/games/').json()\n    for g in games:\n        # Only new games are added\n        if not Game.objects.filter(game_id=g['id']).exists():\n            now = datetime.now().replace(second= 0, microsecond= 0)\n            game_date_obj = datetime.strptime(g['commenceTime'][:-8],\"%Y-%m-%dT%H:%M\")\n            # Only upcoming games are added\n            if game_date_obj>now:\n                Game.create(g['id'],\"football\",\"Portugal\",\"Primeira Liga\",g['homeTeam'],g['awayTeam'],game_date_obj)",
-        "detail": "game.models",
-        "documentation": {}
-    },
-    {
         "label": "game_details",
         "kind": 2,
         "importPath": "game.models",
         "description": "game.models",
         "peekOfCode": "def game_details(game:dict):\n    odds = Odd.objects.filter(game_id=game['game_id'])\n    game = Game.objects.get(game_id=game['game_id'])\n    sport = str(game.sport)\n    country = str(game.country)\n    competition = str(game.competition)\n    state = str(game.state)\n    game_dict = {}\n    game_dict[\"game\"] = game\n    for odd_obj in odds:",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "open_game_details",
+        "kind": 2,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "def open_game_details(game:dict):\n    odds = Odd.objects.filter(game_id=game['game_id'])\n    game = Game.objects.get(game_id=game['game_id'])\n    if game.state.str() == \"open\":\n        sport = str(game.sport)\n        country = str(game.country)\n        competition = str(game.competition)\n        state = str(game.state)\n        game_dict = {}\n        game_dict[\"game\"] = game",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1759,6 +1464,24 @@
         "documentation": {}
     },
     {
+        "label": "load_ucras",
+        "kind": 2,
+        "importPath": "jobs.jobs",
+        "description": "jobs.jobs",
+        "peekOfCode": "def load_ucras():\n    print(\"Running job: load_ucras\")\n    url = \"http://ucras.di.uminho.pt/v1/games/\"\n    games = requests.get(url).json()\n    if not Sport.objects.filter(sport=\"Football\").exists():\n        Sport.objects.create(sport=\"Football\",has_draw=True,is_team_sport=True)\n    if not Country.objects.filter(country=\"Portugal\").exists():\n        Country.objects.create(country=\"Portugal\")\n    if not Competition.objects.filter(competition=\"Primeira Liga\").exists():\n        sport = Sport.objects.get(sport=\"Football\")",
+        "detail": "jobs.jobs",
+        "documentation": {}
+    },
+    {
+        "label": "start",
+        "kind": 2,
+        "importPath": "jobs.scheduler",
+        "description": "jobs.scheduler",
+        "peekOfCode": "def start():\n    sheduler = BackgroundScheduler()\n    sheduler.add_job(load_ucras,IntervalTrigger(seconds=20),max_instances = 1)\n    sheduler.start()",
+        "detail": "jobs.scheduler",
+        "documentation": {}
+    },
+    {
         "label": "MainConfig",
         "kind": 6,
         "importPath": "main.apps",
@@ -1781,7 +1504,7 @@
         "kind": 2,
         "importPath": "main.views",
         "description": "main.views",
-        "peekOfCode": "def home(request):\n    #load ucras api to database\n    #load_ucras('http://ucras.di.uminho.pt/v1/games/')\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    main_listing = []\n    # Group each game with the odds in a dictionary\n    for g in games:\n        main_listing.append(game_details(g))",
+        "peekOfCode": "def home(request):\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    main_listing = []\n    # Group each game with the odds in a dictionary\n    for g in games:\n        details = open_game_details(g)\n        if details!={}:\n            main_listing.append(details)",
         "detail": "main.views",
         "documentation": {}
     },
