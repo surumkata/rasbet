@@ -9,18 +9,34 @@ def load_ucras():
     url = "http://ucras.di.uminho.pt/v1/games/"
     games = requests.get(url).json()
 
+    if not Sport.objects.filter(sport="Football").exists():
+        Sport.objects.create(sport="Football",has_draw=True,is_team_sport=True)
+
+    if not Country.objects.filter(country="Portugal").exists():
+        Country.objects.create(country="Portugal")
+
+    if not Competition.objects.filter(competition="Primeira Liga").exists():
+        sport = Sport.objects.get(sport="Football")
+        country = Country.objects.get(country = "Portugal")
+        Competition.objects.create(competition="Primeira Liga",country=country,sport=sport)
+
     for g in games:
         # Only new games are added
-        if not Game.objects.filter(game_id=g['id']).exists():
-            now = datetime.now().replace(second= 0, microsecond= 0)
+      
+        try:
             game_date_obj = datetime.strptime(g['commenceTime'][:-8],"%Y-%m-%dT%H:%M")
+            if not Game.exist_game(g['homeTeam'],g['awayTeam'],game_date_obj):
+                
+                now = datetime.now().replace(second= 0, microsecond= 0)
 
-            # Only upcoming games are added
-            if game_date_obj>now:
-                Game.create(g['id'],"football","Portugal","Primeira Liga",g['homeTeam'],g['awayTeam'],game_date_obj)
-                game = Game.objects.get(game_id=g['id'])
-                Odd.home(game,g['bookmakers'][1]['markets'][0]['outcomes'][0]['price'])
-                Odd.away(game,g['bookmakers'][1]['markets'][0]['outcomes'][1]['price'])
-                Odd.draw(game,g['bookmakers'][1]['markets'][0]['outcomes'][2]['price'])
+                # Only upcoming games are added
+                if game_date_obj>now:
+                    Game.insert("Football","Portugal","Primeira Liga",g['homeTeam'],g['awayTeam'],game_date_obj)
+                    game = Game.objects.filter(home=g['homeTeam'],away=g['awayTeam'],datetime=game_date_obj).get()
+                    Odd.home(game,g['bookmakers'][1]['markets'][0]['outcomes'][0]['price'])
+                    Odd.away(game,g['bookmakers'][1]['markets'][0]['outcomes'][1]['price'])
+                    Odd.draw(game,g['bookmakers'][1]['markets'][0]['outcomes'][2]['price'])
+        except Exception as e:
+            print(e)
 
 

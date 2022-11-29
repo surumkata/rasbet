@@ -49,7 +49,7 @@ class Competition(models.Model):
 
 
 class Game(models.Model):
-    game_id = models.CharField(max_length=50,primary_key=True)
+    game_id = models.AutoField(primary_key=True)
     # Specify what kind of sport
     sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
@@ -101,22 +101,29 @@ class Game(models.Model):
         return Game.objects.filter(game_id=id).exists()
 
     def __str__(self):
-        return self.game_id + ' :' + self.home + " vs " + self.away
+        return f"{self.game_id}: {self.home} vs {self.away}"
+
+    @classmethod
+    def exist_game(self,home,away,datetime):
+        return Game.objects.filter(home=home,away=away,datetime=datetime).exists()
 
 
 
 
     @classmethod
     # Create a game in the database
-    def create(self,id,sport,country,competition,home,away,datetime):
+    def insert(self,sport,country,competition,home,away,datetime):
         # The sport MUST exist in the db
+        if not Sport.objects.filter(sport="Football").exists():
+            Sport.objects.create(sport="Football",has_draw=True,is_team_sport=True)
+
         if Sport.objects.filter(sport=sport).exists():
             sport = Sport.objects.get(sport=sport)
             country = Country.objects.get(country=country)
             competition = Competition.objects.get(competition=competition)
             # By default the game state is closed
             state = State.objects.get(state="on_hold")
-            Game.objects.create(game_id=id,sport=sport,country=country,competition=competition,state=state,home=home,away=away,datetime=datetime)
+            Game.objects.create(sport=sport,country=country,competition=competition,state=state,home=home,away=away,datetime=datetime)
 
 
 
