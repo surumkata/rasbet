@@ -114,8 +114,6 @@ class Game(models.Model):
     # Create a game in the database
     def insert(self,sport,country,competition,home,away,datetime):
         # The sport MUST exist in the db
-        if not Sport.objects.filter(sport="Football").exists():
-            Sport.objects.create(sport="Football",has_draw=True,is_team_sport=True)
 
         if Sport.objects.filter(sport=sport).exists():
             sport = Sport.objects.get(sport=sport)
