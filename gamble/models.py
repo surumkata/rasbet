@@ -106,11 +106,15 @@ class Bet(models.Model):
 
     #returns the total amount that can be gained (single or multiple bet)
     def total_gains(self):
+        return self.total_odd() * self.amount
+
+    def total_odd(self):
         bet_games = Bet_game.objects.filter(bet=self)
         odd_value = 0
         for bet in bet_games:
             odd_value += bet.odd
-        return odd_value * self.amount
+        return odd_value
+
 
 
 
