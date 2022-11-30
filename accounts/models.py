@@ -2,6 +2,9 @@ from django.utils import timezone
 from django.db import models
 from django import forms
 from django.utils.crypto import get_random_string
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart 
 
 # Default User model
 class User(models.Model):
@@ -254,6 +257,41 @@ class Deposit_Promotion(models.Model):
                 return True
 
         return False
+
+#Sends promotion emails to users
+class SendingEmail:
+
+    #Set instance variables
+    def __init__(self, template):
+        self.sender_mail = "rasbetpl32@gmail.com"
+        self.password = "zmrbnzoaetikoygo"
+        self.smtp_server_domain_name = "smtp.gmail.com"
+        self.port = 465
+        self.template = "media/" + str(template)
+
+    #Send email
+    def send(self, emails):
+        ssl_context = ssl.create_default_context()
+        service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=ssl_context)
+        service.login(self.sender_mail, self.password)
+
+        for email in emails:
+            mail = MIMEMultipart('mixed')
+            mail['Subject'] = "Promoção RasBet" 
+            mail['From'] = self.sender_mail
+            mail['To'] = email
+
+            with open(self.template) as html_file:
+                html_content = MIMEText(html_file.read(), 'html') 
+                mail.attach(html_content) 
+
+            service.sendmail(self.sender_mail, email, mail.as_string())
+
+        service.quit()
+
+
+
+
 
 
 
