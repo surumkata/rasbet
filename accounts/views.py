@@ -95,15 +95,26 @@ def deposit(request):
         response = render(request,'deposit.html')
 
         if request.method == 'POST':
+            exists_promotion = True
             amount = request.POST.get('amount',False)
+            promo_code = request.POST.get('promo_code',False)
             session_id = request.COOKIES.get("session")
 
             request.session['amount'] = amount
+            request.session['promo_code'] = promo_code
+            #Verify promo_code
+            if promo_code:
+                if not Deposit_Promotion.objects.filter(promo_code=promo_code).exists():
+                    exists_promotion = False
 
-            if request.POST.get('mbway',False):
+            if request.POST.get('mbway',False) and exists_promotion:
                 response = redirect('mbway/')
-            elif request.POST.get('card',False):
+            elif request.POST.get('card',False) and exists_promotion:
                 response = redirect('card/')
+            else:
+                context = {}
+                context['promo_error'] = 1
+                response = render(request,'deposit.html',context)
     else:
         response = redirect('/accounts/login/')
 
@@ -116,11 +127,29 @@ def mbway(request):
     if session_id:
         response = render(request,"mbway.html")
         if request.method == 'POST':
+            valid_promotion = True
             amount = request.session.get('amount',False)
+            promo_code = request.session.get('promo_code',False)
+            reward = 0
+            if promo_code:
+                promotion = Deposit_Promotion.objects.get(promo_code=promo_code)
+                user = Session.objects.get(session_id=session_id).user_in_session
+                if promotion.valid(user,amount):
+                    reward = promotion.reward
+                else:
+                    valid_promotion = False
+
             u = Session.objects.get(session_id=session_id)
 
-            if Transation.regist(u.user_in_session,"deposit","mbway",amount):
-                response = redirect('/accounts/balance')
+            if valid_promotion:
+                if Transation.regist(u.user_in_session,"deposit","mbway",amount):
+                    if reward > 0:
+                        Transation.regist(u.user_in_session,f"promo_code:{promo_code}","promotion",reward)
+                    response = redirect('/accounts/balance')
+            else:
+                context = {}
+                context['promo_error'] = 2
+                response = render(request,'deposit.html',context)
     else:
         response = redirect('/accounts/login/')
 

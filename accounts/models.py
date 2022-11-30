@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django import forms
 from django.utils.crypto import get_random_string
@@ -169,7 +170,7 @@ class Transation(models.Model):
             # Regist of the transation
             Transation.objects.create(user=user,type=type,method=pm,amount=amount)
             # Updates user balance
-            if type=="deposit" or type=='bet_won':
+            if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code':
                 user.deposit(float(amount))
             elif type=="withdraw" or type=='bet':
                 user.withdraw(float(amount))
@@ -192,3 +193,65 @@ class History(models.Model):
     @classmethod
     def create(self,bet,user):
         History.objects.create(bet=bet,user=user)
+
+
+# Promotions
+class Promotion(models.Model):
+    promo_code = models.CharField(max_length=30,primary_key=True)
+    # Minimum value to use for the promotion to be aplicable
+    value_restriction = models.FloatField()
+    # Mail template path
+    mail_template_path = models.CharField(max_length=200,null=False)
+    # Image to use on the website
+    image_path = models.CharField(max_length=200,null=False)
+    # Limit to use the promotion
+    limit_date = models.DateTimeField(null=False)
+
+    def __str__(self):
+        return self.promo_code
+
+
+#Promotion specific to a bet on a game
+class Bet_Promotion(models.Model):
+    promo_code = models.ForeignKey(Promotion,on_delete=models.CASCADE)
+    #game on which the promotion can be used
+    applyable_game = models.ForeignKey("game.Game",on_delete=models.CASCADE) 
+    # Reward in percentage
+    reward = models.IntegerField()
+
+#Promotion specific to deposits
+class Deposit_Promotion(models.Model):
+    promo_code = models.ForeignKey(Promotion,on_delete=models.CASCADE)
+    # Reward in money
+    reward = models.FloatField()
+    # Number of times that promotion can be used
+    usages = models.IntegerField()
+    # Restriction in case of promotion only available on the first deposit
+    first_deposit_restriction = models.BooleanField(null=False)
+
+    #Checks if promotion is valid for a specific user
+    def valid(self,user,amount):
+        promotion = Promotion.objects.get(promo_code=self.promo_code)
+        date_valid = promotion.limit_date >= timezone.now()
+        #Check if in date limit
+        if date_valid and float(amount) >= promotion.value_restriction:
+            #In case of first deposit, check if user has made deposits before
+            if self.first_deposit_restriction:
+                if Transation.objects.filter(user=user,type=f'deposit').exists():
+                    return False
+
+            times_used = Transation.objects.filter(user=user,type=f'promo_code:{self.promo_code}').count()
+            #Checks if promotion has not been used more times than the limit
+            if times_used < self.usages:
+                return True
+
+        return False
+
+
+
+
+
+
+
+
+

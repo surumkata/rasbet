@@ -23,6 +23,13 @@
         {% csrf_token %}
         <div>
           <div>
+            <h5>Promo code:</h5>
+            <input name="promo_code">
+            {%if promo_error%}
+              <p>Invalid promotion</p>
+            {%endif%}
+          </div>
+          <div>
             <h2>Insere montante a depositar:</h2> <br>
             <input type="number" name="amount" oninput="check_deposit_value(this)" required>
             <div class="minAmount"></div>
