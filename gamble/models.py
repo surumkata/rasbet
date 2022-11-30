@@ -86,12 +86,16 @@ class Bet(models.Model):
         status = Bet_status.objects.get(status='lost')
         self.status = status
 
+    def turn_lock(self):
+        status = Bet_status.objects.get(status='lock')
+        self.status = status
+
     #turn its status, if the case, to won or lost
     def check_status(self):
         lost = False
         open = False
+        lock = False
         bet_games = Bet_game.objects.filter(bet=self)
-        index = 0
 
         for bet in bet_games:
             if bet.get_status() == 'lost':
@@ -99,9 +103,13 @@ class Bet(models.Model):
                 break
             elif bet.get_status() == 'open':
                 open = True
+            elif bet.get_status() == 'lock':
+                lock = True
 
         if lost:
             self.turn_lost()
+        elif lock:
+            self.turn_lock()
         elif not open:
             self.turn_won()
 
@@ -153,6 +161,10 @@ class Bet_game(models.Model):
 
     def turn_lost(self):
         status = Bet_status.objects.get(status='lost')
+        self.status = status
+
+    def turn_lock(self):
+        status = Bet_status.objects.get(status='lock')
         self.status = status
 
     def get_status(self):

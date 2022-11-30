@@ -199,6 +199,15 @@ def history_transactions(request):
 def history_bets(request):
     session_id = request.COOKIES.get("session")
 
+    if request.method == 'POST':
+            bet_id = request.POST['bet_id']
+
+            bet = Bet.objects.get(betID=bet_id)
+            open = Bet_status.objects.get(status="open")
+
+            if bet.status == open:
+                bet.delete()
+
     if session_id:
         u = Session.objects.get(session_id=session_id)
 
@@ -211,6 +220,7 @@ def history_bets(request):
                 bet_game = Bet_game.objects.get(bet=entry.bet)
 
                 bets.append({
+                    "id" : entry.bet.betID,
                     "type" : entry.bet.type.str(),
                     "amount" : entry.bet.amount,
                     "odd" : bet_game.odd,
@@ -233,6 +243,7 @@ def history_bets(request):
                         })
 
                 bets.append({
+                    "id" : entry.bet.betID,
                     "type" : entry.bet.type.str(),
                     "amount" : entry.bet.amount,
                     "odd" : entry.bet.total_odd(),
