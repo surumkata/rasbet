@@ -72,53 +72,72 @@ def signup(request):
 
 
 def balance(request):
+
     session_id = request.COOKIES.get("session")
-    u = Session.objects.get(session_id=session_id)
-    context = {
-        "balance" : u.user_in_session.balance,
-        "logged" : True,
-        "id" : u.user_in_session.userID,
-        "fname" : u.user_in_session.first_name,
-    }
-    response = render(request,'balance.html',context)
+    if session_id:
+        u = Session.objects.get(session_id=session_id)
+        context = {
+            "balance" : u.user_in_session.balance,
+            "logged" : True,
+            "id" : u.user_in_session.userID,
+            "fname" : u.user_in_session.first_name,
+            }
+        response = render(request,'balance.html',context)
+    else:
+        response = redirect('/accounts/login/')
 
     return response
 
 def deposit(request):
-    response = render(request,'deposit.html')
-    if request.method == 'POST':
-        amount = request.POST.get('amount',False)
-        session_id = request.COOKIES.get("session")
+    session_id = request.COOKIES.get("session")
 
-        request.session['amount'] = amount
+    if session_id:
+        response = render(request,'deposit.html')
 
-        if request.POST.get('mbway',False):
-            response = redirect('mbway/')
-        elif request.POST.get('card',False):
-            response = redirect('card/')
+        if request.method == 'POST':
+            amount = request.POST.get('amount',False)
+            session_id = request.COOKIES.get("session")
+
+            request.session['amount'] = amount
+
+            if request.POST.get('mbway',False):
+                response = redirect('mbway/')
+            elif request.POST.get('card',False):
+                response = redirect('card/')
+    else:
+        response = redirect('/accounts/login/')
 
 
     return response
 
 def mbway(request):
-    response = render(request,"mbway.html")
-    if request.method == 'POST':
-        amount = request.session.get('amount',False)
-        session_id = request.COOKIES.get("session")
-        u = Session.objects.get(session_id=session_id)
-        if Transation.regist(u.user_in_session,"deposit","mbway",amount):
-            response = redirect('/accounts/balance')
+    session_id = request.COOKIES.get("session")
+
+    if session_id:
+        response = render(request,"mbway.html")
+        if request.method == 'POST':
+            amount = request.session.get('amount',False)
+            u = Session.objects.get(session_id=session_id)
+
+            if Transation.regist(u.user_in_session,"deposit","mbway",amount):
+                response = redirect('/accounts/balance')
+    else:
+        response = redirect('/accounts/login/')
 
     return response
 
 def withdraw(request):
-    response = render(request,"withdraw.html")
-    if request.method == 'POST':
-        amount = request.POST.get('amount',False)
-        session_id = request.COOKIES.get("session")
-        u = Session.objects.get(session_id=session_id)
-        if Transation.regist(u.user_in_session,"withdraw","mbway",amount):
-            response = redirect('/accounts/balance')
+    session_id = request.COOKIES.get("session")
+
+    if session_id:
+        response = render(request,"withdraw.html")
+        if request.method == 'POST':
+            amount = request.POST.get('amount',False)
+            u = Session.objects.get(session_id=session_id)
+            if Transation.regist(u.user_in_session,"withdraw","mbway",amount):
+                response = redirect('/accounts/balance')
+    else:
+        response = redirect('/accounts/login/')
 
     return response
 
@@ -128,71 +147,72 @@ def history_transactions(request):
 
 def history_bets(request):
     session_id = request.COOKIES.get("session")
-    u = Session.objects.get(session_id=session_id)
 
-    user_bet_history = History.objects.filter(user=u.user_in_session)
+    if session_id:
+        u = Session.objects.get(session_id=session_id)
 
-    openBets = []
-    closedBets = []
-    for entry in user_bet_history:
+        user_bet_history = History.objects.filter(user=u.user_in_session)
 
-        if entry.bet.type.str() == "simple":
+        openBets = []
+        closedBets = []
+        for entry in user_bet_history:
 
-            bet_game = Bet_game.objects.get(bet=entry.bet)
+            if entry.bet.type.str() == "simple":
 
-            # Verify if is open or closed bet
-            if bet_game.odd_id.game.state.__str__()=="open":
-                openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type})
-            else:
-                closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
-        else:
+                bet_game = Bet_game.objects.get(bet=entry.bet)
 
-            bet_games = Bet_game.objects.filter(bet=entry.bet)
-
-            gamesList = []
-            is_open = False
-            happened = True
-
-            # Verify if is open or closed bet, in multi bet one open game is enougth to be a open bet
-            for bet_game in bet_games:
+                # Verify if is open or closed bet
                 if bet_game.odd_id.game.state.__str__()=="open":
-                    print("open")
-                    is_open = True
-
-                if not bet_game.odd_id.happened:
-                    happened = False
-
-                gamesList.append({"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
-
-
-            if is_open:
-                openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"games":gamesList})
+                    openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type})
+                else:
+                    closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount ,"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
             else:
-                closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"happened": happened,"games":gamesList})
 
-#FALTA DATAS
+                bet_games = Bet_game.objects.filter(bet=entry.bet)
 
-#Openbets é uma lista de dicionários
-# aposta simples -> type,amount,odd,home,away,bet
-# aposta multipla -> type,amount, game->odd,home,away,bet
+                gamesList = []
+                is_open = False
+                happened = True
 
-#Closedbets é uma lista de dicionários
-# aposta simples -> type,amount,odd,home,away,bet,happened
-# aposta multipla -> type,amount,happened, game->odd,home,away,bet,happened
+                # Verify if is open or closed bet, in multi bet one open game is enougth to be a open bet
+                for bet_game in bet_games:
+                    if bet_game.odd_id.game.state.__str__()=="open":
+                        print("open")
+                        is_open = True
 
-    context = {
+                    if not bet_game.odd_id.happened:
+                        happened = False
+
+                    gamesList.append({"odd" : bet_game.odd,"home" : bet_game.odd_id.game.home,"away": bet_game.odd_id.game.away,"bet" : bet_game.odd_id.odd_type,"happened" : bet_game.odd_id.happened})
+
+
+                    if is_open:
+                        openBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"games":gamesList})
+                    else:
+                        closedBets.append({"type" : entry.bet.type.str() ,"amount" : entry.bet.amount,"happened": happened,"games":gamesList})
+
+                #FALTA DATAS
+
+                #Openbets é uma lista de dicionários
+                # aposta simples -> type,amount,odd,home,away,bet
+                # aposta multipla -> type,amount, game->odd,home,away,bet
+
+                #Closedbets é uma lista de dicionários
+                # aposta simples -> type,amount,odd,home,away,bet,happened
+                # aposta multipla -> type,amount,happened, game->odd,home,away,bet,happened
+
+        context = {
         "logged" : True,
         "id" : u.user_in_session.userID,
         "fname" : u.user_in_session.first_name,
+        "balance" : u.user_in_session.balance,
         "openBets" : openBets,
         "closedBets" : closedBets
-    }
+        }
+        response = render(request,"history_bets.html",context)
 
-    print("openBets: ")
-    print(openBets)
-    print("closedBets: ")
-    print(closedBets)
-    response = render(request,"history_bets.html",context)
+    else:
+        response = redirect('/accounts/login/')
 
     return response
 
