@@ -180,8 +180,6 @@ class Transation(models.Model):
         return False
 
 
-        # fazer transaiton DEPOSIT
-        # transation withdraw
 
 # Users betting history
 class History(models.Model):
@@ -215,9 +213,19 @@ class Promotion(models.Model):
 class Bet_Promotion(models.Model):
     promo_code = models.ForeignKey(Promotion,on_delete=models.CASCADE)
     #game on which the promotion can be used
-    applyable_game = models.ForeignKey("game.Game",on_delete=models.CASCADE) 
+    applyable_game = models.ForeignKey("game.Game",on_delete=models.CASCADE,unique=True) 
     # Reward in percentage
     reward = models.IntegerField()
+
+    #Checks if promotion is valid for a specific user
+    def valid(self,amount):
+        promotion = Promotion.objects.get(promo_code=self.promo_code)
+        date_valid = promotion.limit_date >= timezone.now()
+        #Check if in date limit
+        if date_valid and float(amount) >= promotion.value_restriction:
+            return True
+        return False
+
 
 #Promotion specific to deposits
 class Deposit_Promotion(models.Model):

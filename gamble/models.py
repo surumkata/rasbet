@@ -32,7 +32,7 @@ class Bet(models.Model):
     # Amount of money
     amount = models.FloatField()
     # Datetime of the bet
-    datetime = models.DateField(auto_now_add=True)
+    datetime = models.DateTimeField(auto_now_add=True)
     # Status of the bet, open, won or lost
     status = models.ForeignKey(Bet_status, on_delete=models.CASCADE)
 
@@ -52,12 +52,14 @@ class Bet(models.Model):
             game_obj = Game.objects.get(game_id=dict['game_id'])
             odd_type_obj = Odd_type.objects.get(type=dict['bet_outcome'])
             odd_obj = Odd.objects.get(game=game_obj,odd_type=odd_type_obj)
-            Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_obj.odd)
+            odd_multiplier = odd_obj.odd
+            odd_multiplier = Bet.apply_promotion(game=game_obj,odd=odd_multiplier,amount=float(dict['amount']))
+            Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_multiplier)
             # Add to user History
             History.create(bet=bet_obj,user=user_obj)
 
-
-
+   
+        
     # Arguments : Total amount of the bet , Array od dictionaries {game_id,odd_type}
     def place_multiple(user_obj,total_amount,gamesBet):
         bet_obj = Bet.create(type='multiple',amount=total_amount)
@@ -68,7 +70,9 @@ class Bet(models.Model):
             game_obj = Game.objects.get(game_id=dict['game_id'])
             odd_type_obj = Odd_type.objects.get(type=dict['bet_outcome'])
             odd_obj = Odd.objects.get(game=game_obj,odd_type=odd_type_obj)
-            Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_obj.odd)
+            odd_multiplier = odd_obj.odd
+            odd_multiplier = Bet.apply_promotion(game=game_obj,odd=odd_multiplier,amount=total_amount)
+            Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_multiplier)
 
     def turn_won(self):
         status = Bet_status.objects.get(status='won')
@@ -110,10 +114,22 @@ class Bet(models.Model):
 
     def total_odd(self):
         bet_games = Bet_game.objects.filter(bet=self)
-        odd_value = 0
+        odd_value = 1
         for bet in bet_games:
-            odd_value += bet.odd
+            odd_value *= bet.odd
         return odd_value
+
+    @classmethod
+    #apply promotions on odd value
+    def apply_promotion(self,game,odd,amount):
+        if Bet_Promotion.objects.filter(applyable_game=game).exists():
+                promotion =  Bet_Promotion.objects.get(applyable_game=game)
+                if promotion.valid(amount):
+                    odd += (odd*promotion.reward)/100
+        return odd
+
+    def __str__(self):
+        return f'{self.betID}:{self.type}|{self.amount}$|{self.datetime}'
 
 
 

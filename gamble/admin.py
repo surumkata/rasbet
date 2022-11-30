@@ -5,6 +5,7 @@ from gamble.models import *
 class betAdmin(admin.ModelAdmin):
   list_display = ['betID','type','amount','datetime']
 
+
 class bet_gameAdmin(admin.ModelAdmin):
   list_display = ['bet','odd_id','odd','status']
 
