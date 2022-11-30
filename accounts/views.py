@@ -384,3 +384,19 @@ def profile(request):
             response = render(request, 'index.html',context)
             response.delete_cookie('session')
     return response
+
+
+
+def promotions(request):
+
+    promotions = Promotion.objects.all()
+    context = {
+                "logged" : False,
+                    }
+    promotion_list = []
+    for promotion in promotions:
+        promotion_list.append(promotion.image_path)
+        
+    context["promotions"] = promotion_list
+    response = render(request, 'promotions.html',context)
+    return response

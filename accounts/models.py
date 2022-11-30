@@ -199,9 +199,9 @@ class Promotion(models.Model):
     # Minimum value to use for the promotion to be aplicable
     value_restriction = models.FloatField()
     # Mail template path
-    mail_template_path = models.CharField(max_length=200,null=False)
+    mail_template_path = models.FileField(upload_to='promotions/template')
     # Image to use on the website
-    image_path = models.CharField(max_length=200,null=False)
+    image_path = models.ImageField(upload_to='promotions/images')
     # Limit to use the promotion
     limit_date = models.DateTimeField(null=False)
 
