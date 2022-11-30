@@ -57,6 +57,7 @@ class Bet(models.Model):
             History.create(bet=bet_obj,user=user_obj)
 
 
+
     # Arguments : Total amount of the bet , Array od dictionaries {game_id,odd_type}
     def place_multiple(user_obj,total_amount,gamesBet):
         bet_obj = Bet.create(type='multiple',amount=total_amount)
