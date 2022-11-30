@@ -170,7 +170,7 @@ class Transation(models.Model):
             # Regist of the transation
             Transation.objects.create(user=user,type=type,method=pm,amount=amount)
             # Updates user balance
-            if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code':
+            if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code' or type=="bet_cancel":
                 user.deposit(float(amount))
             elif type=="withdraw" or type=='bet':
                 user.withdraw(float(amount))

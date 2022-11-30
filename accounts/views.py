@@ -199,17 +199,21 @@ def history_transactions(request):
 def history_bets(request):
     session_id = request.COOKIES.get("session")
 
-    if request.method == 'POST':
+    
+
+    if session_id:
+        u = Session.objects.get(session_id=session_id)
+
+        if request.method == 'POST':
             bet_id = request.POST['bet_id']
 
             bet = Bet.objects.get(betID=bet_id)
             open = Bet_status.objects.get(status="open")
 
             if bet.status == open:
+                amount = bet.amount
                 bet.delete()
-
-    if session_id:
-        u = Session.objects.get(session_id=session_id)
+                Transation.regist(user=u.user_in_session,type="bet_cancel",method="balance",amount=amount)
 
         user_bet_history = History.objects.filter(user=u.user_in_session)
 
