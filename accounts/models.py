@@ -79,16 +79,6 @@ class User(models.Model):
         else: return 1
 
 
-
-#Admin module
-class Admin(models.Model):
-    adminID = models.AutoField(primary_key=True)
-    userID = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    @classmethod
-    def is_admin(self,id:str):
-        return Admin.objects.filter(userID=id).exists()
-
 class Specialist(models.Model):
     specID = models.AutoField(primary_key=True)
     userID = models.ForeignKey(User, on_delete=models.CASCADE)

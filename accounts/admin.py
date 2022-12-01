@@ -9,8 +9,6 @@ class TransationAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
   list_display = ['first_name','last_name','email','birthday','balance']
 
-class AdminAdmin(admin.ModelAdmin):
-  list_display = ['adminID','userID']
 
 class SpecAdmin(admin.ModelAdmin):
   list_display = ['specID','userID']
@@ -27,7 +25,7 @@ class PromotionAdmin(admin.ModelAdmin):
     users = User.objects.all()
     for user in users:
       email_list.append(user.email)
-    mail = SendingEmail(obj.mail_template_path)     
+    mail = SendingEmail(obj.mail_template_path)
     mail.send(email_list)
 
 class BetPromotionAdmin(admin.ModelAdmin):
@@ -38,7 +36,6 @@ class DepositPromotionAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(User,UserAdmin)
-admin.site.register(Admin,AdminAdmin)
 admin.site.register(Specialist,SpecAdmin)
 admin.site.register(Session)
 admin.site.register(Payment_method)
@@ -47,4 +44,3 @@ admin.site.register(History,HistoryAdmin)
 admin.site.register(Promotion,PromotionAdmin)
 admin.site.register(Bet_Promotion,BetPromotionAdmin)
 admin.site.register(Deposit_Promotion,DepositPromotionAdmin)
-

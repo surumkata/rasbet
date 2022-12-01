@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from accounts.models import User, Session, Admin,Specialist
+from accounts.models import User, Session,Specialist
 from game.models import db_change_gameodd, db_change_games_state, Game,Odd
 from django.urls import reverse
 import requests
@@ -39,10 +39,6 @@ def sport(request):
                     context['fname'] = session.user_in_session.first_name
                     context['balance'] = session.user_in_session.balance
                     context['sport'] = sport
-                    
-                    if Admin.is_admin(session.user_in_session.userID):
-                        context['admin'] = True
-                        html = 'sport_admin.html'
 
                     response = render(request, html, context)
             # tratar de quando cookie existe, mas a sessao nao
@@ -94,23 +90,6 @@ def change_games_state(request):
                         "sports_info": sports_listing,
                         "sport": sport,
                 }
-                if Admin.is_admin(session.user_in_session.userID):
-                    context = {
-                        "logged": True,
-                        "admin": True,
-                        "id": session.user_in_session.userID,
-                        "fname": session.user_in_session.first_name,
-                        "games_info": games_listing,
-                        "sports_info": sports_listing,
-                    }
-                    response = render(request, 'admin.html', context)
-                    games_to_change = []
-                    iterate = list(request.GET)
-                    iterate.pop(0)
-                    #guarda tuplo de jogo e estado para mudar
-                    for query in iterate:
-                        games_to_change.append((query,request.GET.get(query)))
-                    db_change_games_state(games_to_change)
 
         # tratar de quando cookie existe, mas a sessao nao
         except Exception as e:

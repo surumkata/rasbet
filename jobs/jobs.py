@@ -41,8 +41,8 @@ def load_ucras():
             print(e)
 
 def close_started_games():
-    print("Running job: closing started games")
+    print("Running job: suspending started games")
     games = Game.objects.filter(datetime__lte=datetime.now())
     for game in games:
-        game.close()
+        game.suspend()
         game.save()

@@ -38,17 +38,7 @@ def home(request):
                     "sports_info" : sports_listing,
             }
             response = render(request, 'index.html',context)
-            if Admin.is_admin(session.user_in_session.userID):
-                context = {
-                    "logged" : True,
-                    "admin" : True,
-                    "id" : session.user_in_session.userID,
-                    "fname" : session.user_in_session.first_name,
-                    "games_info" : main_listing,
-                    "sports_info" : sports_listing,
-                }
-                response = render(request, 'admin.html',context)
-            elif Specialist.is_specialist(session.user_in_session.userID):
+            if Specialist.is_specialist(session.user_in_session.userID):
                 on_hold = State.objects.get(state="on_hold")
                 open = State.objects.get(state="open")
                 games_onhold = Game.objects.filter(state=on_hold).values()

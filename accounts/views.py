@@ -201,7 +201,7 @@ def history_transactions(request):
 
     for bet_history in user_bet_history:
         bet = bet_history.bet
-        statistics['bets'] += 1        
+        statistics['bets'] += 1
         print(bet.type.type)
         print(bet.status.status)
         if(bet.type.type == "simple"):
@@ -226,7 +226,7 @@ def history_transactions(request):
             else:
                 statistics['standby_bets'] +=1
 
-    if(statistics['won_bets'] > 0 or statistics['lost_bets'] > 0) : 
+    if(statistics['won_bets'] > 0 or statistics['lost_bets'] > 0) :
         statistics['win_rate'] = statistics['won_bets'] / (statistics['won_bets'] + statistics['lost_bets']) * 100
     if(statistics['won_simple_bets'] > 0 or statistics['lost_simple_bets'] > 0) :
         statistics['win_rate_simple'] = statistics['won_simple_bets'] / (statistics['won_simple_bets'] + statistics['lost_simple_bets']) * 100
@@ -253,9 +253,9 @@ def history_transactions(request):
             "type": transaction.type,
             "method" : transaction.method.method,
             "amount" : transaction.amount,
-            "date" : transaction.datetime 
+            "date" : transaction.datetime
             })
-             
+
     context = {
         "logged" : True,
         "id" : session.user_in_session.userID,
@@ -271,7 +271,7 @@ def history_transactions(request):
 def history_bets(request):
     session_id = request.COOKIES.get("session")
 
-    
+
 
     if session_id:
         u = Session.objects.get(session_id=session_id)
@@ -366,15 +366,7 @@ def change_password(request):
         if cookie and msg != 0:
             session = Session.objects.get(session_id=cookie)
             user_id = session.user_in_session.userID
-            if Admin.is_admin(user_id):
-                context = {
-                    "logged" : True,
-                    "admin" : True,
-                    "id" : user_id,
-                    "fname" : session.user_in_session.first_name,
-                    "msg" : msg
-                }
-            elif Specialist.is_specialist(user_id):
+            if Specialist.is_specialist(user_id):
                 context = {
                     "logged" : True,
                     "specialist" : True,
@@ -387,7 +379,6 @@ def change_password(request):
                     "id" : user_id,
                     "msg" : msg
                 }
-            print("OLA")
             response = render(request, 'change_password.html',context)
 
     except Exception as e:
@@ -430,15 +421,7 @@ def profile(request):
         if cookie:
             session = Session.objects.get(session_id=cookie)
             user_id = session.user_in_session.userID
-            if Admin.is_admin(user_id):
-                context = {
-                    "logged" : True,
-                    "admin" : True,
-                    "id" : user_id,
-                    "fname" : session.user_in_session.first_name,
-                    "msg" : msg
-                }
-            elif Specialist.is_specialist(user_id):
+            if Specialist.is_specialist(user_id):
                 context = {
                     "logged" : True,
                     "specialist" : True,
@@ -483,7 +466,7 @@ def promotions(request):
     promotion_list = []
     for promotion in promotions:
         promotion_list.append(promotion.image_path)
-        
+
     context["promotions"] = promotion_list
     response = render(request, 'promotions.html',context)
     return response
