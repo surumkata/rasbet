@@ -24,6 +24,7 @@ return "";
 function post_slip(){
   type = sessionStorage.getItem("betType")
   sessionStorage.removeItem("betType");
+  sessionStorage.removeItem("order");
   slip_data = {}
   if(type=="simple"){
     slip_data['bet_type'] = type
