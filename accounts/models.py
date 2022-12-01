@@ -2,6 +2,9 @@ from django.utils import timezone
 from django.db import models
 from django import forms
 from django.utils.crypto import get_random_string
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart 
 
 # Default User model
 class User(models.Model):
@@ -170,7 +173,7 @@ class Transation(models.Model):
             # Regist of the transation
             Transation.objects.create(user=user,type=type,method=pm,amount=amount)
             # Updates user balance
-            if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code':
+            if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code' or type=="bet_cancel":
                 user.deposit(float(amount))
             elif type=="withdraw" or type=='bet':
                 user.withdraw(float(amount))
@@ -180,8 +183,6 @@ class Transation(models.Model):
         return False
 
 
-        # fazer transaiton DEPOSIT
-        # transation withdraw
 
 # Users betting history
 class History(models.Model):
@@ -201,9 +202,9 @@ class Promotion(models.Model):
     # Minimum value to use for the promotion to be aplicable
     value_restriction = models.FloatField()
     # Mail template path
-    mail_template_path = models.CharField(max_length=200,null=False)
+    mail_template_path = models.FileField(upload_to='promotions/template')
     # Image to use on the website
-    image_path = models.CharField(max_length=200,null=False)
+    image_path = models.ImageField(upload_to='promotions/images')
     # Limit to use the promotion
     limit_date = models.DateTimeField(null=False)
 
@@ -215,9 +216,19 @@ class Promotion(models.Model):
 class Bet_Promotion(models.Model):
     promo_code = models.ForeignKey(Promotion,on_delete=models.CASCADE)
     #game on which the promotion can be used
-    applyable_game = models.ForeignKey("game.Game",on_delete=models.CASCADE) 
+    applyable_game = models.ForeignKey("game.Game",on_delete=models.CASCADE,unique=True) 
     # Reward in percentage
     reward = models.IntegerField()
+
+    #Checks if promotion is valid for a specific user
+    def valid(self,amount):
+        promotion = Promotion.objects.get(promo_code=self.promo_code)
+        date_valid = promotion.limit_date >= timezone.now()
+        #Check if in date limit
+        if date_valid and float(amount) >= promotion.value_restriction:
+            return True
+        return False
+
 
 #Promotion specific to deposits
 class Deposit_Promotion(models.Model):
@@ -246,6 +257,41 @@ class Deposit_Promotion(models.Model):
                 return True
 
         return False
+
+#Sends promotion emails to users
+class SendingEmail:
+
+    #Set instance variables
+    def __init__(self, template):
+        self.sender_mail = "rasbetpl32@gmail.com"
+        self.password = "zmrbnzoaetikoygo"
+        self.smtp_server_domain_name = "smtp.gmail.com"
+        self.port = 465
+        self.template = "media/" + str(template)
+
+    #Send email
+    def send(self, emails):
+        ssl_context = ssl.create_default_context()
+        service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=ssl_context)
+        service.login(self.sender_mail, self.password)
+
+        for email in emails:
+            mail = MIMEMultipart('mixed')
+            mail['Subject'] = "Promoção RasBet" 
+            mail['From'] = self.sender_mail
+            mail['To'] = email
+
+            with open(self.template) as html_file:
+                html_content = MIMEText(html_file.read(), 'html') 
+                mail.attach(html_content) 
+
+            service.sendmail(self.sender_mail, email, mail.as_string())
+
+        service.quit()
+
+
+
+
 
 
 

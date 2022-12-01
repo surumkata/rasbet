@@ -199,8 +199,21 @@ def history_transactions(request):
 def history_bets(request):
     session_id = request.COOKIES.get("session")
 
+    
+
     if session_id:
         u = Session.objects.get(session_id=session_id)
+
+        if request.method == 'POST':
+            bet_id = request.POST['bet_id']
+
+            bet = Bet.objects.get(betID=bet_id)
+            open = Bet_status.objects.get(status="open")
+
+            if bet.status == open:
+                amount = bet.amount
+                bet.delete()
+                Transation.regist(user=u.user_in_session,type="bet_cancel",method="balance",amount=amount)
 
         user_bet_history = History.objects.filter(user=u.user_in_session)
 
@@ -211,6 +224,7 @@ def history_bets(request):
                 bet_game = Bet_game.objects.get(bet=entry.bet)
 
                 bets.append({
+                    "id" : entry.bet.betID,
                     "type" : entry.bet.type.str(),
                     "amount" : entry.bet.amount,
                     "odd" : bet_game.odd,
@@ -233,6 +247,7 @@ def history_bets(request):
                         })
 
                 bets.append({
+                    "id" : entry.bet.betID,
                     "type" : entry.bet.type.str(),
                     "amount" : entry.bet.amount,
                     "odd" : entry.bet.total_odd(),
@@ -383,4 +398,20 @@ def profile(request):
                 }
             response = render(request, 'index.html',context)
             response.delete_cookie('session')
+    return response
+
+
+
+def promotions(request):
+
+    promotions = Promotion.objects.all()
+    context = {
+                "logged" : False,
+                    }
+    promotion_list = []
+    for promotion in promotions:
+        promotion_list.append(promotion.image_path)
+        
+    context["promotions"] = promotion_list
+    response = render(request, 'promotions.html',context)
     return response

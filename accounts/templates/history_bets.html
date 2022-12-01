@@ -59,13 +59,12 @@
     <table>
       {%for b in bets%}
       <tr>
+        <td>{{b.id}}</td>
         {% if b.type == "simple" %}
         <td>{{b.type}}</td>
         <td>{{b.amount}}</td>
         <td>{{b.odd}}</td>
         <td>[{{b.odd}}|{{b.home}}-{{b.away}}|{{b.bet}}]</td>
-        <td>{{b.date}}</td>
-        <td>{{b.status}}</td>
         {% else %}
         <td>{{b.type}}</td>
         <td>{{b.amount}}</td>
@@ -75,7 +74,17 @@
           [{{g.odd}}|{{g.home}}-{{g.away}}|{{g.bet}}|{{g.status}}]
           {%endfor%}
         </td>
+        {% endif %}
         <td>{{b.date}}</td>
+        {% if b.status == "open" %}
+        <td>
+          <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="bet_id" value="{{b.id}}">
+            <button type="submit">cancelar</button>
+          </form>
+        </td>
+        {% else %}
         <td>{{b.status}}</td>
         {% endif %}
       </tr>
