@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from accounts.models import User, Session,Specialist
-from game.models import db_change_gameodd, db_change_games_state, Game,Odd
+from game.models import db_change_gameodd, Game,Odd
 from django.urls import reverse
 import requests
 from .models import *

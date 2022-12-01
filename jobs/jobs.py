@@ -24,16 +24,25 @@ def load_ucras():
     for g in games:
         # Only new games are added
 
+        if not Participant.objects.filter(name=g['homeTeam']).exists():
+            Participant.objects.create(name=g['homeTeam'],is_team=True)
+        if not Participant.objects.filter(name=g['awayTeam']).exists():
+            Participant.objects.create(name=g['awayTeam'],is_team=True)
+
         try:
+
+            home = Participant.objects.get(name=g['homeTeam'])
+            away = Participant.objects.get(name=g['awayTeam'])
+
             game_date_obj = datetime.strptime(g['commenceTime'][:-8],"%Y-%m-%dT%H:%M")
-            if not Game.exist_game(g['homeTeam'],g['awayTeam'],game_date_obj):
+            if not Game.exist_game(home,away,game_date_obj):
 
                 now = datetime.now().replace(second= 0, microsecond= 0)
 
                 # Only upcoming games are added
                 if game_date_obj>now:
                     Game.insert("Football","Portugal","Primeira Liga",g['homeTeam'],g['awayTeam'],game_date_obj)
-                    game = Game.objects.filter(home=g['homeTeam'],away=g['awayTeam'],datetime=game_date_obj).get()
+                    game = Game.objects.filter(home=home,away=away,datetime=game_date_obj).get()
                     Odd.home(game,g['bookmakers'][1]['markets'][0]['outcomes'][0]['price'])
                     Odd.away(game,g['bookmakers'][1]['markets'][0]['outcomes'][1]['price'])
                     Odd.draw(game,g['bookmakers'][1]['markets'][0]['outcomes'][2]['price'])

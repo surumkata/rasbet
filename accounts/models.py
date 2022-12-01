@@ -6,6 +6,7 @@ from config.storage import OverwriteStorage
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from game.models import Competition
 
 # Default User model
 class User(models.Model):
@@ -78,6 +79,16 @@ class User(models.Model):
             else: return 2
         else: return 1
 
+
+
+#Admin module
+class Admin(models.Model):
+    adminID = models.AutoField(primary_key=True)
+    userID = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @classmethod
+    def is_admin(self,id:str):
+        return Admin.objects.filter(userID=id).exists()
 
 class Specialist(models.Model):
     specID = models.AutoField(primary_key=True)

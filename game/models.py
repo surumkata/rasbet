@@ -47,6 +47,13 @@ class Competition(models.Model):
     def __str__(self):
         return self.competition
 
+class Participant(models.Model):
+    name = models.CharField(primary_key=True,max_length=50,null=False)
+    is_team = models.BooleanField()
+
+    def __str__(self):
+        return self.name
+
 
 class Game(models.Model):
     game_id = models.AutoField(primary_key=True)
@@ -55,8 +62,8 @@ class Game(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
-    home = models.CharField(max_length=50,null=False)
-    away = models.CharField(max_length=50,null=False)
+    home = models.ForeignKey(Participant, on_delete=models.CASCADE,related_name='home')
+    away = models.ForeignKey(Participant, on_delete=models.CASCADE,related_name='away')
     home_score = models.IntegerField(default=0)
     away_score = models.IntegerField(default=0)
     datetime = models.DateTimeField()
@@ -119,6 +126,8 @@ class Game(models.Model):
             sport = Sport.objects.get(sport=sport)
             country = Country.objects.get(country=country)
             competition = Competition.objects.get(competition=competition)
+            home = Participant.objects.get(name=home)
+            away = Participant.objects.get(name=away)
             # By default the game state is closed
             state = State.objects.get(state="on_hold")
             Game.objects.create(sport=sport,country=country,competition=competition,state=state,home=home,away=away,datetime=datetime)
@@ -225,35 +234,12 @@ def open_game_details(game:dict):
         return {}
 
 
-
-
-
 def sports_list():
     sports = Sport.objects.all().values()
     sports_listing = []
     for sport in sports:
       sports_listing.append(sport['sport'])
     return sports_listing
-
-
-
-def db_change_games_state(games_to_change):
-    for game in games_to_change:
-        if Game.exists(game[0]):
-            g = Game.objects.get(game_id=game[0])
-            print(g)
-            if game[1] == 'Closed':
-                g.close()
-                g.save()
-            elif game[1] == 'Open':
-                g.open()
-                g.save()
-            elif game[1] == 'Suspended':
-                g.suspend()
-                g.save()
-
-
-
 
 def db_change_gamestate(game_id,state):
     try:

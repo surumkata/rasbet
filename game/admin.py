@@ -111,6 +111,7 @@ admin.site.register(Game,gameAdmin)
 admin.site.register(Odd,oddAdmin)
 admin.site.register(Country)
 admin.site.register(Competition)
+admin.site.register(Participant)
 
 # @admin.action(description='Mark selected stories as published')
 # def make_published(modeladmin, request, queryset):
