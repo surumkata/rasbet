@@ -1,5 +1,6 @@
 import requests,json
 from game.models import *
+from django.utils.timezone import make_aware
 
 
 
@@ -22,11 +23,11 @@ def load_ucras():
 
     for g in games:
         # Only new games are added
-      
+
         try:
             game_date_obj = datetime.strptime(g['commenceTime'][:-8],"%Y-%m-%dT%H:%M")
             if not Game.exist_game(g['homeTeam'],g['awayTeam'],game_date_obj):
-                
+
                 now = datetime.now().replace(second= 0, microsecond= 0)
 
                 # Only upcoming games are added
@@ -39,4 +40,9 @@ def load_ucras():
         except Exception as e:
             print(e)
 
-
+def close_started_games():
+    print("Running job: closing started games")
+    games = Game.objects.filter(datetime__lte=datetime.now())
+    for game in games:
+        game.close()
+        game.save()
