@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from .models import *
-from game.models import Game
+from game.models import Game, Participant
 from gamble.models import Bet_game,Odd,Bet,Bet_status
 
 
@@ -338,6 +338,50 @@ def history_bets(request):
         "bets" : bets
         }
         response = render(request,"history_bets.html",context)
+
+    else:
+        response = redirect('/accounts/login/')
+
+    return response
+
+def favorites(request):
+    session_id = request.COOKIES.get("session")
+
+
+
+    if session_id:
+        session = Session.objects.get(session_id=session_id)
+
+        favs_sports = FavoriteSports.objects.filter(user=session.user_in_session)
+        favs_comps = FavoriteCompetitions.objects.filter(user=session.user_in_session)
+        favs_participantes = FavoriteParticipant.objects.filter(user=session.user_in_session)
+
+        favs_teams = []
+        favs_players = []
+
+        for fav in favs_participantes:
+            participant = Participant.objects.get(name=fav)
+            if participant.is_team:
+                favs_teams.append(fav)
+            else:
+                favs_players.append(fav)
+
+        print(favs_sports)
+        print(favs_comps)
+        print(favs_teams)
+        print(favs_players)
+
+        context = {
+        "logged" : True,
+        "id" : session.user_in_session.userID,
+        "fname" : session.user_in_session.first_name,
+        "balance" : session.user_in_session.balance,
+        "favs_sports" : favs_sports,
+        "favs_comps" : favs_comps,
+        "favs_teams" : favs_teams,
+        "favs_players" : favs_players,
+        }
+        response = render(request,"favorites.html",context)
 
     else:
         response = redirect('/accounts/login/')

@@ -267,15 +267,24 @@ class FavoriteSports(models.Model):
     sport = models.ForeignKey("game.Sport",on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.sport)
+
 class FavoriteCompetitions(models.Model):
     id = models.AutoField(primary_key=True)
     competition = models.ForeignKey("game.Competition",on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.competition)
+
 class FavoriteParticipant(models.Model):
     id = models.AutoField(primary_key=True)
     participant = models.ForeignKey("game.Participant",on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.participant)
 
 
 
