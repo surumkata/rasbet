@@ -175,21 +175,93 @@ def history_transactions(request):
     session = Session.objects.get(session_id=session_id)
 
     user_transactions_history = Transation.objects.filter(user=session.user_in_session)
+    user_bet_history = History.objects.filter(user=session.user_in_session)
     transactions = []
+    statistics = {
+        "deposit" : 0.0,
+        "withdraw" : 0.0,
+        "bet_spend" : 0.0,
+        "bet_gains" : 0.0,
+        "promotion_gains" : 0.0,
+        "bets" : 0,
+        "simple_bets" : 0,
+        "multiple_bets" : 0,
+        "standby_bets" : 0,
+        "won_bets" : 0,
+        "won_simple_bets" : 0,
+        "won_multiple_bets" : 0,
+        "lost_bets" : 0,
+        "lost_simple_bets" : 0,
+        "lost_multiple_bets" : 0,
+        "win_rate" : 0,
+        "win_rate_simple" : 0,
+        "win_rate_multiple" : 0
+    }
+
+
+    for bet_history in user_bet_history:
+        bet = bet_history.bet
+        statistics['bets'] += 1        
+        print(bet.type.type)
+        print(bet.status.status)
+        if(bet.type.type == "simple"):
+            statistics['simple_bets'] += 1
+            if(bet.status.status == "won"):
+                statistics['won_simple_bets'] += 1
+                statistics['won_bets'] +=1
+            elif(bet.status.status == "lost"):
+                statistics['lost_simple_bets'] += 1
+                statistics['lost_bets'] +=1
+            else:
+                statistics['standby_bets'] +=1
+
+        elif(bet.type.type == "multiple"):
+            statistics['multiple_bets'] += 1
+            if(bet.status.status == "won"):
+                statistics['won_multiple_bets'] += 1
+                statistics['won_bets'] +=1
+            elif(bet.status.status == "lost"):
+                statistics['lost_multiple_bets'] += 1
+                statistics['lost_bets'] +=1
+            else:
+                statistics['standby_bets'] +=1
+
+    if(statistics['won_bets'] > 0 or statistics['lost_bets'] > 0) : 
+        statistics['win_rate'] = statistics['won_bets'] / (statistics['won_bets'] + statistics['lost_bets']) * 100
+    if(statistics['won_simple_bets'] > 0 or statistics['lost_simple_bets'] > 0) :
+        statistics['win_rate_simple'] = statistics['won_simple_bets'] / (statistics['won_simple_bets'] + statistics['lost_simple_bets']) * 100
+    if(statistics['won_multiple_bets'] > 0 or statistics['lost_multiple_bets'] > 0) :
+        statistics['win_rate_multiple'] = statistics['won_multiple_bets'] / (statistics['won_multiple_bets'] + statistics['lost_multiple_bets']) * 100
+
 
     for transaction in user_transactions_history:
+
+        if transaction.type == "deposit":
+            statistics['deposit'] += transaction.amount
+        elif transaction.type == "withdraw":
+            statistics['withdraw'] += transaction.amount
+        elif transaction.type == "bet":
+            statistics['bet_spend'] += transaction.amount
+        elif transaction.type == "bet_won":
+            statistics['bet_gains'] += transaction.amount
+        elif transaction.type == "bet_cancel":
+            statistics['bet_spend'] -= transaction.amount
+        elif transaction.type.split(":")[0] == "promo_code":
+            statistics['promotion_gains'] += transaction.amount
+
         transactions.append({
             "type": transaction.type,
             "method" : transaction.method.method,
             "amount" : transaction.amount,
             "date" : transaction.datetime 
             })
-            
+             
     context = {
         "logged" : True,
         "id" : session.user_in_session.userID,
         "fname" : session.user_in_session.first_name,
-        "transactions" : transactions
+        "transactions" : transactions,
+        "statistics" : statistics
     }
 
     response = render(request,"history_transactions.html",context)
