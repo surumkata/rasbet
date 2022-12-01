@@ -7,7 +7,7 @@ class TransationAdmin(admin.ModelAdmin):
   list_display = ['user','type']
 
 class UserAdmin(admin.ModelAdmin):
-  list_display = ['first_name','last_name','email','birthday','balance']
+  list_display = ['userID','first_name','last_name','email','birthday','balance']
 
 
 class SpecAdmin(admin.ModelAdmin):

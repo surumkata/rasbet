@@ -6,6 +6,7 @@ from asgiref.sync import sync_to_async
 
 
 
+
 class Sport(models.Model):
     sport = models.CharField(primary_key=True,max_length=50,null=False)
     has_draw = models.BooleanField()
@@ -233,7 +234,7 @@ def open_game_details(game:dict):
     else:
         return {}
 
-
+#list of the sports, countries that have it and respective competitions
 def sports_list():
     sports = Sport.objects.all()
     sports_listing = {}
@@ -245,6 +246,10 @@ def sports_list():
             country_name = country.country
             sports_listing[sport_name][country_name] = Competition.objects.filter(sport=sport,country=country)   
     return sports_listing
+
+
+
+
 
 def db_change_gamestate(game_id,state):
     try:

@@ -48,8 +48,26 @@
 
   <div class="display">
     <div class="display-left" style="background-color:#aaa;">
-      <h2>Desportos</h2>
       <form method='get' action="/game/filter">
+      <h2>Favoritos</h2>
+      {% for type,favorites in favorites_info.items%}
+      <p>
+        <a class="" data-toggle="collapse"
+                href="#{{type}}" role="button"
+                aria-expanded="false" aria-controls="{{type}}">
+            {{type}}
+        </a>
+      </p>
+      <div class="collapse" id="{{type}}">
+        {% for favorite in favorites %}
+        <div>
+          <button name="{{type}}" type="submit" value="{{favorite}}" data-checked="false" >{{favorite}}</button>
+        </div>
+        {% endfor %}
+      </div>
+
+      {%endfor%}
+      <h2>Desportos</h2>
       {% for sport, countrys in sports_info.items %}   
       <p>
           <a class="" data-toggle="collapse"
@@ -57,6 +75,7 @@
                   aria-expanded="false" aria-controls="{{sport}}">
               {{sport}}
           </a>
+          <input type="checkbox" class="" name="{{sport}}">fav</input>
       </p>
       <div class="collapse" id="{{sport}}">
           <div>

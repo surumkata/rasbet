@@ -319,3 +319,10 @@ class SendingEmail:
 
         service.quit()
 
+#list of a users favorites
+def favorites_list(user):
+    fav_list = {}
+    fav_list['sport'] = FavoriteSports.objects.filter(user=user)
+    fav_list['competition'] = FavoriteCompetitions.objects.filter(user=user)
+    fav_list['participant'] = FavoriteParticipants.objects.filter(user=user)
+    return fav_list

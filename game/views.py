@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from accounts.models import User, Session,Specialist
+from accounts.models import User, Session,Specialist, favorites_list
 from game.models import db_change_gameodd, Game,Odd
 from django.urls import reverse
 import requests
@@ -13,9 +13,12 @@ def filter(request):
     if request.method == 'GET':
         sport = request.GET.get('sport')
         competition = request.GET.get('competition')
-        if sport or competition:
+        participant = request.GET.get('participant')
+        if sport or competition or participant:
             if sport: games = Game.objects.filter(sport=sport).values()
             if competition: games = Game.objects.filter(competition=competition).values()
+            if participant: 
+                games = Game.objects.filter(home=participant).values() | Game.objects.filter(away=participant).values()
             games_listing = []
             for game in games:
                 details = open_game_details(game)
@@ -36,11 +39,12 @@ def filter(request):
                 if cookie:
                     html = 'index.html'
                     session = Session.objects.get(session_id=cookie)
+                    fav_list = favorites_list(session.user_in_session)
                     context['logged'] = True
                     context['id'] =  session.user_in_session.userID
                     context['fname'] = session.user_in_session.first_name
                     context['balance'] = session.user_in_session.balance
-                    context['sport'] = sport
+                    context['favorites_info'] = fav_list
 
                     response = render(request, html, context)
             # tratar de quando cookie existe, mas a sessao nao

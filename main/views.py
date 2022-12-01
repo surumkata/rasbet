@@ -30,6 +30,8 @@ def home(request):
     try:
         if cookie:
             session = Session.objects.get(session_id=cookie)
+            user_id = session.user_in_session.userID
+            fav_list = favorites_list(session.user_in_session)
             context = {
                     "logged" : True,
                     "id" : session.user_in_session.userID,
@@ -37,9 +39,10 @@ def home(request):
                     "balance" : session.user_in_session.balance,
                     "games_info" : main_listing,
                     "sports_info" : sports_listing,
+                    "favorites_info" : fav_list,
             }
             response = render(request, 'index.html',context)
-            if Specialist.is_specialist(session.user_in_session.userID):
+            if Specialist.is_specialist(user_id):
                 on_hold = State.objects.get(state="on_hold")
                 open = State.objects.get(state="open")
                 games_onhold = Game.objects.filter(state=on_hold).values()
