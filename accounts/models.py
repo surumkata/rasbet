@@ -3,7 +3,9 @@ from django.db import models
 from django import forms
 from django.utils.crypto import get_random_string
 from config.storage import OverwriteStorage
-
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart 
 
 # Default User model
 class User(models.Model):
@@ -66,7 +68,7 @@ class User(models.Model):
                 self.save()
                 return 0
         else: return 2
-    
+
     def change_password(self,password,new_password,new_password2):
         if(self.password == password):
             if(new_password == new_password2):
@@ -75,7 +77,7 @@ class User(models.Model):
                 return 0
             else: return 2
         else: return 1
-            
+
 
 
 #Admin module
@@ -172,7 +174,7 @@ class Transation(models.Model):
             # Regist of the transation
             Transation.objects.create(user=user,type=type,method=pm,amount=amount)
             # Updates user balance
-            if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code':
+            if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code' or type=="bet_cancel":
                 user.deposit(float(amount))
             elif type=="withdraw" or type=='bet':
                 user.withdraw(float(amount))
@@ -215,7 +217,7 @@ class Promotion(models.Model):
 class Bet_Promotion(models.Model):
     promo_code = models.ForeignKey(Promotion,on_delete=models.CASCADE)
     #game on which the promotion can be used
-    applyable_game = models.ForeignKey("game.Game",on_delete=models.CASCADE,unique=True) 
+    applyable_game = models.ForeignKey("game.Game",on_delete=models.CASCADE,unique=True)
     # Reward in percentage
     reward = models.IntegerField()
 
@@ -257,11 +259,33 @@ class Deposit_Promotion(models.Model):
 
         return False
 
+#Sends promotion emails to users
+class SendingEmail:
 
+    #Set instance variables
+    def __init__(self, template):
+        self.sender_mail = "rasbetpl32@gmail.com"
+        self.password = "zmrbnzoaetikoygo"
+        self.smtp_server_domain_name = "smtp.gmail.com"
+        self.port = 465
+        self.template = "media/" + str(template)
 
+    #Send email
+    def send(self, emails):
+        ssl_context = ssl.create_default_context()
+        service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=ssl_context)
+        service.login(self.sender_mail, self.password)
 
+        for email in emails:
+            mail = MIMEMultipart('mixed')
+            mail['Subject'] = "Promoção RasBet"
+            mail['From'] = self.sender_mail
+            mail['To'] = email
 
+            with open(self.template) as html_file:
+                html_content = MIMEText(html_file.read(), 'html')
+                mail.attach(html_content)
 
+            service.sendmail(self.sender_mail, email, mail.as_string())
 
-
-
+        service.quit()

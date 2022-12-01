@@ -1,6 +1,10 @@
 // Global scope
   window.totalAmount = 0
   window.totalGains = 0
+  window.games_on_slip = []
+  window.game_counter = 0
+  window.same_game_counter = 0
+  window.bet_type = "simple"
 
 
 // Change to multi bet
@@ -87,8 +91,11 @@ function update_simple_gains(){
 function update_simple_amount(elem,amount){
   // get the div with the game id
   game_div = $(elem).parent().parent().parent()
-  game_id = game_div.attr("id")
+  slip_game_id = game_div.attr("id")
   odd_type = game_div.attr("data-oddType")
+  //slip;game_id;betType => game_id
+  slip_game_id_fields = slip_game_id.split(";");
+  game_id = slip_game_id_fields[1]
 
   game_data = sessionStorage.getItem(game_id)
   game_data_obj = JSON.parse(game_data)
@@ -99,16 +106,12 @@ function update_simple_amount(elem,amount){
         }
   }
   sessionStorage.setItem(game_id,JSON.stringify(game_data_obj))
+
 }
 
 
 
 function simpleAmount_handler(elem){
-
-    var rowCimaValor = document.getElementById('rowCimaValor')
-
-    slip_counter = $("#slipform").attr("data-counter")
-
     if(elem.value!="" && elem.value>=0.10 && elem.value<=500){
       value = parseFloat(elem.value)
       if(elem.oldvalue==""){
@@ -145,9 +148,12 @@ function storage_change_simple(){
   sessionStorage.setItem("betType","simple")
 
   betboxes = document.getElementsByClassName("betbox");
-
+  order_array = []
   for(var i=0;i<betboxes.length;i++){
-    game_id = betboxes[i].getAttribute("id")
+    slip_id = betboxes[i].getAttribute("id")
+    slip_id_fields = slip_id.split(";")
+    game_id = slip_id_fields[1]
+
     odd_type = betboxes[i].getAttribute("data-oddtype")
     home = betboxes[i].getAttribute("data-home")
     away = betboxes[i].getAttribute("data-away")
@@ -164,7 +170,10 @@ function storage_change_simple(){
       sessionStorage.setItem(game_id,JSON.stringify(data_obj));
 
     }
+    order_array.push([game_id,odd_type])
   }
+  sessionStorage.setItem("order",JSON.stringify(order_array))
+  console.log(JSON.parse(sessionStorage.getItem("order")))
 }
 
 // Change every game in storage has multiple
@@ -174,9 +183,12 @@ function storage_change_multiple(){
   sessionStorage.setItem("betType","multiple")
 
   betboxes = document.getElementsByClassName("betbox");
-
+  order_array = []
   for(var i=0;i<betboxes.length;i++){
-    game_id = betboxes[i].getAttribute("id")
+    slip_id = betboxes[i].getAttribute("id")
+    slip_id_fields = slip_id.split(";")
+    game_id = slip_id_fields[1]
+
     odd_type = betboxes[i].getAttribute("data-oddtype")
     home = betboxes[i].getAttribute("data-home")
     away = betboxes[i].getAttribute("data-away")
@@ -184,19 +196,19 @@ function storage_change_multiple(){
     odd = betboxes[i].getAttribute("data-odd")
     new_store_value = [{"home":home,"away":away,"bet":bet,"odd":odd,"bet_outcome" : odd_type}]
     sessionStorage.setItem(game_id,JSON.stringify(new_store_value))
+    order_array.push(game_id)
   }
+
+  sessionStorage.setItem("order",JSON.stringify(order_array))
 
   sessionStorage.setItem("amount","0")
 
 
 }
 
+
 function slip_handler(bttchange,home,away,bet,odd){
 
-  slipform = document.getElementById("slipform")
-  counter = parseFloat(slipform.getAttribute("data-counter"))
-  sameGcounter = parseFloat(slipform.getAttribute("data-sameGcounter"))
-  prev_bettype = slipform.getAttribute("data-bettype")
 
   var betboxs = document.getElementsByClassName('betbox');
   total_odd = 1
@@ -205,10 +217,10 @@ function slip_handler(bttchange,home,away,bet,odd){
   }
 
   // Simple
-  if(sameGcounter>=1 || counter<=1 || bttchange=="simple"){
+  if(window.same_game_counter>=1 || window.game_counter<=1 || bttchange=="simple"){
 
     change_to_simple()
-    slipform.setAttribute("data-bettype","simple")
+    window.bet_type = "simple"
     sessionStorage.setItem("betType","simple")
 
     // disable bet button
@@ -236,12 +248,12 @@ function slip_handler(bttchange,home,away,bet,odd){
     storage_change_simple(home,away,bet,odd)
 
   // Multiple
-}else if(counter>1 || bttchange=="multiple" ){
+}else if(window.game_counter>1 || bttchange=="multiple" ){
 
     // Multiple bets max 10 slections
-    if(counter<=10){
+    if(window.game_counter<=10){
       change_to_multi()
-      slipform.setAttribute("data-bettype","multiple")
+      window.bet_type = "multiple"
       sessionStorage.setItem("betType","multiple")
       window.totalAmount = 0
 
@@ -293,12 +305,13 @@ function button_handler(elem){
     elem.style.color = "#ffdf7b"
 
     // Increase same game counter in the form
-    game_on_slip = document.getElementById(game_id)
-    if(game_on_slip != null && typeof(game_on_slip) != 'undefined'){
-        sameGcounter = parseFloat(slipform.getAttribute("data-sameGcounter"))
-        sameGcounter++;
-        slipform.setAttribute("data-sameGcounter",String(sameGcounter))
+
+    if(window.games_on_slip.includes(game_id)){
+        window.same_game_counter++
     }
+
+
+
 
     // Get data atributes from tag
     let slip = document.querySelector('.slip');
@@ -319,16 +332,23 @@ function button_handler(elem){
 
     $('#slipbodyMsg').remove()
 
+    // If values have whitespaces  need to be a string
+    str_home = "\""+home+"\""
+    str_away = "\""+away+"\""
+    str_bet = "\""+bet+"\""
+
+
+    slip_id = "slip;"+elem.id
+
+    str_slip_id = "\'"+slip_id+"\'"
+
     //Add game to slip in the html
-    slip.innerHTML += '<div class="betbox" id='+game_id+' data-odd='+odd+' data-oddType='+odd_type+' data-home='+home+' data-away='+away+' data-bet='+bet+'><div class="betboxHeader"><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>Cota '+odd+' </div></label></div>';
 
-    // Increase total games counter in the form
-    slipform = document.getElementById("slipform")
-    counter = parseFloat(slipform.getAttribute("data-counter"))
-    counter++
+    slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+odd+' data-oddType='+odd_type+' data-home='+str_home+' data-away='+str_away+' data-bet='+str_bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>Cota '+odd+' </div></label></div>';
 
-    slipform.setAttribute("data-counter",String(counter))
-    console.log(bet)
+    window.games_on_slip.push(game_id)
+    window.game_counter++
+
     slip_handler("nobtt",home,away,bet,odd)
   }else{
     // Button uncheck
@@ -336,79 +356,125 @@ function button_handler(elem){
     elem.style.background = "#ffdf7b"
     elem.style.color = "#af7537"
 
-    // Remove game from slip
-    game_on_slip = document.getElementById(game_id)
+    slip_id = "slip;"+elem.id
+    game_on_slip = document.getElementById(slip_id)
     if(game_on_slip != null && typeof(game_on_slip) != 'undefined'){
       game_on_slip.remove()
 
-      //Decrase counter in the form
-      slipform = document.getElementById("slipform")
-      counter = parseFloat(slipform.getAttribute("data-counter"))
-      counter--;
-      slipform.setAttribute("data-counter",String(counter))
 
-      if(counter==0){
+      order_array = JSON.parse(sessionStorage.getItem("order"))
+      index = order_array.indexOf(game_id);
+      order_array.splice(index, 1);
+      sessionStorage.setItem("order",JSON.stringify(order_array))
+
+
+      index = window.games_on_slip.indexOf(game_id);
+      window.games_on_slip.splice(index, 1);
+      window.game_counter--
+
+      if(window.game_counter==0){
         let slip = document.querySelector('.slip');
         slip.innerHTML += "<div id='slipbodyMsg'>Adiciona a tua primeira aposta!</div>"
       }
 
       // Decrease same game counter
-      game_on_slip = document.getElementById(game_id)
-      if(game_on_slip != null && typeof(game_on_slip) != 'undefined'){
-          sameGcounter = parseFloat(slipform.getAttribute("data-sameGcounter"))
-          sameGcounter--;
-          slipform.setAttribute("data-sameGcounter",String(sameGcounter))
+      if(window.games_on_slip.includes(game_id)){
+          window.same_game_counter--
+        }
 
-      }
       slip_handler("nobtt")
     }
   }
 }
 
+function delete_selection(slip_game_id){
+  //slip;gameId;betType
+  slip_game_id_fields = slip_game_id.split(";")
+
+  elem = document.getElementById(slip_game_id);
+  elem.remove()
+
+  window.game_counter--
+
+  if(window.bet_type=="simple"){
+    // Decrease same game counter
+    for(var i=0;i<window.games_on_slip.length;i++){
+        if(slip_game_id_fields[1]==window.games_on_slip[i]){
+          index = window.games_on_slip.indexOf(slip_game_id_fields[1]);
+          window.games_on_slip.splice(index, 1);
+          window.same_game_counter--
+          break
+
+        }
+    }
+  }
+
+  // Uncheck button if there is one
+
+  btt_id = slip_game_id_fields[1] + ";" + slip_game_id_fields[2]
+  btt_elem = document.getElementById(btt_id)
+  // If the game is showed in the page then click th odd
+  if(btt_elem){
+    btt_elem.setAttribute("data-checked","false")
+    btt_elem.style.background = "#ffdf7b"
+    btt_elem.style.color = "#af7537"
+
+  }
+  slip_handler("nobtt")
+}
+
+// Onload build slip as saved in localStorage
 window.onload = (event) =>{
 
     type = sessionStorage.getItem("betType");
-
     if(type){
 
-      $('#slipbodyMsg').remove()
+
+
       let slip = document.querySelector('.slip');
-      slipform = document.getElementById("slipform")
+
+      order_array = JSON.parse(sessionStorage.getItem("order"))
+
       counter = 0
-      keys = Object.keys(sessionStorage)
 
       if(type=="simple"){
         sameGameCounter = 0
           //update
-          for(var i=0;i<keys.length;i++){
-            if(keys[i]=="betType" || keys[i]=="amount"){
-              //do nothing
-            }else{
-              game_data_obj = JSON.parse(sessionStorage.getItem(keys[i]))
+          for(var i=0;i<order_array.length;i++){
+              game_data_obj = JSON.parse(sessionStorage.getItem(order_array[i][0]))
               for(var j=0;j<game_data_obj.length;j++){
-                btt_id =  keys[i] + ";" + game_data_obj[j].bet_outcome
-                btt_elem = document.getElementById(btt_id)
-                // If the game is showed in the page then click th odd
-                if(btt_elem){
-                  btt_elem.setAttribute("data-checked","true")
-                  btt_elem.style.background = "#af7537"
-                  btt_elem.style.color = "#ffdf7b"
-                }
-                  slip.innerHTML += '<div class="betbox" id='+keys[i]+' data-odd='+game_data_obj[j].odd+' data-oddType='+game_data_obj[j].bet_outcome+' data-home='+game_data_obj[j].home+' data-away='+game_data_obj[j].away+' data-bet='+game_data_obj[j].bet+' ><div class="betboxHeader"><label>'+game_data_obj[j].home+"-"+game_data_obj[j].away+'<br>Resultado(Tempo Regulamentar): ' + game_data_obj[j].bet + '<br>Cota '+game_data_obj[j].odd+' </div></label></div>';
-                  counter++
-                  if(j>=1){
-                      sameGameCounter++
+                if(game_data_obj[j].bet_outcome==order_array[i][1]){
+
+                    if(window.games_on_slip.includes(order_array[i][0])){
+                        sameGameCounter++
+                    }
+                    window.games_on_slip.push(order_array[i][0])
+
+                    btt_id =  order_array[i][0] + ";" + game_data_obj[j].bet_outcome
+                    btt_elem = document.getElementById(btt_id)
+                    // If the game is showed in the page then click th odd
+                    if(btt_elem){
+                        btt_elem.setAttribute("data-checked","true")
+                        btt_elem.style.background = "#af7537"
+                        btt_elem.style.color = "#ffdf7b"
+                      }
+                    slip_id = "slip;"+btt_id
+                    str_slip_id = "\'"+slip_id+"\'"
+                    slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+game_data_obj[j].odd+' data-oddType='+game_data_obj[j].bet_outcome+' data-home='+game_data_obj[j].home+' data-away='+game_data_obj[j].away+' data-bet='+game_data_obj[j].bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>'+game_data_obj[j].home+"-"+game_data_obj[j].away+'<br>Resultado(Tempo Regulamentar): ' + game_data_obj[j].bet + '<br>Cota '+game_data_obj[j].odd+' </div></label></div>';
+
+                    counter++
+
                   }
+
+                }
               }
-            }
-          }
 
+          window.game_counter = counter
+          window.same_game_counter = sameGameCounter
 
-          slipform.setAttribute("data-sameGcounter",String(sameGameCounter))
-          slipform.setAttribute("data-counter",String(counter))
-
-          slipform.setAttribute("data-bettype","simple")
+          window.bet_type = "simple"
           change_to_simple()
+
           $(".betboxFooter").remove()
           $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
 
@@ -419,12 +485,9 @@ window.onload = (event) =>{
           $("#valorGanhos span").text('0,00€')
       }else{
 
-        for(var i=0;i<keys.length;i++){
-          if(keys[i]=="betType" || keys[i]=="amount"){
-            //do nothing
-          }else{
-              game_data_obj = JSON.parse(sessionStorage.getItem(keys[i]))
-              btt_id =  keys[i] + ";" + game_data_obj[0].bet_outcome
+        for(var i=0;i<order_array.length;i++){
+              game_data_obj = JSON.parse(sessionStorage.getItem(order_array[i]))
+              btt_id =  order_array[i] + ";" + game_data_obj[0].bet_outcome
               btt_elem = document.getElementById(btt_id)
               // If the game is showed in the page then click th odd
               if(btt_elem){
@@ -432,14 +495,18 @@ window.onload = (event) =>{
                 btt_elem.style.background = "#af7537"
                 btt_elem.style.color = "#ffdf7b"
               }
+              // Build slip id
+              slip_id = "slip;"+btt_id
+              str_slip_id = "\'"+slip_id+"\'"
               let slip = document.querySelector('.slip');
-              slip.innerHTML += '<div class="betbox" id='+keys[i]+' data-odd='+game_data_obj[0].odd+' data-oddType='+game_data_obj[0].bet_outcome+' data-home='+game_data_obj[0].home+' data-away='+game_data_obj[0].away+' data-bet='+game_data_obj[0].bet+' ><div class="betboxHeader"><label>'+game_data_obj[0].home+"-"+game_data_obj[0].away+'<br>Resultado(Tempo Regulamentar): ' + game_data_obj[0].bet + '<br>Cota '+game_data_obj[0].odd+' </div></label></div>';
+              slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+game_data_obj[0].odd+' data-oddType='+game_data_obj[0].bet_outcome+' data-home='+game_data_obj[0].home+' data-away='+game_data_obj[0].away+' data-bet='+game_data_obj[0].bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>'+game_data_obj[0].home+"-"+game_data_obj[0].away+'<br>Resultado(Tempo Regulamentar): ' + game_data_obj[0].bet + '<br>Cota '+game_data_obj[0].odd+' </div></label></div>';
               counter++
 
-          }
+
         }
 
-        slipform.setAttribute("data-counter",String(counter))
+        window.game_counter = counter
+        window.same_game_counter = 0
 
         var betboxs = document.getElementsByClassName('betbox');
         total_odd = 1
@@ -447,7 +514,7 @@ window.onload = (event) =>{
           total_odd *= parseFloat(betboxs[i].getAttribute("data-odd"))
         }
 
-        slipform.setAttribute("data-bettype","multiple")
+        window.bet_type = "multiple"
         change_to_multi()
         $(".betboxFooter").remove()
 
@@ -458,5 +525,10 @@ window.onload = (event) =>{
         $("#rowBaixoNome span").text('Ganhos Possíveis')
         $("#valorGanhos span").text('0,00€')
       }
+      if(window.game_counter>0){
+        $('#slipbodyMsg').remove()
+      }
+    }else{
+      sessionStorage.setItem("order",JSON.stringify([]))
     }
 };

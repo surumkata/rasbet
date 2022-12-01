@@ -21,6 +21,15 @@ class HistoryAdmin(admin.ModelAdmin):
 class PromotionAdmin(admin.ModelAdmin):
   list_display = ['promo_code','value_restriction','mail_template_path','image_path','limit_date']
 
+  def save_model(self,request,obj,form,change):
+    super().save_model(request,obj,form,change)
+    email_list = []
+    users = User.objects.all()
+    for user in users:
+      email_list.append(user.email)
+    mail = SendingEmail(obj.mail_template_path)     
+    mail.send(email_list)
+
 class BetPromotionAdmin(admin.ModelAdmin):
   list_display = ['promo_code','applyable_game','reward']
 
