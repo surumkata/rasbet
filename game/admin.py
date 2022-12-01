@@ -10,9 +10,9 @@ class gameAdmin(admin.ModelAdmin):
 
   def save_model(self,request,obj,form,change):
     super().save_model(request,obj,form,change)
-    Odd.home(obj,0.0)
-    Odd.away(obj,0.0)
-    Odd.draw(obj,0.0) 
+    Odd.home(obj,1.0)
+    Odd.away(obj,1.0)
+    Odd.draw(obj,1.0) 
 
 
   @admin.action(description='Mark selected games as closed')

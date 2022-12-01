@@ -19,6 +19,7 @@ def home(request):
             main_listing.append(details)
 
     sports_listing = sports_list()
+    print(sports_listing)
 
     context = {
                     "logged" : False,

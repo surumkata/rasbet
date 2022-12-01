@@ -4,12 +4,16 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>   
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% csrf_token %}
 <title> Home Page </title>
 </head>
@@ -45,15 +49,37 @@
   <div class="display">
     <div class="display-left" style="background-color:#aaa;">
       <h2>Desportos</h2>
-      <form method='get' action="/game/sport">
-        {% for s in sports_info %}
-          <div class="column odds">
-            <div class="column odd">
-                <button name="sport" type="submit" value="{{s}}" data-checked="false" >{{s}}</button>
-            </div>
+      <form method='get' action="/game/filter">
+      {% for sport, countrys in sports_info.items %}   
+      <p>
+          <a class="" data-toggle="collapse"
+                  href="#{{sport}}" role="button"
+                  aria-expanded="false" aria-controls="{{sport}}">
+              {{sport}}
+          </a>
+      </p>
+      <div class="collapse" id="{{sport}}">
+          <div>
+            <button name="sport" type="submit" value="{{sport}}" data-checked="false" >Toda a oferta</button>
           </div>
-
-        {% endfor %}
+          {% for country, competitions in countrys.items %} 
+          <p>
+            <a class="" data-toggle="collapse"
+                  href="#{{sport}}{{country}}" role="button"
+                  aria-expanded="false" aria-controls="{{sport}}{{country}}">
+              {{country}}
+            </a>
+          </p>
+          <div class="collapse" id="{{sport}}{{country}}">
+            {% for competition in competitions %}
+            <div>
+              <button name="competition" type="submit" value="{{competition}}" data-checked="false" >{{competition}}</button>
+            </div>
+            {% endfor %}
+          </div>
+          {% endfor %}
+      </div>
+      {% endfor %}
       </form>
     </div>
     <div class="display-center">

@@ -9,11 +9,13 @@ from .models import *
 import json
 
 # page to list all bets of a sport
-def sport(request):
+def filter(request):
     if request.method == 'GET':
         sport = request.GET.get('sport')
-        if sport:
-            games = Game.objects.filter(sport_id=sport).values()
+        competition = request.GET.get('competition')
+        if sport or competition:
+            if sport: games = Game.objects.filter(sport=sport).values()
+            if competition: games = Game.objects.filter(competition=competition).values()
             games_listing = []
             for game in games:
                 details = open_game_details(game)
@@ -30,9 +32,9 @@ def sport(request):
                         }
             try:
 
-                response = render(request, 'sport.html', context)
+                response = render(request, 'index.html', context)
                 if cookie:
-                    html = 'sport.html'
+                    html = 'index.html'
                     session = Session.objects.get(session_id=cookie)
                     context['logged'] = True
                     context['id'] =  session.user_in_session.userID
@@ -44,7 +46,7 @@ def sport(request):
             # tratar de quando cookie existe, mas a sessao nao
             except Exception as e:
                 print(e)
-                response = render(request, 'sport.html', context)
+                response = render(request, 'index.html', context)
                 if cookie:
                     response.delete_cookie('session')
         else:

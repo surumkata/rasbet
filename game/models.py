@@ -235,10 +235,15 @@ def open_game_details(game:dict):
 
 
 def sports_list():
-    sports = Sport.objects.all().values()
-    sports_listing = []
+    sports = Sport.objects.all()
+    sports_listing = {}
     for sport in sports:
-      sports_listing.append(sport['sport'])
+        sport_name = sport.sport
+        countrys = Country.objects.all()
+        sports_listing[sport_name] = {}
+        for country in countrys:
+            country_name = country.country
+            sports_listing[sport_name][country_name] = Competition.objects.filter(sport=sport,country=country)   
     return sports_listing
 
 def db_change_gamestate(game_id,state):
