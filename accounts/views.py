@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from .models import *
-from game.models import Game, Participant
+from game.models import Participant
 from gamble.models import Bet_game,Odd,Bet,Bet_status
 
 
@@ -346,15 +346,29 @@ def history_bets(request):
 
 def favorites(request):
     session_id = request.COOKIES.get("session")
-
-
-
     if session_id:
         session = Session.objects.get(session_id=session_id)
 
+        if request.method == 'POST':
+            fav_name = request.POST['fav']
+            type = request.POST['type']
+
+            if type=="Sport":
+                if FavoriteSports.objects.filter(sport=fav_name,user=session.user_in_session).exists():
+                    fav = FavoriteSports.objects.get(sport=fav_name,user=session.user_in_session)
+                    fav.delete()
+            elif type=="Competition":
+                if FavoriteCompetitions.objects.filter(competition=fav_name,user=session.user_in_session).exists():
+                    fav = FavoriteCompetitions.objects.get(competition=fav_name,user=session.user_in_session)
+                    fav.delete()
+            elif type=="Participant":
+                if FavoriteParticipants.objects.filter(participant=fav_name,user=session.user_in_session).exists():
+                    fav = FavoriteParticipants.objects.get(participant=fav_name,user=session.user_in_session)
+                    fav.delete()
+
         favs_sports = FavoriteSports.objects.filter(user=session.user_in_session)
         favs_comps = FavoriteCompetitions.objects.filter(user=session.user_in_session)
-        favs_participantes = FavoriteParticipant.objects.filter(user=session.user_in_session)
+        favs_participantes = FavoriteParticipants.objects.filter(user=session.user_in_session)
 
         favs_teams = []
         favs_players = []

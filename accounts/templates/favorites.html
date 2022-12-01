@@ -61,6 +61,14 @@
           {%for fav in favs_sports%}
           <tr>
             <td>{{fav}}</td>
+            <td>
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="fav" value="{{fav}}">
+                  <input type="hidden" name="type" value="Sport">
+                  <button type="submit">eliminar</button>
+                </form>
+            </td>
           </tr>
           {%endfor%}
         </table>
@@ -71,6 +79,14 @@
           {%for fav in favs_comps%}
           <tr>
             <td>{{fav}}</td>
+            <td>
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="fav" value="{{fav}}">
+                  <input type="hidden" name="type" value="Competition">
+                  <button type="submit">eliminar</button>
+                </form>
+            </td>
           </tr>
           {%endfor%}
         </table>
@@ -81,6 +97,14 @@
           {%for fav in favs_teams%}
           <tr>
             <td>{{fav}}</td>
+            <td>
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="fav" value="{{fav}}">
+                  <input type="hidden" name="type" value="Participant">
+                  <button type="submit">eliminar</button>
+                </form>
+            </td>
           </tr>
           {%endfor%}
         </table>
@@ -91,6 +115,14 @@
           {%for fav in favs_players%}
           <tr>
             <td>{{fav}}</td>
+            <td>
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="fav" value="{{fav}}">
+                  <input type="hidden" name="type" value="Participant">
+                  <button type="submit">eliminar</button>
+                </form>
+            </td>
           </tr>
           {%endfor%}
         </table>
