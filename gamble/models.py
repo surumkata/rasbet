@@ -44,22 +44,16 @@ class Bet(models.Model):
 
 
     # Arguments : Total amount of the bet , Array od dictionaries {game_id,odd_type,amount}
-    def place_simple(user_obj,gamesBet):
-        # Cada jogo do dicionário é uma simples
-        for dict in gamesBet:
-            print(dict)
-            bet_obj = Bet.create(type='simple',amount=float(dict['amount']))
-            game_obj = Game.objects.get(game_id=dict['game_id'])
-            odd_type_obj = Odd_type.objects.get(type=dict['bet_outcome'])
-            odd_obj = Odd.objects.get(game=game_obj,odd_type=odd_type_obj)
-            odd_multiplier = odd_obj.odd
-            odd_multiplier = Bet.apply_promotion(game=game_obj,odd=odd_multiplier,amount=float(dict['amount']))
-            Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_multiplier)
-            # Add to user History
-            History.create(bet=bet_obj,user=user_obj)
+    def place_simple(user_obj,gameBet):
+        bet_obj = Bet.create(type='simple',amount=float(gameBet['amount']))
+        game_obj = Game.objects.get(game_id=gameBet['game_id'])
+        odd_type_obj = Odd_type.objects.get(type=gameBet['bet_outcome'])
+        odd_obj = Odd.objects.get(game=game_obj,odd_type=odd_type_obj)
+        Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_obj.odd)
+        # Add to user History
+        History.create(bet=bet_obj,user=user_obj)
 
-   
-        
+
     # Arguments : Total amount of the bet , Array od dictionaries {game_id,odd_type}
     def place_multiple(user_obj,total_amount,gamesBet):
         bet_obj = Bet.create(type='multiple',amount=total_amount)
