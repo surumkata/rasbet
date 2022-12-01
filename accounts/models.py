@@ -2,6 +2,8 @@ from django.utils import timezone
 from django.db import models
 from django import forms
 from django.utils.crypto import get_random_string
+from config.storage import OverwriteStorage
+
 
 # Default User model
 class User(models.Model):
@@ -199,9 +201,9 @@ class Promotion(models.Model):
     # Minimum value to use for the promotion to be aplicable
     value_restriction = models.FloatField()
     # Mail template path
-    mail_template_path = models.FileField(upload_to='promotions/template')
+    mail_template_path = models.FileField(upload_to='promotions/template', storage=OverwriteStorage())
     # Image to use on the website
-    image_path = models.ImageField(upload_to='promotions/images')
+    image_path = models.ImageField(upload_to='promotions/images', storage=OverwriteStorage())
     # Limit to use the promotion
     limit_date = models.DateTimeField(null=False)
 
