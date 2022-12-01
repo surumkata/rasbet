@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string
 from config.storage import OverwriteStorage
 import smtplib, ssl
 from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart 
+from email.mime.multipart import MIMEMultipart
 
 # Default User model
 class User(models.Model):
@@ -43,7 +43,7 @@ class User(models.Model):
         else: return False
 
     def withdraw_bet(self,amount):
-        if(self.has_sufficient_balance(amount)):
+        if(amount >= 0.10 and self.has_sufficient_balance(amount)):
             self.balance -= amount
             return True
         else: return False
@@ -176,8 +176,10 @@ class Transation(models.Model):
             # Updates user balance
             if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code' or type=="bet_cancel":
                 user.deposit(float(amount))
-            elif type=="withdraw" or type=='bet':
+            elif type=="withdraw":
                 user.withdraw(float(amount))
+            elif type=="bet":
+                user.withdraw_bet(float(amount))
             user.save()
             return True
 
