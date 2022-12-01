@@ -262,6 +262,23 @@ class Deposit_Promotion(models.Model):
 
         return False
 
+class FavoriteSports(models.Model):
+    id = models.AutoField(primary_key=True)
+    sport = models.ForeignKey("game.Sport",on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+class FavoriteCompetitions(models.Model):
+    id = models.AutoField(primary_key=True)
+    competition = models.ForeignKey("game.Competition",on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+class FavoriteParticipant(models.Model):
+    id = models.AutoField(primary_key=True)
+    participant = models.ForeignKey("game.Participant",on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+
+
 #Sends promotion emails to users
 class SendingEmail:
 
@@ -292,3 +309,4 @@ class SendingEmail:
             service.sendmail(self.sender_mail, email, mail.as_string())
 
         service.quit()
+
