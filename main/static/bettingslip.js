@@ -173,7 +173,6 @@ function storage_change_simple(){
     order_array.push([game_id,odd_type])
   }
   sessionStorage.setItem("order",JSON.stringify(order_array))
-  console.log(JSON.parse(sessionStorage.getItem("order")))
 }
 
 // Change every game in storage has multiple
