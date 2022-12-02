@@ -311,6 +311,8 @@ def history_bets(request):
                     "odd": bet_game.odd,
                     "home": bet_game.odd_id.game.home,
                     "away": bet_game.odd_id.game.away,
+                    "home_score" : bet_game.odd_id.game.home_score,
+                    "away_score" : bet_game.odd_id.game.away_score,
                     "bet": bet_game.odd_id.odd_type.type,
                     "status": entry.bet.status.status,
                     "date": str(entry.bet.datetime)
@@ -323,6 +325,8 @@ def history_bets(request):
                         "odd": bet_game.odd,
                         "home": bet_game.odd_id.game.home,
                         "away": bet_game.odd_id.game.away,
+                        "home_score" : bet_game.odd_id.game.home_score,
+                        "away_score" : bet_game.odd_id.game.away_score,
                         "bet": bet_game.odd_id.odd_type.type,
                         "status": bet_game.status.status
                     })

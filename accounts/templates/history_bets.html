@@ -64,14 +64,14 @@
         <td>{{b.type}}</td>
         <td>{{b.amount}}</td>
         <td>{{b.odd}}</td>
-        <td>[{{b.odd}}|{{b.home}}-{{b.away}}|{{b.bet}}]</td>
+        <td>[{{b.odd}}|{{b.home}}{% if g.status == "open" %} - {%else%} {{b.home_score}} - {{b.away_score}} {% endif %}{{b.away}}|{{b.bet}}]</td>
         {% else %}
         <td>{{b.type}}</td>
         <td>{{b.amount}}</td>
         <td>{{b.odd}}</td>
         <td>
           {% for g in b.games %}
-          [{{g.odd}}|{{g.home}}-{{g.away}}|{{g.bet}}|{{g.status}}]
+          [{{g.odd}}|{{g.home}}{% if g.status == "open" %} - {%else%} {{g.home_score}} - {{g.away_score}} {% endif %}{{g.away}}|{{g.bet}}|{{g.status}}]
           {%endfor%}
         </td>
         {% endif %}
