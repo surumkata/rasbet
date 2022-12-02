@@ -530,4 +530,7 @@ window.onload = (event) =>{
     }else{
       sessionStorage.setItem("order",JSON.stringify([]))
     }
-};
+}
+
+
+

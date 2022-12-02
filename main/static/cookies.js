@@ -73,3 +73,29 @@ function post_slip(){
 
 
 }
+
+function update_fav(elem){
+  favorited = elem.checked
+  type = elem.name.split(':')[0]
+  favorite = elem.name.split(':')[1]
+  console.log(favorited)
+  console.log(type)
+  console.log(favorite)
+  $.ajax({
+    type: 'POST',
+    url: '/accounts/update_favorite/',
+    dataType: "json",
+    headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": getCookie("csrftoken"),
+   },
+   data: JSON.stringify({'favorited' : favorited,'type':type,'favorite':favorite}),
+   success: function( data, status, xhttp) {
+            if(data.status==0){
+                window.location.reload();
+           }else{
+                window.location.assign('/')
+          }
+  },
+})
+};

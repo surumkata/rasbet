@@ -68,31 +68,36 @@
 
       {%endfor%}
       <h2>Desportos</h2>
-      {% for sport, countrys in sports_info.items %}   
+      {% for s, countrys in sports_info.items %}   
       <p>
           <a class="" data-toggle="collapse"
-                  href="#{{sport}}" role="button"
-                  aria-expanded="false" aria-controls="{{sport}}">
-              {{sport}}
+                  href="#{{s}}" role="button"
+                  aria-expanded="false" aria-controls="{{s}}">
+              {{s}}
           </a>
-          <input type="checkbox" class="" name="{{sport}}">fav</input>
+          {% if logged %}
+          <input type="checkbox"  {%if s in favorites_info.sport %} checked {%endif%} class="" name="sport:{{s}}" onclick='update_fav(this);'>fav</input>
+          {%endif%}
       </p>
-      <div class="collapse" id="{{sport}}">
+      <div class="collapse" id="{{s}}">
           <div>
-            <button name="sport" type="submit" value="{{sport}}" data-checked="false" >Toda a oferta</button>
+            <button name="sport" type="submit" value="{{s}}" data-checked="false" >Toda a oferta</button>
           </div>
           {% for country, competitions in countrys.items %} 
           <p>
             <a class="" data-toggle="collapse"
-                  href="#{{sport}}{{country}}" role="button"
-                  aria-expanded="false" aria-controls="{{sport}}{{country}}">
+                  href="#{{s}}{{country}}" role="button"
+                  aria-expanded="false" aria-controls="{{s}}{{country}}">
               {{country}}
             </a>
           </p>
-          <div class="collapse" id="{{sport}}{{country}}">
-            {% for competition in competitions %}
+          <div class="collapse" id="{{s}}{{country}}">
+            {% for c in competitions %}
             <div>
-              <button name="competition" type="submit" value="{{competition}}" data-checked="false" >{{competition}}</button>
+              <button name="competition" type="submit" value="{{c}}" data-checked="false" >{{c}}</button>
+              {% if logged %}
+              <input type="checkbox"  {%if c in favorites_info.competition %} checked {%endif%} class="" name="competition:{{c}}" onclick='update_fav(this);'>fav</input>
+              {%endif%}
             </div>
             {% endfor %}
           </div>
@@ -185,3 +190,4 @@
   <script src="{% static 'cookies.js' %}"></script>
  </body>
  </html>
+
