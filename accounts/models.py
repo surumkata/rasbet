@@ -6,7 +6,7 @@ from config.storage import OverwriteStorage
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from game.models import Competition
+from game.models import Competition, Participant, Sport
 
 # Default User model
 class User(models.Model):
@@ -69,6 +69,35 @@ class User(models.Model):
                 self.save()
                 return 0
         else: return 2
+
+    #updates a user favourite, creating or deleting it
+    def update_favorite(self,type,favorite):
+        try:
+            print(type)
+            print(favorite)
+            if type == 'sport':
+                sport = Sport.objects.get(sport=favorite)
+                if FavoriteSports.objects.filter(user=self,sport=sport).exists():
+                    FavoriteSports.objects.get(user=self,sport=sport).delete()
+                else: 
+                    FavoriteSports.objects.create(user=self,sport=sport)
+            elif type == 'competition':
+                competition = Competition.objects.get(competition=favorite)
+                if FavoriteCompetitions.objects.filter(user=self,competition=competition).exists():
+                    FavoriteCompetitions.objects.get(user=self,competition=competition).delete()
+                else: 
+                    FavoriteCompetitions.objects.create(user=self,competition=competition)
+            elif type == 'participant':
+                participant = Participant.objects.get(participant=favorite)
+                if FavoriteParticipants.objects.filter(user=self,participant=participant).exists():
+                    FavoriteParticipants.objects.get(user=self,participant=participant).delete()
+                else: 
+                    FavoriteParticipants.objects.create(user=self,participant=participant)
+        except Exception as e:
+            print(e)
+
+        
+
 
     def change_password(self,password,new_password,new_password2):
         if(self.password == password):
@@ -322,7 +351,7 @@ class SendingEmail:
 #list of a users favorites
 def favorites_list(user):
     fav_list = {}
-    fav_list['sport'] = FavoriteSports.objects.filter(user=user)
-    fav_list['competition'] = FavoriteCompetitions.objects.filter(user=user)
-    fav_list['participant'] = FavoriteParticipants.objects.filter(user=user)
+    fav_list['sport'] = [str(k) for k in FavoriteSports.objects.filter(user=user)]
+    fav_list['competition'] = [str(k) for k in FavoriteCompetitions.objects.filter(user=user)]
+    fav_list['participant'] = [str(k) for k in FavoriteParticipants.objects.filter(user=user)]
     return fav_list

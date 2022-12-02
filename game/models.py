@@ -244,7 +244,7 @@ def sports_list():
         sports_listing[sport_name] = {}
         for country in countrys:
             country_name = country.country
-            sports_listing[sport_name][country_name] = Competition.objects.filter(sport=sport,country=country)   
+            sports_listing[sport_name][country_name] = [str(k) for k in Competition.objects.filter(sport=sport,country=country)] 
     return sports_listing
 
 
