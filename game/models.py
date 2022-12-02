@@ -141,6 +141,7 @@ class Odd(models.Model):
     odd_type = models.ForeignKey(Odd_type, on_delete=models.CASCADE)
     odd = models.FloatField()
     happened = models.BooleanField(default=False)
+    number_betters = models.IntegerField(default=0)
 
     @classmethod
     # Create odd to the outcome home team wins
@@ -163,6 +164,9 @@ class Odd(models.Model):
     def create(self,game_id,odd_type,odd):
         game = Game.objects.get(id=game_id)
         Odd.objects.create(game=game,odd_type=odd_type,odd=odd)
+
+    def incr_number_better(self):
+        self.number_betters+=1
 
 
     #change odd value
@@ -217,15 +221,25 @@ def open_game_details(game:dict):
         state = str(game.state)
         game_dict = {}
         game_dict["game"] = game
+        total_betters = 0
         for odd_obj in odds:
             type =  getattr(odd_obj, "odd_type")
             odd = getattr(odd_obj, "odd")
+            number_betters = getattr(odd_obj,"number_betters")
+            total_betters += number_betters
             if str(type) == "home":
                 game_dict["home_odd"] = odd
+                game_dict["home_nb"] = number_betters
             elif str(type) == "away":
                 game_dict["away_odd"] = odd
+                game_dict["away_nb"] = number_betters
             elif str(type) == "draw":
                 game_dict["draw_odd"] = odd
+                game_dict["draw_nb"] = number_betters
+        if total_betters > 0:
+            game_dict["home_nb"] = float("{:.2f}".format(game_dict["home_nb"] / total_betters * 100))
+            game_dict["draw_nb"] = float("{:.2f}".format(game_dict["draw_nb"] / total_betters * 100))
+            game_dict["away_nb"] = float("{:.2f}".format(game_dict["away_nb"] / total_betters * 100))
         game_dict["sport"] = sport
         game_dict["country"] = country
         game_dict["competition"] = competition

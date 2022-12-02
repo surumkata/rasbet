@@ -114,7 +114,7 @@ class gameAdmin(admin.ModelAdmin):
         bet.save()
 
 class oddAdmin(admin.ModelAdmin):
-  list_display = ['game','odd_type','odd','happened']
+  list_display = ['game','odd_type','odd','happened','number_betters']
 
 admin.site.register(Sport)
 admin.site.register(State)

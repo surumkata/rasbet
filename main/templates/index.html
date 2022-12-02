@@ -136,12 +136,15 @@
           <div class="odds">
             <div class="odd">
               <button id="{{g.game.game_id}};home" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" onclick="button_handler(this);" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
+              <p>{{g.home_nb}}%</p>
             </div>
             <div class="odd">
               <button id="{{g.game.game_id}};draw" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" onclick="button_handler(this);" >Draw<br><span>{{g.draw_odd}}</span></button>
+              <p>{{g.draw_nb}}%</p>
             </div>
             <div class="odd">
               <button id="{{g.game.game_id}};away" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" onclick="button_handler(this);">{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
+              <p>{{g.away_nb}}%</p>
             </div>
           </div>
         </div>

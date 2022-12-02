@@ -49,6 +49,8 @@ class Bet(models.Model):
         game_obj = Game.objects.get(game_id=gameBet['game_id'])
         odd_type_obj = Odd_type.objects.get(type=gameBet['bet_outcome'])
         odd_obj = Odd.objects.get(game=game_obj,odd_type=odd_type_obj)
+        odd_obj.incr_number_better()
+        odd_obj.save()
         Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_obj.odd)
         # Add to user History
         History.create(bet=bet_obj,user=user_obj)
@@ -64,6 +66,8 @@ class Bet(models.Model):
             game_obj = Game.objects.get(game_id=dict['game_id'])
             odd_type_obj = Odd_type.objects.get(type=dict['bet_outcome'])
             odd_obj = Odd.objects.get(game=game_obj,odd_type=odd_type_obj)
+            odd_obj.incr_number_better()
+            odd_obj.save()
             odd_multiplier = odd_obj.odd
             odd_multiplier = Bet.apply_promotion(game=game_obj,odd=odd_multiplier,amount=total_amount)
             Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_multiplier)
