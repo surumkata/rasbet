@@ -3,9 +3,11 @@ from django.db import models
 from django import forms
 from django.utils.crypto import get_random_string
 from config.storage import OverwriteStorage
+from email.mime.image import MIMEImage
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import re
 from game.models import Competition
 
 # Default User model
@@ -288,16 +290,38 @@ class FavoriteParticipants(models.Model):
 
 
 
+
 #Sends promotion emails to users
 class SendingEmail:
 
     #Set instance variables
-    def __init__(self, template):
+    def __init__(self, template, subject):
         self.sender_mail = "rasbetpl32@gmail.com"
         self.password = "zmrbnzoaetikoygo"
         self.smtp_server_domain_name = "smtp.gmail.com"
         self.port = 465
-        self.template = "media/" + str(template)
+        self.subject = subject
+        self.template = str(template)
+
+    def write_user_in_template(self, username, template):
+        html_file = open(template,'r').read()
+        return re.sub("#User", username, html_file)
+
+    def write_user_and_bet_in_template(self, username, template, bet_result):
+        s1 = template.replace("#User", username)
+        return s1.replace("#bet_result", bet_result)
+
+    #Update template with the result of a game
+    @classmethod
+    def write_result_in_template(self, template, sport, home, home_score, away, away_score):
+        html_file = open(template,'r').read()
+        rep = {"#sport": sport, "#home": home, "#score_home":str(home_score), "#away":away, "#score_away":str(away_score)} 
+
+        # use these three lines to do the replacement
+        rep = dict((re.escape(k), v) for k, v in rep.items()) 
+        #Python 3 renamed dict.iteritems to dict.items so use rep.items() for latest versions
+        pattern = re.compile("|".join(rep.keys()))
+        return pattern.sub(lambda m: rep[re.escape(m.group(0))], html_file)
 
     #Send email
     def send(self, emails):
@@ -305,17 +329,63 @@ class SendingEmail:
         service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=ssl_context)
         service.login(self.sender_mail, self.password)
 
-        for email in emails:
-            mail = MIMEMultipart('mixed')
-            mail['Subject'] = "Promoção RasBet"
+        for (name,email) in emails:
+            mail = MIMEMultipart('related')
+            mail['Subject'] = self.subject
             mail['From'] = self.sender_mail
             mail['To'] = email
+            html = self.write_user_in_template(name, self.template)
 
-            with open(self.template) as html_file:
-                html_content = MIMEText(html_file.read(), 'html')
-                mail.attach(html_content)
+            msgAlternative = MIMEMultipart('alternative')
+            mail.attach(msgAlternative)
+            
+            html_content = MIMEText(html, 'html')
+            msgAlternative.attach(html_content)
+            # This example assumes the image is in the current directory
+            cid = re.compile(r'"cid:([\w\.\/]+)"')
+            images = cid.findall(html)
+            
+            for image in images:
+                fp = open(image, 'rb')
+                msgImage = MIMEImage(fp.read())
+                fp.close()
+                # Define the image's ID as referenced above
+                msgImage.add_header('Content-ID', f'<{image}>')
+                mail.attach(msgImage)
 
             service.sendmail(self.sender_mail, email, mail.as_string())
+
+        service.quit()
+
+
+    def send_notification(self, name, email, bet_result):
+        ssl_context = ssl.create_default_context()
+        service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=ssl_context)
+        service.login(self.sender_mail, self.password)
+
+        mail = MIMEMultipart('related')
+        mail['Subject'] = self.subject
+        mail['From'] = self.sender_mail
+        mail['To'] = email
+        html = self.write_user_and_bet_in_template(name, self.template, bet_result)
+
+        msgAlternative = MIMEMultipart('alternative')
+        mail.attach(msgAlternative)
+        
+        html_content = MIMEText(html, 'html')
+        msgAlternative.attach(html_content)
+        # This example assumes the image is in the current directory
+        cid = re.compile(r'"cid:([\w\.\/]+)"')
+        images = cid.findall(html)
+        
+        for image in images:
+            fp = open(image, 'rb')
+            msgImage = MIMEImage(fp.read())
+            fp.close()
+            # Define the image's ID as referenced above
+            msgImage.add_header('Content-ID', f'<{image}>')
+            mail.attach(msgImage)
+        service.sendmail(self.sender_mail, email, mail.as_string())
 
         service.quit()
 

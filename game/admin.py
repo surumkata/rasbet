@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from gamble.models import *
 from .models import *
+from accounts.models import SendingEmail
 
 
 class gameAdmin(admin.ModelAdmin):
@@ -26,6 +27,9 @@ class gameAdmin(admin.ModelAdmin):
     #updating odds that happened
     for game_id in games_id:
       g = Game.objects.get(game_id=game_id)
+
+      template_notif = SendingEmail.write_result_in_template("game/static/template_notification.html", str(g.sport), str(g.home), g.home_score, str(g.away), g.away_score)
+      
       #mudar resultado da odd
       result = g.tabulate_winner()
       odd_type_result = Odd_type.objects.get(type=result)
@@ -61,10 +65,18 @@ class gameAdmin(admin.ModelAdmin):
         bet.turn_lost()
         bet.save()
 
+      email = SendingEmail(template_notif, "RasBet Game Notification")
       for main_bet in main_bets_list:
         bet = Bet.objects.get(betID=main_bet)
-        bet.check_status()
+        bet_changed = bet.check_status()
         bet.save() 
+        if(bet_changed):
+          status = bet.status
+          user = History.objects.get(bet=bet).user
+          email.send_notification(user.first_name, user.email, str(status))
+      
+
+
   
   @admin.action(description='Mark selected games as suspended')
   def turn_suspend(self,request, queryset):

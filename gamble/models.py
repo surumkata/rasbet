@@ -86,6 +86,8 @@ class Bet(models.Model):
 
     #turn its status, if the case, to won or lost
     def check_status(self):
+        if(self.status == "lost"):
+            return False
         lost = False
         open = False
         lock = False
@@ -102,10 +104,13 @@ class Bet(models.Model):
 
         if lost:
             self.turn_lost()
+            return True
         elif lock:
             self.turn_lock()
+            return False
         elif not open:
             self.turn_won()
+            return True
 
 
 
