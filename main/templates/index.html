@@ -105,13 +105,24 @@
       </div>
       {% endfor %}
       </form>
+      <form method='get' action="/game/filter">
+        <div>
+          {% if get.sport %} <input type="hidden" name="sport" value="{{get.sport}}"> {%endif%}
+          {% if get.competition %}<input type="hidden" name="competition" value="{{get.competition}}">{%endif%}
+          {% if get.participant %}<input type="hidden" name="participant" value="{{get.participant}}">{%endif%}
+          <button name="order_by_nb" type="submit" value="True">ordenar por numero de apostas</button>
+        </div>
+      </form>
     </div>
     <div class="display-center">
-      {% for g in games_info%}
+      
+      {% for date, games in games_info.items%}
+      <p>{{date}}</p>
+      {% for g in games%}
       <div class="card-event">
         <div class="event">
           <div class="event_path">
-            <p><span>{{g.sport}} - {{g.country}} - {{g.competition}}<span></p>
+            <p><span>{{g.game.sport}} - {{g.game.country}} - {{g.game.competition}}<span></p>
           </div>
           <div class="event_info">
             <div class="home">
@@ -130,6 +141,7 @@
             <div class="away">
               <p><b>{{g.game.away}}</b></p>
             </div>
+            <p>número de apostas: {{g.nb}}</p>
           </div>
         </div>
         <div class="market_odds">
@@ -149,6 +161,7 @@
           </div>
         </div>
       </div>
+      {% endfor %}
       {% endfor %}
     </div>
     <div class="display-right">

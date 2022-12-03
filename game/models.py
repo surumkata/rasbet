@@ -4,9 +4,6 @@ from datetime import datetime
 import asyncio
 from asgiref.sync import sync_to_async
 
-
-
-
 class Sport(models.Model):
     sport = models.CharField(primary_key=True,max_length=50,null=False)
     has_draw = models.BooleanField()
@@ -183,7 +180,24 @@ class Odd(models.Model):
 
 
 
+def detail_games(games,ordered_by_nb):
+    games_dict = {}
+    datetimes = set()
+    for g in games:
+        details = open_game_details(g)
+        datetime = str(g.datetime.date())
+        datetimes.add(datetime)
+        if details!={}:
+            if datetime in games_dict:
+                games_dict[datetime].append(details)
+            else: 
+                games_dict[datetime] = [details]
 
+    for datetime in datetimes:
+        if(ordered_by_nb): games_dict[datetime].sort(key=take_number_betters,reverse=True)
+        else: games_dict[datetime].sort(key=take_datetime)
+
+    return games_dict
 
 
 def game_details(game:dict):
@@ -210,15 +224,11 @@ def game_details(game:dict):
     game_dict["state"] = state
     return game_dict
 
-def open_game_details(game:dict):
-    odds = Odd.objects.filter(game_id=game['game_id'])
-    game = Game.objects.get(game_id=game['game_id'])
+def open_game_details(game):
+    odds = Odd.objects.filter(game_id=game.game_id)
+    game = Game.objects.get(game_id=game.game_id)
 
     if game.state.str() == "open":
-        sport = str(game.sport)
-        country = str(game.country)
-        competition = str(game.competition)
-        state = str(game.state)
         game_dict = {}
         game_dict["game"] = game
         total_betters = 0
@@ -240,13 +250,16 @@ def open_game_details(game:dict):
             game_dict["home_nb"] = float("{:.2f}".format(game_dict["home_nb"] / total_betters * 100))
             game_dict["draw_nb"] = float("{:.2f}".format(game_dict["draw_nb"] / total_betters * 100))
             game_dict["away_nb"] = float("{:.2f}".format(game_dict["away_nb"] / total_betters * 100))
-        game_dict["sport"] = sport
-        game_dict["country"] = country
-        game_dict["competition"] = competition
-        game_dict["state"] = state
+        game_dict["nb"] = total_betters
         return game_dict
     else:
         return {}
+
+def take_number_betters(elem):
+    return elem["nb"]
+
+def take_datetime(elem):
+    return elem["game"].datetime
 
 #list of the sports, countries that have it and respective competitions
 def sports_list():

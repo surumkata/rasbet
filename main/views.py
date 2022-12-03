@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from accounts.models import *
 from game.models import *
 import requests
+from collections import OrderedDict
 
 
 # Create your views here
@@ -9,21 +10,20 @@ def home(request):
 
     cookie = request.COOKIES.get("session")
     # get all games
-    games = Game.objects.all().values()
+    ordered_by_nb = False
 
-    main_listing = []
-    # Group each game with the odds in a dictionary
-    for g in games:
-        details = open_game_details(g)
-        if details!={}:
-            main_listing.append(details)
+    games = Game.objects.all()
+    games = detail_games(games,ordered_by_nb)
+    games = OrderedDict(sorted(games.items()))
+
+    # ORDERNAR POR MAIS APOSTADOS main_listing.sort(key=takeNB,reverse=True)
 
     sports_listing = sports_list()
     print(sports_listing)
 
     context = {
                     "logged" : False,
-                    "games_info" : main_listing,
+                    "games_info" : games,
                     "sports_info" : sports_listing,
                 }
     response = render(request, 'index.html',context)
@@ -37,7 +37,7 @@ def home(request):
                     "id" : session.user_in_session.userID,
                     "fname" : session.user_in_session.first_name,
                     "balance" : session.user_in_session.balance,
-                    "games_info" : main_listing,
+                    "games_info" : games,
                     "sports_info" : sports_listing,
                     "favorites_info" : fav_list,
             }
@@ -71,7 +71,7 @@ def home(request):
         if cookie:
             context = {
                     "logged" : False,
-                    "games_info" : main_listing,
+                    "games_info" : games,
                     "sports_info" : sports_listing,
                 }
             response = render(request, 'index.html',context)

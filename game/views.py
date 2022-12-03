@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -14,16 +15,22 @@ def filter(request):
         sport = request.GET.get('sport')
         competition = request.GET.get('competition')
         participant = request.GET.get('participant')
-        if sport or competition or participant:
-            if sport: games = Game.objects.filter(sport=sport).values()
-            if competition: games = Game.objects.filter(competition=competition).values()
-            if participant: 
-                games = Game.objects.filter(home=participant).values() | Game.objects.filter(away=participant).values()
-            games_listing = []
-            for game in games:
-                details = open_game_details(game)
-                if details!={}:
-                    games_listing.append(game_details(game))
+        order_by_nb = request.GET.get('order_by_nb')
+        get = {
+                "sport" : sport,
+                "competition" : competition,
+                "participant" : participant
+             }
+        if sport or competition or participant or order_by_nb:
+            if sport: games = Game.objects.filter(sport=sport)
+            elif competition: games = Game.objects.filter(competition=competition)
+            elif participant: 
+                games = Game.objects.filter(home=participant) | Game.objects.filter(away=participant)
+            else: games = Game.objects.all()
+            order = False
+            if(order_by_nb): order = True
+            games_listing = detail_games(games,order)
+            games_listing = OrderedDict(sorted(games_listing.items()))
             sports_listing = sports_list()
 
             cookie = request.COOKIES.get("session")
@@ -32,6 +39,7 @@ def filter(request):
                             "logged": False,
                             "games_info": games_listing,
                             "sports_info": sports_listing,
+                            "get" : get
                         }
             try:
 
