@@ -16,9 +16,11 @@
 <body>
   <div class="header">
     <div class="header-left">
-      <a href="/" ><div class="tab"><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></div></a>
-      <div class="tab"><a href="/accounts/profile">{{ fname }}</a></div>
-      <a href="/accounts/history_bets">Apostas</a>
+      <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
+      <div class="tab"><a href="/">Desporto</a></div>
+      <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
+      <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
+      <div class="tab_balance">{{ balance }}€<a href="/accounts/deposit">+</a></div>
     </div>
     <div class="header-right">
       <div class="tab"><a href="/accounts/logout">Logout</a></div>

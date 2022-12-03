@@ -163,7 +163,14 @@ def withdraw(request):
     session_id = request.COOKIES.get("session")
 
     if session_id:
-        response = render(request, "withdraw.html")
+        u = Session.objects.get(session_id=session_id)
+        context = {
+            "balance": u.user_in_session.balance,
+            "logged": True,
+            "id": u.user_in_session.userID,
+            "fname": u.user_in_session.first_name,
+        }
+        response = render(request, "withdraw.html",context)
         if request.method == 'POST':
             amount = request.POST.get('amount', False)
             u = Session.objects.get(session_id=session_id)
@@ -269,6 +276,7 @@ def history_transactions(request):
         "logged": True,
         "id": session.user_in_session.userID,
         "fname": session.user_in_session.first_name,
+        "balance": session.user_in_session.balance,
         "transactions": transactions,
         "statistics": statistics
     }
@@ -521,43 +529,30 @@ def profile(request):
         if cookie:
             session = Session.objects.get(session_id=cookie)
             user_id = session.user_in_session.userID
-            if Specialist.is_specialist(user_id):
-                context = {
-                    "logged": True,
-                    "specialist": True,
-                    "id": user_id,
-                    "fname": session.user_in_session.first_name,
-                    "msg": msg
-                }
-            else:
-                user = {
-                    "email": session.user_in_session.email,
-                    "birthday": str(session.user_in_session.birthday),
-                    "first_name": session.user_in_session.first_name,
-                    "last_name": session.user_in_session.last_name,
-                }
-                context = {
-                    "logged": True,
-                    "id": user_id,
-                    "fname": session.user_in_session.first_name,
-                    "balance": session.user_in_session.balance,
-                    "user": user,
-                    "msg": msg
-                }
+            user = {
+                "email": session.user_in_session.email,
+                "birthday": str(session.user_in_session.birthday),
+                "first_name": session.user_in_session.first_name,
+                "last_name": session.user_in_session.last_name,
+            }
+            context = {
+                "logged": True,
+                "id": user_id,
+                "fname": session.user_in_session.first_name,
+                "balance": session.user_in_session.balance,
+                "user": user,
+                "msg": msg
+            }
             response = render(request, 'profile.html', context)
     except Exception as e:
         print('error: ' + str(e))
-        if cookie:
-            context = {
-                "logged": False,
-            }
-            response = render(request, 'index.html', context)
-            response.delete_cookie('session')
+        response = render(request, 'index.html', context)
+        response.delete_cookie('session')
     return response
 
 
 def promotions(request):
-
+    cookie = request.COOKIES.get("session")
     promotions = Promotion.objects.all()
     context = {
         "logged": False,
@@ -567,5 +562,18 @@ def promotions(request):
         promotion_list.append(promotion.image_path)
 
     context["promotions"] = promotion_list
+    try:
+        response = render(request, 'index.html', context)
+        if cookie:
+            session = Session.objects.get(session_id=cookie)
+            user_id = session.user_in_session.userID
+            context["logged"] = True
+            context["id"] = user_id
+            context["fname"] = session.user_in_session.first_name
+            context["balance"] = session.user_in_session.balance
+
+    except Exception as e:
+        print('error: ' + str(e))
+
     response = render(request, 'promotions.html', context)
     return response
