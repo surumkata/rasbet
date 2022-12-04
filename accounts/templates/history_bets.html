@@ -7,9 +7,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'history.css' %}"/>
 {% csrf_token %}
 <title> Home Page </title>
 </head>
@@ -21,46 +20,81 @@
       <div class="tab"><a href="/">Desporto</a></div>
       <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
       <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
-      <div class="tab_balance">{{ balance }}€<a href="/accounts/deposit">+</a></div>
+      <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
     </div>
     <div class="header-right">
       <div class="tab"><a href="/accounts/logout">Logout</a></div>
     </div>
   </div>
-    <div><p>BETS</p></div>
-    <table>
-      {%for b in bets%}
-      <tr>
-        <td>{{b.id}}</td>
-        {% if b.type == "simple" %}
-        <td>{{b.type}}</td>
-        <td>{{b.amount}}</td>
-        <td>{{b.odd}}</td>
-        <td>[{{b.odd}}|{{b.home}}{% if g.status == "open" %} - {%else%} {{b.home_score}} - {{b.away_score}} {% endif %}{{b.away}}|{{b.bet}}]</td>
-        {% else %}
-        <td>{{b.type}}</td>
-        <td>{{b.amount}}</td>
-        <td>{{b.odd}}</td>
-        <td>
-          {% for g in b.games %}
-          [{{g.odd}}|{{g.home}}{% if g.status == "open" %} - {%else%} {{g.home_score}} - {{g.away_score}} {% endif %}{{g.away}}|{{g.bet}}|{{g.status}}]
-          {%endfor%}
-        </td>
-        {% endif %}
-        <td>{{b.date}}</td>
-        {% if b.status == "open" %}
-        <td>
-          <form action="" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="bet_id" value="{{b.id}}">
-            <button type="submit">cancelar</button>
-          </form>
-        </td>
-        {% else %}
-        <td>{{b.status}}</td>
-        {% endif %}
-      </tr>
-      {%endfor%}
-    </table>
+
+  <div class="container">
+    <div class="history_bets">
+      <div><h2>Bets History</h2></div>
+      <table>
+        <tr>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Odd</th>
+          <th>Bet(s)</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+        {%for b in bets%}
+        <tr>
+          {% if b.type == "simple" %}
+          <td>Simple</td>
+          <td>{{b.amount|floatformat:2}} €</td>
+          <td>{{b.odd|floatformat:2}}</td>
+
+          <td>
+            <div class="game">
+              <div class="game-top">
+                <div class="game-top-item">{{b.odd}}</div>
+                <div class="game-top-item">{{b.bet}}</div>
+                <div class="game-top-item">{{b.status}}</div>
+              </div>
+              <div class="game-bottom">
+                <div>{{b.home}}{% if g.status == "Open" %} - {%else%} {{b.home_score}} - {{b.away_score}} {% endif %}{{b.away}}</div>
+              </div>
+            </div>
+          </td>
+
+          {% else %}
+          <td>Multiple</td>
+          <td>{{b.amount|floatformat:2}} €</td>
+          <td>{{b.odd|floatformat:2}}</td>
+          <td>
+            {% for g in b.games %}
+            <div class="game">
+              <div class="game-top">
+                <div class="game-top-item">{{g.odd}}</div>
+                <div class="game-top-item">{{g.bet}}</div>
+                <div class="game-top-item">{{g.status}}</div>
+              </div>
+              <div class="game-bottom">
+                <div>{{g.home}} {% if g.status == "Open" %} - {%else%} {{g.home_score}} - {{g.away_score}} {% endif %}{{g.away}}</div>
+              </div>
+            </div>            
+            {%endfor%}
+          </td>
+          {% endif %}
+          <td>{{b.date|date:"H:m\H d/m/Y"}}</td>
+          {% if b.status == "open" %}
+          <td>
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="bet_id" value="{{b.id}}">
+              {{b.status}}
+              <button type="submit">Cancel</button>
+            </form>
+          </td>
+          {% else %}
+          <td>{{b.status}}</td>
+          {% endif %}
+        </tr>
+        {%endfor%}
+      </table>
+    </div>
+  </div>
  </body>
  </html>

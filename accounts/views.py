@@ -273,9 +273,15 @@ def history_transactions(request):
             type="Deposit"
         else: type = "Withdraw"
 
+        if(transaction.method =="mbway"):
+            method = "Mbway"
+        elif(transaction.method =="card"):
+            method = "Card"
+        else: method = "Balance"
+
         transactions.append({
             "type": type,
-            "method": transaction.method.method,
+            "method": method,
             "amount": transaction.amount,
             "date": transaction.datetime
         })
@@ -320,6 +326,20 @@ def history_bets(request):
             if entry.bet.type.str() == "simple":
                 bet_game = Bet_game.objects.get(bet=entry.bet)
 
+                if(bet_game.odd_id.odd_type.type =="home"):
+                    bet_type = bet_game.odd_id.game.home
+                elif(bet_game.odd_id.odd_type.type =="away"):
+                    bet_type = bet_game.odd_id.game.away
+                else: bet_type = "Draw"
+
+                if(entry.bet.status.status=="open"):
+                        status = "Open"
+                elif(entry.bet.status.status=="won"):
+                        status = "Won"
+                elif(entry.bet.status.status=="lost"):
+                        status = "Lost"
+                else: status = "On hold"
+
                 bets.append({
                     "id": entry.bet.betID,
                     "type": entry.bet.type.str(),
@@ -329,23 +349,46 @@ def history_bets(request):
                     "away": bet_game.odd_id.game.away,
                     "home_score" : bet_game.odd_id.game.home_score,
                     "away_score" : bet_game.odd_id.game.away_score,
-                    "bet": bet_game.odd_id.odd_type.type,
-                    "status": entry.bet.status.status,
-                    "date": str(entry.bet.datetime)
+                    "bet": bet_type,
+                    "status": status,
+                    "date": entry.bet.datetime
                 })
             else:
                 bet_games = Bet_game.objects.filter(bet=entry.bet)
                 games = []
                 for bet_game in bet_games:
+
+                    if(bet_game.odd_id.odd_type.type =="home"):
+                        bet_type = bet_game.odd_id.game.home
+                    elif(bet_game.odd_id.odd_type.type =="away"):
+                        bet_type = bet_game.odd_id.game.away
+                    else: bet_type = "Draw"
+
+                    if(bet_game.status.status=="open"):
+                        status = "Open"
+                    elif(bet_game.status.status=="won"):
+                        status = "Won"
+                    elif(bet_game.status.status=="lost"):
+                        status = "Lost"
+                    else: status = "On hold"
+
                     games.append({
                         "odd": bet_game.odd,
                         "home": bet_game.odd_id.game.home,
                         "away": bet_game.odd_id.game.away,
                         "home_score" : bet_game.odd_id.game.home_score,
                         "away_score" : bet_game.odd_id.game.away_score,
-                        "bet": bet_game.odd_id.odd_type.type,
-                        "status": bet_game.status.status
+                        "bet": bet_type,
+                        "status": status
                     })
+                
+                if(entry.bet.status.status=="open"):
+                        status = "Open"
+                elif(entry.bet.status.status=="won"):
+                        status = "Won"
+                elif(entry.bet.status.status=="lost"):
+                        status = "Lost"
+                else: status = "On hold"
 
                 bets.append({
                     "id": entry.bet.betID,
@@ -353,8 +396,8 @@ def history_bets(request):
                     "amount": entry.bet.amount,
                     "odd": entry.bet.total_odd(),
                     "games": games,
-                    "status": entry.bet.status.status,
-                    "date": str(entry.bet.datetime)
+                    "status": status,
+                    "date": entry.bet.datetime
                 })
 
         print(bets)
