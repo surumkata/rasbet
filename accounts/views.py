@@ -29,7 +29,7 @@ def login(request):
                 response = redirect("/")
                 response.set_cookie('session', session_id)
         else:
-            context = {"error": True, "msg": "User não existe"}
+            context = {"error": True, "msg": "User does not exist"}
             response = render(request, 'login.html', context)
     else:
         context = {"error": False, "msg": ""}
