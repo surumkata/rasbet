@@ -7,10 +7,10 @@ function check_deposit_value(elem){
     }else if(elem.value<5){
       // disables btts
       $('.depositBtt').prop('disabled', true);
-      $('.minAmount').html("<br>Limite mínimo: 5 €")
+      $('.minAmount').html("<span>Minimum limit: 5 €</span>")
     }else if(elem.value>500) {
       // disables btts
       $('.depositBtt').prop('disabled', true);
-      $('.minAmount').html("Limite máximo atingido: 500€")
+      $('.minAmount').html("<span>Maximum limit reached: 500€</span>")
     }
 }

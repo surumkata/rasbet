@@ -56,6 +56,11 @@
     background-color: #af7537;
     color: #ffdf7b;
 }
+.form-box button:disabled{
+    background-color: #af7537;
+    color: #ffdf7b;
+    cursor: not-allowed;
+}
 .form-box a{
     color: #af7537;
     font-size: 18px;

@@ -27,13 +27,6 @@
       </div>
     </div>
     <div>
-      {%if msg == 0 %}
-      <p>Gravações bem sucedidas!</p>
-      {% elif msg == 1 %}
-      <p>Email já está registado</p>
-      {% elif msg == 2 %}
-      <p>Password incorreta</p>
-      {%endif%}
     <div class="container">
       <div class="form-box">
         <div class="form-div">
@@ -71,6 +64,13 @@
                 <input type="date" id="birthday" name="birthday" value={{user.birthday}} required/>
               </div>
             </div>
+            {%if msg == 0 %}
+            <p>Successful changes!</p>
+            {% elif msg == 1 %}
+            <span>Email is already registered</span>
+            {% elif msg == 2 %}
+            <span>Incorrect Password</span>
+            {%endif%}
             <div id="confirm_state">
               <button type="submit">Save Changes</button>
               <label for="psw">Confirm password</label>

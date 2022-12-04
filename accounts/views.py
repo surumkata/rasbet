@@ -107,9 +107,9 @@ def deposit(request):
                 if not Deposit_Promotion.objects.filter(promo_code=promo_code).exists():
                     exists_promotion = False
 
-            if request.POST.get('mbway', False) and exists_promotion:
+            if request.POST.get('Mbway', False) and exists_promotion:
                 response = redirect('mbway/')
-            elif request.POST.get('card', False) and exists_promotion:
+            elif request.POST.get('Card', False) and exists_promotion:
                 response = redirect('card/')
             else:
                 context = {}

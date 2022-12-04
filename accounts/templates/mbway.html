@@ -3,18 +3,21 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
     <title> Deposit </title>
   </head>
   <body>
-
-      <form method="POST" required>
-        {% csrf_token %}
-        <h2>Phone number:</h2> <br>
-        <input type="number"  name="phoneNumber"><br><br>
-
-          <input type="submit"  name="" value="Pagar" >
-      </form>
-
-
+    <div class="container">
+      <div class="form-box">
+        <form method="POST" required>
+          {% csrf_token %}
+          <h2>Phone number</h2>
+          <input type="number"  name="phoneNumber">
+          <button type="submit"  name="" value="pay">Pay</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

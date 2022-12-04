@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
 <title>Withdraw</title>
 </head>
 
@@ -17,19 +17,21 @@
       <div class="tab"><a href="/">Desporto</a></div>
       <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
       <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
-      <div class="tab_balance">{{ balance }}€<a href="/accounts/deposit">+</a></div>
+      <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
     </div>
     <div class="header-right">
       <div class="tab"><a href="/accounts/logout">Logout</a></div>
     </div>
   </div>
+  <div class="container">
+    <div class="form-box">
       <form id="myform" method="POST" >
         {% csrf_token %}
-        <h2>Insere o montante a levantar:</h2> <br>
-        <input type="number" name="amount" required><br><br>
-
-        <input type="submit" name="withdraw" value="levantar">
-
+        <h2>Amount to withdraw</h2>
+        <input type="number" name="amount" required>
+        <button type="submit" name="withdraw" value="levantar">Withdraw</button>
       </form>
+    </div>
+  </div>
   </body>
 </html>

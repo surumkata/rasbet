@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
     <title> Deposit </title>
     </head>
 
@@ -19,30 +19,31 @@
           <div class="tab"><a href="/accounts/logout">Logout</a></div>
         </div>
       </div>
-      <form id="myform" method="POST" >
-        {% csrf_token %}
-        <div>
-          <div>
-            <h5>Promo code:</h5>
-            <input name="promo_code">
-            {%if promo_error%}
-              <p>Invalid promotion</p>
-            {%endif%}
-          </div>
-          <div>
-            <h2>Insere montante a depositar:</h2> <br>
-            <input type="number" name="amount" oninput="check_deposit_value(this)" required>
-            <div class="minAmount"></div>
-          </div>
-          <div>
-            <input class="depositBtt" type="submit" name="mbway" value="mbway" disabled>
-            <input class="depositBtt" type="submit" name="card" value="card" disabled>
-          </div>
+      <div class="container">
+        <div class="form-box">
+          <form id="myform" method="POST" >
+            {% csrf_token %}
+            <div>
+              <div>
+                <h3>Promo code</h3>
+                <input name="promo_code">
+                {%if promo_error%}
+                  <span>Invalid promotion</span>
+                {%endif%}
+              </div>
+              <div>
+                <h2>Amount to deposit</h2>
+                <input type="number" name="amount" oninput="check_deposit_value(this)" required>
+                <div class="minAmount"></div>
+              </div>
+              <div>
+                <button class="depositBtt" type="submit" name="Mbway" value="Mbway" disabled>Mbway</button>
+                <button class="depositBtt" type="submit" name="Card" value="Card" disabled>Card</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-
-
-
-      </form>
       <script src="{% static 'transations.js' %}"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </body>
