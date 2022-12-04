@@ -125,3 +125,14 @@
 .game-top-item{
     padding: 0px 10px;
 }
+
+.favorites{
+    width: 20%;
+    background-color:#fff;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding: 15px 15px 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

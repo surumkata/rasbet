@@ -7,9 +7,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'history.css' %}"/>
 {% csrf_token %}
 <title> Home Page </title>
 </head>
@@ -18,17 +17,18 @@
   <div class="header">
     <div class="header-left">
       <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
-      <div class="tab"><a href="/">Desporto</a></div>
-      <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
+      <div class="tab"><a href="/">Sport</a></div>
+      <div class="tab"><a href="/accounts/promotions">Promotions</a></div>
       <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
-      <div class="tab_balance">{{ balance }}€<a href="/accounts/deposit">+</a></div>
+      <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
     </div>
     <div class="header-right">
       <div class="tab"><a href="/accounts/logout">Logout</a></div>
     </div>
   </div>
-    <div>
-        <p>FAVORITES SPORTS</p>
+  <div class="container">
+    <div class="favorites">
+        <h3>Favorite Sports</h3>
         <table>
           {%for fav in favs_sports%}
           <tr>
@@ -38,15 +38,15 @@
                   {% csrf_token %}
                   <input type="hidden" name="fav" value="{{fav}}">
                   <input type="hidden" name="type" value="Sport">
-                  <button type="submit">eliminar</button>
+                  <button type="submit">Remove</button>
                 </form>
             </td>
           </tr>
           {%endfor%}
         </table>
     </div>
-    <div>
-        <p>FAVORITES COMPETITIONS</p>
+    <div class="favorites">
+        <h3>Favorite Competitions</h3>
         <table>
           {%for fav in favs_comps%}
           <tr>
@@ -56,13 +56,14 @@
                   {% csrf_token %}
                   <input type="hidden" name="fav" value="{{fav}}">
                   <input type="hidden" name="type" value="Competition">
-                  <button type="submit">eliminar</button>
+                  <button type="submit">Remove</button>
                 </form>
             </td>
           </tr>
           {%endfor%}
         </table>
     </div>
+    <!--
     <div>
         <p>FAVORITES TEAMS</p>
         <table>
@@ -98,6 +99,9 @@
           </tr>
           {%endfor%}
         </table>
+        
+    </div>
+    -->
     </div>
  </body>
  </html>
