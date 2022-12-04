@@ -39,9 +39,9 @@ function change_to_simple(){
 
 function check_amount(elem){
   if(elem.value<0.10 && elem.value!="" && elem.value>0){
-      elem.parentElement.outerHTML += "<div>A aposta mínima é 0.10€</div>"
+      elem.parentElement.outerHTML += "<div>The minimun bet is 0.10€</div>"
   }else if(elem.value>500){
-      elem.parentElement.outerHTML += "<div>A aposta máxima é 500€</div>"
+      elem.parentElement.outerHTML += "<div>The maximum bet is 500€</div>"
   }
 }
 
@@ -226,22 +226,22 @@ function slip_handler(bttchange,home,away,bet,odd){
     //$('.buttonApostar').prop('disabled', true);
 
     $(".betboxFooter").remove()
-    $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
+    $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
 
     // Simple bets needs to have a odds less then 1.20
     var betboxs = document.getElementsByClassName('betbox');
     for(var i=0;i<betboxs.length;i++){
         odd = parseFloat(betboxs[i].getAttribute("data-odd"))
         if(odd < 1.20){
-          betboxs[i].children[1].innerHTML = "<p style='color:red'> Cota"+odd+"</p><p>A cota para esta selecção simples deve ser igual, ou superior, a 1,20</p>"
+          betboxs[i].children[1].innerHTML = "<p style='color:red'> Odd"+odd+"</p><p>The odds for the simple bets must be equal to or greater than 1.20</p>"
         }
 
     }
 
-    $("#rowCimaNome span").text('Montante Total')
+    $("#rowCimaNome span").text('Total Amount')
     $("#rowCimaValor span").text('0,00€')
 
-    $("#rowBaixoNome span").text('Ganhos Possíveis')
+    $("#rowBaixoNome span").text('Possible Gains')
     $("#valorGanhos span").text('0,00€')
 
     storage_change_simple(home,away,bet,odd)
@@ -262,14 +262,14 @@ function slip_handler(bttchange,home,away,bet,odd){
       $(".betboxFooter").remove()
 
 
-      $("#rowCimaNome span").text('Cota '+total_odd.toFixed(2))
-      $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="update_gains(this,'+total_odd+');check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
+      $("#rowCimaNome span").text('Odd '+total_odd.toFixed(2))
+      $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="update_gains(this,'+total_odd+');check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
 
       var betboxs = document.getElementsByClassName('betbox');
       for(var i=0;i<betboxs.length;i++){
           odd = parseFloat(betboxs[i].getAttribute("data-odd"))
           if(odd < 1.10){
-            $("#rowCimaNome span").text("Esta aposta múltipla não é permitida, as cotas dos jogos tem de ser, pelo menos, 1,10")
+            $("#rowCimaNome span").text("This multiple bet is not allowed, game odds must be at least 1.10")
             $("#rowCimaValor span").html('')
             // disable bet button
             $('.buttonApostar').prop('disabled', true);
@@ -277,12 +277,12 @@ function slip_handler(bttchange,home,away,bet,odd){
 
       }
 
-      $("#rowBaixoNome span").text('Ganhos Possíveis')
+      $("#rowBaixoNome span").text('Possible Gains')
       $("#valorGanhos span").text('0,00€')
 
     storage_change_multiple(home,away,bet,odd)
     }else{
-      alert("Só podem ser feitas 10 seleções na modalidade múltipla");
+      alert("Only 10 selections can be made in multiple mode");
       // disable bet button
       $('.buttonApostar').prop('disabled', true);
     }
@@ -343,7 +343,7 @@ function button_handler(elem){
 
     //Add game to slip in the html
 
-    slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+odd+' data-oddType='+odd_type+' data-home='+str_home+' data-away='+str_away+' data-bet='+str_bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>' + home + '-' + away + '<br>Resultado(Tempo Regulamentar): ' + bet + '<br>Cota '+odd+' </div></label></div>';
+    slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+odd+' data-oddType='+odd_type+' data-home='+str_home+' data-away='+str_away+' data-bet='+str_bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>' + home + '-' + away + '<br>Result: ' + bet + '<br>Odd '+odd+' </div></label></div>';
 
     window.games_on_slip.push(game_id)
     window.game_counter++
@@ -373,7 +373,7 @@ function button_handler(elem){
 
       if(window.game_counter==0){
         let slip = document.querySelector('.slip');
-        slip.innerHTML += "<div id='slipbodyMsg'>Adiciona a tua primeira aposta!</div>"
+        slip.innerHTML += '<div class="betbox-msg" id="slipbodyMsg">Add your first bet!</div>'
       }
 
       // Decrease same game counter
@@ -459,7 +459,7 @@ window.onload = (event) =>{
                       }
                     slip_id = "slip;"+btt_id
                     str_slip_id = "\'"+slip_id+"\'"
-                    slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+game_data_obj[j].odd+' data-oddType='+game_data_obj[j].bet_outcome+' data-home='+game_data_obj[j].home+' data-away='+game_data_obj[j].away+' data-bet='+game_data_obj[j].bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>'+game_data_obj[j].home+"-"+game_data_obj[j].away+'<br>Resultado(Tempo Regulamentar): ' + game_data_obj[j].bet + '<br>Cota '+game_data_obj[j].odd+' </div></label></div>';
+                    slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+game_data_obj[j].odd+' data-oddType='+game_data_obj[j].bet_outcome+' data-home='+game_data_obj[j].home+' data-away='+game_data_obj[j].away+' data-bet='+game_data_obj[j].bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>'+game_data_obj[j].home+"-"+game_data_obj[j].away+'<br>Result: ' + game_data_obj[j].bet + '<br>Odd '+game_data_obj[j].odd+' </div></label></div>';
 
                     counter++
 
@@ -475,12 +475,12 @@ window.onload = (event) =>{
           change_to_simple()
 
           $(".betboxFooter").remove()
-          $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Montante" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
+          $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
 
-          $("#rowCimaNome span").text('Montante Total')
+          $("#rowCimaNome span").text('Total Amount')
           $("#rowCimaValor span").text('0,00€')
 
-          $("#rowBaixoNome span").text('Ganhos Possíveis')
+          $("#rowBaixoNome span").text('Possible Gains')
           $("#valorGanhos span").text('0,00€')
       }else{
 
@@ -498,7 +498,7 @@ window.onload = (event) =>{
               slip_id = "slip;"+btt_id
               str_slip_id = "\'"+slip_id+"\'"
               let slip = document.querySelector('.slip');
-              slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+game_data_obj[0].odd+' data-oddType='+game_data_obj[0].bet_outcome+' data-home='+game_data_obj[0].home+' data-away='+game_data_obj[0].away+' data-bet='+game_data_obj[0].bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>'+game_data_obj[0].home+"-"+game_data_obj[0].away+'<br>Resultado(Tempo Regulamentar): ' + game_data_obj[0].bet + '<br>Cota '+game_data_obj[0].odd+' </div></label></div>';
+              slip.innerHTML += '<div class="betbox" id='+slip_id+' data-odd='+game_data_obj[0].odd+' data-oddType='+game_data_obj[0].bet_outcome+' data-home='+game_data_obj[0].home+' data-away='+game_data_obj[0].away+' data-bet='+game_data_obj[0].bet+' ><div class="betboxHeader"><button onclick="delete_selection('+str_slip_id+');" ><span>&times;</span></button><label>'+game_data_obj[0].home+"-"+game_data_obj[0].away+'<br>Result: ' + game_data_obj[0].bet + '<br>Odd '+game_data_obj[0].odd+' </div></label></div>';
               counter++
 
 
@@ -518,10 +518,10 @@ window.onload = (event) =>{
         $(".betboxFooter").remove()
 
 
-        $("#rowCimaNome span").text('Cota '+total_odd.toFixed(2))
-        $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Montante" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="update_gains(this,'+total_odd+');check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
+        $("#rowCimaNome span").text('Odd '+total_odd.toFixed(2))
+        $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="update_gains(this,'+total_odd+');check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
 
-        $("#rowBaixoNome span").text('Ganhos Possíveis')
+        $("#rowBaixoNome span").text('Possible Gains')
         $("#valorGanhos span").text('0,00€')
       }
       if(window.game_counter>0){

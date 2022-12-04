@@ -24,13 +24,13 @@
   <div class="popup" id="no-balance-popup">
     <div class="model">
       <div>
-        Saldo insuficiente
+        Insuficient balance
       </div>
       <div>
         <a href="/accounts/deposit/">
-        <button>Depositar</div>
+        <button>Deposit</div>
         </a>
-        <button onclick="close_no_balance_popup()">Mais tarde</div>
+        <button onclick="close_no_balance_popup()">Later</div>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
   <div class="popup" id="sucess-popup">
     <div class="model">
       <div>
-        Aposta realizada
+        Bet done!
       </div>
       <div>
         <a href="/">
@@ -118,7 +118,7 @@
               </div>
               <div class="collapse" id="{{s}}">
                   <div class="filter">
-                    <button name="sport" type="submit" value="{{s}}" data-checked="false" >Toda a oferta</button>
+                    <button name="sport" type="submit" value="{{s}}" data-checked="false" >All Offer</button>
                   </div>
                   {% for country, competitions in countrys.items %}
                   <p style="margin-left:15px">
@@ -223,25 +223,25 @@
           <div class="boletim">
             <div class="boletimHeader">
               <div class="title">
-                <p>A minha aposta</p>
+                <p>My bet</p>
               </div>
               <div class="tabs">
                 <div class="tab">
-                  <button id="simplebtt" class="checked" onclick="slip_handler('simple')">Simples</button>
+                  <button id="simplebtt" class="checked" onclick="slip_handler('simple')">Simple</button>
                 </div>
                 <div class="tab">
-                  <button id="multibtt" class="unchecked" onclick="slip_handler('multiple')">Multipla</button>
+                  <button id="multibtt" class="unchecked" onclick="slip_handler('multiple')">Multiple</button>
                 </div>
               </div>
             </div>
-            <div id="slipbody" class="boletimContent slip"><div id="slipbodyMsg">Adiciona a tua primeira aposta!</div></div>
+            <div id="slipbody" class="boletimContent slip"><div class="betbox-msg" id="slipbodyMsg">Add your first bet!</div></div>
             <div class="boletimFooter">
               <div class="boletimRow">
-                <div id="rowCimaNome" class="boletimRowItem start"><span>Montante Total</span></div>
+                <div id="rowCimaNome" class="boletimRowItem start"><span>Total Amount</span></div>
                 <div id="rowCimaValor" class="boletimRowItem end"><span>0,00€</span></div>
               </div>
               <div class="boletimRow">
-                <div id="rowBaixoNome" class="boletimRowItem start"><span>Ganhos Possíveis</span></div>
+                <div id="rowBaixoNome" class="boletimRowItem start"><span>Total Earnings</span></div>
                 <div id="valorGanhos" class="boletimRowItem end"><span>0,00€<span></div>
               </div>
               <div class="boletimRowItem">
