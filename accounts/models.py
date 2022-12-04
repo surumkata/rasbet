@@ -38,26 +38,29 @@ class User(models.Model):
             return True
         else: return False
 
+    def has_sufficient_balance(self,amount):
+        if(self.balance >= amount): return True
+        else: return False
+
+
     def deposit(self,amount):
         self.balance += amount
+        return True
 
 
     def withdraw(self,amount):
-        if(amount > 5 and self.has_sufficient_balance(amount)):
+        if(amount >= 5 and self.has_sufficient_balance(amount)):
             self.balance -= amount
             return True
         else: return False
 
     def withdraw_bet(self,amount):
+        var = self.has_sufficient_balance(amount)
+        print(var)
         if(amount >= 0.10 and self.has_sufficient_balance(amount)):
             self.balance -= amount
             return True
         else: return False
-
-    def has_sufficient_balance(self,amount):
-        if(self.balance >= amount): return True
-        else: return False
-
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -84,24 +87,24 @@ class User(models.Model):
                 sport = Sport.objects.get(sport=favorite)
                 if FavoriteSports.objects.filter(user=self,sport=sport).exists():
                     FavoriteSports.objects.get(user=self,sport=sport).delete()
-                else: 
+                else:
                     FavoriteSports.objects.create(user=self,sport=sport)
             elif type == 'competition':
                 competition = Competition.objects.get(competition=favorite)
                 if FavoriteCompetitions.objects.filter(user=self,competition=competition).exists():
                     FavoriteCompetitions.objects.get(user=self,competition=competition).delete()
-                else: 
+                else:
                     FavoriteCompetitions.objects.create(user=self,competition=competition)
             elif type == 'participant':
                 participant = Participant.objects.get(participant=favorite)
                 if FavoriteParticipants.objects.filter(user=self,participant=participant).exists():
                     FavoriteParticipants.objects.get(user=self,participant=participant).delete()
-                else: 
+                else:
                     FavoriteParticipants.objects.create(user=self,participant=participant)
         except Exception as e:
             print(e)
 
-        
+
 
 
     def change_password(self,password,new_password,new_password2):
@@ -206,17 +209,20 @@ class Transation(models.Model):
     def regist(self,user,type,method,amount):
         if Payment_method.objects.filter(method=method).exists():
             pm = Payment_method.objects.get(method=method)
-            # Regist of the transation
-            Transation.objects.create(user=user,type=type,method=pm,amount=amount)
+
             # Updates user balance
             if type=="deposit" or type=='bet_won' or type.split(':')[0]=='promo_code' or type=="bet_cancel":
-                user.deposit(float(amount))
+                rt = user.deposit(float(amount))
             elif type=="withdraw":
-                user.withdraw(float(amount))
+                rt = user.withdraw(float(amount))
             elif type=="bet":
-                user.withdraw_bet(float(amount))
-            user.save()
-            return True
+                rt = user.withdraw_bet(float(amount))
+
+            if rt :
+                # Regist of the transation
+                Transation.objects.create(user=user,type=type,method=pm,amount=amount)
+                user.save()
+                return True
 
         return False
 
@@ -347,10 +353,10 @@ class SendingEmail:
     @classmethod
     def write_result_in_template(self, template, sport, home, home_score, away, away_score):
         html_file = open(template,'r').read()
-        rep = {"#sport": sport, "#home": home, "#score_home":str(home_score), "#away":away, "#score_away":str(away_score)} 
+        rep = {"#sport": sport, "#home": home, "#score_home":str(home_score), "#away":away, "#score_away":str(away_score)}
 
         # use these three lines to do the replacement
-        rep = dict((re.escape(k), v) for k, v in rep.items()) 
+        rep = dict((re.escape(k), v) for k, v in rep.items())
         #Python 3 renamed dict.iteritems to dict.items so use rep.items() for latest versions
         pattern = re.compile("|".join(rep.keys()))
         return pattern.sub(lambda m: rep[re.escape(m.group(0))], html_file)
@@ -370,13 +376,13 @@ class SendingEmail:
 
             msgAlternative = MIMEMultipart('alternative')
             mail.attach(msgAlternative)
-            
+
             html_content = MIMEText(html, 'html')
             msgAlternative.attach(html_content)
             # This example assumes the image is in the current directory
             cid = re.compile(r'"cid:([\w\.\/]+)"')
             images = cid.findall(html)
-            
+
             for image in images:
                 fp = open(image, 'rb')
                 msgImage = MIMEImage(fp.read())
@@ -403,13 +409,13 @@ class SendingEmail:
 
         msgAlternative = MIMEMultipart('alternative')
         mail.attach(msgAlternative)
-        
+
         html_content = MIMEText(html, 'html')
         msgAlternative.attach(html_content)
         # This example assumes the image is in the current directory
         cid = re.compile(r'"cid:([\w\.\/]+)"')
         images = cid.findall(html)
-        
+
         for image in images:
             fp = open(image, 'rb')
             msgImage = MIMEImage(fp.read())

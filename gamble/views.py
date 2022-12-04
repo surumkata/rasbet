@@ -26,18 +26,31 @@ def bet(request):
                 slip = request_data.get('slip')
                 print(slip['games'])
                 if slip['bet_type']=="simple":
+
+                    total_amount = 0
                     for game in slip['games']:
-                        if Transation.regist(session.user_in_session,"bet","balance",game['amount']):
-                            Bet.place_simple(session.user_in_session,game)
+                        total_amount += game['amount']
+
+                    if session.user_in_session.has_sufficient_balance(total_amount):
+                        for game in slip['games']:
+                            if Transation.regist(session.user_in_session,"bet","balance",game['amount']):
+                                Bet.place_simple(session.user_in_session,game)
+                                response = {'status': 0, 'message': "bet placed"}
+                    else:
+                        response = {'status': 2, 'message': "Not enough balance"}
+
 
                 else:
                     if Transation.regist(session.user_in_session,"bet","balance",float(slip['amount'])):
                         Bet.place_multiple(session.user_in_session,float(slip['amount']),slip['games'])
+                        response = {'status': 0, 'message': "bet placed"}
+                    else:
+                        response = {'status': 2, 'message': "Not enough balance"}
 
-                response = {'status': 0, 'message': "bet placed"}
             else:
                 response = {'status': 1, 'message': "Session expired"}
         else:
             response = {'status': 1, 'message': "Not logged in"}
 
+    print(response)
     return HttpResponse(json.dumps(response), content_type='application/json')

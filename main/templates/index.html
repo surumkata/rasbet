@@ -11,14 +11,43 @@
 <link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'popup.css' %}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% csrf_token %}
 <title> Home Page </title>
 </head>
 
 <body>
+  <div class="popup" id="no-balance-popup">
+    <div class="model">
+      <div>
+        Saldo insuficiente
+      </div>
+      <div>
+        <a href="/accounts/deposit/">
+        <button>Depositar</div>
+        </a>
+        <button onclick="close_no_balance_popup()">Mais tarde</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="sucess-popup">
+    <div class="model">
+      <div>
+        Aposta realizada
+      </div>
+      <div>
+        <a href="/">
+        <button>ok</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
   {% if logged %}
     <div class="header">
       <div class="header-left">
@@ -26,7 +55,7 @@
         <div class="tab"><a class="active" href="/">Desporto</a></div>
         <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
         <div class="tab"><a href="/accounts/profile">{{ fname }}</a></div>
-        <div class="tab_balance">{{ balance }}€<a href="/accounts/deposit">+</a></div>
+        <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
       </div>
       <div class="header-right">
         <div class="tab"><a href="/accounts/logout">Logout</a></div>
@@ -68,7 +97,7 @@
 
       {%endfor%}
       <h2>Desportos</h2>
-      {% for s, countrys in sports_info.items %}   
+      {% for s, countrys in sports_info.items %}
       <p>
           <a class="" data-toggle="collapse"
                   href="#{{s}}" role="button"
@@ -83,7 +112,7 @@
           <div>
             <button name="sport" type="submit" value="{{s}}" data-checked="false" >Toda a oferta</button>
           </div>
-          {% for country, competitions in countrys.items %} 
+          {% for country, competitions in countrys.items %}
           <p>
             <a class="" data-toggle="collapse"
                   href="#{{s}}{{country}}" role="button"
@@ -115,7 +144,7 @@
       </form>
     </div>
     <div class="display-center">
-      
+
       {% for date, games in games_info.items%}
       <p>{{date}}</p>
       {% for g in games%}
@@ -206,4 +235,3 @@
   <script src="{% static 'cookies.js' %}"></script>
  </body>
  </html>
-

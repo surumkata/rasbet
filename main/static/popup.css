@@ -1,0 +1,23 @@
+.popup{
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #E6E6E6;
+  opacity: 0.9;
+
+}
+
+.model{
+  max-width: 200px;
+  height: 200px;
+  margin: auto;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

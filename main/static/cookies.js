@@ -21,6 +21,11 @@ for(let i = 0; i <ca.length; i++) {
 return "";
 }
 
+function close_no_balance_popup(){
+  const popup = document.getElementById("no-balance-popup")
+  popup.style.display = "none"
+
+}
 function post_slip(){
   type = sessionStorage.getItem("betType")
   sessionStorage.removeItem("betType");
@@ -64,9 +69,19 @@ function post_slip(){
      data: JSON.stringify({slip : slip_data}),
      success: function( data, status, xhttp) {
               if(data.status==0){
-                  window.location.reload();
-             }else{
+                  // Bet placed
+                  const popup = document.getElementById("sucess-popup")
+                  // Display sucess popup
+                  popup.style.display = "block"
+             }else if(data.status==1){
+                  // Not logged in or session expired
                   window.location.assign('/accounts/login/')
+            }else if(data.status==2){
+                // Not enough balance
+                const popup = document.getElementById("no-balance-popup")
+                // Display no balance popup
+                popup.style.display = "block"
+                // Not enough balance
             }
     },
 })

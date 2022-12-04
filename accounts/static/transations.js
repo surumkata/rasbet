@@ -1,6 +1,6 @@
 
 function check_deposit_value(elem){
-    if(elem.value=="" || (elem.value>5 && elem.value<=500)){
+    if(elem.value=="" || (elem.value>=5 && elem.value<=500)){
       // Enable btts to continue for payment
       $('.depositBtt').prop('disabled', false);
       $('.minAmount').html("")
