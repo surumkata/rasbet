@@ -43,9 +43,14 @@
   </div>
   {% endif %}
 
-  {% for promotion in promotions%}
-  <img src="{{ MEDIA_URL }}{{promotion}}" alt="{{promotion}}">
-  {%endfor%}
+  <div class="container">
+    {% for promotion in promotions%}
+    <div style="width:100%">
+      <img src="{{ MEDIA_URL }}{{promotion}}" alt="{{promotion}}">
+    </div>
+    {%endfor%}
+  </div>
+  
 
  
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
