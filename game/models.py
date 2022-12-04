@@ -185,7 +185,7 @@ def detail_games(games,ordered_by_nb):
     datetimes = set()
     for g in games:
         details = open_game_details(g)
-        datetime = str(g.datetime.date())
+        datetime = g.datetime.date().strftime("%Y/%m/%d")
         datetimes.add(datetime)
         if details!={}:
             if datetime in games_dict:

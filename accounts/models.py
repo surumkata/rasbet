@@ -430,7 +430,7 @@ class SendingEmail:
 #list of a users favorites
 def favorites_list(user):
     fav_list = {}
-    fav_list['sport'] = [str(k) for k in FavoriteSports.objects.filter(user=user)]
-    fav_list['competition'] = [str(k) for k in FavoriteCompetitions.objects.filter(user=user)]
-    fav_list['participant'] = [str(k) for k in FavoriteParticipants.objects.filter(user=user)]
+    fav_list['Sport'] = [str(k) for k in FavoriteSports.objects.filter(user=user)]
+    fav_list['Competition'] = [str(k) for k in FavoriteCompetitions.objects.filter(user=user)]
+    #fav_list['Participant'] = [str(k) for k in FavoriteParticipants.objects.filter(user=user)]
     return fav_list

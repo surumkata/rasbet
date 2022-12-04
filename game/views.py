@@ -19,7 +19,8 @@ def filter(request):
         get = {
                 "sport" : sport,
                 "competition" : competition,
-                "participant" : participant
+                "participant" : participant,
+                "order" : order_by_nb,
              }
         if sport or competition or participant or order_by_nb:
             if sport: games = Game.objects.filter(sport=sport)
@@ -28,7 +29,7 @@ def filter(request):
                 games = Game.objects.filter(home=participant) | Game.objects.filter(away=participant)
             else: games = Game.objects.all()
             order = False
-            if(order_by_nb): order = True
+            if(order_by_nb == "true"): order = True
             games_listing = detail_games(games,order)
             games_listing = OrderedDict(sorted(games_listing.items()))
             sports_listing = sports_list()

@@ -1,0 +1,112 @@
+.filterWrapper {
+    padding: 20px 4px 20px 16px;
+}
+
+.filters{
+    height: 100%;
+    overflow: hidden;
+    color: #3d3c42;
+}
+
+.filters p{
+    font-size: 15px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    padding: 5px 0px 5px 0px;
+}
+
+.filters a{
+    color: #3d3c42;
+    padding-bottom: 5px;
+    font-size:16px;
+    color: black;
+}
+
+.filters a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.filters a:active{
+    color: black;
+    text-decoration: none;
+}
+
+.favorites{
+    padding: 15px 15px;
+    background: #fff;
+    border-radius: 1.6rem;
+    border: 0.1rem solid #eef0f3;
+    margin-bottom: 10px;
+}
+
+.filter{
+    border-bottom: 0.1rem solid #eef0f3;
+    margin-left: 15px;
+}
+
+.filter button{
+    background-color: #fff;
+    border: none;
+    color: #3d3c42;
+    font-size:16px;
+    padding: 5px 0px 5px 0px;
+}
+
+.filter button:hover{
+    color: black;
+}
+
+
+
+.sports_filters{
+    padding: 15px 15px;
+    background: #fff;
+    border-radius: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.orders{
+    padding: 15px 15px;
+    background: #fff;
+    border-radius: 1.6rem;
+}
+
+.favorite{
+    border: none;
+    background-color: #eef0f3;
+    border-radius: 10px;
+    padding-left: 10px;
+    width: 100px;
+    margin: 0px;
+}
+
+.filter_tab{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.1rem solid #eef0f3;
+}
+
+.orders button {
+    border: none;
+    color: #af7537;
+    background-color: #ffdf7b;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+
+.orders button:hover{
+    color: #ffdf7b;
+    background-color: #af7537;
+}
+
+.orders button.checked {
+    color: #ffdf7b;
+    background-color: #af7537;
+}
+
+.orders button.checked:hover {
+    color: #af7537;
+    background-color: #ffdf7b;
+}

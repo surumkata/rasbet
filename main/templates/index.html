@@ -3,17 +3,18 @@
 
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'filter.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'popup.css' %}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>   
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% csrf_token %}
 <title> Home Page </title>
@@ -47,7 +48,6 @@
     </div>
   </div>
 
-
   {% if logged %}
     <div class="header">
       <div class="header-left">
@@ -76,77 +76,96 @@
   {% endif %}
 
   <div class="display">
-    <div class="display-left" style="background-color:#aaa;">
-      <form method='get' action="/game/filter">
-      <h2>Favoritos</h2>
-      {% for type,favorites in favorites_info.items%}
-      <p>
-        <a class="" data-toggle="collapse"
-                href="#{{type}}" role="button"
-                aria-expanded="false" aria-controls="{{type}}">
-            {{type}}
-        </a>
-      </p>
-      <div class="collapse" id="{{type}}">
-        {% for favorite in favorites %}
-        <div>
-          <button name="{{type}}" type="submit" value="{{favorite}}" data-checked="false" >{{favorite}}</button>
-        </div>
-        {% endfor %}
-      </div>
-
-      {%endfor%}
-      <h2>Desportos</h2>
-      {% for s, countrys in sports_info.items %}
-      <p>
-          <a class="" data-toggle="collapse"
-                  href="#{{s}}" role="button"
-                  aria-expanded="false" aria-controls="{{s}}">
-              {{s}}
-          </a>
-          {% if logged %}
-          <input type="checkbox"  {%if s in favorites_info.sport %} checked {%endif%} class="" name="sport:{{s}}" onclick='update_fav(this);'>fav</input>
-          {%endif%}
-      </p>
-      <div class="collapse" id="{{s}}">
-          <div>
-            <button name="sport" type="submit" value="{{s}}" data-checked="false" >Toda a oferta</button>
-          </div>
-          {% for country, competitions in countrys.items %}
-          <p>
-            <a class="" data-toggle="collapse"
-                  href="#{{s}}{{country}}" role="button"
-                  aria-expanded="false" aria-controls="{{s}}{{country}}">
-              {{country}}
-            </a>
-          </p>
-          <div class="collapse" id="{{s}}{{country}}">
-            {% for c in competitions %}
-            <div>
-              <button name="competition" type="submit" value="{{c}}" data-checked="false" >{{c}}</button>
-              {% if logged %}
-              <input type="checkbox"  {%if c in favorites_info.competition %} checked {%endif%} class="" name="competition:{{c}}" onclick='update_fav(this);'>fav</input>
-              {%endif%}
+    <div class="display-left">
+      <div class="filterWrapper">
+        <div class="filters">
+          <form method='get' action="/game/filter">
+            {% if logged %}
+            <h4>Favorites</h4>
+            <div class="favorites">
+                {% for type,favorites in favorites_info.items%}
+              <p>
+                <a data-toggle="collapse"
+                        href="#{{type}}" role="button"
+                        aria-expanded="false" aria-controls="{{type}}">
+                  {{type}}
+                </a>
+              </p>
+              <div class="collapse" id="{{type}}">
+                {% for favorite in favorites %}
+                <div class="filter">
+                  <button name="{{type}}" type="submit" value="{{favorite}}" data-checked="false" >{{favorite}}</button>
+                </div>
+                {% endfor %}
+              </div>
+              {%endfor%}
             </div>
-            {% endfor %}
-          </div>
-          {% endfor %}
-      </div>
-      {% endfor %}
-      </form>
-      <form method='get' action="/game/filter">
-        <div>
-          {% if get.sport %} <input type="hidden" name="sport" value="{{get.sport}}"> {%endif%}
-          {% if get.competition %}<input type="hidden" name="competition" value="{{get.competition}}">{%endif%}
-          {% if get.participant %}<input type="hidden" name="participant" value="{{get.participant}}">{%endif%}
-          <button name="order_by_nb" type="submit" value="True">ordenar por numero de apostas</button>
+            {% endif %}
+            <h4>Sports</h4>
+            <div class="sports_filters">
+              {% for s, countrys in sports_info.items %}
+              <div class="filter_tab">
+              <p>
+                  <a class="" data-toggle="collapse"
+                          href="#{{s}}" role="button"
+                          aria-expanded="false" aria-controls="{{s}}">
+                      {{s}}
+                  </a>
+              </p>
+              {% if logged %}
+                  <div class="favorite"><input type="checkbox"  {%if s in favorites_info.Sport %} checked {%endif%} class="" name="sport:{{s}}" onclick='update_fav(this);'> Favorite</input></div>
+              {%endif%}
+              </div>
+              <div class="collapse" id="{{s}}">
+                  <div class="filter">
+                    <button name="sport" type="submit" value="{{s}}" data-checked="false" >Toda a oferta</button>
+                  </div>
+                  {% for country, competitions in countrys.items %}
+                  <p style="margin-left:15px">
+                    <a class="" data-toggle="collapse"
+                          href="#{{s}}{{country}}" role="button"
+                          aria-expanded="false" aria-controls="{{s}}{{country}}">
+                      {{country}}
+                    </a>
+                  </p>
+                  <div class="collapse" id="{{s}}{{country}}">
+                    {% for c in competitions %}
+                    <div class="filter_tab">
+                    <div class="filter" style="margin-left: 30px;">
+                      <button name="competition" type="submit" value="{{c}}" data-checked="false" >{{c}}</button>
+                    </div>
+                    {% if logged %}
+                      <div class="favorite"><input type="checkbox"  {%if c in favorites_info.Competition %} checked {%endif%} class="" name="competition:{{c}}" onclick='update_fav(this);'> Favorite</input></div>
+                      {%endif%}
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% endfor %}
+              </div>
+              {% endfor %}
+            </div>
+            </form>
+            <h6>Order by:</h6>
+            <div class="orders">
+              <form method='get' action="/game/filter">
+                <div>
+                  {% if get.sport %} <input type="hidden" name="sport" value="{{get.sport}}"> {%endif%}
+                  {% if get.competition %}<input type="hidden" name="competition" value="{{get.competition}}">{%endif%}
+                  {% if get.participant %}<input type="hidden" name="participant" value="{{get.participant}}">{%endif%}
+                  {% if get.order == "true" %}<button class="checked" name="order_by_nb" type="submit" value="false">number of bets</button>
+                  {%else%}<button name="order_by_nb" type="submit" value="true">number of bets{%endif%}
+                </div>
+              </form>
+            </div>  
         </div>
-      </form>
+      </div>
     </div>
     <div class="display-center">
-
+      
       {% for date, games in games_info.items%}
-      <p>{{date}}</p>
+      <div class="dateCE">
+        <p>{{date}}</p>
+      </div>
       {% for g in games%}
       <div class="card-event">
         <div class="event">
@@ -170,22 +189,28 @@
             <div class="away">
               <p><b>{{g.game.away}}</b></p>
             </div>
-            <p>número de apostas: {{g.nb}}</p>
           </div>
         </div>
         <div class="market_odds">
           <div class="odds">
+            <div class="number_bets"><p>+{{g.nb}} bets</p></div>
             <div class="odd">
               <button id="{{g.game.game_id}};home" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" onclick="button_handler(this);" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
-              <p>{{g.home_nb}}%</p>
+              <div class="nb_bar">
+                <div class="nb_bar_percentage" style="width:{{g.home_nb}}%"></div>
+              </div>
             </div>
             <div class="odd">
               <button id="{{g.game.game_id}};draw" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" onclick="button_handler(this);" >Draw<br><span>{{g.draw_odd}}</span></button>
-              <p>{{g.draw_nb}}%</p>
+              <div class="nb_bar">
+                <div class="nb_bar_percentage" style="width:{{g.draw_nb}}%"></div>
+              </div>
             </div>
             <div class="odd">
               <button id="{{g.game.game_id}};away" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" onclick="button_handler(this);">{{g.game.away}}<br><span>{{g.away_odd}}</span></button>
-              <p>{{g.away_nb}}%</p>
+              <div class="nb_bar">
+                <div class="nb_bar_percentage" style="width:{{g.away_nb}}%"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -235,3 +260,4 @@
   <script src="{% static 'cookies.js' %}"></script>
  </body>
  </html>
+

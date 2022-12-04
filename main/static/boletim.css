@@ -17,7 +17,7 @@
 
 .boletimHeader .title{
     font-size: 17px;
-    padding: 0px 15px;
+    padding: 5px 15px;
     font-family: 'MarlinGeoBold';
 }
 
@@ -115,6 +115,11 @@
     
 }
 .buttonApostar:hover{
+    background-color: #444349;
+}
+
+.buttonApostar:disabled{
+    cursor: not-allowed;
     background-color: #444349;
 }
 
