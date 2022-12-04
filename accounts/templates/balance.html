@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
 
 {% csrf_token %}
 <title>Balance</title>
@@ -20,26 +21,22 @@
       <div class="tab"><a href="/">Desporto</a></div>
       <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
       <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
-      <div class="tab_balance">{{ balance }}€<a href="/accounts/deposit">+</a></div>
+      <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
     </div>
     <div class="header-right">
       <div class="tab"><a href="/accounts/logout">Logout</a></div>
     </div>
   </div>
 
-  <div class="box">
-    <div class="center-box">
+  <div class="container">
+    <div class="form-box">
       <div class="balance-box">
-        <h1>BALANCE</h1>
-        <h3>{{balance}} €</h3>
+        <h1>{{fname}}'s Balance</h1>
+        <h2>{{ balance | floatformat:2 }}€</h2>
       </div>
-      <div class="method-box">
-        <div class="method">
-        <a href="/accounts/deposit">Deposit</a> <br>
-       </div>
-       <div class="method">
-        <a href="/accounts/withdraw">Withdraw</a>
-       </div>
+      <div class="form-div">
+        <div class="form-div-side"><a class="button" href="/accounts/deposit">Deposit</a></div>
+       <div class="form-div-side"><a class="button" href="/accounts/withdraw">Withdraw</a></div>
       </div>
     </div>
 

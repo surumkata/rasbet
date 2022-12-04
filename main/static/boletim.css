@@ -120,7 +120,7 @@
 
 .buttonApostar:disabled{
     cursor: not-allowed;
-    background-color: #444349;
+    background-color: #bababa3f;
 }
 
 .montante{
