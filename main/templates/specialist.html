@@ -131,14 +131,13 @@
             <div class="odd">
               <input class="odd_input" type="number"  game_id="{{g.game.game_id}}" data-checked="false" data-type="away" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" original-value="{{g.away_odd}}" value="{{g.away_odd}}" min="0" required>{{g.game.away}}</input>
             </div>
-            <input game_id="{{g.game.game_id}}" type="submit" value="Aprovar" onclick="change_state_to_open(this)"> </input>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
     <div class="display-right" style="background-color:#ccc;">
-      <h2>Confirmar Operação</h2>
+      <h2>Confirm Operation</h2>
       <div id="confirm_state">
         <input type="submit" value="Cancelar" onclick="save(this);"> </input>
         <input type="submit" value="Gravar" onclick="save(this);"> </input>
