@@ -7,9 +7,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'history.css' %}"/>
 {% csrf_token %}
 <title> Home Page </title>
 </head>
@@ -21,31 +20,97 @@
         <div class="tab"><a href="/">Desporto</a></div>
         <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
         <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
-        <div class="tab_balance">{{ balance }}€<a href="/accounts/deposit">+</a></div>
+        <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
       </div>
       <div class="header-right">
         <div class="tab"><a href="/accounts/logout">Logout</a></div>
       </div>
     </div>
-    <div><p>STATISTICS</p></div>
-    <div><p>Total depositado: {{statistics.deposit}}€</p></div>
-    <div><p>Total levantado: {{statistics.withdraw}}€</p></div>
-    <div><p>Total apostado: {{statistics.bet_spend}}€ Apostas feitas: {{statistics.bets}} Apostas simples: {{statistics.simple_bets}} Apostas multiplas: {{statistics.multiple_bets}} Apostas em espera: {{statistics.standby_bets}}</p></div>
-    <div><p>Total ganho com apostas: {{statistics.bet_gains}} €</p></div>
-    <div><p>Total ganho com promoções (deposito): {{statistics.promotion_gains}} €</p></div>
-    <div><p>Percentagem de apostas ganhas: {{statistics.win_rate}}% Apostas ganhas: {{statistics.won_bets}} Apostas perdidas: {{statistics.lost_bets}}</p></div>
-    <div><p>Percentagem de apostas simples ganhas: {{statistics.win_rate_simple}}% Apostas ganhas: {{statistics.won_simple_bets}} Apostas perdidas: {{statistics.lost_simple_bets}}</p></p></div>
-    <div><p>Percentagem de apostas multiplas ganhas: {{statistics.win_rate_multiple}}% Apostas ganhas: {{statistics.won_multiple_bets}} Apostas perdidas: {{statistics.lost_multiple_bets}}</p></p></div>
-    <div><p>TRANSACTIONS</p></div>
-    <table>
-      {%for t in transactions%}
-      <tr>
-        <td>{{t.type}}</td>
-        <td>{{t.amount}}</td>
-        <td>{{t.method}}</td>
-        <td>{{t.date}}</td>
-      </tr>
-      {%endfor%}
-    </table>
+    <div class="container">
+      <div class="statistics">
+        <div><h2>Statistics</h2></div>
+        <div class="statistics-side">
+          <div class="statistics-side3">
+            <p>Total deposit: <b>{{statistics.deposit | floatformat:2}} €</b></p>
+          </div>
+          <div class="statistics-side3">
+            <p>Total withdraw: <b>{{statistics.withdraw | floatformat:2}} €</b></p>
+          </div>
+          <div class="statistics-side3">
+            <p>Total apostate: <b>{{statistics.bet_spend | floatformat:2}} €</b></p>
+          </div>
+          <div class="statistics-side4">
+            <p>Total gains: <b>{{statistics.bet_gains| floatformat:2}} €</b></p>
+          </div>
+        </div>
+        <div><h3>All bets</h3></div>
+        <div class="statistics-side">
+          <div class="statistics-side5">
+            <p>Bets: <b>{{statistics.bets}}</b></p>
+          </div>
+          <div class="statistics-side5">
+            <p>Standby bets: <b>{{statistics.standby_bets}}</b></p>
+          </div>
+          <div class="statistics-side5">
+            <p>Won bets: <b>{{statistics.won_bets}}</b></p>
+          </div>
+          <div class="statistics-side5">
+            <p>Lost bets: <b>{{statistics.lost_bets}}</b></p>
+          </div>
+          <div class="statistics-side5">
+            <p>Win rate: <b>{{statistics.win_rate|floatformat:2}}%</b></p>
+          </div>
+        </div>
+        <div><h3>Simple bets</h3></div>
+        <div class="statistics-side">
+          <div class="statistics-side4">
+            <p>Bets: <b>{{statistics.simple_bets}}</b></p>
+          </div>
+          <div class="statistics-side4">
+            <p>Won bets: <b>{{statistics.won_simple_bets}}</b></p>
+          </div>
+          <div class="statistics-side4">
+            <p>Lost bets: <b>{{statistics.lost_simple_bets}}</b></p>
+          </div>
+          <div class="statistics-side4">
+            <p>Win rate: <b>{{statistics.win_rate_simple|floatformat:2}}%</b></p>
+          </div>
+        </div>
+        <div><h3>Multiple bets</h3></div>
+        <div class="statistics-side">
+          <div class="statistics-side4">
+            <p>Bets: <b>{{statistics.multiple_bets}}</b></p>
+          </div>
+          <div class="statistics-side4">
+            <p>Won bets: <b>{{statistics.won_multiple_bets}}</b></p>
+          </div>
+          <div class="statistics-side4">
+            <p>Lost bets: <b>{{statistics.lost_multiple_bets}}</b></p>
+          </div>
+          <div class="statistics-side4">
+            <p>Win rate: <b>{{statistics.win_rate_multiple|floatformat:2}}%</b></p>
+          </div>
+        </div>        
+      </div>
+      <div class="transactions">
+        <div><h2>Transactions</h2></div>
+        <table>
+          <tr>
+            <th>Operation</th>
+            <th>Amount</th>
+            <th>Method</th>
+            <th>Date</th>
+          </tr>
+          {%for t in transactions%}
+          <tr>
+            <td>{{t.type}}</td>
+            <td>{{t.amount|floatformat:2}} €</td>
+            <td>{{t.method}}</td>
+            <td>{{t.date|date:"d/m/Y h:m"}}</td>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
+    </div>
  </body>
  </html>

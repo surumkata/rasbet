@@ -265,8 +265,16 @@ def history_transactions(request):
         elif transaction.type.split(":")[0] == "promo_code":
             statistics['promotion_gains'] += transaction.amount
 
+        if(transaction.type =="bet"):
+            type = "Bet"
+        elif(transaction.type =="bet_won"):
+            type ="Bet Won"
+        elif(transaction.type =="deposit"):
+            type="Deposit"
+        else: type = "Withdraw"
+
         transactions.append({
-            "type": transaction.type,
+            "type": type,
             "method": transaction.method.method,
             "amount": transaction.amount,
             "date": transaction.datetime
