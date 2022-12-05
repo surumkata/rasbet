@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
+{% csrf_token %}
+<title> Perfil </title>
+</head>
+
+<body>
+    <div class="header">
+      <div class="header-left">
+        <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
+        <div class="tab"><a href="/">Desporto</a></div>
+        <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
+        <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
+        <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
+      </div>
+      <div class="header-right">
+        <div class="language">
+          <select class="change_language" original-value="{{language}}" value="{{language}}" onchange="change_language(this)">
+            <optgroup>
+              <option selected disabled hidden  value="{{language}}">{{language|upper}}</option>
+              <option value="en">EN</option>
+              <option value="pt">PT</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="tab"><a href="/accounts/logout">Sair</a></div>
+      </div>
+    </div>
+    <div>
+    <div class="container">
+      <div class="form-box">
+        <div class="form-div">
+          <div class="form-div-side"><a class="button" href="/accounts/balance">Saldo</a></div>
+          <div class="form-div-side"><a class="button" href="/accounts/favorites">Favoritos</a></div>
+        </div>
+        <div class="form-div">
+          <div class="form-div-side"><a class="button" href="/accounts/history_bets">Histórico de apostas</a></div>
+          <div class="form-div-side"><a class="button" href="/accounts/history_transactions">Histórico de transações</a></div>
+      </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="form-box">
+        <form method="POST" required>
+            {% csrf_token %}
+            <h2>Perfil de {{ fname }}</h2>
+            <div class="form-div">
+              <div class="form-div-side">
+                <label for="fname">Primeiro nome</label>
+                <input type="text" placeholder="Primeiro nome" id="fname" name="fname" value={{user.first_name}} required>
+              </div>
+              <div class="form-div-side">
+                <label for="lname">Último nome</label>
+                <input type="text" placeholder="Último nome" id="lname" name="lname" value={{user.last_name}} required>
+              </div>
+            </div>
+            <div class="form-div">
+              <div class="form-div-side">
+                <label for="email">Email</label>
+                <input type="text" placeholder="Email" id="email" name="email" value={{user.email}} required>
+              </div>
+              <div class="form-div-side">
+                <label for="birthday">Data de nascimento</label>
+                <input type="date" id="birthday" name="birthday" value={{user.birthday}} required/>
+              </div>
+            </div>
+            {%if msg == 0 %}
+            <p>Alterado com sucesso!</p>
+            {% elif msg == 1 %}
+            <span>Email já se encontra registado!</span>
+            {% elif msg == 2 %}
+            <span>Palavra passe incorreta!</span>
+            {%endif%}
+            <div id="confirm_state">
+              <button type="submit">Guardar alterações</button>
+              <label for="psw">Confirmar password</label>
+              <input type="password" placeholder="Password" name="psw" value="" required>
+            </div>
+        </form>
+        <a href="/accounts/change_password">Alterar password</a>
+      </div>
+    </div> 
+  <script src="{% static 'birthday.js' %}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'cookies.js' %}"></script>
+ </body>
+ </html>

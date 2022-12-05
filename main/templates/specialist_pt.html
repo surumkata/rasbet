@@ -1,0 +1,200 @@
+{% load static %}
+{% if specialist %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'filter.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'popup.css' %}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>   
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% csrf_token %}
+<title> Especialista </title>
+</head>
+
+<body>
+  {% if logged %}
+    <div class="header">
+      <div class="header-left">
+        <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
+      </div>
+      <div class="header-right">
+        <div class="language">
+          <select class="change_language" original-value="{{language}}" value="{{language}}" onchange="change_language(this)">
+            <optgroup>
+              <option selected disabled hidden  value="{{language}}">{{language|upper}}</option>
+              <option value="en">EN</option>
+              <option value="pt">PT</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="tab"><a href="/accounts/logout">Logout</a></div>
+      </div>
+    </div>
+  {% else %}
+  <div class="header">
+    <div class="header-left">
+      <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
+      <div class="tab"><a class="active" href="/game/sports_page">Desporto</a></div>
+      <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
+    </div>
+    <div class="header-right">
+      <div class="tab"><a href="/accounts/login">Login</a></div>
+      <div class="tab"><a href="/accounts/signup">Registar</a></div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="display">
+    <div class="display-left">
+      <div class="filterWrapper">
+        <div class="filters">
+          <form method='get' action="/game/filter_specialist">
+            <h4>Desportos</h4>
+                <div class="sports_filters">
+                  {% for s, countrys in sports_info.items %}
+                  <div class="filter_tab">
+                  <p>
+                      <a class="" data-toggle="collapse"
+                              href="#{{s}}" role="button"
+                              aria-expanded="false" aria-controls="{{s}}">
+                          {{s}}
+                      </a>
+                  </p>
+                  </div>
+                  <div class="collapse" id="{{s}}">
+                      <div class="filter">
+                        <button name="sport" type="submit" value="{{s}}" data-checked="false" >Toda a oferta</button>
+                      </div>
+                      {% for country, competitions in countrys.items %}
+                      <p style="margin-left:15px">
+                        <a class="" data-toggle="collapse"
+                              href="#{{s}}{{country}}" role="button"
+                              aria-expanded="false" aria-controls="{{s}}{{country}}">
+                          {{country}}
+                        </a>
+                      </p>
+                      <div class="collapse" id="{{s}}{{country}}">
+                        {% for c in competitions %}
+                        <div class="filter_tab">
+                        <div class="filter" style="margin-left: 30px;">
+                          <button name="competition" type="submit" value="{{c}}" data-checked="false" >{{c}}</button>
+                        </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                      {% endfor %}
+                  </div>
+                  {% endfor %}
+                </div>
+                </form>
+        </div>
+      </div>
+    </div>
+    <div class="display-center">
+      {% for g in games_onhold%}
+      <div class="card-event">
+        <div class="event">
+          <div class="event_path">
+            <p><span>{{g.sport}} - {{g.country}} - {{g.competition}}<span></p>
+          </div>
+          <div class="event_info">
+            <div class="home">
+              <p><b>{{g.game.home}}</b></p>
+            </div>
+            <div class="event_date">
+              <div class="datetime">
+                <div class="date">
+                  {{g.game.datetime|date:"d/m/Y"}}
+                </div>
+                <div class="hour">
+                  {{g.game.datetime|date:"H:i"}}
+                </div>
+              </div>
+            </div>
+            <div class="away">
+              <p><b>{{g.game.away}}</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="market_odds_specialist">
+          <div id="{{g.game.game_id}}" class="odds" original-value="{{g.state}}" value="{{g.state}}">
+            <div class="oddinput">
+              <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="home" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" original-value="{{g.home_odd}}" value="{{g.home_odd}}" min="0" required></input><div class="oddName">{{g.game.home}}</div>
+            </div>
+            <div class="oddinput">
+              <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="draw" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" original-value="{{g.draw_odd}}" value="{{g.draw_odd}}" min="0" required></input><div class="oddName">Draw</div>
+            </div>
+            <div class="oddinput">
+              <input class="odd_input" type="number"  game_id="{{g.game.game_id}}" data-checked="false" data-type="away" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" original-value="{{g.away_odd}}" value="{{g.away_odd}}" min="0" required></input><div class="oddName">{{g.game.away}}</div>
+            </div>
+          </div>
+          <input game_id="{{g.game.game_id}}" type="submit" value="Approve" onclick="change_state_to_open(this)"> </input>
+        </div>
+      </div>
+      {% endfor %}
+      {% for g in games_open%}
+      <div class="card-event" style="background-color: #b6d4b4">
+        <div class="event">
+          <div class="event_path">
+            <p><span>{{g.sport}} - {{g.country}} - {{g.competition}}<span></p>
+          </div>
+          <div class="event_info">
+            <div class="home">
+              <p><b>{{g.game.home}}</b></p>
+            </div>
+            <div class="event_date">
+              <div class="datetime">
+                <div class="date">
+                  {{g.game.datetime|date:"d/m/Y"}}
+                </div>
+                <div class="hour">
+                  {{g.game.datetime|date:"H:i"}}
+                </div>
+              </div>
+            </div>
+            <div class="away">
+              <p><b>{{g.game.away}}</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="market_odds">
+          <div id="{{g.game.game_id}}" class="odds" original-value="{{g.state}}" value="{{g.state}}">
+            <div class="oddinput">
+              <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="home" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" original-value="{{g.home_odd}}" value="{{g.home_odd}}" min="0" required></input><div class="oddName">{{g.game.home}}</div>
+            </div>
+            <div class="oddinput">
+              <input class="odd_input" type="number" game_id="{{g.game.game_id}}" data-checked="false" data-type="draw" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" original-value="{{g.draw_odd}}" value="{{g.draw_odd}}" min="0" required></input><div class="oddName">Draw</div>
+            </div>
+            <div class="oddinput">
+              <input class="odd_input" type="number"  game_id="{{g.game.game_id}}" data-checked="false" data-type="away" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.away}}" data-odd="{{g.away_odd}}" original-value="{{g.away_odd}}" value="{{g.away_odd}}" min="0" required></input><div class="oddName">{{g.game.away}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="display-right">
+      <h2>Confirmar Operação</h2>
+      <div id="confirm_state">
+        <input type="submit" value="Cancel" onclick="save(this);"> </input>
+        <input type="submit" value="Save" onclick="save(this);"> </input>
+      </div>
+      </form>
+    </div>
+  </div>
+  <script src="{% static 'specialist.js' %}"></script>
+  <script src="{% static 'cookies.js' %}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ </body>
+ </html>
+{% endif %}

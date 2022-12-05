@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'boletim.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+{% csrf_token %}
+<title> Promoções </title>
+</head>
+
+<body>
+  {% if logged %}
+    <div class="header">
+      <div class="header-left">
+        <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
+        <div class="tab"><a href="/">Sport</a></div>
+        <div class="tab"><a class="active" href="/accounts/promotions">Promoções</a></div>
+        <div class="tab"><a href="/accounts/profile">{{ fname }}</a></div>
+        <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
+      </div>
+      <div class="header-right">
+        <div class="language">
+          <select class="change_language" original-value="{{language}}" value="{{language}}" onchange="change_language(this)">
+            <optgroup>
+              <option selected disabled hidden  value="{{language}}">{{language|upper}}</option>
+              <option value="en">EN</option>
+              <option value="pt">PT</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="tab"><a href="/accounts/logout">Sair</a></div>
+      </div>
+    </div>
+  {% else %}
+  <div class="header">
+    <div class="header-left">
+      <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
+      <div class="tab"><a href="/">Sport</a></div>
+      <div class="tab"><a class="active" href="/accounts/promotions">Promoções</a></div>
+    </div>
+    <div class="header-right">
+      <div class="tab"><a href="/accounts/login">Entrar</a></div>
+      <div class="tab"><a href="/accounts/signup">Registar</a></div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="container">
+    {% for promotion in promotions%}
+    <div style="width:100%">
+      <img src="{{ MEDIA_URL }}{{promotion}}" alt="{{promotion}}">
+    </div>
+    {%endfor%}
+  </div>
+  
+
+ 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'cookies.js' %}"></script>
+ </body>
+ </html>
