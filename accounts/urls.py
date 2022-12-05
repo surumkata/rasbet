@@ -9,6 +9,7 @@ urlpatterns = [
     path('balance/',views.balance,{}),
     path('deposit/',views.deposit,{}),
     path('deposit/mbway/',views.mbway,{}),
+    path('deposit/card/',views.card,{}),
     path('withdraw/',views.withdraw,{}),
     path('history_bets/',views.history_bets,{}),
     path('history_transactions/',views.history_transactions,{}),
@@ -18,6 +19,3 @@ urlpatterns = [
     path('favorites/',views.favorites,{}),
     path('update_favorite/',views.update_favorite,{})
 ]
-
-
-

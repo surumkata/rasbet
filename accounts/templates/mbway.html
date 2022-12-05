@@ -14,10 +14,12 @@
         <form method="POST" required>
           {% csrf_token %}
           <h2>Phone number</h2>
-          <input type="number"  name="phoneNumber">
-          <button type="submit"  name="" value="pay">Pay</button>
+          <input type="number" oninput="check_phone_number(this)" name="phoneNumber">
+          <button type="submit" id="mbpaybtt" name="" value="pay" disabled>Pay</button>
         </form>
       </div>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'transations.js' %}"></script>
   </body>
 </html>

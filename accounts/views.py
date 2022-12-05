@@ -158,6 +158,43 @@ def mbway(request):
 
     return response
 
+def card(request):
+    session_id = request.COOKIES.get("session")
+
+    if session_id:
+        response = render(request, "card.html")
+        if request.method == 'POST':
+            valid_promotion = True
+            amount = request.session.get('amount', False)
+            promo_code = request.session.get('promo_code', False)
+            reward = 0
+            if promo_code:
+                promotion = Deposit_Promotion.objects.get(
+                    promo_code=promo_code)
+                user = Session.objects.get(
+                    session_id=session_id).user_in_session
+                if promotion.valid(user, amount):
+                    reward = promotion.reward
+                else:
+                    valid_promotion = False
+
+            u = Session.objects.get(session_id=session_id)
+
+            if valid_promotion:
+                if Transation.regist(u.user_in_session, "deposit", "card", amount):
+                    if reward > 0:
+                        Transation.regist(
+                            u.user_in_session, f"promo_code:{promo_code}", "promotion", reward)
+                    response = redirect('/accounts/balance')
+            else:
+                context = {}
+                context['promo_error'] = 2
+                response = render(request, 'deposit.html', context)
+    else:
+        response = redirect('/accounts/login/')
+
+    return response
+
 
 def withdraw(request):
     session_id = request.COOKIES.get("session")
@@ -381,7 +418,7 @@ def history_bets(request):
                         "bet": bet_type,
                         "status": status
                     })
-                
+
                 if(entry.bet.status.status=="open"):
                         status = "Open"
                 elif(entry.bet.status.status=="won"):
@@ -496,7 +533,7 @@ def update_favorite(request):
                     user = session.user_in_session
                     user.update_favorite(type,favorite)
                     status = {'status': 0, 'message': "favorite updated"}
-                    
+
 
     response = {'status': 1, 'message': "Error"}
     response = HttpResponse(json.dumps(status), content_type='application/json')

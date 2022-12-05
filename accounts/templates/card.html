@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
+    <title> Deposit </title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-box">
+        <form method="POST" required>
+          {% csrf_token %}
+          <h2>Card details</h2>
+
+
+          <input type="numeric" id="cardNumber"  placeholder="Card number" oninput="card_number_mask(this)" minlength="16" maxlength="16" >
+          <input type="text" id="cardHolder"  oninput="expdate_mask(this)" minlength="5" maxlength="5" placeholder="Expiry date">
+          <input type="numeric"  id="cvv"  oninput="check_cvv(this)"   minlength="3" maxlength="3" placeholder="CVV" >
+          <input type="text"  id="cardOwner" oninput="check_name(this)" placeholder="Card owner" >
+          <div id="invalid_owner"></div>
+          <button id="paybtt" type="submit"  name="" value="pay" disabled>Pay</button>
+        </form>
+      </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'transations.js' %}"></script>
+  </body>
+</html>
