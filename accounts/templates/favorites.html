@@ -23,6 +23,15 @@
       <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
     </div>
     <div class="header-right">
+      <div class="language">
+        <select class="change_language" original-value="{{language}}" value="{{language}}" onchange="change_language(this)">
+          <optgroup>
+            <option selected disabled hidden  value="{{language}}">{{language|upper}}</option>
+            <option value="en">EN</option>
+            <option value="pt">PT</option>
+          </optgroup>
+        </select>
+      </div>
       <div class="tab"><a href="/accounts/logout">Logout</a></div>
     </div>
   </div>
@@ -103,5 +112,7 @@
     </div>
     -->
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'cookies.js' %}"></script>
  </body>
  </html>
