@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
+    <title> Depósito </title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-box">
+        <form method="POST" required>
+          {% csrf_token %}
+          <h2>Número de telemóvel</h2>
+          <input type="number" oninput="check_phone_number(this)" name="phoneNumber">
+          <button type="submit" id="mbpaybtt" name="" value="pay" disabled>Pagamento</button>
+        </form>
+      </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'transations.js' %}"></script>
+    <script src="{% static 'cookies.js' %}"></script>
+  </body>
+</html>

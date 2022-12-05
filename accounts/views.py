@@ -82,6 +82,7 @@ def balance(request):
             "logged": True,
             "id": session.user_in_session.userID,
             "fname": session.user_in_session.first_name,
+            'language':language,
         }
         html = change_url_language('balance',language)
         response = render(request, html, context)
@@ -120,6 +121,7 @@ def deposit(request):
             else:
                 context = {}
                 context['promo_error'] = 1
+                context['language'] = language
                 html = change_url_language('deposit',language)
                 response = render(request, html, context)
     else:
@@ -163,6 +165,7 @@ def mbway(request):
             else:
                 context = {}
                 context['promo_error'] = 2
+                context['language'] = language
                 html = change_url_language('deposit',language)
                 response = render(request, html, context)
     else:
@@ -204,6 +207,7 @@ def card(request):
             else:
                 context = {}
                 context['promo_error'] = 2
+                context['language'] = language
                 html = change_url_language('deposit',language)
                 response = render(request, html, context)
     else:
@@ -225,6 +229,7 @@ def withdraw(request):
             "id": session.user_in_session.userID,
             "fname": session.user_in_session.first_name,
         }
+        context['language'] = language
         response = render(request, "withdraw.html",context)
         if request.method == 'POST':
             amount = request.POST.get('amount', False)
@@ -349,6 +354,7 @@ def history_transactions(request):
         "statistics": statistics
     }
     language = session.language
+    context['language'] = language
     html = change_url_language('history_transactions',language)
     response = render(request, html, context)
 
@@ -464,6 +470,7 @@ def history_bets(request):
             "bets": bets
         }
         language = session.language
+        context['language'] = language
         html = change_url_language('history_bets',language)
         response = render(request, html, context)
 
@@ -531,6 +538,7 @@ def favorites(request):
             "favs_players": favs_players,
         }
         language = session.language
+        context['language'] = language
         html = change_url_language('favorites',language)
         response = render(request, html, context)
 
@@ -597,7 +605,10 @@ def change_password(request):
                     "id": user_id,
                     "msg": msg
                 }
-            response = render(request, 'change_password.html', context)
+            context['language'] = language
+            language = session.language
+            html = change_url_language('change_password',language)
+            response = render(request, html, context)
 
     except Exception as e:
         print('error: ' + str(e))
@@ -635,7 +646,10 @@ def profile(request):
         msg = user.update(password, fname, lname, email, birthday)
 
     try:
-        response = render(request, 'index.html', context)
+        language = session.language
+        html = change_url_language('index',language)
+        context['language'] = language
+        response = render(request, html, context)
         if cookie:
             session = Session.objects.get(session_id=cookie)
             user_id = session.user_in_session.userID
@@ -653,10 +667,14 @@ def profile(request):
                 "user": user,
                 "msg": msg
             }
-            response = render(request, 'profile.html', context)
+            context['language'] = language
+            html = change_url_language('profile',language)
+            response = render(request, html, context)
     except Exception as e:
         print('error: ' + str(e))
-        response = render(request, 'index.html', context)
+        language = session.language
+        html = change_url_language('index',language)
+        response = render(request, html, context)
         response.delete_cookie('session')
     return response
 
@@ -671,6 +689,7 @@ def promotions(request):
     for promotion in promotions:
         promotion_list.append(promotion.image_path)
 
+    html = 'promotions.html'
     context["promotions"] = promotion_list
     try:
         response = render(request, 'index.html', context)
@@ -681,9 +700,13 @@ def promotions(request):
             context["id"] = user_id
             context["fname"] = session.user_in_session.first_name
             context["balance"] = session.user_in_session.balance
+            language = session.language
+            context['language'] = language
+            html = change_url_language('promotions',language)
+        
 
     except Exception as e:
         print('error: ' + str(e))
 
-    response = render(request, 'promotions.html', context)
+    response = render(request, html, context)
     return response
