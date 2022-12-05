@@ -6,6 +6,7 @@ from django.urls import reverse
 from .models import *
 from game.models import Participant
 from gamble.models import Bet_game, Odd, Bet, Bet_status
+from main.models import change_url_language
 
 
 def login(request):
@@ -74,14 +75,16 @@ def balance(request):
 
     session_id = request.COOKIES.get("session")
     if session_id:
-        u = Session.objects.get(session_id=session_id)
+        session = Session.objects.get(session_id=session_id)
+        language = session.language
         context = {
-            "balance": u.user_in_session.balance,
+            "balance": session.user_in_session.balance,
             "logged": True,
-            "id": u.user_in_session.userID,
-            "fname": u.user_in_session.first_name,
+            "id": session.user_in_session.userID,
+            "fname": session.user_in_session.first_name,
         }
-        response = render(request, 'balance.html', context)
+        html = change_url_language('balance',language)
+        response = render(request, html, context)
     else:
         response = redirect('/accounts/login/')
 
@@ -92,13 +95,16 @@ def deposit(request):
     session_id = request.COOKIES.get("session")
 
     if session_id:
-        response = render(request, 'deposit.html')
+        session = Session.objects.get(session_id=session_id)
+        language = session.language
+        html = change_url_language('deposit',language)
+        response = render(request, html)
 
         if request.method == 'POST':
             exists_promotion = True
             amount = request.POST.get('amount', False)
             promo_code = request.POST.get('promo_code', False)
-            session_id = request.COOKIES.get("session")
+            
 
             request.session['amount'] = amount
             request.session['promo_code'] = promo_code
@@ -114,7 +120,8 @@ def deposit(request):
             else:
                 context = {}
                 context['promo_error'] = 1
-                response = render(request, 'deposit.html', context)
+                html = change_url_language('deposit',language)
+                response = render(request, html, context)
     else:
         response = redirect('/accounts/login/')
 
@@ -125,7 +132,10 @@ def mbway(request):
     session_id = request.COOKIES.get("session")
 
     if session_id:
-        response = render(request, "mbway.html")
+        session = Session.objects.get(session_id=session_id)
+        language = session.language
+        html = change_url_language('mbway',language)
+        response = render(request, html)
         if request.method == 'POST':
             valid_promotion = True
             amount = request.session.get('amount', False)
@@ -141,18 +151,20 @@ def mbway(request):
                 else:
                     valid_promotion = False
 
-            u = Session.objects.get(session_id=session_id)
+            session = Session.objects.get(session_id=session_id)
+            language = session.language
 
             if valid_promotion:
-                if Transation.regist(u.user_in_session, "deposit", "mbway", amount):
+                if Transation.regist(session.user_in_session, "deposit", "mbway", amount):
                     if reward > 0:
                         Transation.regist(
-                            u.user_in_session, f"promo_code:{promo_code}", "promotion", reward)
+                            session.user_in_session, f"promo_code:{promo_code}", "promotion", reward)
                     response = redirect('/accounts/balance')
             else:
                 context = {}
                 context['promo_error'] = 2
-                response = render(request, 'deposit.html', context)
+                html = change_url_language('deposit',language)
+                response = render(request, html, context)
     else:
         response = redirect('/accounts/login/')
 
@@ -162,7 +174,10 @@ def card(request):
     session_id = request.COOKIES.get("session")
 
     if session_id:
-        response = render(request, "card.html")
+        session = Session.objects.get(session_id=session_id)
+        language = session.language
+        html = change_url_language('card',language)
+        response = render(request, html)
         if request.method == 'POST':
             valid_promotion = True
             amount = request.session.get('amount', False)
@@ -178,18 +193,19 @@ def card(request):
                 else:
                     valid_promotion = False
 
-            u = Session.objects.get(session_id=session_id)
-
+            session = Session.objects.get(session_id=session_id)
+            language = session.language
             if valid_promotion:
-                if Transation.regist(u.user_in_session, "deposit", "card", amount):
+                if Transation.regist(session.user_in_session, "deposit", "card", amount):
                     if reward > 0:
                         Transation.regist(
-                            u.user_in_session, f"promo_code:{promo_code}", "promotion", reward)
+                            session.user_in_session, f"promo_code:{promo_code}", "promotion", reward)
                     response = redirect('/accounts/balance')
             else:
                 context = {}
                 context['promo_error'] = 2
-                response = render(request, 'deposit.html', context)
+                html = change_url_language('deposit',language)
+                response = render(request, html, context)
     else:
         response = redirect('/accounts/login/')
 
@@ -200,18 +216,19 @@ def withdraw(request):
     session_id = request.COOKIES.get("session")
 
     if session_id:
-        u = Session.objects.get(session_id=session_id)
+        session = Session.objects.get(session_id=session_id)
+        language = session.language
+        html = change_url_language('withdraw',language)
         context = {
-            "balance": u.user_in_session.balance,
+            "balance": session.user_in_session.balance,
             "logged": True,
-            "id": u.user_in_session.userID,
-            "fname": u.user_in_session.first_name,
+            "id": session.user_in_session.userID,
+            "fname": session.user_in_session.first_name,
         }
         response = render(request, "withdraw.html",context)
         if request.method == 'POST':
             amount = request.POST.get('amount', False)
-            u = Session.objects.get(session_id=session_id)
-            if Transation.regist(u.user_in_session, "withdraw", "mbway", amount):
+            if Transation.regist(session.user_in_session, "withdraw", "mbway", amount):
                 response = redirect('/accounts/balance')
     else:
         response = redirect('/accounts/login/')
@@ -331,8 +348,9 @@ def history_transactions(request):
         "transactions": transactions,
         "statistics": statistics
     }
-
-    response = render(request, "history_transactions.html", context)
+    language = session.language
+    html = change_url_language('history_transactions',language)
+    response = render(request, html, context)
 
     return response
 
@@ -341,7 +359,7 @@ def history_bets(request):
     session_id = request.COOKIES.get("session")
 
     if session_id:
-        u = Session.objects.get(session_id=session_id)
+        session = Session.objects.get(session_id=session_id)
 
         if request.method == 'POST':
             bet_id = request.POST['bet_id']
@@ -353,9 +371,9 @@ def history_bets(request):
                 amount = bet.amount
                 bet.delete()
                 Transation.regist(
-                    user=u.user_in_session, type="bet_cancel", method="balance", amount=amount)
+                    user=session.user_in_session, type="bet_cancel", method="balance", amount=amount)
 
-        user_bet_history = History.objects.filter(user=u.user_in_session)
+        user_bet_history = History.objects.filter(user=session.user_in_session)
 
         bets = []
         for entry in user_bet_history:
@@ -440,12 +458,14 @@ def history_bets(request):
         print(bets)
         context = {
             "logged": True,
-            "id": u.user_in_session.userID,
-            "fname": u.user_in_session.first_name,
-            "balance": u.user_in_session.balance,
+            "id": session.user_in_session.userID,
+            "fname": session.user_in_session.first_name,
+            "balance": session.user_in_session.balance,
             "bets": bets
         }
-        response = render(request, "history_bets.html", context)
+        language = session.language
+        html = change_url_language('history_bets',language)
+        response = render(request, html, context)
 
     else:
         response = redirect('/accounts/login/')
@@ -510,7 +530,9 @@ def favorites(request):
             "favs_teams": favs_teams,
             "favs_players": favs_players,
         }
-        response = render(request, "favorites.html", context)
+        language = session.language
+        html = change_url_language('favorites',language)
+        response = render(request, html, context)
 
     else:
         response = redirect('/accounts/login/')

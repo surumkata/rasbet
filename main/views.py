@@ -1,8 +1,11 @@
+import json
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from accounts.models import *
 from game.models import *
 import requests
 from collections import OrderedDict
+from main.models import change_url_language
 
 
 # Create your views here
@@ -25,6 +28,7 @@ def home(request):
                     "logged" : False,
                     "games_info" : games,
                     "sports_info" : sports_listing,
+                    "language" : 'en'
                 }
     response = render(request, 'index.html',context)
     try:
@@ -32,6 +36,7 @@ def home(request):
             session = Session.objects.get(session_id=cookie)
             user_id = session.user_in_session.userID
             fav_list = favorites_list(session.user_in_session)
+            language = session.language
             context = {
                     "logged" : True,
                     "id" : session.user_in_session.userID,
@@ -40,8 +45,11 @@ def home(request):
                     "games_info" : games,
                     "sports_info" : sports_listing,
                     "favorites_info" : fav_list,
+                    "language" : language
             }
-            response = render(request, 'index.html',context)
+            html = change_url_language('index',language)
+
+            response = render(request, html,context)
             if Specialist.is_specialist(user_id):
                 on_hold = State.objects.get(state="on_hold")
                 open = State.objects.get(state="open")
@@ -63,6 +71,7 @@ def home(request):
                     "games_open" : open_listing,
                     "games_onhold" : onhold_listing,
                     "sports_info" : sports_listing,
+                    "language" : session.language,
                 }
                 response = render(request, 'specialist.html',context)
 
@@ -73,7 +82,30 @@ def home(request):
                     "logged" : False,
                     "games_info" : games,
                     "sports_info" : sports_listing,
+                    "language" : 'en'
                 }
             response = render(request, 'index.html',context)
             response.delete_cookie('session')
     return response
+
+
+
+def change_language(request):
+    if request.method == "POST":
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+    if is_ajax:
+        request_data = json.load(request)
+
+        cookie = request.COOKIES.get("session")
+
+        if cookie:
+            session = Session.objects.get(session_id=cookie)
+            if session:
+                new_language= request_data.get('language')
+                print(new_language)
+                session.language = new_language
+                session.save()
+                response = {'status': 0, 'message': "Language changed"}
+        else:
+            response = {'status': 1, 'message': "Not logged in"}
+    return HttpResponse(json.dumps(response), content_type='application/json')

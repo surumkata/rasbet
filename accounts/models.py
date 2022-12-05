@@ -117,16 +117,6 @@ class User(models.Model):
         else: return 1
 
 
-
-#Admin module
-class Admin(models.Model):
-    adminID = models.AutoField(primary_key=True)
-    userID = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    @classmethod
-    def is_admin(self,id:str):
-        return Admin.objects.filter(userID=id).exists()
-
 class Specialist(models.Model):
     specID = models.AutoField(primary_key=True)
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -140,6 +130,8 @@ class Session(models.Model):
     login_time = models.DateField(auto_now_add=True)
     ip_adress = models.CharField(max_length=15,null=False)
     session_id = models.CharField(max_length=32,null=False)
+    currency = models.CharField(max_length=1,null=False)
+    language = models.CharField(max_length=10,null=False)
 
     # Create a new session instance
     @classmethod
@@ -155,7 +147,7 @@ class Session(models.Model):
         else:
             ip = request.META.get('REMOTE_ADDR')
 
-        Session.objects.create(user_in_session=user,ip_adress=ip,session_id=session_key)
+        Session.objects.create(user_in_session=user,ip_adress=ip,session_id=session_key,currency='€',language='en')
         return session_key
 
 

@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+def change_url_language(html,language):
+  if language != 'en':
+    return f'{html}_{language}.html'
+  else:
+    return f'{html}.html'

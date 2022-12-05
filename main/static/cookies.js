@@ -114,3 +114,21 @@ function update_fav(elem){
   },
 })
 };
+
+
+function change_language(elem){
+  new_language = elem.value
+
+
+  $.ajax({
+    type: 'POST',
+    url: '/change_language',
+    dataType: "json",
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
+    },
+    data: JSON.stringify({'language' : new_language}),
+    success: window.location.reload()
+  })
+}
