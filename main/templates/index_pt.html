@@ -24,14 +24,14 @@
   <div class="popup" id="no-balance-popup">
     <div class="model">
       <div>
-        Insuficient balance
+        Saldo insuficiente
       </div>
       <div>
         <a href="/accounts/deposit/">
-        <button>Deposit</div>
+        <button>Depósito</div>
         </a>
         <a href="/">
-          <button onclick="close_no_balance_popup()">Later</div>
+          <button onclick="close_no_balance_popup()">Mais Tarde</div>
         </a>
       </div>
     </div>
@@ -40,7 +40,7 @@
   <div class="popup" id="sucess-popup">
     <div class="model">
       <div>
-        Bet done!
+        Aposta registada!
       </div>
       <div>
         <a href="/">
@@ -54,8 +54,8 @@
     <div class="header">
       <div class="header-left">
         <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
-        <div class="tab"><a class="active" href="/">Sport</a></div>
-        <div class="tab"><a href="/accounts/promotions">Promotions</a></div>
+        <div class="tab"><a class="active" href="/">Desporto</a></div>
+        <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
         <div class="tab"><a href="/accounts/profile">{{ fname }}</a></div>
         <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
         
@@ -78,12 +78,12 @@
   <div class="header">
     <div class="header-left">
       <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
-      <div class="tab"><a class="active" href="/">Sport</a></div>
-      <div class="tab"><a href="/accounts/promotions">Promotions</a></div>
+      <div class="tab"><a class="active" href="/">Desporto</a></div>
+      <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
     </div>
     <div class="header-right">
       <div class="tab"><a href="/accounts/login">Login</a></div>
-      <div class="tab"><a href="/accounts/signup">Register</a></div>
+      <div class="tab"><a href="/accounts/signup">Registar</a></div>
     </div>
   </div>
   {% endif %}
@@ -94,7 +94,7 @@
         <div class="filters">
           <form method='get' action="/game/filter">
             {% if logged %}
-            <h4>Favorites</h4>
+            <h4>Favoritos</h4>
             <div class="favorites">
                 {% for type,favorites in favorites_info.items%}
               <p>
@@ -114,7 +114,7 @@
               {%endfor%}
             </div>
             {% endif %}
-            <h4>Sports</h4>
+            <h4>Desportos</h4>
             <div class="sports_filters">
               {% for s, countrys in sports_info.items %}
               <div class="filter_tab">
@@ -126,7 +126,7 @@
                   </a>
               </p>
               {% if logged %}
-                  <div class="favorite"><input type="checkbox"  {%if s in favorites_info.Sport %} checked {%endif%} class="" name="sport:{{s}}" onclick='update_fav(this);'> Favorite</input></div>
+                  <div class="favorite"><input type="checkbox"  {%if s in favorites_info.Sport %} checked {%endif%} class="" name="sport:{{s}}" onclick='update_fav(this);'> Favorito</input></div>
               {%endif%}
               </div>
               <div class="collapse" id="{{s}}">
@@ -148,7 +148,7 @@
                       <button name="competition" type="submit" value="{{c}}" data-checked="false" >{{c}}</button>
                     </div>
                     {% if logged %}
-                      <div class="favorite"><input type="checkbox"  {%if c in favorites_info.Competition %} checked {%endif%} class="" name="competition:{{c}}" onclick='update_fav(this);'> Favorite</input></div>
+                      <div class="favorite"><input type="checkbox"  {%if c in favorites_info.Competition %} checked {%endif%} class="" name="competition:{{c}}" onclick='update_fav(this);'> Favorito</input></div>
                       {%endif%}
                     </div>
                     {% endfor %}
@@ -158,15 +158,15 @@
               {% endfor %}
             </div>
             </form>
-            <h6>Order by:</h6>
+            <h6>Ordenar por:</h6>
             <div class="orders">
               <form method='get' action="/game/filter">
                 <div>
                   {% if get.sport %} <input type="hidden" name="sport" value="{{get.sport}}"> {%endif%}
                   {% if get.competition %}<input type="hidden" name="competition" value="{{get.competition}}">{%endif%}
                   {% if get.participant %}<input type="hidden" name="participant" value="{{get.participant}}">{%endif%}
-                  {% if get.order == "true" %}<button class="checked" name="order_by_nb" type="submit" value="false">number of bets</button>
-                  {%else%}<button name="order_by_nb" type="submit" value="true">number of bets{%endif%}
+                  {% if get.order == "true" %}<button class="checked" name="order_by_nb" type="submit" value="false">número de apostas</button>
+                  {%else%}<button name="order_by_nb" type="submit" value="true">número de apostas{%endif%}
                 </div>
               </form>
             </div>
@@ -206,7 +206,7 @@
         </div>
         <div class="market_odds">
           <div class="odds">
-            <div class="number_bets"><p>+{{g.nb}} bets</p></div>
+            <div class="number_bets"><p>+{{g.nb}} apostas</p></div>
             <div class="odd">
               <button id="{{g.game.game_id}};home" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="{{g.game.home}}" data-odd="{{g.home_odd}}" onclick="button_handler(this);" >{{g.game.home}}<br><span>{{g.home_odd}}</span></button>
               <div class="nb_bar">
@@ -214,7 +214,7 @@
               </div>
             </div>
             <div class="odd">
-              <button id="{{g.game.game_id}};draw" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" onclick="button_handler(this);" >Draw<br><span>{{g.draw_odd}}</span></button>
+              <button id="{{g.game.game_id}};draw" data-checked="false" data-home="{{g.game.home}}" data-away="{{g.game.away}}" data-bet="Draw" data-odd="{{g.draw_odd}}" onclick="button_handler(this);" >Empate<br><span>{{g.draw_odd}}</span></button>
               <div class="nb_bar">
                 <div class="nb_bar_percentage" style="width:{{g.draw_nb}}%"></div>
               </div>
@@ -236,25 +236,25 @@
           <div class="boletim">
             <div class="boletimHeader">
               <div class="title">
-                <p>My bet</p>
+                <p>Minha aposta</p>
               </div>
               <div class="tabs">
                 <div class="tab">
-                  <button id="simplebtt" class="checked" onclick="slip_handler('simple')">Simple</button>
+                  <button id="simplebtt" class="checked" onclick="slip_handler('simple')">Simples</button>
                 </div>
                 <div class="tab">
-                  <button id="multibtt" class="unchecked" onclick="slip_handler('multiple',)">Multiple</button>
+                  <button id="multibtt" class="unchecked" onclick="slip_handler('multiple',)">Múltipla</button>
                 </div>
               </div>
             </div>
-            <div id="slipbody" class="boletimContent slip"><div class="betbox-msg" id="slipbodyMsg">Add your first bet!</div></div>
+            <div id="slipbody" class="boletimContent slip"><div class="betbox-msg" id="slipbodyMsg">Faz a tua primeira aposta!</div></div>
             <div class="boletimFooter">
               <div class="boletimRow">
-                <div id="rowCimaNome" class="boletimRowItem start"><span>Total Amount</span></div>
+                <div id="rowCimaNome" class="boletimRowItem start"><span>Montante total</span></div>
                 <div id="rowCimaValor" class="boletimRowItem end"><span>0,00€</span></div>
               </div>
               <div class="boletimRow">
-                <div id="rowBaixoNome" class="boletimRowItem start"><span>Total Earnings</span></div>
+                <div id="rowBaixoNome" class="boletimRowItem start"><span>Ganhos possíveis</span></div>
                 <div id="valorGanhos" class="boletimRowItem end"><span>0,00€<span></div>
               </div>
               <div class="boletimRowItem">
@@ -269,7 +269,7 @@
     </div>
   </div>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="{% static 'bettingslip.js' %}"></script>
+  <script src="{% static 'bettingslip_pt.js' %}"></script>
   <script src="{% static 'cookies.js' %}"></script>
  </body>
  </html>
