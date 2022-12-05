@@ -6,6 +6,8 @@ from accounts.models import User, Session,Specialist, favorites_list
 from game.models import db_change_gameodd, Game,Odd
 from django.urls import reverse
 import requests
+
+from main.models import change_url_language
 from .models import *
 import json
 
@@ -54,7 +56,9 @@ def filter(request):
                     context['fname'] = session.user_in_session.first_name
                     context['balance'] = session.user_in_session.balance
                     context['favorites_info'] = fav_list
-
+                    language = session.language
+                    context['language'] = language
+                    html = change_url_language('index',language)
                     response = render(request, html, context)
             # tratar de quando cookie existe, mas a sessao nao
             except Exception as e:
@@ -72,6 +76,8 @@ def filter(request):
 
 
 def filter_specialist(request):
+    cookie = request.COOKIES.get("session")
+    session = Session.objects.get(session_id=cookie)
     if request.method == 'GET':
         sport = request.GET.get('sport')
         competition = request.GET.get('competition')
@@ -87,10 +93,6 @@ def filter_specialist(request):
             else:
                 games_onhold = Game.objects.filter(state=on_hold).values()
                 games_open = Game.objects.filter(state=open).values()
-
-
-            cookie = request.COOKIES.get("session")
-            session = Session.objects.get(session_id=cookie)
 
             open_listing = []
             onhold_listing = []
@@ -111,54 +113,12 @@ def filter_specialist(request):
                 "games_onhold" : onhold_listing,
                 "sports_info": sports_listing,
             }
-    response = render(request, 'specialist.html',context)
+    language = session.language
+    context['language'] = language
+    html = change_url_language('specialist',language)
+    response = render(request,html,context)
             
 
-    return response
-
-def change_games_state(request):
-    if request.method == 'GET':
-        sport = request.GET.get('sport')
-        cookie = request.COOKIES.get("session")
-        print(sport)
-
-        if sport is None or sport=='null':
-            games = Game.objects.all().values()
-        else:
-            games = Game.objects.filter(sport_id=sport).values()
-        games_listing = []
-        for game in games:
-            games_listing.append(game_details(game))
-        sports_listing = sports_list()
-        context = {
-                    "logged": False,
-                    "games_info": games_listing,
-                    "sports_info": sports_listing,
-                }
-
-        try:
-            response = render(request, 'index.html', context)
-            if cookie:
-                session = Session.objects.get(session_id=cookie)
-                context = {
-
-                        "logged": True,
-                        "id": session.user_in_session.userID,
-                        "fname": session.user_in_session.first_name,
-                        "balance": session.user_in_session.balance,
-                        "games_info": games_listing,
-                        "sports_info": sports_listing,
-                        "sport": sport,
-                }
-
-        # tratar de quando cookie existe, mas a sessao nao
-        except Exception as e:
-            print(e)
-            response = render(request, 'index.html',context)
-            if cookie:
-                response.delete_cookie('session')
-    else:
-        response = redirect('/')
     return response
 
 
