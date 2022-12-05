@@ -39,8 +39,10 @@ function change_to_simple(){
 
 function check_amount(elem){
   if(elem.value<0.10 && elem.value!="" && elem.value>0){
+      $('#buttonApostar').attr("disabled", true);
       elem.parentElement.outerHTML += "<div>The minimun bet is 0.10€</div>"
   }else if(elem.value>500){
+      $('#buttonApostar').attr("disabled", true);
       elem.parentElement.outerHTML += "<div>The maximum bet is 500€</div>"
   }
 }
@@ -73,18 +75,29 @@ function update_simple_gains(){
 
       betboxesInputs = document.getElementsByClassName("betboxMontanteInput");
       gains = 0
+      emptyInput = false
       for(var i=0;i<betboxesInputs.length;i++){
+        console.log(betboxesInputs[i].value)
         value = betboxesInputs[i].value
         betbox = betboxesInputs[i].parentNode.parentNode.parentNode
-        if(value!=null){
+        if(value!=null && value!=""){
           gains += value * parseFloat(betbox.getAttribute("data-odd"))
+        }else{
+            emptyInput = true
         }
 
       if(gains==0){
-        $("#valorGanhos span").text("0,00€")
+          $('.buttonApostar').attr("disabled", true);
+          $("#valorGanhos span").text("0,00€")
       }else{
+        $('.buttonApostar').attr("disabled", false);
         $("#valorGanhos span").text(String(gains.toFixed(2)) + "€")
       }
+    }
+    console.log(emptyInput)
+    if(emptyInput){
+      $('.buttonApostar').attr("disabled", true);
+
     }
 }
 
@@ -226,7 +239,7 @@ function slip_handler(bttchange,home,away,bet,odd){
     //$('.buttonApostar').prop('disabled', true);
 
     $(".betboxFooter").remove()
-    $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
+    $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="check_amount(this);update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>')
 
     // Simple bets needs to have a odds less then 1.20
     var betboxs = document.getElementsByClassName('betbox');
@@ -263,7 +276,7 @@ function slip_handler(bttchange,home,away,bet,odd){
 
 
       $("#rowCimaNome span").text('Odd '+total_odd.toFixed(2))
-      $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="update_gains(this,'+total_odd+');check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
+      $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="check_amount(this);update_gains(this,'+total_odd+');"><span class="betboxMontanteEuro">€</span></div></div>')
 
       var betboxs = document.getElementsByClassName('betbox');
       for(var i=0;i<betboxs.length;i++){
@@ -475,7 +488,7 @@ window.onload = (event) =>{
           change_to_simple()
 
           $(".betboxFooter").remove()
-          $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
+          $(".betboxHeader").after('<div class="betboxFooter"><div class="betboxMontante"><input class="betboxMontanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="this.oldvalue = this.value;remove_amount_warning(this)" oninput="check_amount(this);update_simple_gains();simpleAmount_handler(this);this.oldvalue = this.value;"><span class="betboxMontanteEuro">€</span></div></div>')
 
           $("#rowCimaNome span").text('Total Amount')
           $("#rowCimaValor span").text('0,00€')
@@ -519,7 +532,7 @@ window.onload = (event) =>{
 
 
         $("#rowCimaNome span").text('Odd '+total_odd.toFixed(2))
-        $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="update_gains(this,'+total_odd+');check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
+        $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="check_amount(this);update_gains(this,'+total_odd+');"><span class="betboxMontanteEuro">€</span></div></div>')
 
         $("#rowBaixoNome span").text('Possible Gains')
         $("#valorGanhos span").text('0,00€')
@@ -531,6 +544,3 @@ window.onload = (event) =>{
       sessionStorage.setItem("order",JSON.stringify([]))
     }
 }
-
-
-

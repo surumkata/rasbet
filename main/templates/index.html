@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'filter.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'popup.css' %}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% csrf_token %}
 <title> Home Page </title>
@@ -156,12 +156,12 @@
                   {%else%}<button name="order_by_nb" type="submit" value="true">number of bets{%endif%}
                 </div>
               </form>
-            </div>  
+            </div>
         </div>
       </div>
     </div>
     <div class="display-center">
-      
+
       {% for date, games in games_info.items%}
       <div class="dateCE">
         <p>{{date}}</p>
@@ -246,7 +246,7 @@
               </div>
               <div class="boletimRowItem">
                 <div>
-                  <input class="buttonApostar" type="submit" value="Bet" onclick="post_slip()"> </input>
+                  <input class="buttonApostar" type="submit" value="Bet" onclick="post_slip()" disabled> </input>
                 </div>
               </div>
             </div>
@@ -260,4 +260,3 @@
   <script src="{% static 'cookies.js' %}"></script>
  </body>
  </html>
-
