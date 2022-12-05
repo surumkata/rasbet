@@ -71,6 +71,51 @@ def filter(request):
     return response
 
 
+def filter_specialist(request):
+    if request.method == 'GET':
+        sport = request.GET.get('sport')
+        competition = request.GET.get('competition')
+        if sport or competition:
+            on_hold = State.objects.get(state="on_hold")
+            open = State.objects.get(state="open")
+            if sport: 
+                games_onhold = Game.objects.filter(sport=sport,state=on_hold).values()
+                games_open = Game.objects.filter(sport=sport,state=open).values()
+            elif competition:
+                games_onhold = Game.objects.filter(competition=competition,state=on_hold).values()
+                games_open = Game.objects.filter(competition=competition,state=open).values()
+            else:
+                games_onhold = Game.objects.filter(state=on_hold).values()
+                games_open = Game.objects.filter(state=open).values()
+
+
+            cookie = request.COOKIES.get("session")
+            session = Session.objects.get(session_id=cookie)
+
+            open_listing = []
+            onhold_listing = []
+            # Group each game with the odds in a dictionary
+            for g in games_open:
+                open_listing.append(game_details(g))
+            for g in games_onhold:
+                onhold_listing.append(game_details(g))
+
+            sports_listing = sports_list()
+
+            context = {
+                "logged" : True,
+                "specialist" : True,
+                "id" : session.user_in_session.userID,
+                "fname" : session.user_in_session.first_name,
+                "games_open" : open_listing,
+                "games_onhold" : onhold_listing,
+                "sports_info": sports_listing,
+            }
+    response = render(request, 'specialist.html',context)
+            
+
+    return response
+
 def change_games_state(request):
     if request.method == 'GET':
         sport = request.GET.get('sport')
@@ -140,33 +185,4 @@ def specialist_update_games(request):
                         db_change_gameodd(game,g['away'],'away')
                     if 'draw' in g.keys():
                         db_change_gameodd(game,g['draw'],'draw')
-                """
-                onhold = State.objects.get(state="on_hold")
-                open = State.objects.get(state="open")
-                sport = None
-                sports_listing = sports_list()
-                if sport is None or sport=='null':
-                    games_onhold = Game.objects.filter(state=onhold).values()
-                    games_open = Game.objects.filter(state=open).values()
-                else:
-                    games_onhold = Game.objects.filter(sport_id=sport,state=onhold).values()
-                    games_open = Game.objects.filter(sport_id=sport,state=open).values()
-                onhold_listening = []
-                open_listening = []
-                for game in games_onhold:
-                    onhold_listening.append(game_details(game))
-                for game in games_open:
-                    open_listening.append(game_details(game))
-                context = {
-                    "logged": True,
-                    "specialist": True,
-                    "id": session.user_in_session.userID,
-                    "fname": session.user_in_session.first_name,
-                    "games_onhold": onhold_listening,
-                    "games_open": open_listening,
-                    "sports_info": sports_listing,
-                }
-                response = render(request, 'index.html', context)
-                return response
-                """
     return response

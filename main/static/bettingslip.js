@@ -241,7 +241,7 @@ function slip_handler(bttchange,home,away,bet,odd){
     $("#rowCimaNome span").text('Total Amount')
     $("#rowCimaValor span").text('0,00€')
 
-    $("#rowBaixoNome span").text('Possible Gains')
+    $("#rowBaixoNome span").text('Total Earnings')
     $("#valorGanhos span").text('0,00€')
 
     storage_change_simple(home,away,bet,odd)
@@ -277,7 +277,7 @@ function slip_handler(bttchange,home,away,bet,odd){
 
       }
 
-      $("#rowBaixoNome span").text('Possible Gains')
+      $("#rowBaixoNome span").text('Total Earnings')
       $("#valorGanhos span").text('0,00€')
 
     storage_change_multiple(home,away,bet,odd)
@@ -480,7 +480,7 @@ window.onload = (event) =>{
           $("#rowCimaNome span").text('Total Amount')
           $("#rowCimaValor span").text('0,00€')
 
-          $("#rowBaixoNome span").text('Possible Gains')
+          $("#rowBaixoNome span").text('Total Earnings')
           $("#valorGanhos span").text('0,00€')
       }else{
 
@@ -521,7 +521,7 @@ window.onload = (event) =>{
         $("#rowCimaNome span").text('Odd '+total_odd.toFixed(2))
         $("#rowCimaValor span").html('<div class="montante"><input class="montanteInput" type="number" placeholder="Amount" type="tel" step="0.01" onfocus="remove_amount_warning(this)"  oninput="update_gains(this,'+total_odd+');check_amount(this);"><span class="betboxMontanteEuro">€</span></div></div>')
 
-        $("#rowBaixoNome span").text('Possible Gains')
+        $("#rowBaixoNome span").text('Total Earnings')
         $("#valorGanhos span").text('0,00€')
       }
       if(window.game_counter>0){

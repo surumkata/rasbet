@@ -265,9 +265,9 @@ def take_datetime(elem):
 def sports_list():
     sports = Sport.objects.all()
     sports_listing = {}
+    countrys = Country.objects.all()
     for sport in sports:
         sport_name = sport.sport
-        countrys = Country.objects.all()
         sports_listing[sport_name] = {}
         for country in countrys:
             country_name = country.country
