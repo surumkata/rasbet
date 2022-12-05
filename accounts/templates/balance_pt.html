@@ -1,0 +1,56 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
+
+{% csrf_token %}
+<title>Saldo</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
+      <div class="tab"><a href="/">Desporto</a></div>
+      <div class="tab"><a href="/accounts/promotions">Promoções</a></div>
+      <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
+      <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
+    </div>
+    <div class="header-right">
+      <div class="language">
+        <select class="change_language" original-value="{{language}}" value="{{language}}" onchange="change_language(this)">
+          <optgroup>
+            <option selected disabled hidden  value="{{language}}">{{language|upper}}</option>
+            <option value="en">EN</option>
+            <option value="pt">PT</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="tab"><a href="/accounts/logout">Logout</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="form-box">
+      <div class="balance-box">
+        <h1>Saldo do {{fname}}</h1>
+        <h2>{{ balance | floatformat:2 }}€</h2>
+      </div>
+      <div class="form-div">
+        <div class="form-div-side"><a class="button" href="/accounts/deposit">Depósito</a></div>
+       <div class="form-div-side"><a class="button" href="/accounts/withdraw">Levantamento</a></div>
+      </div>
+    </div>
+
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'cookies.js' %}"></script>
+  </body>
+</html>
