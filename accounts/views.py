@@ -230,7 +230,7 @@ def withdraw(request):
             "fname": session.user_in_session.first_name,
         }
         context['language'] = language
-        response = render(request, "withdraw.html",context)
+        response = render(request, html,context)
         if request.method == 'POST':
             amount = request.POST.get('amount', False)
             if Transation.regist(session.user_in_session, "withdraw", "mbway", amount):
@@ -605,8 +605,8 @@ def change_password(request):
                     "id": user_id,
                     "msg": msg
                 }
-            context['language'] = language
             language = session.language
+            context['language'] = language
             html = change_url_language('change_password',language)
             response = render(request, html, context)
 
@@ -616,7 +616,7 @@ def change_password(request):
             context = {
                 "logged": False,
             }
-            response = render(request, 'index.html', context)
+            response = redirect('/')
             response.delete_cookie('session')
     return response
 
@@ -646,10 +646,7 @@ def profile(request):
         msg = user.update(password, fname, lname, email, birthday)
 
     try:
-        language = session.language
-        html = change_url_language('index',language)
-        context['language'] = language
-        response = render(request, html, context)
+        response = render(request, 'index.html', context)
         if cookie:
             session = Session.objects.get(session_id=cookie)
             user_id = session.user_in_session.userID
@@ -667,14 +664,13 @@ def profile(request):
                 "user": user,
                 "msg": msg
             }
+            language = session.language
             context['language'] = language
             html = change_url_language('profile',language)
             response = render(request, html, context)
     except Exception as e:
         print('error: ' + str(e))
-        language = session.language
-        html = change_url_language('index',language)
-        response = render(request, html, context)
+        response = render(request, 'index.html', context)
         response.delete_cookie('session')
     return response
 
