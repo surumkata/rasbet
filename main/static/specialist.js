@@ -1,9 +1,9 @@
 //Specialist button to save games odds
 function save(elem){
   //quando carregou no botao cancelar retorna a pagina aos valores originais (reload)
-  if (elem.value.localeCompare('Cancelar') == 0){
+  if (elem.value.localeCompare('Cancel') == 0){
     window.location.replace('/')
-  }else if (elem.value.localeCompare('Gravar') == 0){
+  }else if (elem.value.localeCompare('Save') == 0){
     var games = document.getElementsByClassName('odds')
     gamesDict = {}
     
