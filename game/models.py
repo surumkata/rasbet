@@ -144,19 +144,34 @@ class Odd(models.Model):
     # Create odd to the outcome home team wins
     def home(self,game,odd):
         type = Odd_type.objects.get(type="home")
-        Odd.objects.create(game=game,odd_type=type,odd=odd)
+        if not (Odd.objects.filter(game=game,odd_type=type).exists()):
+            Odd.objects.create(game=game,odd_type=type,odd=odd)
+        else:
+            odd_to_update = Odd.objects.get(game=game,odd_type=type)
+            odd_to_update.odd = odd
+            odd_to_update.save()
 
     @classmethod
     # Create odd to the outcome away team wins
     def away(self,game,odd):
         type = Odd_type.objects.get(type="away")
-        Odd.objects.create(game=game,odd_type=type,odd=odd)
+        if not (Odd.objects.filter(game=game,odd_type=type).exists()):
+            Odd.objects.create(game=game,odd_type=type,odd=odd)
+        else:
+            odd_to_update = Odd.objects.get(game=game,odd_type=type)
+            odd_to_update.odd = odd
+            odd_to_update.save()
 
     @classmethod
     # Create odd to the outcome draw
     def draw(self,game,odd):
         type = Odd_type.objects.get(type="draw")
-        Odd.objects.create(game=game,odd_type=type,odd=odd)
+        if not (Odd.objects.filter(game=game,odd_type=type).exists()):
+            Odd.objects.create(game=game,odd_type=type,odd=odd)
+        else:
+            odd_to_update = Odd.objects.get(game=game,odd_type=type)
+            odd_to_update.odd = odd
+            odd_to_update.save()
 
     def create(self,game_id,odd_type,odd):
         game = Game.objects.get(id=game_id)
@@ -185,9 +200,9 @@ def detail_games(games,ordered_by_nb):
     datetimes = set()
     for g in games:
         details = open_game_details(g)
-        datetime = g.datetime.date().strftime("%Y/%m/%d")
-        datetimes.add(datetime)
         if details!={}:
+            datetime = g.datetime.date().strftime("%Y/%m/%d")
+            datetimes.add(datetime)
             if datetime in games_dict:
                 games_dict[datetime].append(details)
             else: 

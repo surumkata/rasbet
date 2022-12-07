@@ -51,7 +51,9 @@ class Bet(models.Model):
         odd_obj = Odd.objects.get(game=game_obj,odd_type=odd_type_obj)
         odd_obj.incr_number_better()
         odd_obj.save()
-        Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_obj.odd)
+        odd_multiplier = odd_obj.odd
+        odd_multiplier = Bet.apply_promotion(game=game_obj,odd=odd_multiplier,amount=float(gameBet['amount']))
+        Bet_game.create(bet=bet_obj,odd_id=odd_obj,odd=odd_multiplier)
         # Add to user History
         History.create(bet=bet_obj,user=user_obj)
 
@@ -109,7 +111,7 @@ class Bet(models.Model):
         if lost:
             self.turn_lost()
             return True
-        elif lock:
+        elif lock or open:
             self.turn_lock()
             return False
         elif not open:

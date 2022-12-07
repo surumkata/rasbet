@@ -25,7 +25,7 @@ class PromotionAdmin(admin.ModelAdmin):
     users = User.objects.all()
     for user in users:
       email_list.append((user.first_name,user.email))
-    mail = SendingEmail(obj.mail_template_path, "RasBet Promotion")
+    mail = SendingEmail('media/'+str(obj.mail_template_path), "RasBet Promotion")
     mail.send(email_list)
 
 class BetPromotionAdmin(admin.ModelAdmin):
