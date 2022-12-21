@@ -548,6 +548,14 @@
         "documentation": {}
     },
     {
+        "label": "detail_games",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
         "label": "Participant",
         "importPath": "game.models",
         "description": "game.models",
@@ -1389,7 +1397,7 @@
         "kind": 6,
         "importPath": "accounts.models",
         "description": "accounts.models",
-        "peekOfCode": "class FollowedGames(models.Model):\n    user = models.ForeignKey(User,on_delete=models.CASCADE)\n    game = models.ForeignKey(\"game.Game\",on_delete=models.CASCADE)\n    def __str__(self):\n        return str(self.user) + \" : \" + str(self.game)\n#Sends promotion emails to users\nclass SendingEmail:\n    #Set instance variables\n    def __init__(self, template, subject):\n        self.sender_mail = \"rasbetpl32@gmail.com\"",
+        "peekOfCode": "class FollowedGames(models.Model):\n    user = models.ForeignKey(User,on_delete=models.CASCADE)\n    game = models.ForeignKey(\"game.Game\",on_delete=models.CASCADE)\n    def __str__(self):\n        return str(self.user) + \" : \" + str(self.game)\n    def getGamesByUser(user):\n        games = [k.game for k in FollowedGames.objects.filter(user=user)]\n        return detail_games(games,True)\n    def remove(game,user):\n        if FollowedGames.objects.filter(user=user,game=game).exists():",
         "detail": "accounts.models",
         "documentation": {}
     },
@@ -1525,6 +1533,15 @@
         "importPath": "accounts.views",
         "description": "accounts.views",
         "peekOfCode": "def favorites(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        session = Session.objects.get(session_id=session_id)\n        if request.method == 'POST':\n            fav_name = request.POST['fav']\n            type = request.POST['type']\n            if type == \"Sport\":\n                if FavoriteSports.objects.filter(sport=fav_name, user=session.user_in_session).exists():\n                    fav = FavoriteSports.objects.get(",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "followed_games",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def followed_games(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        session = Session.objects.get(session_id=session_id)\n        if request.method == 'POST':\n            game = request.POST['game']\n            FollowedGames.remove(game,session.user_in_session)\n            #delete game followed\n        #buscar jogos e odds seguidos\n        followed = FollowedGames.getGamesByUser(session.user_in_session)",
         "detail": "accounts.views",
         "documentation": {}
     },

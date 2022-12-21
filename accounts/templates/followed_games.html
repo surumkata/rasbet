@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'header.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'display.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'history.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'games-list.css' %}"/>
+{% csrf_token %}
+<title> Followed Games</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-left">
+      <div class="tab"><a class="img" href="/" ><img src="{% static 'logo.png' %}" alt="Rasbet Logo"></a></div>
+      <div class="tab"><a href="/">Sport</a></div>
+      <div class="tab"><a href="/accounts/promotions">Promotions</a></div>
+      <div class="tab"><a class="active" href="/accounts/profile">{{ fname }}</a></div>
+      <div class="tab_balance">{{ balance | floatformat:2 }}€<a href="/accounts/deposit">+</a></div>
+    </div>
+    <div class="header-right">
+      <div class="language">
+        <select class="change_language" original-value="{{language}}" value="{{language}}" onchange="change_language(this)">
+          <optgroup>
+            <option selected disabled hidden  value="{{language}}">{{language|upper}}</option>
+            <option value="en">EN</option>
+            <option value="pt">PT</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="tab"><a href="/accounts/logout">Logout</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="history_bets">
+      <div><h2>Followed Games</h2></div>
+      {% for date, games in followed.items%}
+      <div class="dateCE">
+        <p>{{date}}</p>
+      </div>
+      {% for g in games%}
+      <div class="card-event">
+        <div class="event">
+          <div class="event_path">
+            <p><span>{{g.game.sport}} - {{g.game.country}} - {{g.game.competition}}<span></p>
+          </div>
+          <div class="event_info">
+            <div class="home">
+              <p><b>{{g.game.home}}</b></p>
+            </div>
+            <div class="event_date">
+              <div class="datetime">
+                <div class="date">
+                  {{g.game.datetime|date:"d/m/Y"}}
+                </div>
+                <div class="hour">
+                  {{g.game.datetime|date:"H:i"}}
+                </div>
+              </div>
+            </div>
+            <div class="away">
+              <p><b>{{g.game.away}}</b></p>
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="game" value="{{g.game.game_id}}">
+                <button type="submit">Unfollow</button>
+              </form>
+          </div>
+        </div>
+        <div class="market_odds">
+          <div class="odds">
+            <div class="odd">
+                <div>{{g.game.home}}<br><span>{{g.home_odd}}</span></div>
+            </div>
+            <div class="odd">
+                <div>Draw<br><span>{{g.draw_odd}}</span></div>
+            </div>
+            <div class="odd">
+                <div>{{g.game.away}}<br><span>{{g.away_odd}}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'cookies.js' %}"></script>
+ </body>
+ </html>

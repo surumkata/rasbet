@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 
 import re
 
-from game.models import Competition, Game, Participant, Sport
+from game.models import Competition, Game, Participant, Sport, detail_games
 
 
 # Default User model
@@ -336,6 +336,14 @@ class FollowedGames(models.Model):
     def __str__(self):
         return str(self.user) + " : " + str(self.game)
 
+    def getGamesByUser(user):
+        games = [k.game for k in FollowedGames.objects.filter(user=user)]
+        return detail_games(games,True)
+
+    def remove(game,user):
+        if FollowedGames.objects.filter(user=user,game=game).exists():
+            fg = FollowedGames.objects.filter(user=user,game=game).get()
+            fg.delete()
 
 
 

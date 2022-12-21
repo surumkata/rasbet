@@ -13,6 +13,7 @@ urlpatterns = [
     path('withdraw/',views.withdraw,{}),
     path('history_bets/',views.history_bets,{}),
     path('history_transactions/',views.history_transactions,{}),
+    path('followed_games/',views.followed_games,{}),
     path('profile/',views.profile,{}),
     path('change_password/',views.change_password,{}),
     path('promotions/',views.promotions,{}),

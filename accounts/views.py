@@ -547,6 +547,34 @@ def favorites(request):
 
     return response
 
+def followed_games(request):
+    session_id = request.COOKIES.get("session")
+    if session_id:
+        session = Session.objects.get(session_id=session_id)
+
+        if request.method == 'POST':
+            game = request.POST['game']
+            FollowedGames.remove(game,session.user_in_session)
+            #delete game followed
+
+        #buscar jogos e odds seguidos
+        followed = FollowedGames.getGamesByUser(session.user_in_session)
+
+        context = {
+            "logged": True,
+            "id": session.user_in_session.userID,
+            "fname": session.user_in_session.first_name,
+            "balance": session.user_in_session.balance,
+            "followed" : followed
+        }
+        language = session.language
+        context['language'] = language
+        html = change_url_language('followed_games',language)
+        response = render(request, html, context)
+    else:
+        response = redirect('/accounts/login/')
+    return response
+
 
 def update_favorite(request):
     if request.method == 'POST':

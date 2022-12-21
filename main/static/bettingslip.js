@@ -262,8 +262,8 @@ function slip_handler(bttchange,home,away,bet,odd){
   // Multiple
 }else if(window.game_counter>1 || bttchange=="multiple" ){
 
-    // Multiple bets max 10 slections
-    if(window.game_counter<=10){
+    // Multiple bets max 20 slections
+    if(window.game_counter<=20){
       change_to_multi()
       window.bet_type = "multiple"
       sessionStorage.setItem("betType","multiple")
@@ -295,7 +295,7 @@ function slip_handler(bttchange,home,away,bet,odd){
 
     storage_change_multiple(home,away,bet,odd)
     }else{
-      alert("Only 10 selections can be made in multiple mode");
+      alert("Only 20 selections can be made in multiple mode");
       // disable bet button
       $('.buttonApostar').prop('disabled', true);
     }

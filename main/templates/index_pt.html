@@ -202,6 +202,9 @@
             <div class="away">
               <p><b>{{g.game.away}}</b></p>
             </div>
+            <div class="follow">
+              <input type="checkbox" {%if g.game.game_id in follows %} checked {%endif%} class="" name="{{g.game.game_id}}" onclick='update_follow(this);'> Seguir</input>
+            </div>
           </div>
         </div>
         <div class="market_odds">
