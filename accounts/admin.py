@@ -34,6 +34,9 @@ class BetPromotionAdmin(admin.ModelAdmin):
 class DepositPromotionAdmin(admin.ModelAdmin):
   list_display = ['promo_code','reward','usages','first_deposit_restriction']
 
+class FollowedGamesAdmin(admin.ModelAdmin):
+  list_display = ['user','game']
+
 # Register your models here.
 admin.site.register(User,UserAdmin)
 admin.site.register(Specialist,SpecAdmin)
@@ -47,3 +50,4 @@ admin.site.register(Deposit_Promotion,DepositPromotionAdmin)
 admin.site.register(FavoriteSports)
 admin.site.register(FavoriteCompetitions)
 admin.site.register(FavoriteParticipants)
+admin.site.register(FollowedGames,FollowedGamesAdmin)

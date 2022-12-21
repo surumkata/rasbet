@@ -132,3 +132,30 @@ function change_language(elem){
     success: window.location.reload()
   })
 }
+
+function update_follow(elem){
+  followed = elem.checked
+  game = elem.name
+  console.log(followed)
+  console.log(game)
+  
+  $.ajax({
+    type: 'POST',
+    url: '/accounts/update_follow/',
+    dataType: "json",
+    headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": getCookie("csrftoken"),
+   },
+   data: JSON.stringify({'followed' : followed, 'game':game}),
+   success: function( data, status, xhttp) {
+            if(data.status==0){
+                window.location.reload();
+           }else{
+                window.location.assign('/')
+          }
+  },
+  
+})
+
+};

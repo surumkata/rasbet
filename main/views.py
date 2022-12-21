@@ -36,6 +36,9 @@ def home(request):
             session = Session.objects.get(session_id=cookie)
             user_id = session.user_in_session.userID
             fav_list = favorites_list(session.user_in_session)
+            follows = follows_list(session.user_in_session)
+            print("follows ->")
+            print(follows)
             language = session.language
             context = {
                     "logged" : True,
@@ -45,7 +48,8 @@ def home(request):
                     "games_info" : games,
                     "sports_info" : sports_listing,
                     "favorites_info" : fav_list,
-                    "language" : language
+                    "language" : language,
+                    "follows" : follows,
             }
             html = change_url_language('index',language)
 

@@ -569,6 +569,25 @@ def update_favorite(request):
     response = HttpResponse(json.dumps(status), content_type='application/json')
     return response
 
+def update_follow(request):
+    if request.method == 'POST':
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        if is_ajax:
+            request_data = json.load(request)
+            cookie = request.COOKIES.get("session")
+            if cookie:
+                session = Session.objects.get(session_id=cookie)
+                if session:
+                    followed = request_data.get('followed') == 'True'
+                    game = request_data.get('game')
+                    user = session.user_in_session
+                    user.update_follow(game,followed)
+                    status = {'status': 0, 'message': "follow updated"}
+
+
+    response = {'status': 1, 'message': "Error"}
+    response = HttpResponse(json.dumps(status), content_type='application/json')
+    return response
 
 def change_password(request):
     cookie = request.COOKIES.get("session")

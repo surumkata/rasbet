@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 
 import re
 
-from game.models import Competition, Participant, Sport
+from game.models import Competition, Game, Participant, Sport
 
 
 # Default User model
@@ -101,6 +101,17 @@ class User(models.Model):
                     FavoriteParticipants.objects.get(user=self,participant=participant).delete()
                 else:
                     FavoriteParticipants.objects.create(user=self,participant=participant)
+        except Exception as e:
+            print(e)
+
+    def update_follow(self,game,followed):
+        try:
+            print(game)
+            print(followed)
+            game = Game.objects.filter(game_id=game).get()
+            if FollowedGames.objects.filter(user=self,game=game).exists():
+                FollowedGames.objects.get(user=self,game=game).delete() 
+            else: FollowedGames.objects.create(user=self,game=game)
         except Exception as e:
             print(e)
 
@@ -318,6 +329,13 @@ class FavoriteParticipants(models.Model):
     def __str__(self):
         return str(self.participant)
 
+class FollowedGames(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    game = models.ForeignKey("game.Game",on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.user) + " : " + str(self.game)
+
 
 
 
@@ -426,3 +444,8 @@ def favorites_list(user):
     fav_list['Competition'] = [str(k) for k in FavoriteCompetitions.objects.filter(user=user)]
     #fav_list['Participant'] = [str(k) for k in FavoriteParticipants.objects.filter(user=user)]
     return fav_list
+
+#list of a users favorites
+def follows_list(user):
+    follows = [str(k.game.game_id) for k in FollowedGames.objects.filter(user=user)]
+    return follows

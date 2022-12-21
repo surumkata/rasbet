@@ -17,5 +17,6 @@ urlpatterns = [
     path('change_password/',views.change_password,{}),
     path('promotions/',views.promotions,{}),
     path('favorites/',views.favorites,{}),
-    path('update_favorite/',views.update_favorite,{})
+    path('update_favorite/',views.update_favorite,{}),
+    path('update_follow/',views.update_follow,{})
 ]

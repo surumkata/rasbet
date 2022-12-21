@@ -2,7 +2,7 @@ from collections import OrderedDict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from accounts.models import User, Session,Specialist, favorites_list
+from accounts.models import favorites_list, follows_list, Session, Specialist, User
 from game.models import db_change_gameodd, Game,Odd
 from django.urls import reverse
 import requests
@@ -51,11 +51,13 @@ def filter(request):
                     html = 'index.html'
                     session = Session.objects.get(session_id=cookie)
                     fav_list = favorites_list(session.user_in_session)
+                    follows = follows_list(session.user_in_session)
                     context['logged'] = True
                     context['id'] =  session.user_in_session.userID
                     context['fname'] = session.user_in_session.first_name
                     context['balance'] = session.user_in_session.balance
                     context['favorites_info'] = fav_list
+                    context['follows'] = follows
                     language = session.language
                     context['language'] = language
                     html = change_url_language('index',language)

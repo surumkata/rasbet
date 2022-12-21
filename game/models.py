@@ -245,7 +245,16 @@ def open_game_details(game):
 
     if game.state.str() == "open":
         game_dict = {}
-        game_dict["game"] = game
+        details = {
+            "sport" : game.sport,
+            "competition" : game.competition,
+            "country" : game.country,
+            "home" : game.home,
+            "away" : game.away,
+            "game_id" : str(game.game_id),
+            "datetime" : game.datetime,
+        }
+        game_dict["game"] = details
         total_betters = 0
         for odd_obj in odds:
             type =  getattr(odd_obj, "odd_type")
@@ -274,7 +283,7 @@ def take_number_betters(elem):
     return elem["nb"]
 
 def take_datetime(elem):
-    return elem["game"].datetime
+    return elem["game"]["datetime"]
 
 #list of the sports, countries that have it and respective competitions
 def sports_list():

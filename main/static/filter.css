@@ -72,7 +72,7 @@
     border-radius: 1.6rem;
 }
 
-.favorite{
+.favorite,.follow{
     border: none;
     background-color: #eef0f3;
     border-radius: 10px;

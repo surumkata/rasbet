@@ -96,6 +96,62 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -266,7 +322,15 @@
         "documentation": {}
     },
     {
-        "label": "User",
+        "label": "favorites_list",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "follows_list",
         "importPath": "accounts.models",
         "description": "accounts.models",
         "isExtraImport": true,
@@ -290,7 +354,7 @@
         "documentation": {}
     },
     {
-        "label": "favorites_list",
+        "label": "User",
         "importPath": "accounts.models",
         "description": "accounts.models",
         "isExtraImport": true,
@@ -453,6 +517,14 @@
     },
     {
         "label": "Competition",
+        "importPath": "game.models",
+        "description": "game.models",
+        "isExtraImport": true,
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "Game",
         "importPath": "game.models",
         "description": "game.models",
         "isExtraImport": true,
@@ -749,6 +821,14 @@
         "documentation": {}
     },
     {
+        "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
         "label": "method_decorator",
         "importPath": "django.utils.decorators",
         "description": "django.utils.decorators",
@@ -810,6 +890,30 @@
         "description": "gamble.models",
         "isExtraImport": true,
         "detail": "gamble.models",
+        "documentation": {}
+    },
+    {
+        "label": "change_url_language",
+        "importPath": "main.models",
+        "description": "main.models",
+        "isExtraImport": true,
+        "detail": "main.models",
+        "documentation": {}
+    },
+    {
+        "label": "change_url_language",
+        "importPath": "main.models",
+        "description": "main.models",
+        "isExtraImport": true,
+        "detail": "main.models",
+        "documentation": {}
+    },
+    {
+        "label": "change_url_language",
+        "importPath": "main.models",
+        "description": "main.models",
+        "isExtraImport": true,
+        "detail": "main.models",
         "documentation": {}
     },
     {
@@ -944,6 +1048,22 @@
         "documentation": {}
     },
     {
+        "label": "OrderedDict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "OrderedDict",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
         "label": "requests,json",
         "kind": 6,
         "isExtraImport": true,
@@ -1040,6 +1160,42 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0007_delete_admin",
+        "description": "accounts.migrations.0007_delete_admin",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('accounts', '0006_favoritesports_favoriteparticipants_and_more'),\n    ]\n    operations = [\n        migrations.DeleteModel(\n            name='Admin',\n        ),\n    ]",
+        "detail": "accounts.migrations.0007_delete_admin",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0008_session_currency_session_language",
+        "description": "accounts.migrations.0008_session_currency_session_language",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('accounts', '0007_delete_admin'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='session',\n            name='currency',\n            field=models.CharField(default='€', max_length=1),\n            preserve_default=False,",
+        "detail": "accounts.migrations.0008_session_currency_session_language",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0009_followedgames",
+        "description": "accounts.migrations.0009_followedgames",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('game', '0003_participant_odd_number_betters_alter_game_away_and_more'),\n        ('accounts', '0008_session_currency_session_language'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='FollowedGames',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "accounts.migrations.0009_followedgames",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "accounts.migrations.0010_alter_followedgames_game",
+        "description": "accounts.migrations.0010_alter_followedgames_game",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('game', '0003_participant_odd_number_betters_alter_game_away_and_more'),\n        ('accounts', '0009_followedgames'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='followedgames',\n            name='game',\n            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='game.game'),",
+        "detail": "accounts.migrations.0010_alter_followedgames_game",
+        "documentation": {}
+    },
+    {
         "label": "TransationAdmin",
         "kind": 6,
         "importPath": "accounts.admin",
@@ -1080,7 +1236,7 @@
         "kind": 6,
         "importPath": "accounts.admin",
         "description": "accounts.admin",
-        "peekOfCode": "class PromotionAdmin(admin.ModelAdmin):\n  list_display = ['promo_code','value_restriction','mail_template_path','image_path','limit_date']\n  def save_model(self,request,obj,form,change):\n    super().save_model(request,obj,form,change)\n    email_list = []\n    users = User.objects.all()\n    for user in users:\n      email_list.append((user.first_name,user.email))\n    mail = SendingEmail(obj.mail_template_path, \"RasBet Promotion\")\n    mail.send(email_list)",
+        "peekOfCode": "class PromotionAdmin(admin.ModelAdmin):\n  list_display = ['promo_code','value_restriction','mail_template_path','image_path','limit_date']\n  def save_model(self,request,obj,form,change):\n    super().save_model(request,obj,form,change)\n    email_list = []\n    users = User.objects.all()\n    for user in users:\n      email_list.append((user.first_name,user.email))\n    mail = SendingEmail('media/'+str(obj.mail_template_path), \"RasBet Promotion\")\n    mail.send(email_list)",
         "detail": "accounts.admin",
         "documentation": {}
     },
@@ -1089,7 +1245,7 @@
         "kind": 6,
         "importPath": "accounts.admin",
         "description": "accounts.admin",
-        "peekOfCode": "class BetPromotionAdmin(admin.ModelAdmin):\n  list_display = ['promo_code','applyable_game','reward']\nclass DepositPromotionAdmin(admin.ModelAdmin):\n  list_display = ['promo_code','reward','usages','first_deposit_restriction']\n# Register your models here.\nadmin.site.register(User,UserAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)\nadmin.site.register(Payment_method)\nadmin.site.register(Transation,TransationAdmin)",
+        "peekOfCode": "class BetPromotionAdmin(admin.ModelAdmin):\n  list_display = ['promo_code','applyable_game','reward']\nclass DepositPromotionAdmin(admin.ModelAdmin):\n  list_display = ['promo_code','reward','usages','first_deposit_restriction']\nclass FollowedGamesAdmin(admin.ModelAdmin):\n  list_display = ['user','game']\n# Register your models here.\nadmin.site.register(User,UserAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)",
         "detail": "accounts.admin",
         "documentation": {}
     },
@@ -1098,7 +1254,16 @@
         "kind": 6,
         "importPath": "accounts.admin",
         "description": "accounts.admin",
-        "peekOfCode": "class DepositPromotionAdmin(admin.ModelAdmin):\n  list_display = ['promo_code','reward','usages','first_deposit_restriction']\n# Register your models here.\nadmin.site.register(User,UserAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)\nadmin.site.register(Payment_method)\nadmin.site.register(Transation,TransationAdmin)\nadmin.site.register(History,HistoryAdmin)\nadmin.site.register(Promotion,PromotionAdmin)",
+        "peekOfCode": "class DepositPromotionAdmin(admin.ModelAdmin):\n  list_display = ['promo_code','reward','usages','first_deposit_restriction']\nclass FollowedGamesAdmin(admin.ModelAdmin):\n  list_display = ['user','game']\n# Register your models here.\nadmin.site.register(User,UserAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)\nadmin.site.register(Payment_method)\nadmin.site.register(Transation,TransationAdmin)",
+        "detail": "accounts.admin",
+        "documentation": {}
+    },
+    {
+        "label": "FollowedGamesAdmin",
+        "kind": 6,
+        "importPath": "accounts.admin",
+        "description": "accounts.admin",
+        "peekOfCode": "class FollowedGamesAdmin(admin.ModelAdmin):\n  list_display = ['user','game']\n# Register your models here.\nadmin.site.register(User,UserAdmin)\nadmin.site.register(Specialist,SpecAdmin)\nadmin.site.register(Session)\nadmin.site.register(Payment_method)\nadmin.site.register(Transation,TransationAdmin)\nadmin.site.register(History,HistoryAdmin)\nadmin.site.register(Promotion,PromotionAdmin)",
         "detail": "accounts.admin",
         "documentation": {}
     },
@@ -1121,15 +1286,6 @@
         "documentation": {}
     },
     {
-        "label": "Admin",
-        "kind": 6,
-        "importPath": "accounts.models",
-        "description": "accounts.models",
-        "peekOfCode": "class Admin(models.Model):\n    adminID = models.AutoField(primary_key=True)\n    userID = models.ForeignKey(User, on_delete=models.CASCADE)\n    @classmethod\n    def is_admin(self,id:str):\n        return Admin.objects.filter(userID=id).exists()\nclass Specialist(models.Model):\n    specID = models.AutoField(primary_key=True)\n    userID = models.ForeignKey(User, on_delete=models.CASCADE)\n    @classmethod",
-        "detail": "accounts.models",
-        "documentation": {}
-    },
-    {
         "label": "Specialist",
         "kind": 6,
         "importPath": "accounts.models",
@@ -1143,7 +1299,7 @@
         "kind": 6,
         "importPath": "accounts.models",
         "description": "accounts.models",
-        "peekOfCode": "class Session(models.Model):\n    user_in_session = models.ForeignKey(User, on_delete=models.CASCADE)\n    login_time = models.DateField(auto_now_add=True)\n    ip_adress = models.CharField(max_length=15,null=False)\n    session_id = models.CharField(max_length=32,null=False)\n    # Create a new session instance\n    @classmethod\n    def create(self,user,request):\n        session_key = get_random_string(32,allowed_chars=\"abcdefghijklmnopqrstuvwxyz0123456789\")\n        # Just to make sure that the key generated is not already in session",
+        "peekOfCode": "class Session(models.Model):\n    user_in_session = models.ForeignKey(User, on_delete=models.CASCADE)\n    login_time = models.DateField(auto_now_add=True)\n    ip_adress = models.CharField(max_length=15,null=False)\n    session_id = models.CharField(max_length=32,null=False)\n    currency = models.CharField(max_length=1,null=False)\n    language = models.CharField(max_length=10,null=False)\n    # Create a new session instance\n    @classmethod\n    def create(self,user,request):",
         "detail": "accounts.models",
         "documentation": {}
     },
@@ -1224,7 +1380,16 @@
         "kind": 6,
         "importPath": "accounts.models",
         "description": "accounts.models",
-        "peekOfCode": "class FavoriteParticipants(models.Model):\n    id = models.AutoField(primary_key=True)\n    participant = models.ForeignKey(\"game.Participant\",on_delete=models.CASCADE)\n    user = models.ForeignKey(User,on_delete=models.CASCADE)\n    def __str__(self):\n        return str(self.participant)\n#Sends promotion emails to users\nclass SendingEmail:\n    #Set instance variables\n    def __init__(self, template, subject):",
+        "peekOfCode": "class FavoriteParticipants(models.Model):\n    id = models.AutoField(primary_key=True)\n    participant = models.ForeignKey(\"game.Participant\",on_delete=models.CASCADE)\n    user = models.ForeignKey(User,on_delete=models.CASCADE)\n    def __str__(self):\n        return str(self.participant)\nclass FollowedGames(models.Model):\n    user = models.ForeignKey(User,on_delete=models.CASCADE)\n    game = models.ForeignKey(\"game.Game\",on_delete=models.CASCADE)\n    def __str__(self):",
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "FollowedGames",
+        "kind": 6,
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "peekOfCode": "class FollowedGames(models.Model):\n    user = models.ForeignKey(User,on_delete=models.CASCADE)\n    game = models.ForeignKey(\"game.Game\",on_delete=models.CASCADE)\n    def __str__(self):\n        return str(self.user) + \" : \" + str(self.game)\n#Sends promotion emails to users\nclass SendingEmail:\n    #Set instance variables\n    def __init__(self, template, subject):\n        self.sender_mail = \"rasbetpl32@gmail.com\"",
         "detail": "accounts.models",
         "documentation": {}
     },
@@ -1242,7 +1407,16 @@
         "kind": 2,
         "importPath": "accounts.models",
         "description": "accounts.models",
-        "peekOfCode": "def favorites_list(user):\n    fav_list = {}\n    fav_list['sport'] = [str(k) for k in FavoriteSports.objects.filter(user=user)]\n    fav_list['competition'] = [str(k) for k in FavoriteCompetitions.objects.filter(user=user)]\n    fav_list['participant'] = [str(k) for k in FavoriteParticipants.objects.filter(user=user)]\n    return fav_list",
+        "peekOfCode": "def favorites_list(user):\n    fav_list = {}\n    fav_list['Sport'] = [str(k) for k in FavoriteSports.objects.filter(user=user)]\n    fav_list['Competition'] = [str(k) for k in FavoriteCompetitions.objects.filter(user=user)]\n    #fav_list['Participant'] = [str(k) for k in FavoriteParticipants.objects.filter(user=user)]\n    return fav_list\n#list of a users favorites\ndef follows_list(user):\n    follows = [str(k.game.game_id) for k in FollowedGames.objects.filter(user=user)]\n    return follows",
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "follows_list",
+        "kind": 2,
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "peekOfCode": "def follows_list(user):\n    follows = [str(k.game.game_id) for k in FollowedGames.objects.filter(user=user)]\n    return follows",
         "detail": "accounts.models",
         "documentation": {}
     },
@@ -1251,7 +1425,7 @@
         "kind": 5,
         "importPath": "accounts.urls",
         "description": "accounts.urls",
-        "peekOfCode": "urlpatterns = [\n    path('login/',views.login,{}),\n    path('logout/',views.logout,{}),\n    path('signup/',views.signup,{}),\n    path('balance/',views.balance,{}),\n    path('deposit/',views.deposit,{}),\n    path('deposit/mbway/',views.mbway,{}),\n    path('withdraw/',views.withdraw,{}),\n    path('history_bets/',views.history_bets,{}),\n    path('history_transactions/',views.history_transactions,{}),",
+        "peekOfCode": "urlpatterns = [\n    path('login/',views.login,{}),\n    path('logout/',views.logout,{}),\n    path('signup/',views.signup,{}),\n    path('balance/',views.balance,{}),\n    path('deposit/',views.deposit,{}),\n    path('deposit/mbway/',views.mbway,{}),\n    path('deposit/card/',views.card,{}),\n    path('withdraw/',views.withdraw,{}),\n    path('history_bets/',views.history_bets,{}),",
         "detail": "accounts.urls",
         "documentation": {}
     },
@@ -1287,7 +1461,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def balance(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        u = Session.objects.get(session_id=session_id)\n        context = {\n            \"balance\": u.user_in_session.balance,\n            \"logged\": True,\n            \"id\": u.user_in_session.userID,\n            \"fname\": u.user_in_session.first_name,\n        }",
+        "peekOfCode": "def balance(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        session = Session.objects.get(session_id=session_id)\n        language = session.language\n        context = {\n            \"balance\": session.user_in_session.balance,\n            \"logged\": True,\n            \"id\": session.user_in_session.userID,\n            \"fname\": session.user_in_session.first_name,",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1296,7 +1470,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def deposit(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        response = render(request, 'deposit.html')\n        if request.method == 'POST':\n            exists_promotion = True\n            amount = request.POST.get('amount', False)\n            promo_code = request.POST.get('promo_code', False)\n            session_id = request.COOKIES.get(\"session\")\n            request.session['amount'] = amount",
+        "peekOfCode": "def deposit(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        session = Session.objects.get(session_id=session_id)\n        language = session.language\n        html = change_url_language('deposit',language)\n        response = render(request, html)\n        if request.method == 'POST':\n            exists_promotion = True\n            amount = request.POST.get('amount', False)",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1305,7 +1479,16 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def mbway(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        response = render(request, \"mbway.html\")\n        if request.method == 'POST':\n            valid_promotion = True\n            amount = request.session.get('amount', False)\n            promo_code = request.session.get('promo_code', False)\n            reward = 0\n            if promo_code:",
+        "peekOfCode": "def mbway(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        session = Session.objects.get(session_id=session_id)\n        language = session.language\n        html = change_url_language('mbway',language)\n        response = render(request, html)\n        if request.method == 'POST':\n            valid_promotion = True\n            amount = request.session.get('amount', False)",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "card",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def card(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        session = Session.objects.get(session_id=session_id)\n        language = session.language\n        html = change_url_language('card',language)\n        response = render(request, html)\n        if request.method == 'POST':\n            valid_promotion = True\n            amount = request.session.get('amount', False)",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1314,7 +1497,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def withdraw(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        response = render(request, \"withdraw.html\")\n        if request.method == 'POST':\n            amount = request.POST.get('amount', False)\n            u = Session.objects.get(session_id=session_id)\n            if Transation.regist(u.user_in_session, \"withdraw\", \"mbway\", amount):\n                response = redirect('/accounts/balance')\n    else:",
+        "peekOfCode": "def withdraw(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        session = Session.objects.get(session_id=session_id)\n        language = session.language\n        html = change_url_language('withdraw',language)\n        context = {\n            \"balance\": session.user_in_session.balance,\n            \"logged\": True,\n            \"id\": session.user_in_session.userID,",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1332,7 +1515,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def history_bets(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        u = Session.objects.get(session_id=session_id)\n        if request.method == 'POST':\n            bet_id = request.POST['bet_id']\n            bet = Bet.objects.get(betID=bet_id)\n            open = Bet_status.objects.get(status=\"open\")\n            if bet.status == open:\n                amount = bet.amount",
+        "peekOfCode": "def history_bets(request):\n    session_id = request.COOKIES.get(\"session\")\n    if session_id:\n        session = Session.objects.get(session_id=session_id)\n        if request.method == 'POST':\n            bet_id = request.POST['bet_id']\n            bet = Bet.objects.get(betID=bet_id)\n            open = Bet_status.objects.get(status=\"open\")\n            if bet.status == open:\n                amount = bet.amount",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1351,6 +1534,15 @@
         "importPath": "accounts.views",
         "description": "accounts.views",
         "peekOfCode": "def update_favorite(request):\n    if request.method == 'POST':\n        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'\n        if is_ajax:\n            request_data = json.load(request)\n            cookie = request.COOKIES.get(\"session\")\n            if cookie:\n                session = Session.objects.get(session_id=cookie)\n                if session:\n                    favourited = request_data.get('favorited') == 'True'",
+        "detail": "accounts.views",
+        "documentation": {}
+    },
+    {
+        "label": "update_follow",
+        "kind": 2,
+        "importPath": "accounts.views",
+        "description": "accounts.views",
+        "peekOfCode": "def update_follow(request):\n    if request.method == 'POST':\n        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'\n        if is_ajax:\n            request_data = json.load(request)\n            cookie = request.COOKIES.get(\"session\")\n            if cookie:\n                session = Session.objects.get(session_id=cookie)\n                if session:\n                    followed = request_data.get('followed') == 'True'",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1377,7 +1569,7 @@
         "kind": 2,
         "importPath": "accounts.views",
         "description": "accounts.views",
-        "peekOfCode": "def promotions(request):\n    promotions = Promotion.objects.all()\n    context = {\n        \"logged\": False,\n    }\n    promotion_list = []\n    for promotion in promotions:\n        promotion_list.append(promotion.image_path)\n    context[\"promotions\"] = promotion_list\n    response = render(request, 'promotions.html', context)",
+        "peekOfCode": "def promotions(request):\n    cookie = request.COOKIES.get(\"session\")\n    promotions = Promotion.objects.all()\n    context = {\n        \"logged\": False,\n    }\n    promotion_list = []\n    for promotion in promotions:\n        promotion_list.append(promotion.image_path)\n    html = 'promotions.html'",
         "detail": "accounts.views",
         "documentation": {}
     },
@@ -1832,6 +2024,15 @@
         "documentation": {}
     },
     {
+        "label": "detail_games",
+        "kind": 2,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "def detail_games(games,ordered_by_nb):\n    games_dict = {}\n    datetimes = set()\n    for g in games:\n        details = open_game_details(g)\n        if details!={}:\n            datetime = g.datetime.date().strftime(\"%Y/%m/%d\")\n            datetimes.add(datetime)\n            if datetime in games_dict:\n                games_dict[datetime].append(details)",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
         "label": "game_details",
         "kind": 2,
         "importPath": "game.models",
@@ -1845,7 +2046,25 @@
         "kind": 2,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "def open_game_details(game:dict):\n    odds = Odd.objects.filter(game_id=game['game_id'])\n    game = Game.objects.get(game_id=game['game_id'])\n    if game.state.str() == \"open\":\n        sport = str(game.sport)\n        country = str(game.country)\n        competition = str(game.competition)\n        state = str(game.state)\n        game_dict = {}\n        game_dict[\"game\"] = game",
+        "peekOfCode": "def open_game_details(game):\n    odds = Odd.objects.filter(game_id=game.game_id)\n    game = Game.objects.get(game_id=game.game_id)\n    if game.state.str() == \"open\":\n        game_dict = {}\n        details = {\n            \"sport\" : game.sport,\n            \"competition\" : game.competition,\n            \"country\" : game.country,\n            \"home\" : game.home,",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "take_number_betters",
+        "kind": 2,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "def take_number_betters(elem):\n    return elem[\"nb\"]\ndef take_datetime(elem):\n    return elem[\"game\"][\"datetime\"]\n#list of the sports, countries that have it and respective competitions\ndef sports_list():\n    sports = Sport.objects.all()\n    sports_listing = {}\n    countrys = Country.objects.all()\n    for sport in sports:",
+        "detail": "game.models",
+        "documentation": {}
+    },
+    {
+        "label": "take_datetime",
+        "kind": 2,
+        "importPath": "game.models",
+        "description": "game.models",
+        "peekOfCode": "def take_datetime(elem):\n    return elem[\"game\"][\"datetime\"]\n#list of the sports, countries that have it and respective competitions\ndef sports_list():\n    sports = Sport.objects.all()\n    sports_listing = {}\n    countrys = Country.objects.all()\n    for sport in sports:\n        sport_name = sport.sport\n        sports_listing[sport_name] = {}",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1854,7 +2073,7 @@
         "kind": 2,
         "importPath": "game.models",
         "description": "game.models",
-        "peekOfCode": "def sports_list():\n    sports = Sport.objects.all()\n    sports_listing = {}\n    for sport in sports:\n        sport_name = sport.sport\n        countrys = Country.objects.all()\n        sports_listing[sport_name] = {}\n        for country in countrys:\n            country_name = country.country\n            sports_listing[sport_name][country_name] = [str(k) for k in Competition.objects.filter(sport=sport,country=country)] ",
+        "peekOfCode": "def sports_list():\n    sports = Sport.objects.all()\n    sports_listing = {}\n    countrys = Country.objects.all()\n    for sport in sports:\n        sport_name = sport.sport\n        sports_listing[sport_name] = {}\n        for country in countrys:\n            country_name = country.country\n            sports_listing[sport_name][country_name] = [str(k) for k in Competition.objects.filter(sport=sport,country=country)] ",
         "detail": "game.models",
         "documentation": {}
     },
@@ -1881,7 +2100,7 @@
         "kind": 5,
         "importPath": "game.urls",
         "description": "game.urls",
-        "peekOfCode": "urlpatterns = [\n    path('filter/',views.filter,{}),\n    path('change_games_state/',views.change_games_state,{}),\n    path('specialist_update_games/',views.specialist_update_games,{}),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('filter/',views.filter,{}),\n    path('filter_specialist/',views.filter_specialist,{}),\n    path('specialist_update_games/',views.specialist_update_games,{}),\n]",
         "detail": "game.urls",
         "documentation": {}
     },
@@ -1890,16 +2109,16 @@
         "kind": 2,
         "importPath": "game.views",
         "description": "game.views",
-        "peekOfCode": "def filter(request):\n    if request.method == 'GET':\n        sport = request.GET.get('sport')\n        competition = request.GET.get('competition')\n        participant = request.GET.get('participant')\n        if sport or competition or participant:\n            if sport: games = Game.objects.filter(sport=sport).values()\n            if competition: games = Game.objects.filter(competition=competition).values()\n            if participant: \n                games = Game.objects.filter(home=participant).values() | Game.objects.filter(away=participant).values()",
+        "peekOfCode": "def filter(request):\n    if request.method == 'GET':\n        sport = request.GET.get('sport')\n        competition = request.GET.get('competition')\n        participant = request.GET.get('participant')\n        order_by_nb = request.GET.get('order_by_nb')\n        get = {\n                \"sport\" : sport,\n                \"competition\" : competition,\n                \"participant\" : participant,",
         "detail": "game.views",
         "documentation": {}
     },
     {
-        "label": "change_games_state",
+        "label": "filter_specialist",
         "kind": 2,
         "importPath": "game.views",
         "description": "game.views",
-        "peekOfCode": "def change_games_state(request):\n    if request.method == 'GET':\n        sport = request.GET.get('sport')\n        cookie = request.COOKIES.get(\"session\")\n        print(sport)\n        if sport is None or sport=='null':\n            games = Game.objects.all().values()\n        else:\n            games = Game.objects.filter(sport_id=sport).values()\n        games_listing = []",
+        "peekOfCode": "def filter_specialist(request):\n    cookie = request.COOKIES.get(\"session\")\n    session = Session.objects.get(session_id=cookie)\n    if request.method == 'GET':\n        sport = request.GET.get('sport')\n        competition = request.GET.get('competition')\n        if sport or competition:\n            on_hold = State.objects.get(state=\"on_hold\")\n            open = State.objects.get(state=\"open\")\n            if sport: ",
         "detail": "game.views",
         "documentation": {}
     },
@@ -1935,7 +2154,7 @@
         "kind": 2,
         "importPath": "jobs.scheduler",
         "description": "jobs.scheduler",
-        "peekOfCode": "def start():\n    sheduler = BackgroundScheduler()\n    #sheduler.add_job(load_ucras,IntervalTrigger(seconds=10),max_instances = 1)\n    #sheduler.add_job(close_started_games,IntervalTrigger(seconds=3),max_instances = 1)\n    sheduler.start()",
+        "peekOfCode": "def start():\n    sheduler = BackgroundScheduler()\n    sheduler.add_job(load_ucras,IntervalTrigger(seconds=10),max_instances = 1)\n    sheduler.add_job(close_started_games,IntervalTrigger(seconds=3),max_instances = 1)\n    sheduler.start()",
         "detail": "jobs.scheduler",
         "documentation": {}
     },
@@ -1949,11 +2168,20 @@
         "documentation": {}
     },
     {
+        "label": "change_url_language",
+        "kind": 2,
+        "importPath": "main.models",
+        "description": "main.models",
+        "peekOfCode": "def change_url_language(html,language):\n  if language != 'en':\n    return f'{html}_{language}.html'\n  else:\n    return f'{html}.html'",
+        "detail": "main.models",
+        "documentation": {}
+    },
+    {
         "label": "urlpatterns",
         "kind": 5,
         "importPath": "main.urls",
         "description": "main.urls",
-        "peekOfCode": "urlpatterns = [\n    path('',views.home,{}),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('',views.home,{}),\n    path('change_language',views.change_language,{}),\n]",
         "detail": "main.urls",
         "documentation": {}
     },
@@ -1962,7 +2190,16 @@
         "kind": 2,
         "importPath": "main.views",
         "description": "main.views",
-        "peekOfCode": "def home(request):\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    games = Game.objects.all().values()\n    main_listing = []\n    # Group each game with the odds in a dictionary\n    for g in games:\n        details = open_game_details(g)\n        if details!={}:\n            main_listing.append(details)",
+        "peekOfCode": "def home(request):\n    cookie = request.COOKIES.get(\"session\")\n    # get all games\n    ordered_by_nb = False\n    games = Game.objects.all()\n    games = detail_games(games,ordered_by_nb)\n    games = OrderedDict(sorted(games.items()))\n    # ORDERNAR POR MAIS APOSTADOS main_listing.sort(key=takeNB,reverse=True)\n    sports_listing = sports_list()\n    print(sports_listing)",
+        "detail": "main.views",
+        "documentation": {}
+    },
+    {
+        "label": "change_language",
+        "kind": 2,
+        "importPath": "main.views",
+        "description": "main.views",
+        "peekOfCode": "def change_language(request):\n    if request.method == \"POST\":\n        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'\n    if is_ajax:\n        request_data = json.load(request)\n        cookie = request.COOKIES.get(\"session\")\n        if cookie:\n            session = Session.objects.get(session_id=cookie)\n            if session:\n                new_language= request_data.get('language')",
         "detail": "main.views",
         "documentation": {}
     },
