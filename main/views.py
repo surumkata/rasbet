@@ -37,8 +37,6 @@ def home(request):
             user_id = session.user_in_session.userID
             fav_list = favorites_list(session.user_in_session)
             follows = follows_list(session.user_in_session)
-            print("follows ->")
-            print(follows)
             language = session.language
             context = {
                     "logged" : True,

@@ -345,6 +345,12 @@ class FollowedGames(models.Model):
             fg = FollowedGames.objects.filter(user=user,game=game).get()
             fg.delete()
 
+    def removeGame(game):
+        if FollowedGames.objects.filter(game=game).exists():
+            fgs = FollowedGames.objects.filter(game=game)
+            for fg in fgs:
+                fg.delete()
+
 
 
 #Sends promotion emails to users
@@ -367,11 +373,36 @@ class SendingEmail:
         s1 = template.replace("#User", username)
         return s1.replace("#bet_result", bet_result)
 
+    def write_user(self, username, template):
+        return template.replace("#User", username)
+
     #Update template with the result of a game
     @classmethod
     def write_result_in_template(self, template, sport, home, home_score, away, away_score):
         html_file = open(template,'r').read()
         rep = {"#sport": sport, "#home": home, "#score_home":str(home_score), "#away":away, "#score_away":str(away_score)}
+
+        # use these three lines to do the replacement
+        rep = dict((re.escape(k), v) for k, v in rep.items())
+        #Python 3 renamed dict.iteritems to dict.items so use rep.items() for latest versions
+        pattern = re.compile("|".join(rep.keys()))
+        return pattern.sub(lambda m: rep[re.escape(m.group(0))], html_file)
+
+    @classmethod
+    def write_odds_in_template(self, template, game, home, away, home_odd, draw_odd, away_odd):
+        html_file = open(template,'r').read()
+        rep = {"#game": game, "#home": home, "#odd_h":str(home_odd), "#odd_d":str(draw_odd), "#away":away, "#odd_a":str(away_odd)}
+
+        # use these three lines to do the replacement
+        rep = dict((re.escape(k), v) for k, v in rep.items())
+        #Python 3 renamed dict.iteritems to dict.items so use rep.items() for latest versions
+        pattern = re.compile("|".join(rep.keys()))
+        return pattern.sub(lambda m: rep[re.escape(m.group(0))], html_file)
+
+    @classmethod
+    def write_suspend_template(self, template, game):
+        html_file = open(template,'r').read()
+        rep = {"#game": game}
 
         # use these three lines to do the replacement
         rep = dict((re.escape(k), v) for k, v in rep.items())
@@ -413,6 +444,38 @@ class SendingEmail:
 
         service.quit()
 
+    def send_suspend(self, emails):
+        ssl_context = ssl.create_default_context()
+        service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=ssl_context)
+        service.login(self.sender_mail, self.password)
+
+        for (name,email) in emails:
+            mail = MIMEMultipart('related')
+            mail['Subject'] = self.subject
+            mail['From'] = self.sender_mail
+            mail['To'] = email
+            html = self.write_user(name, self.template)
+
+            msgAlternative = MIMEMultipart('alternative')
+            mail.attach(msgAlternative)
+
+            html_content = MIMEText(html, 'html')
+            msgAlternative.attach(html_content)
+            # This example assumes the image is in the current directory
+            cid = re.compile(r'"cid:([\w\.\/]+)"')
+            images = cid.findall(html)
+
+            for image in images:
+                fp = open(image, 'rb')
+                msgImage = MIMEImage(fp.read())
+                fp.close()
+                # Define the image's ID as referenced above
+                msgImage.add_header('Content-ID', f'<{image}>')
+                mail.attach(msgImage)
+
+            service.sendmail(self.sender_mail, email, mail.as_string())
+
+        service.quit()
 
     def send_notification(self, name, email, bet_result):
         ssl_context = ssl.create_default_context()

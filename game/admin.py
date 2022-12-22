@@ -89,6 +89,8 @@ class gameAdmin(admin.ModelAdmin):
     #updating bets that have this games to lock
     for game_id in games_id:
       g = Game.objects.get(game_id=game_id)
+      game_name = f"{g.home} - {g.away}"
+      template = SendingEmail.write_suspend_template("game/static/template_gamesuspend.html",game_name)
 
       odd_type_home = Odd_type.objects.get(type='home')
       odd_type_draw = Odd_type.objects.get(type='draw')
@@ -112,6 +114,15 @@ class gameAdmin(admin.ModelAdmin):
         bet = Bet.objects.get(betID=main_bet)
         bet.check_status()
         bet.save()
+
+      #Send email to users that followed that game
+      email = SendingEmail(template, "Game Suspend")
+      users = [(k.user.first_name,k.user.email) for k in FollowedGames.objects.filter(game=g)]
+      email.send_suspend(users)
+
+      #Delete this game of followed games
+      FollowedGames.removeGame(g)
+      
 
 class oddAdmin(admin.ModelAdmin):
   list_display = ['game','odd_type','odd','happened','number_betters']

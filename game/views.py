@@ -2,7 +2,7 @@ from collections import OrderedDict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
-from accounts.models import favorites_list, follows_list, Session, Specialist, User
+from accounts.models import FollowedGames, SendingEmail, favorites_list, follows_list, Session, Specialist, User
 from game.models import db_change_gameodd, Game,Odd
 from django.urls import reverse
 import requests
@@ -138,6 +138,8 @@ def specialist_update_games(request):
                 games = request_data.get('games')
 
                 for game in games:
+                    print("GAME: ")
+                    print(game)
                     g = games[game]
                     if 'state' in g.keys():
                         db_change_gamestate(game,g['state'])
@@ -147,4 +149,24 @@ def specialist_update_games(request):
                         db_change_gameodd(game,g['away'],'away')
                     if 'draw' in g.keys():
                         db_change_gameodd(game,g['draw'],'draw')
+
+                    #mandar email 
+                    go = Game.objects.get(game_id=game)
+                    game_name = f"{go.home} - {go.away}"
+                    odd_type_home = Odd_type.objects.get(type='home')
+                    odd_type_draw = Odd_type.objects.get(type='draw')
+                    odd_type_away = Odd_type.objects.get(type='away')
+                    odd_draw = Odd.objects.get(game=game,odd_type=odd_type_draw)
+                    odd_home = Odd.objects.get(game=game,odd_type=odd_type_home) 
+                    odd_away = Odd.objects.get(game=game,odd_type=odd_type_away)  
+                    template = SendingEmail.write_odds_in_template("game/static/template_oddschanged.html",game_name, str(go.home), str(go.away), odd_home.odd, odd_draw.odd, odd_away.odd)
+                    
+                    print("A enviar")
+
+                    email = SendingEmail(template, "Odds Changed")
+                    users = [(k.user.first_name,k.user.email) for k in FollowedGames.objects.filter(game=game)]
+                    print(users)
+                    email.send_suspend(users)
+
+
     return response
