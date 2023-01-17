@@ -104,13 +104,14 @@ class User(models.Model):
         except Exception as e:
             print(e)
 
-    def update_follow(self,game,followed):
+    def update_follow(self,game,toFollow):
         try:
             print(game)
-            print(followed)
+            print(toFollow)
             game = Game.objects.filter(game_id=game).get()
             if FollowedGames.objects.filter(user=self,game=game).exists():
-                FollowedGames.objects.get(user=self,game=game).delete() 
+                if not toFollow:
+                    FollowedGames.objects.get(user=self,game=game).delete() 
             else: FollowedGames.objects.create(user=self,game=game)
         except Exception as e:
             print(e)

@@ -24,7 +24,6 @@ def bet(request):
             if session:
 
                 slip = request_data.get('slip')
-                print(slip['games'])
                 if slip['bet_type']=="simple":
 
                     total_amount = 0
@@ -35,6 +34,9 @@ def bet(request):
                         for game in slip['games']:
                             if Transation.regist(session.user_in_session,"bet","balance",game['amount']):
                                 Bet.place_simple(session.user_in_session,game)
+                                user = session.user_in_session
+                                user.update_follow(game["game_id"],True)
+                                
                                 response = {'status': 0, 'message': "bet placed"}
                     else:
                         response = {'status': 2, 'message': "Not enough balance"}
@@ -43,6 +45,9 @@ def bet(request):
                 else:
                     if Transation.regist(session.user_in_session,"bet","balance",float(slip['amount'])):
                         Bet.place_multiple(session.user_in_session,float(slip['amount']),slip['games'])
+                        for game in slip['games']:
+                            user = session.user_in_session
+                            user.update_follow(game["game_id"],True)
                         response = {'status': 0, 'message': "bet placed"}
                     else:
                         response = {'status': 2, 'message': "Not enough balance"}

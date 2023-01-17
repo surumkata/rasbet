@@ -19,13 +19,15 @@ class gameAdmin(admin.ModelAdmin):
   @admin.action(description='Mark selected games as closed')
   def turn_close(self,request, queryset):
     games_id = [game.game_id for game in queryset]
+    print(f"--------------fechar games: {games_id}--------------")
     close = State.objects.get(state='closed')
     #update games to closed
     queryset.update(state=close)
-    main_bets_list = set()
 
     #updating odds that happened
     for game_id in games_id:
+      main_bets_list = set()
+      print(f"#####GID: {game_id}")
       g = Game.objects.get(game_id=game_id)
 
       template_notif = SendingEmail.write_result_in_template("game/static/template_notification.html", str(g.sport), str(g.home), g.home_score, str(g.away), g.away_score)
@@ -43,6 +45,7 @@ class gameAdmin(admin.ModelAdmin):
 
       #tratar das bets
       bets_won = Bet_game.objects.filter(odd_id=odd)
+      print(f"***** bets_won: {bets_won}")
       if odd_type_result == odd_type_home:
         odd_lost1 = Odd.objects.get(game=g,odd_type=odd_type_draw) 
         odd_lost2 = Odd.objects.get(game=g,odd_type=odd_type_away) 
@@ -56,6 +59,7 @@ class gameAdmin(admin.ModelAdmin):
       bets_lost2 = Bet_game.objects.filter(odd_id=odd_lost2)
 
       for bet in bets_won:
+        print(f"bet in bets_won| {bet}")
         main_bets_list.add(bet.bet.betID)
         bet.turn_won()
         bet.save()
@@ -65,6 +69,7 @@ class gameAdmin(admin.ModelAdmin):
         bet.turn_lost()
         bet.save()
 
+      print(f"main_bets_list -> {main_bets_list}")
       email = SendingEmail(template_notif, "RasBet Game Notification")
       for main_bet in main_bets_list:
         bet = Bet.objects.get(betID=main_bet)

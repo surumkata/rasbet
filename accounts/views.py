@@ -330,13 +330,19 @@ def history_transactions(request):
             type ="Bet Won"
         elif(transaction.type =="deposit"):
             type="Deposit"
-        else: type = "Withdraw"
+        elif(transaction.type =="withdraw"):
+            type="Withdraw"
+        else: type="Promotion"
+        print(f"---------TransactionMethodType: {transaction.type}---------------")
 
-        if(transaction.method =="mbway"):
+        print(f"---------TransactionMethod: {transaction.method.method}---------------")
+        if(transaction.method.method =="mbway"):
             method = "Mbway"
-        elif(transaction.method =="card"):
+        elif(transaction.method.method =="card"):
             method = "Card"
-        else: method = "Balance"
+        elif(transaction.method.method =="balance"):
+            method = "Balance"
+        else: method = "Promotion"
 
         transactions.append({
             "type": type,
@@ -608,6 +614,7 @@ def update_follow(request):
                 if session:
                     followed = request_data.get('followed') == 'True'
                     game = request_data.get('game')
+                    print(f"Game (accounts): {game}")
                     user = session.user_in_session
                     user.update_follow(game,followed)
                     status = {'status': 0, 'message': "follow updated"}
