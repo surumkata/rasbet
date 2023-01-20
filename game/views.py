@@ -136,10 +136,8 @@ def specialist_update_games(request):
                 request_data = json.load(request)
 
                 games = request_data.get('games')
-
+                
                 for game in games:
-                    print("GAME: ")
-                    print(game)
                     g = games[game]
                     if 'state' in g.keys():
                         db_change_gamestate(game,g['state'])
@@ -150,7 +148,7 @@ def specialist_update_games(request):
                     if 'draw' in g.keys():
                         db_change_gameodd(game,g['draw'],'draw')
 
-                    #mandar email 
+                    #update odds
                     go = Game.objects.get(game_id=game)
                     game_name = f"{go.home} - {go.away}"
                     odd_type_home = Odd_type.objects.get(type='home')
@@ -159,13 +157,13 @@ def specialist_update_games(request):
                     odd_draw = Odd.objects.get(game=game,odd_type=odd_type_draw)
                     odd_home = Odd.objects.get(game=game,odd_type=odd_type_home) 
                     odd_away = Odd.objects.get(game=game,odd_type=odd_type_away)  
-                    template = SendingEmail.write_odds_in_template("game/static/template_oddschanged.html",game_name, str(go.home), str(go.away), odd_home.odd, odd_draw.odd, odd_away.odd)
                     
-                    print("A enviar")
-
+                    #criação do email de odds mudadas
+                    template = SendingEmail.write_odds_in_template("game/static/template_oddschanged.html",game_name, str(go.home), str(go.away), odd_home.odd, odd_draw.odd, odd_away.odd)
                     email = SendingEmail(template, "Odds Changed")
+
+                    #users que seguem os jogos
                     users = [(k.user.first_name,k.user.email) for k in FollowedGames.objects.filter(game=game)]
-                    print(users)
                     email.send_suspend(users)
 
 
