@@ -322,6 +322,22 @@
         "documentation": {}
     },
     {
+        "label": "FollowedGames",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
+        "label": "SendingEmail",
+        "importPath": "accounts.models",
+        "description": "accounts.models",
+        "isExtraImport": true,
+        "detail": "accounts.models",
+        "documentation": {}
+    },
+    {
         "label": "favorites_list",
         "importPath": "accounts.models",
         "description": "accounts.models",

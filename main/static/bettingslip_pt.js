@@ -295,8 +295,8 @@ function slip_handler(bttchange,home,away,bet,odd){
 
     storage_change_multiple(home,away,bet,odd)
     }else{
-      alert("Apenas 20 seleções podem ser feitas no modo múltiplo");
-      // disable bet button
+      $("#rowCimaNome span").text("Esta aposta múltipla não é válida, só pode fazer 20 jogos na múltipla")
+      $("#rowCimaValor span").html('')
       $('.buttonApostar').prop('disabled', true);
     }
 

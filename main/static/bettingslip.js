@@ -295,8 +295,9 @@ function slip_handler(bttchange,home,away,bet,odd){
 
     storage_change_multiple(home,away,bet,odd)
     }else{
-      alert("Only 20 selections can be made in multiple mode");
       // disable bet button
+      $("#rowCimaNome span").text("This multiple bet is not allowed, only 20 games for multiple bet")
+      $("#rowCimaValor span").html('')
       $('.buttonApostar').prop('disabled', true);
     }
 
